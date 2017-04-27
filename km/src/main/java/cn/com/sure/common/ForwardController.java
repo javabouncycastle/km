@@ -12,8 +12,9 @@ public class ForwardController {
 	
 	@RequestMapping("forward")
 	public ModelAndView forwardController(HttpServletRequest request,
-	ModelAndView model,@RequestParam("page")String pageName){
-	return new ModelAndView(pageName);
+		ModelAndView model,@RequestParam("page")String pageName){
+		System.out.println(12344);
+		return new ModelAndView(pageName);
 	}
 }
 
