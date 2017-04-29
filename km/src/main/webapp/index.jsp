@@ -13,7 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 	<script type="text/javascript">
 		function forward(pageName){
-			$("#contentIframe").attr("src","forward.do?page="+pageName);
+			var url="forward.do?page="+pageName;//跳转页面的路径
+			$("#contentIframe").attr("src",url);//给iframe动态配置跳转的url
 		}
 	</script>
 	<body>
@@ -24,49 +25,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div id="sidebar">
 			<ul>
-					<li class="submenu">
-						<a href="#"><i class="icon icon-th-list"></i> <span>密钥管理</span><span class="label">3</span> </a>
-							<ul>
-								<li><a onclick="forward('/keyManager/generateKey')">密钥生成</a></li>
-								<li><a onclick="forward">密钥查询</a></li>
-							</ul>
-					<li class="submenu">
-						<a href="#"><i class="icon icon-th-list"></i> <span>日志管理</span> <span class="label">3</span></a>
-							<ul>
-								<li><a href="form-common.html">Common elements</a></li>
-								<li><a href="form-validation.html">Validation</a></li>
-								<li><a href="form-wizard.html">Wizard</a></li>
-							</ul>
-					</li>
-					<li class="submenu">
-						<a href="#"><i class="icon icon-th-list"></i> <span>管理员管理</span> <span class="label">3</span></a>
-							<ul>
-								<li><a href="form-common.html">Common elements</a></li>
-								<li><a href="form-validation.html">Validation</a></li>
-								<li><a href="form-wizard.html">Wizard</a></li>
-							</ul>
-					</li>
-		
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>密钥管理</span><span class="label">3</span> </a>
+					<ul>
+						<li><a href="javascript:forward('keypair/keypairInsert')">密钥生成</a></li>
+						<li><a href="javascript:forward('keypair/keypairList')">密钥查询</a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>算法管理</span><span class="label">4</span> </a>
+					<ul>
+						<!-- javascript:forward()跳转时，不去找对应的controller的路径，是根据javascript:forward()括号里边的路径跳转 -->
+						<li><a href="javascript:forward('algorithm/keypairInsert')">增加密钥算法</a></li>
+						<li><a href="<%=request.getContextPath()%>/algorithm/search">查询密钥算法</a></li>
+						<li><a href="<%=request.getContextPath()%>/algorithm/update">修改密钥算法</a></li>
+						<li><a href="<%=request.getContextPath()%>/algorithm/delete">删除密钥算法</a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>日志管理</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="form-common.html">Common elements</a></li>
+						<li><a href="form-validation.html">Validation</a></li>
+						<li><a href="form-wizard.html">Wizard</a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>管理员管理</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="form-common.html">Common elements</a></li>
+						<li><a href="form-validation.html">Validation</a></li>
+						<li><a href="form-wizard.html">Wizard</a></li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 		
-		
 		<div id="content">
-			<div id="content-header">
-				<h1>确信信息</h1>
-				<div class="btn-group">
-				</div>
+			<div id="contentIframeDiv">
+				<iframe id="contentIframe" src=""></iframe>
 			</div>
-			<div id="breadcrumb">
-				<a href="#" title="返回首页" class="tip-bottom"><i class="icon-home"></i> 首页</a>
-			</div>
-			<iframe id="contentIframe" src=""></iframe>
 			<div id="footer" class="span12">
 				Copyright © 2016 suresec.net/ All Rights Reserved　山东确信信息产业股份有限公司　版权所有　鲁ICP备13015085号-4 </br>
 				电话：400-006-8211 　 地址：济南市高新区舜华路2000号舜泰广场11号楼北区203室
 			</div>
 				
 	  </div>
-
-            
 	</body>
 </html>

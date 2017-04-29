@@ -11,11 +11,11 @@
             <script src="js/jquery.peity.min.js"></script>
             <script src="js/fullcalendar.min.js"></script>
             <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.dashboard.js"></script>
+            <!-- <script src="js/unicorn.dashboard.js"></script> -->
 
 			<link rel="stylesheet" href="css/bootstrap.min.css" />
 			<link rel="stylesheet" href="css/unicorn.main.css" />
 			<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
 			
-			<%=((HttpServletRequest)pageContext.getRequest()).getServletPath()%>
+			<%-- <%=((HttpServletRequest)pageContext.getRequest()).getServletPath()%> --%>
 
