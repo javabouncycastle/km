@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.com.keypair.alg.dao.KeypairAlgorithmDAO">  
+
+	<insert id="insert" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm">
+		insert into keypair_algorithm(
+			id,
+			name,
+			alg_oid,
+			alg_name,
+			keysize,
+			notes,
+			is_valid
+		)values(
+			#{id},
+			#{name},
+			#{algorithmOid},
+			#{algorithmName},
+			#{keysize},
+			#{notes},
+			#{isValid}
+		)
+	</insert>
+	
+	<select id="findNameCountById" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm" resultType="int">
+	 select count(0) from keypair_algorithm where name=#{name}
+	</select>
+	
+	<select id="selectAll" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm" resultType="cn.com.keypair.alg.entry.KeypairAlgorithm">
+		select * from keypair_algorithm
+	</select>
+    
+</mapper>
