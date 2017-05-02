@@ -27,7 +27,31 @@
 	</select>
 	
 	<select id="selectAll" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm" resultType="cn.com.keypair.alg.entry.KeypairAlgorithm">
-		select * from keypair_algorithm
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
 	</select>
+	
+	<update id="update" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm">
+		update keypair_algorithm
+		 name=#{name},
+		 alg_oid={algorithmOid},
+		 alg_name=#{algorithmName},
+		 keysize=#{keysize},
+		 notes=#{notes},
+		 is_valid=#{isValid}
+		 where
+		 id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from keypair_algorithm where id=#{id}
+	</delete>
     
 </mapper>

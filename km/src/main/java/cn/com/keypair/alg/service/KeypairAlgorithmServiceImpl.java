@@ -46,6 +46,20 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		LOG.debug("selectAll - end");
 		return keypairAlgorithms;
 	}
+
+	@Override
+	public void update(KeypairAlgorithm keypairAlgorithm) {
+		LOG.debug("update - start");
+		keypairAlgorithmDAO.update(keypairAlgorithm);
+		LOG.debug("update - end");
+	}
+
+	@Override
+	public void delete(Long id) {
+		LOG.debug("delete - start");
+		keypairAlgorithmDAO.delete(id);
+		LOG.debug("delete - end");
+	}
 	
 
 }

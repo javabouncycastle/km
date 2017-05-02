@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul>
 						<!-- javascript:forward()跳转时，不去找对应的controller的路径，是根据javascript:forward()括号里边的路径跳转 -->
 						<li><a href="javascript:forward('algorithm/keypairInsert')">增加密钥算法</a></li>
-						<li><a href="<%=request.getContextPath()%>/algorithm/search">查询密钥算法</a></li>
+						<li><a href="<%=request.getContextPath()%>/algorithm/selectAll.do">查询密钥算法</a></li>
 						<li><a href="<%=request.getContextPath()%>/algorithm/update">修改密钥算法</a></li>
 						<li><a href="<%=request.getContextPath()%>/algorithm/delete">删除密钥算法</a></li>
 					</ul>

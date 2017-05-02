@@ -13,4 +13,8 @@ public interface KeypairAlgorithmDAO {
 
 	List<KeypairAlgorithm> selectAll(KeypairAlgorithm keypairAlgorithm);
 
+	void update(KeypairAlgorithm keypairAlgorithm);
+
+	void delete(Long id);
+
 }
