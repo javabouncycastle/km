@@ -17,4 +17,6 @@ public interface KeypairAlgorithmDAO {
 
 	void delete(Long id);
 
+	KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm);
+
 }

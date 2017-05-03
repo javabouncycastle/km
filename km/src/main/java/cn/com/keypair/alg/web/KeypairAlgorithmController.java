@@ -103,7 +103,18 @@ public class KeypairAlgorithmController {
 		return null;
 		
 	}
-	
+	/**
+	 * 更新密钥算法
+	 */
+	@RequestMapping(value="findById")
+	public ModelAndView findById(KeypairAlgorithm keypairAlgorithm,Model model, 
+			RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("findById - start");
+		keypairAlgorithm=keypairAlgorithmService.findById(keypairAlgorithm);//根据id查到数据库中的信息
+		LOG.debug("findById - end");
+		attr.addFlashAttribute("success",keypairAlgorithm.getId());
+		return new ModelAndView("algorithm/keypairUpdate").addObject("keypairAlgorithm",keypairAlgorithm);//跳转到update的页面，并把这条数据显示出来
+	}	
 	/**
 	 *  删除密钥算法
 	 */

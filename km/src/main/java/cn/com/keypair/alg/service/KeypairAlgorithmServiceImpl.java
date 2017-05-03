@@ -60,6 +60,12 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		keypairAlgorithmDAO.delete(id);
 		LOG.debug("delete - end");
 	}
+
+	@Override
+	public KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm) {
+		keypairAlgorithm = keypairAlgorithmDAO.findById(keypairAlgorithm);
+		return keypairAlgorithm;
+	}
 	
 
 }
