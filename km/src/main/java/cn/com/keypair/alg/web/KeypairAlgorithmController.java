@@ -126,7 +126,8 @@ public class KeypairAlgorithmController {
 		keypairAlgorithmService.delete(id);
 		attr.addFlashAttribute("sucess", id);
 		LOG.debug("delete - end");
-				return null;
+		attr.addFlashAttribute("success",id);
+		return "redirect:/algorithm/keypairList";
 		
 	}
 	

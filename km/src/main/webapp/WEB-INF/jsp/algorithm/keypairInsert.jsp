@@ -27,13 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="span12">
 						<div class="widget-box">
 							<div class="widget-title">
-								<span class="icon">
-									<i class="icon-align-justify"></i>									
-								</span>
 								<h5>增加密钥算法</h5>
+								<span class="label label-important">48 notices</span>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="algorithm/insert.do" method="post" class="form-horizontal">
+								<form action="algorithm/insert.do" method="post" class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">
 									<div class="control-group">
 										<label class="control-label">别名</label>
 										<div class="controls">
@@ -74,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">保存</button>
+									<button type="submit" value="Validate" class="btn btn-primary">保存</button>
 									</div>
 								</form>
 							</div>

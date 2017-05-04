@@ -53,8 +53,9 @@
 	
 	<update id="update" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm">
 		update keypair_algorithm
-		 name=#{name},
-		 alg_oid={algorithmOid},
+		set
+		 name = #{name},
+		 alg_oid=#{algorithmOid},
 		 alg_name=#{algorithmName},
 		 keysize=#{keysize},
 		 notes=#{notes},

@@ -22,34 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <script type="text/javascript">
-  //修改密钥算法
-   $(function(){
-	   $("#updateKeypair").dialog({
-		   autoOpen: false,
-		   modal:true,
-		   height:600,
-		   width:1000,
-		   buttons: {
-			   "确定": function () {
-		           $(this).dialog("close");
-			   },
-			   "取消": function () {
-				   $(this).dialog("close");
-			   }
-		   },
-		   show: {
-		       effect: "fade",
-			   duration: 500
-		   },
-		   hide: {
-			   effect: "fade",
-			   duration: 500
-		   } 
-	   });
-   });
-   function showIframe(){
-	   $("#iframe2").attr("src","forward.do?page=algorithm/keypairUpdate");
-   }
    function updateDialog(){
         var ids=[];//先生成一个数组，放选中的id
        	//jquery选择器， $(".keyPairCheckbox:checked") 
@@ -58,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        		ids.push(this.value);//把id放进数组
        	});
        	if(ids.length==0){//如果没有勾选
-       		alert("请至少选择一条");
+       		alert("请选择一条数据进行更新");
        		return false;
        	}
        	if(ids.length>1){//如果勾选了多条
@@ -68,23 +40,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var url="algorithm/findById.do?id="+ids[0];//拼装后台请求路径，给iframe的src赋值
         $("#dialogIframe").attr("src",url);//给iframe赋值路径，跳转到更新的页面
         $("#updateKeypair").dialog("open");
-	    
    }
-   //新增密钥算法
-    $(function(){
+   
+   function insertDialog(){
+   		$("#insertKeypair").dialog("open");
+   }
+   
+   $(function(){
+   //修改密钥算法
+	   $("#updateKeypair").dialog({
+		   autoOpen: false,
+		   modal:true,
+		   height:600,
+		   width:1000,
+		   show: {
+		       effect: "fade",
+			   duration: 500
+		   },
+		   hide: {
+			   effect: "fade",
+			   duration: 500
+		   } 
+	   });
+	   //新增密钥算法
 	   $("#insertKeypair").dialog({
 		   autoOpen: false,
 		   modal:true,
 		   height:600,
 		   width:1000,
-		   buttons: {
-			   "确定": function () {
-		           $(this).dialog("close");
-			   },
-			   "取消": function () {
-				   $(this).dialog("close");
-			   }
-		   },
 		   show: {
 		       effect: "fade",
 			   duration: 500
@@ -95,25 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   } 
 	   });
    });
-   function showIframe(){
-	   $("#iframe2").attr("src","forward.do?page=algorithm/keypairInsert");
-   }
-   function insertDialog(){
-        var ids=[];//先生成一个数组，放选中的id
-       	//jquery选择器， $(".keyPairCheckbox:checked") 
-       	//意思是获取所有class 是keyPairCheckbox 并且选中的checkbox
-       	$(".keypairAlgCheckbox:checked").each(function(){//循环所有的选中的checkbox，把id放进数组
-       		ids.push(this.value);//把id放进数组
-       	});
-       	if(ids.length==0){//如果没有勾选
-       		alert("请至少选择一条");
-       		return false;
-       	}
-        var url="algorithm/findById.do?id="+ids[0];//拼装后台请求路径，给iframe的src赋值
-        $("#dialogIframe").attr("src",url);//给iframe赋值路径，跳转到更新的页面
-        $("#insertKeypair").dialog("open");
-	    
-   }
 </script> 
   
   <body>
@@ -128,6 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<button onclick="updateDialog()" class="btn btn-inverse">更新密钥算法</button>
 								<button onclick="deleteDialog()" class="btn btn-inverse">删除密钥算法</button>
 							</div>
+							<div id="content">
 							<div class="widget-content nopadding">
 								<table class="table table-bordered table-striped table-hover with-check">
 									<thead>
@@ -145,7 +110,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<tbody>
 										<c:forEach items="${keypairAlgorithms}" var="keypairAlgorithm" varStatus="count">
 											<tr>
-												<tr onclick="check()">
 												    <td><input type="checkbox" class="keypairAlgCheckbox" value="${keypairAlgorithm.id}"/></td>
 												    <td>${keypairAlgorithm.id}</td>
 													<td>${keypairAlgorithm.name}</td>
@@ -154,7 +118,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<td>${keypairAlgorithm.keysize}</td>
 													<td>${keypairAlgorithm.notes}</td>
 		 											<td>${keypairAlgorithm.isValid=='0'?'否':'是'}</td>
-											</tr>
 										</c:forEach>
 									</tbody>
 								</table>							
@@ -163,13 +126,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>
   		
   		<!-- 弹出窗口 ,修改密钥算法内容-->
-  		<div id="updateKeypair" style="overflow:hidden" title="更新密钥算法" > <!-- 不要滚动条 -->
-			<iframe id="dialogIframe" style="width:100%;height:100%" src=""></iframe>
+  		<div id="updateKeypair" style="overflow:hidden" title="更新密钥算法" > <!-- style="overflow:hidden"，不要滚动条 ;frameBorder="no"不要边框-->
+			<iframe id="dialogIframe" style="width:100%;height:100%" src="" frameBorder="no"></iframe>
 		</div>
 		
 		<!-- 弹出窗口 ,修改密钥算法内容-->
-		<div id="insertKeypair" title="增加密钥算法">
-			<iframe id="dialogIframe2" style="width:100%;height:100%" src="forward.do?page=algorithm/keypairInsert"></iframe>
+		<div id="insertKeypair" style="overflow:hidden" title="增加密钥算法">
+			<iframe id="dialogIframe2" style="width:100%;height:100%" src="" frameBorder="no"></iframe>
 		</div>
 		
   </body>

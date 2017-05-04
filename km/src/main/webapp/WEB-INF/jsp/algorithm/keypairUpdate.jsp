@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'keypairInsert.jsp' starting page</title>
+    <title>确信身份认证系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -18,26 +18,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<%@include file="/common/common.jsp" %>
 
-  </head>
+ 					 </head>
   
-  <body>
-  <from>
-  		<div class="container-fluid">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="icon-align-justify"></i>									
-								</span>
-								<h5>增加密钥算法</h5>
-							</div>
-							<div class="widget-content nopadding">
-								<form action="algorithm/update.do" method="post" class="form-horizontal">
+  						<body>
+							<div class="widget-box">
+								<form action="algorithm/update.do" method="post" class="form-horizontal"  onsubmit="window.opener=null;window.close();">
+									<div class="control-group">
+										<label class="control-label">id</label>
+										<div class="controls">
+											<input type="text" name="id"  value="${keypairAlgorithm.id}"/>
+										</div>
+									</div>
 									<div class="control-group">
 										<label class="control-label">别名</label>
 										<div class="controls">
-											<input type="text" name="name" value="${keypairAlgorithm.name}"/>
+											<input type="text" name="name"  value="${keypairAlgorithm.name}"/>
 										</div>
 									</div>
 									<div class="control-group">
@@ -67,20 +62,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="control-group">
 										<label class="control-label">是否有效</label>
 										<div class="controls">
+										<div class="control-group">
 											<select name="isValid">
 												<option value="1">是</option>
 												<option value="0">否</option>
 											</select>
 										</div>
+										</div>
 									</div>
-									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">保存</button>
-									</div>
+									
+									<div class="form-actions" >
+                                        <input type="submit" value="保存" class="btn btn-primary">
+                                    </div>
 								</form>
 							</div>
-						</div>						
-					</div>
-				</div>
-			</div>
-  </body>
-</html>
+ 						 </body>
+					</html>

@@ -13,7 +13,7 @@
             <script src="${ctx}/js/fullcalendar.min.js"></script>
             <script src="${ctx}/js/jquery.gritter.min.js"></script>
             <script src="${ctx}/js/jquery.peity.min.js"></script>
-            <script src="${ctx}/js/unicorn.interface.js"></script>
+           <%--  <script src="${ctx}/js/unicorn.interface.js"></script> --%>
 		    <script src="${ctx}/js/templatemo_script.js"></script>
 		    <%-- <script src="${ctx}/js/My97DatePicker/WdatePicker.js"></script>  --%>
             <script src="${ctx}/js/unicorn.js"></script><!-- 左边菜单栏的展开 -->
