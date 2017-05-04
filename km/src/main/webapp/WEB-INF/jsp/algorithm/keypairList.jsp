@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<button onclick="updateDialog()" class="btn btn-inverse">更新密钥算法</button>
 								<button onclick="deleteDialog()" class="btn btn-inverse">删除密钥算法</button>
 							</div>
-							<div id="content">
+							
 							<div class="widget-content nopadding">
 								<table class="table table-bordered table-striped table-hover with-check">
 									<thead>
@@ -118,6 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<td>${keypairAlgorithm.keysize}</td>
 													<td>${keypairAlgorithm.notes}</td>
 		 											<td>${keypairAlgorithm.isValid=='0'?'否':'是'}</td>
+		 									</tr>		
 										</c:forEach>
 									</tbody>
 								</table>							

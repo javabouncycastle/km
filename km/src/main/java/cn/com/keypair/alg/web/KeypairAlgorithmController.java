@@ -1,5 +1,6 @@
 package cn.com.keypair.alg.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -94,14 +96,16 @@ public class KeypairAlgorithmController {
 	 * 更新密钥算法
 	 */
 	@RequestMapping(value="update")
-	public String update(KeypairAlgorithm keypairAlgorithm,Model model, 
+	@ResponseBody
+	public Map<String,Object> update(KeypairAlgorithm keypairAlgorithm,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
+		Map<String,Object> resultMap=new HashMap<String,Object>();
 		LOG.debug("update - start");
 		keypairAlgorithmService.update(keypairAlgorithm);
+		resultMap.put("success", true);
+		resultMap.put("id", keypairAlgorithm.getId());
 		LOG.debug("update - end");
-		attr.addFlashAttribute("success",keypairAlgorithm.getId());
-		return null;
-		
+		return resultMap;
 	}
 	/**
 	 * 更新密钥算法
