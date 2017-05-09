@@ -22,6 +22,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <script type="text/javascript">
+  //删除密钥算法
+  function deleteDialog(){
+  	var ids=[];
+  		$(".keypairAlgCheckbox:checked").each(function(){
+       		ids.push(this.value);//把id放进数组
+       	});
+       	if(ids.length==0){//如果没有勾选
+       		alert("请选择数据进行删除");
+       		return false;
+    }
+    //var url = "algorithm/delete.do?id="+ids[0];
+    
+    $.ajax({  
+          type : "POST",  //提交方式  
+          url : "algorithm/delete.do",//路径  
+          data : "ids="+ids,
+          success : function(result) {//返回数据根据结果进行相应的处理  
+              if ( result.success ) { 
+                  parent.alert("id为"+result.id+"删除成功");
+              } else { 
+                  alert("删除失败！"); 
+                      }  
+                    }  
+                });  
+    
+  }
    function updateDialog(){
         var ids=[];//先生成一个数组，放选中的id
        	//jquery选择器， $(".keyPairCheckbox:checked") 
@@ -43,6 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    }
    
    function insertDialog(){
+   		$("#dialogIframe2").attr("src","forward.do?page=algorithm/keypairInsert");
    		$("#insertKeypair").dialog("open");
    }
    
@@ -124,8 +151,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</table>							
 							</div>
 						</div>
-  		</div>
-  		
   		<!-- 弹出窗口 ,修改密钥算法内容-->
   		<div id="updateKeypair" style="overflow:hidden" title="更新密钥算法" > <!-- style="overflow:hidden"，不要滚动条 ;frameBorder="no"不要边框-->
 			<iframe id="dialogIframe" style="width:100%;height:100%" src="" frameBorder="no"></iframe>

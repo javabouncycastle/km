@@ -1,4 +1,4 @@
-package cn.com.keypair.search.service;
+package cn.com.sure.keypair.search.service;
 
 import org.springframework.stereotype.Service;
 

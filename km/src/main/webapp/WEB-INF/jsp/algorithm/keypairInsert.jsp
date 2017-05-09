@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'keypairInsert.jsp' starting page</title>
+    <title>确信身份认证系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -17,21 +17,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<%@include file="/common/common.jsp" %>
-
   </head>
+  <script type="text/javascript">
+   var validator;
+  	$(function(){
+  		validator=$("#updateForm").validate({
+			rules:{
+				name:{
+					required: true
+				},
+				algorithmOid:{
+					required:true
+				},
+				algorithmName:{
+					required:true
+				},
+				keysize:{
+					required:true
+				}
+			},
+			errorClass: "help-inline",
+			errorElement: "span",
+			highlight:function(element, errorClass, validClass) {
+				$(element).parents('.control-group').addClass('error');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).parents('.control-group').removeClass('error');
+				$(element).parents('.control-group').addClass('success');
+			}
+		});
+  	});
+ 	function  insert(){
+		if(validator.form()){
+			$.ajax({  
+                 type : "POST",  //提交方式  
+                 url : "algorithm/insert.do",//路径  
+                 data : $("#insertForm").serialize(),//数据，这里使用的是Json格式进行传输  
+                 success : function(result) {//返回数据根据结果进行相应的处理  
+                     if ( result.success ) { 
+                     	parent.$("#insertKeypair").dialog("close");//parent 关闭父页面的dialog 
+                         parent.alert("id为"+result.id+"更新成功");
+                     } else { 
+                        alert("保存失败！"); 
+                     }  
+                 }  
+             });  
+		}
+ 		}
+  </script>
   
   <body>
-  <from>
   		<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="widget-box">
-							<div class="widget-title">
-								<h5>增加密钥算法</h5>
-								<span class="label label-important">48 notices</span>
-							</div>
 							<div class="widget-content nopadding">
-								<form action="algorithm/insert.do" method="post" class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+								<form action="algorithm/insert.do" method="post" class="form-horizontal"  name="basic_validate" id="insertForm" novalidate="novalidate">
 									<div class="control-group">
 										<label class="control-label">别名</label>
 										<div class="controls">

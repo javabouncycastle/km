@@ -60,7 +60,7 @@ public class KeypairAlgorithmController {
 			return "redirect:/algorithm/keypairList";
 		}
 		LOG.debug("insert - end");
-		attr.addFlashAttribute("success",keypairAlgorithm.getId());
+		attr.addFlashAttribute("success","±£´æ¡¾"+keypairAlgorithm.getId()+"¡¿³É¹¦");
 		return "redirect:/algorithm/keypairList";
 		
 	}
@@ -124,7 +124,7 @@ public class KeypairAlgorithmController {
 	 */
 	@RequestMapping(value="delete")
 	public String delete(
-			@RequestParam(value = "id", required = false)Long id,Model model, 
+			@RequestParam(value = "ids", required = false)Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("delete - start");
 		keypairAlgorithmService.delete(id);
@@ -134,7 +134,5 @@ public class KeypairAlgorithmController {
 		return "redirect:/algorithm/keypairList";
 		
 	}
-	
-	
 	
 }

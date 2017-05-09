@@ -1,4 +1,4 @@
-package cn.com.keypair.web;
+package cn.com.sure.keypair.web;
 
 public class KeypairController {
 

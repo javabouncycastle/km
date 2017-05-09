@@ -26,24 +26,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="sidebar">
 			<ul>
 				<li class="submenu">
-					<a href="#"><i class="icon icon-th-list"></i> <span>密钥管理</span><span class="label">3</span> </a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>密钥管理</span><span class="label"></span> </a>
 					<ul>
 						<li><a href="javascript:forward('keypair/keypairInsert')">密钥生成</a></li>
 						<li><a href="javascript:forward('keypair/keypairList')">密钥查询</a></li>
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="icon icon-th-list"></i> <span>算法管理</span><span class="label">4</span> </a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>算法管理</span><span class="label"></span> </a>
 					<ul>
 						<!-- javascript:forward()跳转时，不去找对应的controller的路径，是根据javascript:forward()括号里边的路径跳转 -->
-						<li><a href="javascript:forward('algorithm/keypairInsert')">增加密钥算法</a></li>
-						<li><a href="<%=request.getContextPath()%>/algorithm/selectAll.do">查询密钥算法</a></li>
-						<li><a href="<%=request.getContextPath()%>/algorithm/update">修改密钥算法</a></li>
-						<li><a href="<%=request.getContextPath()%>/algorithm/delete">删除密钥算法</a></li>
+						<li><a href="<%=request.getContextPath()%>/algorithm/selectAll.do">密钥算法列表</a></li>
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="icon icon-th-list"></i> <span>日志管理</span> <span class="label">3</span></a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>日志管理</span> <span class="label"></span></a>
 					<ul>
 						<li><a href="form-common.html">Common elements</a></li>
 						<li><a href="form-validation.html">Validation</a></li>
@@ -51,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><i class="icon icon-th-list"></i> <span>管理员管理</span> <span class="label">3</span></a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>管理员管理</span> <span class="label"></span></a>
 					<ul>
 						<li><a href="form-common.html">Common elements</a></li>
 						<li><a href="form-validation.html">Validation</a></li>
