@@ -1,14 +1,13 @@
 package cn.com.keypair.alg.service;
 
 import java.util.List;
-import java.util.Map;
 
 import cn.com.keypair.alg.entry.KeypairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 
 public interface KeypairAlgorithmService {
 
-	Map insert(KeypairAlgorithm keypairAlgorithm) throws  KmApplicationexception;
+	void insert(KeypairAlgorithm keypairAlgorithm) throws  KmApplicationexception;
 
 	List<KeypairAlgorithm> selectAll(KeypairAlgorithm keypairAlgorithm);
 
@@ -17,6 +16,10 @@ public interface KeypairAlgorithmService {
 	void delete(Long id);
 
 	KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm);
+
+	void suspend(Long id);
+
+	void activate(Long id);
 
 	
 

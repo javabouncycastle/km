@@ -1,8 +1,6 @@
 package cn.com.keypair.alg.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.com.common.KmConstants;
 import cn.com.keypair.alg.dao.KeypairAlgorithmDAO;
 import cn.com.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.km.KmErrorMessageConstants;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Service("keypairAlgorithmService")
@@ -24,19 +25,15 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	private KeypairAlgorithmDAO keypairAlgorithmDAO;
 
 	@Override
-	public Map insert(KeypairAlgorithm keypairAlgorithm) {
+	public void insert(KeypairAlgorithm keypairAlgorithm) throws KmApplicationexception {
 		LOG.debug("insert - start");
-		Map<String,Object> resultMap=new HashMap<String,Object>();
-		int i = keypairAlgorithmDAO.findNameCountById(keypairAlgorithm);
-		if(i==0){
+		KeypairAlgorithm dbkeypairAlgorithm = this.keypairAlgorithmDAO.findByName(keypairAlgorithm);
+		if (dbkeypairAlgorithm!=null){
+			KmApplicationexception.throwException(KmErrorMessageConstants.nameExist, new String[]{keypairAlgorithm.getName()});
+		}if(dbkeypairAlgorithm==null){
 			keypairAlgorithmDAO.insert(keypairAlgorithm);
-			resultMap.put("success", true);
-		}else{
-			resultMap.put("success", false);
-			resultMap.put("msg", "");
 		}
 		LOG.debug("insert - end");
-		return resultMap;
 	}
 
 	@Override
@@ -61,10 +58,35 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		LOG.debug("delete - end");
 	}
 
-	@Override
+	/*@Override
 	public KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm) {
 		keypairAlgorithm = keypairAlgorithmDAO.findById(keypairAlgorithm);
 		return keypairAlgorithm;
+	}
+*/
+	@Override
+	public void suspend(Long id) {
+		LOG.debug("suspend - start");
+		KeypairAlgorithm keypairAlgorithm = keypairAlgorithmDAO.findById(id);
+		keypairAlgorithm.setIsValid(KmConstants.YES_OR_NO_OPTION_NO);
+		keypairAlgorithmDAO.update(keypairAlgorithm);
+		LOG.debug("suspend - end");
+		
+	}
+
+	@Override
+	public void activate(Long id) {
+		LOG.debug("activate - start");
+		KeypairAlgorithm keypairAlgorithm = keypairAlgorithmDAO.findById(id);
+		keypairAlgorithm.setIsValid(KmConstants.YES_OR_NO_OPTION_YES);
+		keypairAlgorithmDAO.update(keypairAlgorithm);
+		LOG.debug("activate - end");
+	}
+
+	@Override
+	public KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

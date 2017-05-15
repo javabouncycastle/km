@@ -4,7 +4,6 @@ import java.util.List;
 
 import cn.com.keypair.alg.entry.KeypairAlgorithm;
 
-
 public interface KeypairAlgorithmDAO {
 
 	int findNameCountById(KeypairAlgorithm keypairAlgorithm);
@@ -17,6 +16,8 @@ public interface KeypairAlgorithmDAO {
 
 	void delete(Long id);
 
-	KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm);
+	KeypairAlgorithm findById(Long id);
+	
+	KeypairAlgorithm findByName(KeypairAlgorithm keypairAlgorithm);
 
 }

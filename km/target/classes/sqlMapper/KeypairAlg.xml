@@ -38,6 +38,19 @@
 		 from keypair_algorithm
 	</select>
 	
+	<select id="findByName" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm" resultType="cn.com.keypair.alg.entry.KeypairAlgorithm">
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where name=#{name}
+	</select>
+	
 	<select id="findById" parameterType="cn.com.keypair.alg.entry.KeypairAlgorithm" resultType="cn.com.keypair.alg.entry.KeypairAlgorithm">
 		select 
 			id,
