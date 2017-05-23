@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-
+//µ¥ÀýÄ£Ê½
 public class ResourceBundleErrorMessage {
 	
 	public static final String propertiesFilePath = "Messages_SURE";

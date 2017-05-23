@@ -1,8 +1,8 @@
-package cn.com.keypair.alg.dao;
+package cn.com.sure.keypair.alg.dao;
 
 import java.util.List;
 
-import cn.com.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 
 public interface KeypairAlgorithmDAO {
 

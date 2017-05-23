@@ -78,11 +78,11 @@
             		<div class="modal-header">
             			<div class="form">
             				<table id="infoTable"  class="table table-striped table-hover table-bordered">
-				            	 <c:if test="${message != null && message != ''}">               
+				            	 <c:if test="${messageInsert != null && messageInsert != ''}">               
 				                    <div class="alert alert-danger alert-dismissible" role="alert">
 				                      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
 				                      <span class="sr-only">Close</span></button>
-				                      <strong>${message}</strong> 
+				                      <strong>${messageInsert}</strong> 
 				                    </div>  
 					            </c:if> 
 
@@ -90,29 +90,29 @@
                   
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraValue" class="control-label">别名 </label>
-				                    <input type="text" class="form-control" id="name" name="name" required="required"/>                 
+				                    <input type="text" class="form-control" id="name" name="name" value="${keypairAlgorithm.name}" required="required"/>                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">算法OID</label>
-				                    <input type="text" class="form-control" id="algorithmOid" name="algorithmOid" required="required"/>     
+				                    <input type="text" class="form-control" id="algorithmOid" name="algorithmOid" value="${keypairAlgorithm.algorithmOid}"  required="required"/>     
 				                  </div>
 				                </div>
 				                
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">算法英文缩写 </label>
-				                    <input type="text" class="form-control" id="algorithmName" name="algorithmName" required="required" />                 
+				                    <input type="text" class="form-control" id="algorithmName" name="algorithmName" value="${keypairAlgorithm.algorithmName}" required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">密钥长度</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" required="required" />                 
+				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${keypairAlgorithm.keysize}" required="required" />                 
 				                  </div>			
 				                </div>	
                   
 				                <div class="row">		            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="isValid" class="control-label">是否有效</label>
-				                     <select class="form-control margin-bottom-15" name="isValid" id="isValid"  >
+				                     <select class="form-control margin-bottom-15" name="isValid" id="isValid" value="${keypairAlgorithm.isValid}"  >
 									      <option value="1"  >是</option>
 									      <option value="0"  >否</option>
 				                  	   </select>                 
@@ -218,18 +218,14 @@ function remove(id){
      self.location.replace("remove.do?&id="+id);
    }
 }   
-
 function suspend(id){
      self.location.replace("suspend.do?&id="+id);
 }
-
 function activate(id){
      self.location.replace("activate.do?&id="+id);
 }
-
 //修改的初始化页面            
 function edit(id,name,algorithmOid,algorithmName,keysize,notes,isValid){
-            debugger;
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
 			$("#modal_update input[name='algorithmOid']").val(algorithmOid);	
@@ -239,7 +235,6 @@ function edit(id,name,algorithmOid,algorithmName,keysize,notes,isValid){
 			$("#modal_update input[name='isValid']").val(isValid);
 			$("#modal_update").modal('show');
 }
-
 function add(){
 	$("#modal_insert").modal('show');
 }
@@ -251,8 +246,8 @@ function add(){
 </script>
 </c:if> 
  
-<c:if test="${message != null && message != ''}">     
+<c:if test="${messageInsert != null && messageInsert != ''}">     
 	<script type="text/javascript">
-	 	//$("#modal_insert").modal('show');
+	 	$("#modal_insert").modal('show');
 	</script>
 </c:if> 

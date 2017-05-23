@@ -1,4 +1,4 @@
-package cn.com.keypair.alg.service;
+package cn.com.sure.keypair.alg.service;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.common.KmConstants;
-import cn.com.keypair.alg.dao.KeypairAlgorithmDAO;
-import cn.com.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.alg.dao.KeypairAlgorithmDAO;
+import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
 
@@ -58,12 +58,6 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		LOG.debug("delete - end");
 	}
 
-	/*@Override
-	public KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm) {
-		keypairAlgorithm = keypairAlgorithmDAO.findById(keypairAlgorithm);
-		return keypairAlgorithm;
-	}
-*/
 	@Override
 	public void suspend(Long id) {
 		LOG.debug("suspend - start");
@@ -82,12 +76,5 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		keypairAlgorithmDAO.update(keypairAlgorithm);
 		LOG.debug("activate - end");
 	}
-
-	@Override
-	public KeypairAlgorithm findById(KeypairAlgorithm keypairAlgorithm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 
 }

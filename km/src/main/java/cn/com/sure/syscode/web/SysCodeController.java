@@ -81,7 +81,7 @@ public class SysCodeController {
 		this.sysCodeService.update(sysCode);
 		LOG.debug("update - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","修改id【"+sysCode.getId()+"】成功");
+		attr.addFlashAttribute("msg","修改主键=【"+sysCode.getId()+"】信息成功");
 		return  "redirect:/syscode/selectAll.do";
 		
 	}
@@ -99,7 +99,7 @@ public class SysCodeController {
 		this.sysCodeService.remove(id);
 		LOG.debug("remove - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","删除【"+id+"】成功");
+		attr.addFlashAttribute("msg","删除主键为【"+id+"】信息成功");
 		return  "redirect:/syscode/selectAll.do";
 		
 	}
@@ -118,7 +118,7 @@ public class SysCodeController {
 		this.sysCodeService.suspend(id);
     	LOG.debug("suspend - end!");
     	attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","停用【"+id+"】成功");
+		attr.addFlashAttribute("msg","停用主键为【"+id+"】成功");
         return "redirect:/syscode/selectAll.do";
 		
 	}
@@ -140,7 +140,7 @@ public class SysCodeController {
         attr.addFlashAttribute("success", id);
     	LOG.debug("activate - end!");	
     	attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","启用【"+id+"】成功");
+		attr.addFlashAttribute("msg","启用主键为【"+id+"】成功");
         return "redirect:/syscode/selectAll.do";
 		
 	}

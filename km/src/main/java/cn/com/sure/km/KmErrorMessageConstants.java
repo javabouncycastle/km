@@ -1,6 +1,6 @@
 package cn.com.sure.km;
 
-public class KmErrorMessageConstants {
+public interface KmErrorMessageConstants {
 	
 	public static final int unknownError = -1;  // Î´Öª´íÎó
 	

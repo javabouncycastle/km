@@ -24,4 +24,4 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/templatemo_script.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/js/WdatePicker.js"></script>    
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/WdatePicker.js"></script>   

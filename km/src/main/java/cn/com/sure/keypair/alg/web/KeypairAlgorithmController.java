@@ -1,4 +1,4 @@
-package cn.com.keypair.alg.web;
+package cn.com.sure.keypair.alg.web;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cn.com.keypair.alg.entry.KeypairAlgorithm;
-import cn.com.keypair.alg.service.KeypairAlgorithmSearchbycondition;
-import cn.com.keypair.alg.service.KeypairAlgorithmService;
+import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.alg.service.KeypairAlgorithmSearchbycondition;
+import cn.com.sure.keypair.alg.service.KeypairAlgorithmService;
 import cn.com.sure.km.KmApplicationexception;
 
 @Controller
@@ -52,7 +52,7 @@ public class KeypairAlgorithmController {
 			//执行insert操作
 			this.keypairAlgorithmService.insert(keypairAlgorithm);
 		}catch(KmApplicationexception e){
-			attr.addFlashAttribute("success",e.getMessage());
+			attr.addFlashAttribute("messageInsert",e.getMessage());
 			attr.addFlashAttribute("keypairAlgorithm",keypairAlgorithm);
 			return "redirect:/algorithm/selectAll.do";
 		}
@@ -69,6 +69,7 @@ public class KeypairAlgorithmController {
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KeypairAlgorithm keypairAlgorithm,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
+		System.out.println(request.getRemoteAddr());
 		LOG.debug("selectAll - start");
 		List <KeypairAlgorithm> keypairAlgorithms = keypairAlgorithmService.selectAll(keypairAlgorithm);
 		LOG.debug("selectAll - end");
@@ -100,7 +101,7 @@ public class KeypairAlgorithmController {
 		keypairAlgorithmService.update(keypairAlgorithm);
 		LOG.debug("update - end");
 		attr.addFlashAttribute("updateSuccess","true");
-		attr.addFlashAttribute("message","修改主键为【"+keypairAlgorithm.getId()+"】成功！");
+		attr.addFlashAttribute("message","修改主键为【"+keypairAlgorithm.getId()+"】的信息成功！");
 		return "redirect:/algorithm/selectAll.do";
 	}
 	
@@ -133,7 +134,7 @@ public class KeypairAlgorithmController {
 		LOG.debug("suspend - start!");
 		this.keypairAlgorithmService.suspend(id);
         attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","停用【"+id+"】成功");
+		attr.addFlashAttribute("msg","停用主键为【"+id+"】成功");
     	LOG.debug("suspend - end!");
         return "redirect:/algorithm/selectAll.do";
 		
@@ -152,7 +153,7 @@ public class KeypairAlgorithmController {
 		LOG.debug("activate - start!");
 		this.keypairAlgorithmService.activate(id);
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","启用【"+id+"】成功");
+		attr.addFlashAttribute("msg","启用主键为【"+id+"】成功");
     	LOG.debug("activate - end!");		
         return "redirect:/algorithm/selectAll.do";
 		

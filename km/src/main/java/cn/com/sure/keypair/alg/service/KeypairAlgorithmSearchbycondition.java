@@ -1,4 +1,4 @@
-package cn.com.keypair.alg.service;
+package cn.com.sure.keypair.alg.service;
 
 import cn.com.sure.framework.PaginatedParam;
 

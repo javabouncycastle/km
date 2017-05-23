@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import cn.com.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 import cn.com.sure.syscode.entry.SysCode;
 
 public class KpgTask {
