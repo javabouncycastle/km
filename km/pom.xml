@@ -211,11 +211,19 @@
   			<version>1.5.4</version>
   		</dependency> -->
   		<!-- https://mvnrepository.com/artifact/aspectj/aspectjweaver -->
-		<dependency>
-		    <groupId>aspectj</groupId>
+		<!-- <dependency>
+		    <groupId>org.aspect</groupId>
 		    <artifactId>aspectjweaver</artifactId>
-		    <version>1.5.4</version>
+		    <version>1.7.4</version>
+		</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.7.4</version>
 		</dependency>
+		
   		
   <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 <!-- <dependency>

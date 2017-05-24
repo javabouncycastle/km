@@ -46,7 +46,7 @@
 		              <i class="fa fa-database"></i><font style='font-family:"微软雅黑"'>日志管理</font><div class="pull-right"><span class="caret"></span></div>
 		            </a>
 		            <ul class="templatemo-submenu">
-		              <li  ><a href="<%=request.getContextPath()%>/conf/syscode/list"><font style='font-family:"微软雅黑"'>日志列表</font></a></li>
+		              <li  ><a href="<%=request.getContextPath()%>/conf/log/list"><font style='font-family:"微软雅黑"'>日志列表</font></a></li>
 		            </ul>               
           		</li>
             	<li class="sub open">

@@ -28,19 +28,6 @@ public class KeypairAlgorithmController {
 	@Autowired
 	private KeypairAlgorithmService keypairAlgorithmService;
 	
-	
-	/**
-	 * 进入增加密钥算法主页面
-	 * @return
-	 /*
-	 /*@RequestMapping(value="insert")
-	public String searchMain(){
-		LOG.debug("searchMain - start");
-		
-		LOG.debug("searchMain - end");
-		return "";
-	}
-	*/
 	/**
 	 * 增加密钥算法
 	 */

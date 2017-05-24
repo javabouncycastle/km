@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.common.KmConstants;
+import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.alg.dao.KeypairAlgorithmDAO;
 import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
