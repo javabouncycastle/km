@@ -9,5 +9,7 @@ public interface KmErrorMessageConstants {
 	public static final int paraValueExist = 103;//数据字典已存在
 	
 	public static final int paraTypeValueExist = 104;//数据字典类别已存在
+	
+	public static final int kpgTaskNameExist = 105;//任务已存在
 
 }

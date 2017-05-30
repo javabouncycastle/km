@@ -8,9 +8,9 @@
         <div class="templatemo-content">
 	          <ol class="breadcrumb">
 	            <li><a href="<%=request.getContextPath()%>/main">主页面</a></li>
-	            <li class="active">密钥算法容</li>
+	            <li class="active">密钥任务</li>
 	            <li><a href="../../sign-in.html">Sign In Form</a></li>
-	             <li><a href="javascript:add()">增加密钥算法</a></li>
+	             <li><a href="javascript:add()">增加密钥任务</a></li>
 	          </ol>
         <div class="row">
             <div class="col-md-12">
@@ -21,40 +21,42 @@
 	                    </div>
 	             </c:if> 
               <div class="table-responsive">
-                <h4 class="margin-bottom-15">密钥算法列表</h4>
+                <h4 class="margin-bottom-15">密钥任务列表</h4>
                 <table class="table table-striped table-hover table-bordered">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
-		                      <th width="8%">主键</th>
-		                      <th width="10%">别名</th>
-		                      <th width="10%">算法OID</th>
-		                      <th width="10%">算法英文缩写</th>
-		                      <th width="10%">密钥长度</th>
-		                      <th width="8%">是否有效</th>
-		                      <th width="10%">备注</th>
-		                      <th width="16%">操作</th>
+		                      <th width="5%">主键</th>
+		                      <th width="8%">别名</th>
+		                      <th width="8%">算法</th>
+		                      <th width="8%">生成数量</th>
+		                      <th width="8%">已生成数量</th>
+		                      <th width="10%">任务状态</th>
+		                      <th width="10%">任务开始时间</th>
+		                      <th width="10%">执行开始时间</th>
+		                      <th width="10%">执行结束时间</th>
+		                      <th width="10%">任务结果</th>
+		                      <th width="10%">任务说明</th>
 		                    </tr>
 		                  </thead>
                     <tbody id="id_tbody_upd_list"> 
-                    <c:forEach var="row" items="${keypairAlgorithms}">
+                    <c:forEach var="row" items="${kpgTasks}">
                     	<!--  修改密钥算法-->
 	                    <tr id="upd_list_row_id_${row.id}" >
-		                    <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.algorithmOid}','${row.algorithmName}','${row.keysize}','${row.notes}','${row.isValid}')" class="btn btn-link">${row.id}</a>
+		                     <td>
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus}',
+		                    	'${row.taskStartTime}','${row.exeTaskStartTime}, ${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
-		                    <td>${row.algorithmOid}</td>
-		                    <td>${row.algorithmName}</td>
-		                    <td>${row.keysize}</td>
-		                    <td>${row.isValid}</td>
-		                    <td>${row.notes}</td>
+		                    <td>${row.keypairAlgorithm}</td>
+		                    <td>${row.kpgKeyAmount}</td>
+		                    <td>${row.dbCommitBufsize}</td>
+		                    <td>${row.taskStatus}</td>
+		                    <td>${row.taskStartTime}</td>
+		                    <td>${row.exeTaskStartTime}</td>
+		                    <td>${row.exeTaskEndTime}</td>
+		                    <td>${row.taskExeResult}</td>
+		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
-		                    <c:if test="${row.isValid==1}">
-					      		<a href="javascript:suspend('${row.id}')"  class="btn btn-link">停用</a> 
-						      </c:if>
-						      <c:if test="${row.isValid==0}">
-						            <a href="javascript:activate('${row.id}')"  class="btn btn-link">启用</a>
-						      </c:if> 
 							</td>      		
 	                    </tr>
                 	</c:forEach>
@@ -87,41 +89,62 @@
 					            </c:if> 
 
 				                <div class="row"> 
-                  
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraValue" class="control-label">别名 </label>
-				                    <input type="text" class="form-control" id="name" name="name" value="${keypairAlgorithm.name}" required="required"/>                 
+				                    <input type="text" class="form-control" id="name" name="name" value="${kpgTask.name}" required="required"/>                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="notes" class="control-label">算法OID</label>
-				                    <input type="text" class="form-control" id="algorithmOid" name="algorithmOid" value="${keypairAlgorithm.algorithmOid}"  required="required"/>     
+				                    <label for="notes" class="control-label">密钥算法</label>
+				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
+				                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
+				                    	</c:forEach>
+				                    </select>
 				                  </div>
 				                </div>
 				                
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="paraCode" class="control-label">算法英文缩写 </label>
+				                    <label for="paraCode" class="control-label">生成数量 </label>
 				                    <input type="text" class="form-control" id="algorithmName" name="algorithmName" value="${keypairAlgorithm.algorithmName}" required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">密钥长度</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${keypairAlgorithm.keysize}" required="required" />                 
+				                    <label for="color" class="control-label">已生成数量</label>
+				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>			
 				                </div>	
                   
 				                <div class="row">		            
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="isValid" class="control-label">是否有效</label>
-				                     <select class="form-control margin-bottom-15" name="isValid" id="isValid" value="${keypairAlgorithm.isValid}"  >
-									      <option value="1"  >是</option>
-									      <option value="0"  >否</option>
-				                  	   </select>                 
+				                    <label for="color" class="control-label">任务状态</label>
+				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="sc" items="${sysCodes}">
+				                    		<option value="${sc.id}">${sc.name}</option>
+				                    	</c:forEach>
+				                    </select>                 
 				                  </div>
-				                </div>
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="color" class="control-label">任务开始时间</label>
+				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.taskStartTime}" required="required" />                 
+				                  </div>
+				                  </div>
+				                  
+				                <div class="row">	            
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="color" class="control-label">执行开始时间</label>
+				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.exeTaskStartTime}" required="required" />                 
+				                  </div>
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="color" class="control-label">执行结束时间</label>
+				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.exeTaskEndTime}" required="required" />                 
+				                  </div>
+				                  </div>  
 				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
 				                    <label for="notes" class="control-label">备注 </label>
-				                    <textarea class="form-control" rows="3" id="notes" name="notes">${keypairAlgorithm.notes}</textarea>
+				                    <textarea class="form-control" rows="3" id="notes" name="notes">${kpgTask.taskNotes}</textarea>
 				                  </div>
 				                </div>	
             				</table>

@@ -29,7 +29,7 @@
             		</ul>
             		<ul class="templatemo-submenu">
 	              		<li>
-	              			<a href="<%=request.getContextPath()%>/keypairTask/selectAll.do"><font style='font-family:"微软雅黑"'>密钥任务列表</font></a>
+	              			<a href="<%=request.getContextPath()%>/kpgTask/selectAll.do"><font style='font-family:"微软雅黑"'>密钥任务列表</font></a>
 	              		</li>
             		</ul>
           		</li>

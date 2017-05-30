@@ -39,18 +39,12 @@
                     	<!--  修改数据字典-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                    <td>
-		                    	<a href="javascript:edit('${row.id}','${row.paraCode}','${row.paraValue}','${row.isValid}','${row.notes}')" class="btn btn-link">${row.id}</a>
+		                    	<a href="javascript:edit('${row.id}','${row.paraCode}','${row.paraValue}','${row.paraType.id }','${row.isValid}','${row.notes}')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.paraCode}</td>
 		                    <td>${row.paraValue}</td>
-		                    <td>${row.isValid}</td>
-		                    <td>
-	                   	<c:forEach var="frs" items="${sysCodeTypes}">
-	                   		<c:if test="${frs.id==row.paraType.id}">
-	                   			${frs.paraType}
-	                   		</c:if>
-	                   	</c:forEach>
-                    </td>
+		                    <td>${row.paraType.paraType}</td>
+		                 	<td>${row.isValid=='0'?'否':'是'}</td>
 		                    <td>${row.notes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
 		                    <c:if test="${row.isValid==1}">
@@ -63,7 +57,6 @@
 	                    </tr>
                 	</c:forEach>
                </table>
-            	 共找到${totalCount}条记录 ,当前显示1到${totalCount}条.
             </div>
           </div>
         </div>
@@ -174,6 +167,15 @@
 				                    <label for="notes" class="control-label">参数值</label>
 				                    <input type="text" class="form-control" id="paraValue" name="paraValue" required="required"/>     
 				                  </div>
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="notes" class="control-label">所属类型</label>
+				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="frs" items="${sysCodeTypes}">
+				                    		<option value="${frs.id}">${frs.paraType}</option>
+				                    	</c:forEach>
+				                    </select>    
+				                  </div>
 				                </div>
                   
 				                <div class="row">
@@ -221,14 +223,14 @@ function activate(id){
 }
 
 //修改的初始化页面            
-function edit(id,name,algorithmOid,algorithmName,keysize,notes,isValid){
+function edit(id,paraCode,paraValue,paraType,isValid,notes){
+			debugger;
 			$("#modal_update input[name='id']").val(id);
-			$("#modal_update input[name='name']").val(name);
-			$("#modal_update input[name='algorithmOid']").val(algorithmOid);	
-			$("#modal_update input[name='algorithmName']").val(algorithmName);
-			$("#modal_update input[name='keysize']").val(keysize);	
+			$("#modal_update input[name='paraCode']").val(paraCode);
+			$("#modal_update input[name='paraValue']").val(paraValue);
+			$("#modal_update select[name='paraType.id']").val(paraType);
+			$("#modal_update input[name='isValue']").val(isValid);	
 			$("#modal_update [id='notes']").val(notes);
-			$("#modal_update input[name='isValid']").val(isValid);
 			$("#modal_update").modal('show');
 }
 

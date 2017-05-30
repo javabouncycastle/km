@@ -54,14 +54,6 @@ public class KpgTask {
 	@Column(name = "task_notes",length=256) 	
 	private String taskNotes;
 
-    
-	
-	/**
-	 * π‹¿Ì‘±
-	*/
-    @Column (name = "admin_id")
-	private Long adminId; 
-    
 
     
 	/**
@@ -154,14 +146,6 @@ public class KpgTask {
 
 	public void setTaskNotes(String taskNotes) {
 		this.taskNotes = taskNotes;
-	}
-
-	public Long getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(Long adminId) {
-		this.adminId = adminId;
 	}
 
 	public Date getExeTaskStartTime() {

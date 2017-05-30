@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.syscode.dao.SysCodeDAO">  
+	
+	<resultMap type="cn.com.sure.syscode.entry.SysCode" id="SysCodeResultMap">
+		<id column="id" javaType="long" property="id"/>
+		<result column="paraCode" javaType="String" property="paraCode"/>
+		<result column="paraValue" javaType="String" property="paraValue"/>
+		<result column="isValid" javaType="int" property="isValid"/>
+		<result column="notes" javaType="String" property="notes"/>
+		<association property="paraType" javaType="cn.com.sure.syscode.entry.SysCodeType" >
+			<id column="TypeId" javaType="long" property="id"/>
+			<result column="typeParaType" javaType="String" property="paraType"/>
+			<result column="typeNotes" javaType="String" property="notes"/>
+		</association>
+	</resultMap>
 
 	<insert id="insert" parameterType="cn.com.sure.syscode.entry.SysCode">
 		insert into km_sys_code(
@@ -18,19 +31,24 @@
 		)
 	</insert>
 	
-	<select id="selectAll" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="cn.com.sure.syscode.entry.SysCode">
+	<select id="selectAll" parameterType="cn.com.sure.syscode.entry.SysCode" resultMap="SysCodeResultMap">
 		select 
-			id,
-			para_code as paraCode,
-			para_value as paraValue,
-			para_type as paraType,
-			is_valid as isValid,
-			notes
-		 from km_sys_code
+			ks.id as id,
+			ks.para_code as paraCode,
+			ks.para_value as paraValue,
+			ks.para_type as paraType,
+			ks.is_valid as isValid,
+			ks.notes as note,
+			ksty.id as TypeId,
+			ksty.para_type as typeParaType,
+			ksty.notes as typeNotes
+		 from km_sys_code ks,km_sys_param_type ksty
+		 where ks.para_type=ksty.id
 	</select>
 	
 	<select id="findById" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="cn.com.sure.syscode.entry.SysCode">
 		select
+			id,
 			para_code as paraCode,
 			para_value as paraValue,
 			para_type as paraType,
