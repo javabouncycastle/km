@@ -2,16 +2,10 @@ package cn.com.sure.keypair.entry;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
-import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 import cn.com.sure.syscode.entry.SysCode;
 
 public class KpgTask {
@@ -20,9 +14,6 @@ public class KpgTask {
 	 * 主键
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="km_kpg_task_seq_id_gen")
-	@SequenceGenerator( name="km_kpg_task_seq_id_gen",sequenceName="sdca_km_kpg_task_seq_id",allocationSize=1,initialValue=1)
-	@Column(name = "id",length=32) 	
 	private Long id;
 	
 	/**
@@ -34,21 +25,18 @@ public class KpgTask {
 	/**
 	 * 产生密钥的密钥算法+长度
 	 */
-    @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
-    @JoinColumn(name = "kpg_algorithm_id") 
 	private KeypairAlgorithm keypairAlgorithm;
 	
 	
 	/**
 	 * 产生密钥的密钥数量
 	 */
-	@Column(name = "kpg_key_amount",precision=12, scale=0) 	
+	@Column(name = "kpg_key_amount") 	
 	private Integer kpgKeyAmount;
 
     /**
      * 任务状态  1 standby准备状态，executing正在执行，finished任务完成，exception异常结束 ，interrupted人工中断
      */
-    @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "task_status") 
 	private SysCode taskStatus; 
     
@@ -71,7 +59,7 @@ public class KpgTask {
 	/**
 	 * 管理员
 	*/
-    @Column (name = "admin_id",precision=12, scale=0)
+    @Column (name = "admin_id")
 	private Long adminId; 
     
 
@@ -95,7 +83,7 @@ public class KpgTask {
 	/**
 	 * 密钥已经存储缓冲记录数量
 	 */
-    @Column (name = "dbcommit_bufsize",precision=12, scale=0)
+    @Column (name = "dbcommit_bufsize")
 	private Integer dbCommitBufsize; 
 	
 	
@@ -103,7 +91,7 @@ public class KpgTask {
 	/**
 	 * 密钥已经存储数量
 	 */
-    @Column (name = "generated_key_amount",precision=12, scale=0)
+    @Column (name = "generated_key_amount")
 	private Integer generatedKeyAmount; 
 	
 	/**

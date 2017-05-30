@@ -5,12 +5,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-public class AuditLog {
+public class AuditOpLog {
 	
-	public AuditLog() {
+	public AuditOpLog() {
 	}
 	
-	public AuditLog(String id) {
+	public AuditOpLog(String id) {
 		this.id = id;
 	}
 	/**

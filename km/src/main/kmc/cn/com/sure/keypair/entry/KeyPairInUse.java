@@ -13,7 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 
 @Entity
 @Table(name = "km_keypair_in_use")

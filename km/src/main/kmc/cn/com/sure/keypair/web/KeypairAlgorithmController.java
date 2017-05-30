@@ -1,4 +1,4 @@
-package cn.com.sure.keypair.alg.web;
+package cn.com.sure.keypair.web;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
-import cn.com.sure.keypair.alg.service.KeypairAlgorithmSearchbycondition;
-import cn.com.sure.keypair.alg.service.KeypairAlgorithmService;
+import cn.com.sure.keypair.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.service.KeypairAlgorithmSearchbycondition;
+import cn.com.sure.keypair.service.KeypairAlgorithmService;
 import cn.com.sure.km.KmApplicationexception;
 
 @Controller

@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
 
 /*√‹‘øπÈµµ*/
 public class KeypairArchive {

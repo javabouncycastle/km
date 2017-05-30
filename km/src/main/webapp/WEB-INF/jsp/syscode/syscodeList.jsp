@@ -22,12 +22,13 @@
 	             </c:if> 
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">数据字典列表</h4>
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-striped table-hover table-bordered" class="table table-bordered table-striped table-hover data-table">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
 		                      <th width="8%">主键</th>
 		                      <th width="10%">参数名</th>
 		                      <th width="10%">参数值</th>
+		                      <th width="10%">所属类型</th>
 		                      <th width="10%">是否有效</th>
 		                      <th width="10%">备注</th>
 		                      <th width="16%">操作</th>
@@ -43,6 +44,13 @@
 		                    <td>${row.paraCode}</td>
 		                    <td>${row.paraValue}</td>
 		                    <td>${row.isValid}</td>
+		                    <td>
+	                   	<c:forEach var="frs" items="${sysCodeTypes}">
+	                   		<c:if test="${frs.id==row.paraType.id}">
+	                   			${frs.paraType}
+	                   		</c:if>
+	                   	</c:forEach>
+                    </td>
 		                    <td>${row.notes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
 		                    <c:if test="${row.isValid==1}">
@@ -94,6 +102,15 @@
 				                </div>
 				                
 				                <div class="row">		            
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="notes" class="control-label">所属类型</label>
+				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="frs" items="${sysCodeTypes}">
+				                    		<option value="${frs.id}">${frs.paraType}</option>
+				                    	</c:forEach>
+				                    </select>
+				                    </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="isValid" class="control-label">是否有效</label>
 				                     <select class="form-control margin-bottom-15" name="isValid" id="isValid"  >
@@ -228,6 +245,6 @@ function add(){
  
 <c:if test="${message != null && message != ''}">     
 	<script type="text/javascript">
-	 	//$("#modal_insert").modal('show');
+	 	$("#modal_insert").modal('show');
 	</script>
 </c:if> 

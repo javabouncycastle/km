@@ -2,6 +2,7 @@ package cn.com.sure.syscode.entry;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 public class SysCode {
 
@@ -20,6 +21,12 @@ public class SysCode {
 	 */
     @Column (name = "para_value")
     private String paraValue;
+    
+	/**
+	 * 参数类别 - 引用km_sys_code_type表
+	 */
+    private SysCodeType paraType;
+    
 	/**
 	 * 是否有效
 	 */
@@ -31,6 +38,15 @@ public class SysCode {
 	 */
     @Column (name ="notes")
     private String notes;
+    
+
+	public SysCodeType getParaType() {
+		return paraType;
+	}
+
+	public void setParaType(SysCodeType paraType) {
+		this.paraType = paraType;
+	}
 
 	public Long getId() {
 		return id;

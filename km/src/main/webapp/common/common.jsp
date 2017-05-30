@@ -19,6 +19,8 @@
             <script src="${ctx}/js/unicorn.js"></script><!-- 左边菜单栏的展开 -->
            <%--  <script src="${ctx}/js/unicorn.dashboard.js"></script> --%>
             <script src="${ctx}/js/jquery.validate.js"></script>
+            <script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+            
             
 			<link rel="stylesheet" href="css/jquery-ui.css" />
 			<link rel="stylesheet" href="css/bootstrap.min.css" />

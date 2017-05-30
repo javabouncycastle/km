@@ -27,6 +27,11 @@
 	              			<a href="<%=request.getContextPath()%>/algorithm/selectAll.do"><font style='font-family:"微软雅黑"'>密钥算法列表</font></a>
 	              		</li>
             		</ul>
+            		<ul class="templatemo-submenu">
+	              		<li>
+	              			<a href="<%=request.getContextPath()%>/keypairTask/selectAll.do"><font style='font-family:"微软雅黑"'>密钥任务列表</font></a>
+	              		</li>
+            		</ul>
           		</li>
           		<li class="sub">
             		<a href="javascript:;">
@@ -38,6 +43,11 @@
             		<ul class="templatemo-submenu">
 	              		<li>
 	              			<a href="<%=request.getContextPath()%>/syscode/selectAll.do"><font style='font-family:"微软雅黑"'>数据字典列表</font></a>
+	              		</li>
+            		</ul>
+            		<ul class="templatemo-submenu">
+	              		<li>
+	              			<a href="<%=request.getContextPath()%>/syscodetype/selectAll.do"><font style='font-family:"微软雅黑"'>数据字典类型列表</font></a>
 	              		</li>
             		</ul>
           		</li>

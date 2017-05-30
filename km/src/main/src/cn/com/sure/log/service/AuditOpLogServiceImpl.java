@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.sure.log.dao.AuditLogDAO;
-import cn.com.sure.log.entry.AuditLog;
+import cn.com.sure.log.dao.AuditOpLogDAO;
+import cn.com.sure.log.entry.AuditOpLog;
 
 @Transactional(propagation = Propagation.REQUIRED)
-@Service(value="auditLogServiceImp")
-public class AuditLogServiceImpl implements AuditLogService{
+@Service(value="auditOpLogService")
+public class AuditOpLogServiceImpl implements AuditOpLogService{
 	
-	private static final Log LOG = LogFactory.getLog(AuditLogServiceImpl.class);
+	private static final Log LOG = LogFactory.getLog(AuditOpLogServiceImpl.class);
 	
 	@Autowired
-	private AuditLogDAO auditLogDAO;
+	private AuditOpLogDAO auditOpLogDAO;
 
 	@Override
-	public void insert(AuditLog auditLog) {
+	public void insert(AuditOpLog auditOpLog){
 		LOG.debug("insert - start");
-		auditLogDAO.insert(auditLog);
+		auditOpLogDAO.insert(auditOpLog);
 		LOG.debug("insert - end");
 	}
 

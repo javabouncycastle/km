@@ -1,4 +1,4 @@
-package cn.com.sure.keypair.alg.service;
+package cn.com.sure.keypair.service;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.alg.dao.KeypairAlgorithmDAO;
-import cn.com.sure.keypair.alg.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.dao.KeypairAlgorithmDAO;
+import cn.com.sure.keypair.entry.KeypairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
 

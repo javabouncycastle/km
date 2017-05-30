@@ -1,4 +1,4 @@
-package cn.com.sure.keypair.alg.entry;
+package cn.com.sure.keypair.entry;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -10,14 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.syscode.entry.SysCode;
+import cn.com.sure.syscode.entry.SysCodeType;
 import cn.com.sure.syscode.service.SysCodeService;
+import cn.com.sure.syscode.service.SysCodeTypeService;
 
 @Controller
 @RequestMapping(value="syscode")
@@ -27,6 +28,9 @@ public class SysCodeController {
 	
 	@Autowired
 	private SysCodeService sysCodeService;
+	
+	@Autowired
+	private SysCodeTypeService sysCodeTypeService;
 	
 	/**
 	* UC-SYS01-11 新增数据字典内容
@@ -65,8 +69,9 @@ public class SysCodeController {
 			Model model, RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("selectAll - start");
 		List<SysCode> sysCodes = this.sysCodeService.selectAll(sysCode);
+		List<SysCodeType> sysCodeTypes = this.sysCodeTypeService.selectAll(null);
 		LOG.debug("selectAll - end");
-		return new ModelAndView("syscode/syscodeList").addObject("sysCodes", sysCodes);
+		return new ModelAndView("syscode/syscodeList").addObject("sysCodes", sysCodes).addObject("sysCodeTypes",sysCodeTypes);
 	}
 	
 	
@@ -81,7 +86,7 @@ public class SysCodeController {
 		this.sysCodeService.update(sysCode);
 		LOG.debug("update - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","修改主键=【"+sysCode.getId()+"】信息成功");
+		attr.addFlashAttribute("msg","修改【"+sysCode.getParaCode()+"】信息成功");
 		return  "redirect:/syscode/selectAll.do";
 		
 	}
@@ -144,6 +149,8 @@ public class SysCodeController {
         return "redirect:/syscode/selectAll.do";
 		
 	}
+	
+	
 
 
 }

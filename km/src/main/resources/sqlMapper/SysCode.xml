@@ -3,16 +3,16 @@
 <mapper namespace="cn.com.sure.syscode.dao.SysCodeDAO">  
 
 	<insert id="insert" parameterType="cn.com.sure.syscode.entry.SysCode">
-		insert into sys_code(
-			id,
+		insert into km_sys_code(
 			para_code,
 			para_value,
+			para_type,
 			is_valid,
 			notes
 		)values(
-			#{id},
 			#{paraCode},
 			#{paraValue},
+			#{paraType.id},
 			#{isValid},
 			#{notes}
 		)
@@ -23,9 +23,23 @@
 			id,
 			para_code as paraCode,
 			para_value as paraValue,
+			para_type as paraType,
 			is_valid as isValid,
 			notes
-		 from sys_code
+		 from km_sys_code
+	</select>
+	
+	<select id="findById" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="cn.com.sure.syscode.entry.SysCode">
+		select
+			para_code as paraCode,
+			para_value as paraValue,
+			para_type as paraType,
+			is_valid as isValid,
+			notes
+		from
+			km_sys_code
+		where
+			id=#{id}
 	</select>
 	
 	<select id="findByName" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="cn.com.sure.syscode.entry.SysCode">
@@ -33,28 +47,30 @@
 			id,
 			para_code as paraCode,
 			para_value as paraValue,
+			para_type as paraType,
 			is_valid as isValid,
 			notes
-		from sys_code
+		from km_sys_code
 			where para_code=#{paraCode}
 	</select>
 	
 	<update id="updateValid" parameterType="cn.com.sure.syscode.entry.SysCode">
-		update sys_code set is_valid=#{isValid} where id=#{id}
+		update km_sys_code set is_valid=#{isValid} where id=#{id}
 	</update>
 	
 	<update id="update" parameterType="cn.com.sure.syscode.entry.SysCode">
-	 update sys_code 
+	 update km_sys_code 
 		set 
 		 	para_code=#{paraCode},
 		 	para_value=#{paraValue},
+		 	para_type=#{paraType.id},
 		 	is_valid=#{isValid},
 		 	notes=#{notes}
 	 where id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="long">
-		delete from sys_code where id=#{id}
+		delete from km_sys_code where id=#{id}
 	</delete>
 	
 </mapper>

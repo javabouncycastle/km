@@ -2,13 +2,30 @@ package cn.com.sure.common;
 
 public class KmConstants {
 	
-	public static final int YES_OR_NO_OPTION_YES = 1;
-	public static final int YES_OR_NO_OPTION_NO = 0;
+	public static final int YES_OR_NO_OPTION_YES = 1;//停用启用-启用
+	public static final int YES_OR_NO_OPTION_NO = 0;//停用启用-停用
 	
-	public static final long OPERATION_TYPE_INSERT=1;
-	public static final long OPERATION_TYPE_DELETE=2;
-	public static final long OPERATION_TYPE_UPDATE=3;
-	public static final long OPERATION_TYPE__SELECT=4;
+	public static final long OPERATION_TYPE_INSERT=11;//增加
+	public static final long OPERATION_TYPE_DELETE=12;//删除
+	public static final long OPERATION_TYPE_UPDATE=13;//更新
+	public static final long OPERATION_TYPE_SELECT=14;//查询
 	
+	public static final int SUCCESS_OR_FAILD_OPTION_SUCCESS=1;//操作成功
+	public static final int SUCCESS_OR_FAILD_OPTION_FAILD=0;//操作失败	
+	
+	// 任务状态
+	public static final long TYPE_ID_TASK_STATUS = 2L;    // 任务状态TYPE
+	
+	public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //执行状态 - 尚未开始
+	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21L;   //执行状态 - 任务已启动
+
+	
+	public static final long CODE_ID_TASK_STATUS_EXECUTING   = 22L;       //执行状态 - 正在执行
+	public static final long CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED = 23L;//执行状态 - 人工中断Manual interrupt
+	public static final long CODE_ID_TASK_STATUS_FINISHED = 24L;          //执行状态 - 结束
+	public static final long CODE_ID_TASK_STATUS_EXCEPTION = 25L;         //执行状态 - 异常结束
+
+	public static final long CODE_ID_TASK_STATUS_MANUAL_PAUSED = 26L;      //执行状态 - 人工暂停
+	public static final long CODE_ID_TASK_STATUS_MANUAL_RESUMED = 27L;     //执行状态 - 人工继续
 
 }
