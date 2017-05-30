@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.com.sure.keypair.dao.KpgTaskDAO">  
+
+	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KpgTask">
+		insert into kpg_task(
+			name,
+			kpg_algorithm,
+			kpg_key_amount,
+			task_status,
+			task_start_time,
+			task_notes,
+			exe_task_start_time,
+			exe_task_end_time,
+			dbcommit_bufsize,
+			generated_key_amount,
+			task_exe_result
+		)values(
+			#{name},
+			#{keypairAlgorithm.id},
+			#{kpgKeyAmount},
+			#{taskStatus.id},
+			#{taskStartTime},
+			#{taskNotes},
+			#{exeTaskStartTime},
+			#{exeTaskEndTime},
+			#{dbCommitBufsize},
+			#{generatedKeyAmount},
+			#{taskExeResult}
+		)
+	</insert>
+	
+	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KpgTask" resultType="cn.com.sure.keypair.entry.KpgTask">
+		select 
+			id,
+			name,
+			kpg_algorithm as keypairAlgorithm,
+			kpg_key_amount as kpgKeyAmount,
+			task_status as taskStatus,
+			task_start_time as taskStartTime,
+			task_notes as taskNotes,
+			exe_task_start_time as exeTaskStartTime,
+			exe_task_end_time as exeTaskEndTime,
+			dbcommit_bufsize as dbCommitBufsize,
+			generated_key_amount generatedKeyAmount,
+			task_exe_result as taskExeResult
+		 from kpg_task
+	</select>
+	
+	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KpgTask" resultType="cn.com.sure.keypair.entry.KpgTask">
+		select 
+			id,
+			name,
+			kpg_algorithm as keypairAlgorithm,
+			kpg_key_amount as kpgKeyAmount,
+			task_status as taskStatus,
+			task_start_time as taskStartTime,
+			task_notes as taskNotes,
+			exe_task_start_time as exeTaskStartTime,
+			exe_task_end_time as exeTaskEndTime,
+			dbcommit_bufsize as dbCommitBufsize,
+			generated_key_amount generatedKeyAmount,
+			task_exe_result as taskExeResult
+		 from kpg_task
+		 where name=#{name}
+	</select>
+	
+	<update id="update" parameterType="cn.com.sure.keypair.entry.KpgTask">
+		update kpg_task
+		set
+		 	name = #{name},
+			kpg_algorithm = #{keypairAlgorithm.id},
+			kpg_key_amount=#{kpgKeyAmount},
+			task_status=#{taskStatus.id},
+			task_start_time=#{taskStartTime},
+			task_notes=#{taskNotes},
+			exe_task_start_time=#{exeTaskStartTime},
+			exe_task_end_time=#{exeTaskEndTime},
+			dbcommit_bufsize=#{dbCommitBufsize},
+			generated_key_amount=#{generatedKeyAmount},
+			task_exe_result=#{taskExeResult}
+		 where
+		 	id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from kpg_task where id=#{id}
+	</delete>
+    
+</mapper>
