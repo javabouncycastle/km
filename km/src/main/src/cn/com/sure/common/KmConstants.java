@@ -14,9 +14,9 @@ public class KmConstants {
 	public static final int SUCCESS_OR_FAILD_OPTION_FAILD=0;//操作失败	
 	
 	// 任务状态
-	public static final long TYPE_ID_TASK_STATUS = 2L;    // 任务状态TYPE
+	public static final String TYPE_ID_TASK_STATUS = "status";    // 任务状态TYPE
 	
-	public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //执行状态 - 尚未开始
+	/*public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //执行状态 - 尚未开始
 	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21L;   //执行状态 - 任务已启动
 
 	
@@ -27,5 +27,6 @@ public class KmConstants {
 
 	public static final long CODE_ID_TASK_STATUS_MANUAL_PAUSED = 26L;      //执行状态 - 人工暂停
 	public static final long CODE_ID_TASK_STATUS_MANUAL_RESUMED = 27L;     //执行状态 - 人工继续
+*/	
 
 }

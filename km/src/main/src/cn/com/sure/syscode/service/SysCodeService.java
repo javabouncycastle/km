@@ -22,5 +22,7 @@ public interface SysCodeService {
 	void activate(Long id);
 
 	List<SysCode> selectAll(SysCode sysCode);
+	
+	List<SysCode> selectByType(String typeIdTaskStatus);
 
 }

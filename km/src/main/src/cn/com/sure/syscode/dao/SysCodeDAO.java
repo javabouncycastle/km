@@ -19,5 +19,7 @@ public interface SysCodeDAO {
 	public void updateValid(SysCode sysCode);
 
 	public void update(SysCode sysCode);
+	
+	public List<SysCode> findByType(String typeIdTaskStatus);
 
 }

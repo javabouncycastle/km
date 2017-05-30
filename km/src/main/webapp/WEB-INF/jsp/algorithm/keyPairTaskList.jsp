@@ -95,7 +95,7 @@
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">密钥算法</label>
-				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    <select class="form-control margin-bottom-15" name="kpgAlg.id" id="paratypeInfo" required="required">
 				                    	<option value="">--请选择--</option>
 				                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
 				                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
@@ -107,38 +107,38 @@
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">生成数量 </label>
-				                    <input type="text" class="form-control" id="algorithmName" name="algorithmName" value="${keypairAlgorithm.algorithmName}" required="required" />                 
+				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">已生成数量</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.kpgKeyAmount}" required="required" />                 
+				                    <input type="text" class="form-control" id="dbCommitBufsize" name="dbCommitBufsize" value="${kpgTask.dbCommitBufsize}" required="required" />                 
 				                  </div>			
 				                </div>	
                   
 				                <div class="row">		            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务状态</label>
-				                    <select class="form-control margin-bottom-15" name="paraType.id" id="paratypeInfo" required="required">
+				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
 				                    	<option value="">--请选择--</option>
 				                    	<c:forEach var="sc" items="${sysCodes}">
-				                    		<option value="${sc.id}">${sc.name}</option>
+				                    		<option value="${sc.id}">${sc.paraCode}</option>
 				                    	</c:forEach>
 				                    </select>                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务开始时间</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.taskStartTime}" required="required" />                 
+				                    <input type="text" class="form-control" id="taskStartTime" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
 				                  </div>
 				                  </div>
 				                  
 				                <div class="row">	            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">执行开始时间</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.exeTaskStartTime}" required="required" />                 
+				                    <input type="text" class="form-control" id="exeTaskStartTime" name="exeTaskStartTime" value="${kpgTask.exeTaskStartTime}" required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">执行结束时间</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" value="${kpgTask.exeTaskEndTime}" required="required" />                 
+				                    <input type="text" class="form-control" id="exeTaskEndTime" name="exeTaskEndTime" value="${kpgTask.exeTaskEndTime}" required="required" />                 
 				                  </div>
 				                  </div>  
 				                <div class="row">

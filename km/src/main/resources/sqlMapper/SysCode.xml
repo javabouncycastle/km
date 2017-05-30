@@ -72,6 +72,20 @@
 			where para_code=#{paraCode}
 	</select>
 	
+ 	<select id="findByType" parameterType="String" resultType="cn.com.sure.syscode.entry.SysCode">
+		select 
+			ksc.id,
+			ksc.para_code as paraCode,
+			ksc.para_value as paraValue,
+			ksc.para_type as paraType,
+			ksc.is_valid as isValid,
+			ksc.notes
+		from km_sys_code ksc,km_sys_param_type kspt
+			where ksc.para_type=kspt.id
+			and kspt.para_type=#{paraType}
+			
+	</select>
+	
 	<update id="updateValid" parameterType="cn.com.sure.syscode.entry.SysCode">
 		update km_sys_code set is_valid=#{isValid} where id=#{id}
 	</update>

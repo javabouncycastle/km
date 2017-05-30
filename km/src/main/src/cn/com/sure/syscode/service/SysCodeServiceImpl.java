@@ -86,4 +86,15 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return sysCodes;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeService#selectByType(java.lang.String)
+	 */
+	@Override
+	public List<SysCode> selectByType(String typeIdTaskStatus) {
+		LOG.debug("selectByType - start");
+		List<SysCode> sysCodes = this.sysCodeDAO.findByType(typeIdTaskStatus);
+		LOG.debug("selectByType - end");
+		return sysCodes;
+	}
+
 }
