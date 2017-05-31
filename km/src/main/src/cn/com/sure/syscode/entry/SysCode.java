@@ -11,30 +11,30 @@ public class SysCode {
     private Long id;
 	
 	/**
-	 * ²ÎÊıÃû³Æ
+	 * å‚æ•°åç§°
 	 */
 	@Column(name="para_code")
 	private String paraCode;
     
 	/**
-	 * ²ÎÊıÖµ(ÏÔÊ¾Öµ)
+	 * å‚æ•°å€¼(æ˜¾ç¤ºå€¼)
 	 */
     @Column (name = "para_value")
     private String paraValue;
     
 	/**
-	 * ²ÎÊıÀà±ğ - ÒıÓÃkm_sys_code_type±í
+	 * å‚æ•°ç±»åˆ« - å¼•ç”¨km_sys_code_typeè¡¨
 	 */
     private SysCodeType paraType;
     
 	/**
-	 * ÊÇ·ñÓĞĞ§
+	 * æ˜¯å¦æœ‰æ•ˆ
 	 */
     @Column (name = "is_valid")
     private Integer isValid;
         
 	/**
-	 * ±¸×¢
+	 * å¤‡æ³¨
 	 */
     @Column (name ="notes")
     private String notes;

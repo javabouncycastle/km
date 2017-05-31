@@ -18,30 +18,30 @@ public class KeypairAlgorithm {
 	}
 	
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	@Id
 	@Column(name = "id",length=32) 	
 	private Long id;
 	
 	/**
-	 * ±ğÃû
+	 * åˆ«å
 	 */
 	@Column(name = "name",length=64) 	
 	private String name;
 
 	
-	@Column(name = "alg_oid",length=256)                  private String algorithmOid;//Ëã·¨OID
+	@Column(name = "alg_oid",length=256)                  private String algorithmOid;//ç®—æ³•OID
 	
-	@Column(name = "alg_name",length=128)                 private String algorithmName;//Ëã·¨Ó¢ÎÄËõĞ´
+	@Column(name = "alg_name",length=128)                 private String algorithmName;//ç®—æ³•è‹±æ–‡ç¼©å†™
 	/**
-	 * ÃÜÔ¿³¤¶È
+	 * å¯†é’¥é•¿åº¦
 	 */
 	@Column(name = "keysize",precision=12, scale=0) 		private Integer keysize;
 	
 	@Column(name = "notes",length=256)                      private String notes;//
 
-    @Column (name = "is_valid",precision=1, scale=0)        private Integer isValid;//ÊÇ·ñÓĞĞ§,0ÎŞĞ§£¬1ÓĞĞ§
+    @Column (name = "is_valid",precision=1, scale=0)        private Integer isValid;//æ˜¯å¦æœ‰æ•ˆ,0æ— æ•ˆï¼Œ1æœ‰æ•ˆ
 
 	public Long getId() {
 		return id;

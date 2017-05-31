@@ -12,10 +12,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 
-/*ÃÜÔ¿¹éµµ*/
+/*å¯†é’¥å½’æ¡£*/
 public class KeypairArchive {
 	/**
-	 * Ö÷¼üKIDÎ¨Ò»µÄ
+	 * ä¸»é”®KIDå”¯ä¸€çš„
 	 */
 	@Id
 	@Column(name = "id",length=64) 	
@@ -23,7 +23,7 @@ public class KeypairArchive {
 	
 	
 	/**
-	 * ¹«Ô¿ base64¸ñÊ½
+	 * å…¬é’¥ base64æ ¼å¼
 	 */
 	@Lob
 	@Basic(fetch=FetchType.LAZY)
@@ -32,7 +32,7 @@ public class KeypairArchive {
 	
 	
 	/**
-	 * Ë½Ô¿ base64¸ñÊ½
+	 * ç§é’¥ base64æ ¼å¼
 	 */
 	@Lob
 	@Basic(fetch=FetchType.LAZY)
@@ -40,34 +40,34 @@ public class KeypairArchive {
 	private String priKey;
 	
 	/**
-	 * ÃÜÔ¿Ëã·¨
+	 * å¯†é’¥ç®—æ³•
 	 */
     @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "kpg_algorithm_id")
 	private KeypairAlgorithm keypairAlgorithm;
 	
 	/**
-	 * ËùÊôÈÎÎñ
+	 * æ‰€å±ä»»åŠ¡
 	 */	
     @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "km_kpg_task_id") 
 	private KpgTask KpgTask;
     
 	/**
-	 * ¹éµµÊ±¼ä
+	 * å½’æ¡£æ—¶é—´
 	 */
     @Column (name = "archive_time" )
     private Date archiveTime;
     
 	/**
-	 * ÃÜÔ¿¿ªÊ¼Ê¹ÓÃÊ±¼ä
+	 * å¯†é’¥å¼€å§‹ä½¿ç”¨æ—¶é—´
 	 */
     @Column (name = "in_use_time" )
     private Date inUseTime;
     
     
 	/**
-	 * ÃÜÔ¿Éú³ÉÊ±¼ä
+	 * å¯†é’¥ç”Ÿæˆæ—¶é—´
 	 */
     @Column (name = "gen_time" )
     private Date genTime;

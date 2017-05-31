@@ -2,7 +2,7 @@ package cn.com.sure.keypair.search.service;
 
 import org.springframework.stereotype.Service;
 
-@Service("keypairSearchService")//必须加这个注解，spring能识别到
+@Service("keypairSearchService")////蹇呴』鍔犺繖涓敞瑙ｏ紝spring鑳借瘑鍒埌
 public class KeypairSearchServiceImpl {
 
 }

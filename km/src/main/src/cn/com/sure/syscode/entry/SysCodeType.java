@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 /**
  * @author Limin
- *  ÏµÍ³´úÂëÀà±ğÃèÊö - ±êÊ¶Àà±ğ ±ÈÈçĞÔ±ğ£¬Ö°³ÆµÈ
+ *  ç³»ç»Ÿä»£ç ç±»åˆ«æè¿° - æ ‡è¯†ç±»åˆ« æ¯”å¦‚æ€§åˆ«ï¼ŒèŒç§°ç­‰
  *  
  */
 public class SysCodeType {
@@ -16,13 +16,13 @@ public class SysCodeType {
     private Long id;
    
 	/**
-	 * ²ÎÊıÖµ(ÏÔÊ¾Öµ)
+	 * å‚æ•°å€¼(æ˜¾ç¤ºå€¼)
 	 */
     private String paraType;
     
     
 	/**
-	 * ±¸×¢
+	 * å¤‡æ³¨
 	 */
     private String notes;
 

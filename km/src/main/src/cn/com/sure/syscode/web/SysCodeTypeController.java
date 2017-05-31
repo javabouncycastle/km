@@ -35,7 +35,7 @@ public class SysCodeTypeController {
 	private SysCodeTypeService sysCodeTypeService;
 	
 	/**
-	 * Ôö¼ÓÊı¾İ×ÖµäÀà±ğ
+	 * å¢åŠ æ•°æ®å­—å…¸ç±»åˆ«
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -56,13 +56,13 @@ public class SysCodeTypeController {
 		}
 		LOG.debug("insert - end");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","±£´æ¡¾"+sysCodeType.getParaType()+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","ä¿å­˜ã€"+sysCodeType.getParaType()+"ã€‘æˆåŠŸ");
 		return "redirect:/syscodetype/selectAll.do";
 		
 	}
 	
 	/**
-	 * ¸üĞÂÊı¾İ×ÖµäÀà±ğ
+	 * æ›´æ–°æ•°æ®å­—å…¸ç±»åˆ«
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -76,12 +76,12 @@ public class SysCodeTypeController {
 		this.sysCodeTypeService.update(sysCodeType);
 		LOG.debug("update - start");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","ĞŞ¸ÄÊı¾İ×ÖµäÀà±ğ=¡¾"+sysCodeType.getParaType()+"¡¿ĞÅÏ¢³É¹¦");
+		attr.addFlashAttribute("msg","ä¿®æ”¹æ•°æ®å­—å…¸ç±»åˆ«=ã€"+sysCodeType.getParaType()+"ã€‘ä¿¡æ¯æˆåŠŸ");
 				return "redirect:/syscodetype/selectAll.do";
 	}
 	
 	/**
-	 * É¾³ıÊı¾İ×ÖµäÀà±ğ
+	 * åˆ é™¤æ•°æ®å­—å…¸ç±»åˆ«
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -95,13 +95,13 @@ public class SysCodeTypeController {
 		this.sysCodeTypeService.delete(id);
 		LOG.debug("remove - end");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","É¾³ıÖ÷¼üÎª¡¾"+id+"¡¿ĞÅÏ¢³É¹¦");
+		attr.addFlashAttribute("msg","åˆ é™¤ä¸»é”®ä¸ºã€"+id+"ã€‘ä¿¡æ¯æˆåŠŸ");
 				return "redirect:/syscodetype/selectAll.do";
 		
 	}
 	
 	/**
-	 * ²éÑ¯Êı¾İ×ÖµäÀà±ğ
+	 * æŸ¥è¯¢æ•°æ®å­—å…¸ç±»åˆ«
 	 * @param sysCode
 	 * @param model
 	 * @param attr

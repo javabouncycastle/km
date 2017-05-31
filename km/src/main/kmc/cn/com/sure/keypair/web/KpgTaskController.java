@@ -66,7 +66,7 @@ public class KpgTaskController {
 		} catch (KmApplicationexception e) {
 			attr.addFlashAttribute("messageInsert",e.getMessage());
 			attr.addFlashAttribute("kpgTask",kpgTask);
-			return "redirect:/gTask/selectAll.do";
+			return "redirect:/kpgTask/selectAll.do";
 		}
 		LOG.debug("insert - end");
 		return "redirect:/kpgTask/selectAll.do";

@@ -2,31 +2,31 @@ package cn.com.sure.common;
 
 public class KmConstants {
 	
-	public static final int YES_OR_NO_OPTION_YES = 1;//Í£ÓÃÆôÓÃ-ÆôÓÃ
-	public static final int YES_OR_NO_OPTION_NO = 0;//Í£ÓÃÆôÓÃ-Í£ÓÃ
+	public static final int YES_OR_NO_OPTION_YES = 1;//åœç”¨å¯ç”¨-å¯ç”¨
+	public static final int YES_OR_NO_OPTION_NO = 0;//åœç”¨å¯ç”¨-åœç”¨
 	
-	public static final long OPERATION_TYPE_INSERT=11;//Ôö¼Ó
-	public static final long OPERATION_TYPE_DELETE=12;//É¾³ı
-	public static final long OPERATION_TYPE_UPDATE=13;//¸üĞÂ
-	public static final long OPERATION_TYPE_SELECT=14;//²éÑ¯
+	public static final long OPERATION_TYPE_INSERT=11;//å¢åŠ 
+	public static final long OPERATION_TYPE_DELETE=12;//åˆ é™¤
+	public static final long OPERATION_TYPE_UPDATE=13;//æ›´æ–°
+	public static final long OPERATION_TYPE_SELECT=14;//æŸ¥è¯¢
 	
-	public static final int SUCCESS_OR_FAILD_OPTION_SUCCESS=1;//²Ù×÷³É¹¦
-	public static final int SUCCESS_OR_FAILD_OPTION_FAILD=0;//²Ù×÷Ê§°Ü	
+	public static final int SUCCESS_OR_FAILD_OPTION_SUCCESS=1;//æ“ä½œæˆåŠŸ
+	public static final int SUCCESS_OR_FAILD_OPTION_FAILD=0;//æ“ä½œå¤±è´¥	
 	
-	// ÈÎÎñ×´Ì¬
-	public static final String TYPE_ID_TASK_STATUS = "status";    // ÈÎÎñ×´Ì¬TYPE
+	// ä»»åŠ¡çŠ¶æ€
+	public static final String TYPE_ID_TASK_STATUS = "status";    // ä»»åŠ¡çŠ¶æ€TYPE
 	
-	/*public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //Ö´ĞĞ×´Ì¬ - ÉĞÎ´¿ªÊ¼
-	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21L;   //Ö´ĞĞ×´Ì¬ - ÈÎÎñÒÑÆô¶¯
+	/*public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //æ‰§è¡ŒçŠ¶æ€ - å°šæœªå¼€å§‹
+	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21L;   //æ‰§è¡ŒçŠ¶æ€ - ä»»åŠ¡å·²å¯åŠ¨
 
 	
-	public static final long CODE_ID_TASK_STATUS_EXECUTING   = 22L;       //Ö´ĞĞ×´Ì¬ - ÕıÔÚÖ´ĞĞ
-	public static final long CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED = 23L;//Ö´ĞĞ×´Ì¬ - ÈË¹¤ÖĞ¶ÏManual interrupt
-	public static final long CODE_ID_TASK_STATUS_FINISHED = 24L;          //Ö´ĞĞ×´Ì¬ - ½áÊø
-	public static final long CODE_ID_TASK_STATUS_EXCEPTION = 25L;         //Ö´ĞĞ×´Ì¬ - Òì³£½áÊø
+	public static final long CODE_ID_TASK_STATUS_EXECUTING   = 22L;       //æ‰§è¡ŒçŠ¶æ€ - æ­£åœ¨æ‰§è¡Œ
+	public static final long CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED = 23L;//æ‰§è¡ŒçŠ¶æ€ - äººå·¥ä¸­æ–­Manual interrupt
+	public static final long CODE_ID_TASK_STATUS_FINISHED = 24L;          //æ‰§è¡ŒçŠ¶æ€ - ç»“æŸ
+	public static final long CODE_ID_TASK_STATUS_EXCEPTION = 25L;         //æ‰§è¡ŒçŠ¶æ€ - å¼‚å¸¸ç»“æŸ
 
-	public static final long CODE_ID_TASK_STATUS_MANUAL_PAUSED = 26L;      //Ö´ĞĞ×´Ì¬ - ÈË¹¤ÔİÍ£
-	public static final long CODE_ID_TASK_STATUS_MANUAL_RESUMED = 27L;     //Ö´ĞĞ×´Ì¬ - ÈË¹¤¼ÌĞø
+	public static final long CODE_ID_TASK_STATUS_MANUAL_PAUSED = 26L;      //æ‰§è¡ŒçŠ¶æ€ - äººå·¥æš‚åœ
+	public static final long CODE_ID_TASK_STATUS_MANUAL_RESUMED = 27L;     //æ‰§è¡ŒçŠ¶æ€ - äººå·¥ç»§ç»­
 */	
 
 }

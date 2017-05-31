@@ -29,14 +29,14 @@ public class KeypairAlgorithmController {
 	private KeypairAlgorithmService keypairAlgorithmService;
 	
 	/**
-	 * Ôö¼ÓÃÜÔ¿Ëã·¨
+	 * å¢åŠ å¯†é’¥ç®—æ³•
 	 */
 	@RequestMapping(value="insert")
 	public String insert(KeypairAlgorithm keypairAlgorithm,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("insert - start");
 		try{
-			//Ö´ĞĞinsert²Ù×÷
+			//æ‰§è¡Œinsertæ“ä½œ
 			this.keypairAlgorithmService.insert(keypairAlgorithm);
 		}catch(KmApplicationexception e){
 			attr.addFlashAttribute("messageInsert",e.getMessage());
@@ -45,13 +45,13 @@ public class KeypairAlgorithmController {
 		}
 		LOG.debug("insert - end");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","±£´æ¡¾"+keypairAlgorithm.getName()+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","ä¿å­˜ã€"+keypairAlgorithm.getName()+"ã€‘æˆåŠŸ");
 		return "redirect:/algorithm/selectAll.do";
 		
 	}
 	
 	/**
-	 * ²éÑ¯ÃÜÔ¿Ëã·¨ÁĞ±í
+	 * æŸ¥è¯¢å¯†é’¥ç®—æ³•åˆ—è¡¨
 	 */
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KeypairAlgorithm keypairAlgorithm,Model model, 
@@ -65,7 +65,7 @@ public class KeypairAlgorithmController {
 	}
 	
 	/**
-	 * °´Ìõ¼ş²éÑ¯
+	 * æŒ‰æ¡ä»¶æŸ¥è¯¢
 	 */
 	@RequestMapping(value = "list")
 	public String listByConditions(KeypairAlgorithmSearchbycondition condition,
@@ -79,7 +79,7 @@ public class KeypairAlgorithmController {
 	
 	
 	/**
-	 * ¸üĞÂÃÜÔ¿Ëã·¨
+	 * æ›´æ–°å¯†é’¥ç®—æ³•
 	 */
 	@RequestMapping(value="update")
 	public String update(KeypairAlgorithm keypairAlgorithm,Model model, 
@@ -88,13 +88,13 @@ public class KeypairAlgorithmController {
 		keypairAlgorithmService.update(keypairAlgorithm);
 		LOG.debug("update - end");
 		attr.addFlashAttribute("updateSuccess","true");
-		attr.addFlashAttribute("message","ĞŞ¸ÄÖ÷¼üÎª¡¾"+keypairAlgorithm.getId()+"¡¿µÄĞÅÏ¢³É¹¦£¡");
+		attr.addFlashAttribute("message","ä¿®æ”¹ä¸»é”®ä¸ºã€"+keypairAlgorithm.getId()+"ã€‘çš„ä¿¡æ¯æˆåŠŸï¼");
 		return "redirect:/algorithm/selectAll.do";
 	}
 	
 	
 	/**
-	 *  É¾³ıÃÜÔ¿Ëã·¨
+	 *  åˆ é™¤å¯†é’¥ç®—æ³•
 	 */
 	@RequestMapping(value="remove")
 	public String delete(
@@ -104,14 +104,14 @@ public class KeypairAlgorithmController {
 		keypairAlgorithmService.delete(id);
 		LOG.debug("delete - end");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","É¾³ıÖ÷¼üÎª¡¾"+id+"¡¿³É¹¦£¡");
+		attr.addFlashAttribute("msg","åˆ é™¤ä¸»é”®ä¸ºã€"+id+"ã€‘æˆåŠŸï¼");
 		return "redirect:/algorithm/selectAll.do";
 		
 	}
 	
 	
 	/**
-	* UC-SYS01-17 Í£ÓÃ
+	* UC-SYS01-17 åœç”¨
 	* @return "redirect:/list"
 	*/
 	@RequestMapping(value = "suspend")
@@ -121,14 +121,14 @@ public class KeypairAlgorithmController {
 		LOG.debug("suspend - start!");
 		this.keypairAlgorithmService.suspend(id);
         attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","Í£ÓÃÖ÷¼üÎª¡¾"+id+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","åœç”¨ä¸»é”®ä¸ºã€"+id+"ã€‘æˆåŠŸ");
     	LOG.debug("suspend - end!");
         return "redirect:/algorithm/selectAll.do";
 		
 	}
 	
 	/**
-	 *  UC-SYS01-18 ÆôÓÃ
+	 *  UC-SYS01-18 å¯ç”¨
 	 * @return "redirect:/list"
 	 */
 	
@@ -140,7 +140,7 @@ public class KeypairAlgorithmController {
 		LOG.debug("activate - start!");
 		this.keypairAlgorithmService.activate(id);
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","ÆôÓÃÖ÷¼üÎª¡¾"+id+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","å¯ç”¨ä¸»é”®ä¸ºã€"+id+"ã€‘æˆåŠŸ");
     	LOG.debug("activate - end!");		
         return "redirect:/algorithm/selectAll.do";
 		

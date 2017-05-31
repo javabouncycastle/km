@@ -33,7 +33,7 @@ public class SysCodeController {
 	private SysCodeTypeService sysCodeTypeService;
 	
 	/**
-	* UC-SYS01-11 ĞÂÔöÊı¾İ×ÖµäÄÚÈİ
+	* UC-SYS01-11 æ–°å¢æ•°æ®å­—å…¸å†…å®¹
 	* @return "redirect:/list"
 	*/
 	@RequestMapping(value = "insert")
@@ -42,7 +42,7 @@ public class SysCodeController {
 			){
 		LOG.debug("insert - start!");
 		try{
-			//Ö´ĞĞinsert²Ù×÷
+			//æ‰§è¡Œinsertæ“ä½œ
 			this.sysCodeService.insert(sysCode,request);
 		}catch(KmApplicationexception e){
 			attr.addFlashAttribute("message",e.getMessage());
@@ -51,13 +51,13 @@ public class SysCodeController {
 		}
 		LOG.debug("insert - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","±£´æ¡¾"+sysCode.getParaCode()+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","ä¿å­˜ã€"+sysCode.getParaCode()+"ã€‘æˆåŠŸ");
 		return "redirect:/syscode/selectAll.do";
 		
 	}
 	
 	/**
-	 * Êı¾İ×ÖµäÁĞ±í
+	 * æ•°æ®å­—å…¸åˆ—è¡¨
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -76,7 +76,7 @@ public class SysCodeController {
 	
 	
 	/**
-	* ¸üĞÂUC-SYS01-12 ĞŞ¸ÄÊı¾İ×ÖµäÄÚÈİ
+	* æ›´æ–°UC-SYS01-12 ä¿®æ”¹æ•°æ®å­—å…¸å†…å®¹
 	* @return "redirect:/syscode/selectAll.do"
 	*/
 	@RequestMapping(value = "update")
@@ -86,14 +86,14 @@ public class SysCodeController {
 		this.sysCodeService.update(sysCode);
 		LOG.debug("update - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","ĞŞ¸Ä¡¾"+sysCode.getParaCode()+"¡¿ĞÅÏ¢³É¹¦");
+		attr.addFlashAttribute("msg","ä¿®æ”¹ã€"+sysCode.getParaCode()+"ã€‘ä¿¡æ¯æˆåŠŸ");
 		return  "redirect:/syscode/selectAll.do";
 		
 	}
 	
 	
 	/**
-	* UC-SYS01-13 É¾³ıÊı¾İ×ÖµäÄÚÈİ
+	* UC-SYS01-13 åˆ é™¤æ•°æ®å­—å…¸å†…å®¹
 	* @return "redirect:/syscode/selectAll.dot"
 	*/
 	@RequestMapping(value = "remove")
@@ -104,7 +104,7 @@ public class SysCodeController {
 		this.sysCodeService.remove(id);
 		LOG.debug("remove - end!");
 		attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","É¾³ıÖ÷¼üÎª¡¾"+id+"¡¿ĞÅÏ¢³É¹¦");
+		attr.addFlashAttribute("msg","åˆ é™¤ä¸»é”®ä¸ºã€"+id+"ã€‘ä¿¡æ¯æˆåŠŸ");
 		return  "redirect:/syscode/selectAll.do";
 		
 	}
@@ -112,7 +112,7 @@ public class SysCodeController {
 	
 	
 	/**
-	* UC-SYS01-17 Í£ÓÃÊı¾İ×ÖµäÄÚÈİ
+	* UC-SYS01-17 åœç”¨æ•°æ®å­—å…¸å†…å®¹
 	* @return "redirect:/syscode/selectAll.do"
 	*/
 	@RequestMapping(value = "suspend")
@@ -123,7 +123,7 @@ public class SysCodeController {
 		this.sysCodeService.suspend(id);
     	LOG.debug("suspend - end!");
     	attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","Í£ÓÃÖ÷¼üÎª¡¾"+id+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","åœç”¨ä¸»é”®ä¸ºã€"+id+"ã€‘æˆåŠŸ");
         return "redirect:/syscode/selectAll.do";
 		
 	}
@@ -131,7 +131,7 @@ public class SysCodeController {
 	
 	
 	/**
-	 *  UC-SYS01-18 ÆôÓÃÊı¾İ×ÖµäÄÚÈİ
+	 *  UC-SYS01-18 å¯ç”¨æ•°æ®å­—å…¸å†…å®¹
 	 * @return "redirect:/syscode/list"
 	 */
 	
@@ -145,7 +145,7 @@ public class SysCodeController {
         attr.addFlashAttribute("success", id);
     	LOG.debug("activate - end!");	
     	attr.addFlashAttribute("success","true");
-		attr.addFlashAttribute("msg","ÆôÓÃÖ÷¼üÎª¡¾"+id+"¡¿³É¹¦");
+		attr.addFlashAttribute("msg","å¯ç”¨ä¸»é”®ä¸ºã€"+id+"ã€‘æˆåŠŸ");
         return "redirect:/syscode/selectAll.do";
 		
 	}

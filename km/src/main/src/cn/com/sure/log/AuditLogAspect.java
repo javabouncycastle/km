@@ -33,7 +33,7 @@ public class AuditLogAspect {
 	@Autowired
 	private KeypairAlgorithmDAO keypairAlgorithmDAO;
 	
-	//»ñÈ¡µ±Ç°Ê±¼ä£¬²¢ÇÒ°ÑÊ±¼ä×ª»¯Îª×Ô¶¨Òå¸ñÊ½
+	//è·å–å½“å‰æ—¶é—´ï¼Œå¹¶ä¸”æŠŠæ—¶é—´è½¬åŒ–ä¸ºè‡ªå®šä¹‰æ ¼å¼
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Date date=new Date();
@@ -41,21 +41,21 @@ public class AuditLogAspect {
 	
 	
     /** 
-     * Ìí¼ÓÒµÎñÂß¼­·½·¨ÇĞÈëµã ,insert KeyPairAlg·½·¨
+     * æ·»åŠ ä¸šåŠ¡é€»è¾‘æ–¹æ³•åˆ‡å…¥ç‚¹ ,insert KeyPairAlgæ–¹æ³•
      */  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.insert(..))")  
 	 public void insert() {
 		
 	} 
 	/** 
-     * Ìí¼ÓÒµÎñÂß¼­·½·¨ÇĞÈëµã ,delete·½·¨
+     * æ·»åŠ ä¸šåŠ¡é€»è¾‘æ–¹æ³•åˆ‡å…¥ç‚¹ ,deleteæ–¹æ³•
      */  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.delete*(..))")
 	public void delete(){
 		
 	}
 	/** 
-     * Ìí¼ÓÒµÎñÂß¼­·½·¨ÇĞÈëµã ,update·½·¨
+     * æ·»åŠ ä¸šåŠ¡é€»è¾‘æ–¹æ³•åˆ‡å…¥ç‚¹ ,updateæ–¹æ³•
      */  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.update*(..))")
 	public void update(){
@@ -68,7 +68,7 @@ public class AuditLogAspect {
 		KeypairAlgorithm keypairAlgorithm=(KeypairAlgorithm)pjp.getArgs()[0];
 		AuditOpLog auditOpLog = new AuditOpLog();
 		auditOpLog.setType(KmConstants.OPERATION_TYPE_INSERT);
-		auditOpLog.setAction("ĞÂÔöÃÜÔ¿Ëã·¨");
+		auditOpLog.setAction("æ–°å¢å¯†é’¥ç®—æ³•");
 		auditOpLog.setActionExt1(String.valueOf(keypairAlgorithm.getId()));
 		auditOpLog.setActionExt2(keypairAlgorithm.getName());
 		auditOpLog.setActionExt3("");
@@ -100,14 +100,14 @@ public class AuditLogAspect {
 		Date nowDate = dateFormat.parse(date1);
 		AuditOpLog auditOpLog = new AuditOpLog();
 		auditOpLog.setType(KmConstants.OPERATION_TYPE_DELETE);
-		auditOpLog.setAction("É¾³ıÃÜÔ¿Ëã·¨");
-		auditOpLog.setActionExt1(id.toString());//Ö÷¼ü
-		auditOpLog.setActionExt2("");//±ğÃû
+		auditOpLog.setAction("åˆ é™¤å¯†é’¥ç®—æ³•");
+		auditOpLog.setActionExt1(id.toString());//ä¸»é”®
+		auditOpLog.setActionExt2("");//åˆ«å
 		auditOpLog.setActionExt3("");
 		auditOpLog.setActionExt4("");
 		auditOpLog.setMessage("");
-		auditOpLog.setTimestamp(nowDate);//²Ù×÷Ê±¼ä
-		auditOpLog.setId(InetAddress.getLocalHost().getHostAddress());//»ñÈ¡¿Í»§¶ËµÄip
+		auditOpLog.setTimestamp(nowDate);//æ“ä½œæ—¶é—´
+		auditOpLog.setId(InetAddress.getLocalHost().getHostAddress());//è·å–å®¢æˆ·ç«¯çš„ip
 		auditOpLog.setOperator("");
 		Object obj=pjp.proceed();
 		int ifSuccess=1;
@@ -132,14 +132,14 @@ public class AuditLogAspect {
 		Date nowDate = dateFormat.parse(date1);
 		AuditOpLog auditOpLog = new AuditOpLog();
 		auditOpLog.setType(KmConstants.OPERATION_TYPE_UPDATE);
-		auditOpLog.setAction("¸üĞÂ");
-		auditOpLog.setActionExt1(keypairAlgorithm.getId().toString());//Ö÷¼ü
-		auditOpLog.setActionExt2(keypairAlgorithm.getAlgorithmName());//±ğÃû
-		auditOpLog.setActionExt3(attr);//±£´æ¸üĞÂÁËÄÇĞ©×Ö¶Î
+		auditOpLog.setAction("æ›´æ–°");
+		auditOpLog.setActionExt1(keypairAlgorithm.getId().toString());//ä¸»é”®
+		auditOpLog.setActionExt2(keypairAlgorithm.getAlgorithmName());//åˆ«å
+		auditOpLog.setActionExt3(attr);//ä¿å­˜æ›´æ–°äº†é‚£äº›å­—æ®µ
 		auditOpLog.setActionExt4("");
 		auditOpLog.setMessage("");
-		auditOpLog.setTimestamp(nowDate);//²Ù×÷Ê±¼ä
-		auditOpLog.setId(InetAddress.getLocalHost().getHostAddress());//»ñÈ¡¿Í»§¶ËµÄip
+		auditOpLog.setTimestamp(nowDate);//æ“ä½œæ—¶é—´
+		auditOpLog.setId(InetAddress.getLocalHost().getHostAddress());//è·å–å®¢æˆ·ç«¯çš„ip
 		auditOpLog.setOperator("");
 		Object obj=pjp.proceed();
 		int ifSuccess=1;
@@ -157,7 +157,7 @@ public class AuditLogAspect {
 	}
 	
 	/**
-	 * ±È½ÏÒ»ÏÂÃÜÔ¿Ëã·¨¸üĞÂ¸üĞÂÁËÄÇĞ©×Ö¶Î
+	 * æ¯”è¾ƒä¸€ä¸‹å¯†é’¥ç®—æ³•æ›´æ–°æ›´æ–°äº†é‚£äº›å­—æ®µ
 	 */
 	public String compairKPAlg(KeypairAlgorithm keypairAlgorithmNew){
 		LOG.debug("compairKPAlg - start");
@@ -166,21 +166,21 @@ public class AuditLogAspect {
 			KeypairAlgorithm keypairAlgorithmDB=this.find(keypairAlgorithmNew.getId());
 			if(StringUtils.isNotBlank(keypairAlgorithmDB.getAlgorithmName())&&StringUtils.isNotBlank(keypairAlgorithmNew.getAlgorithmName())){
 				if(!keypairAlgorithmDB.getAlgorithmName().equals(keypairAlgorithmNew.getAlgorithmName())){
-					resultString+="Ëã·¨Ó¢ÎÄËõĞ´ÓÉ"+keypairAlgorithmDB.getAlgorithmName()+"±ä¸üÎª"+keypairAlgorithmNew.getAlgorithmName()+";";
+					resultString+="ç®—æ³•è‹±æ–‡ç¼©å†™ç”±"+keypairAlgorithmDB.getAlgorithmName()+"å˜æ›´ä¸º"+keypairAlgorithmNew.getAlgorithmName()+";";
 				}
 			if(keypairAlgorithmDB.getAlgorithmOid()!=null&&keypairAlgorithmNew.getAlgorithmOid()!=null){
 				if(!keypairAlgorithmDB.getAlgorithmOid().equals(keypairAlgorithmNew.getAlgorithmOid())){
-					resultString+="Ëã·¨OIDÓÉ"+keypairAlgorithmDB.getAlgorithmOid()+"±ä¸üÎª"+keypairAlgorithmNew.getAlgorithmOid()+";";
+					resultString+="ç®—æ³•OIDç”±"+keypairAlgorithmDB.getAlgorithmOid()+"å˜æ›´ä¸º"+keypairAlgorithmNew.getAlgorithmOid()+";";
 				}
 			}
 			if(keypairAlgorithmDB.getKeysize()!=null&&keypairAlgorithmNew!=null){
 				if(!keypairAlgorithmDB.equals(keypairAlgorithmNew)){
-					resultString+="ÃÜÔ¿³¤¶ÈÓÉ"+keypairAlgorithmDB.getKeysize()+"±ä¸üÎª"+keypairAlgorithmNew.getKeysize()+";";
+					resultString+="å¯†é’¥é•¿åº¦ç”±"+keypairAlgorithmDB.getKeysize()+"å˜æ›´ä¸º"+keypairAlgorithmNew.getKeysize()+";";
 				}
 			}
 			if(keypairAlgorithmDB.getName()!=null&&keypairAlgorithmNew.getName()!=null){
 				if(!keypairAlgorithmDB.equals(keypairAlgorithmNew)){
-					resultString+="±ğÃûÓÉ"+keypairAlgorithmDB.getName()+"±ä¸üÎª"+keypairAlgorithmNew.getName()+";";
+					resultString+="åˆ«åç”±"+keypairAlgorithmDB.getName()+"å˜æ›´ä¸º"+keypairAlgorithmNew.getName()+";";
 				}
 			}
 			}
@@ -190,7 +190,7 @@ public class AuditLogAspect {
 		
 	}
 	/**
-	 * ¸ù¾İid²éÑ¯
+	 * æ ¹æ®idæŸ¥è¯¢
 	 */
 	private KeypairAlgorithm find(Long id){
 		LOG.debug("find - start");

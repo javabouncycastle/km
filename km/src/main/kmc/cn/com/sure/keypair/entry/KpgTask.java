@@ -11,45 +11,45 @@ import cn.com.sure.syscode.entry.SysCode;
 public class KpgTask {
 
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	@Id
 	private Long id;
 	
 	/**
-	 * ±ğÃû
+	 * åˆ«å
 	 */
 	@Column(name = "name",length=128) 	
 	private String name;
 	
 	/**
-	 * ²úÉúÃÜÔ¿µÄÃÜÔ¿Ëã·¨+³¤¶È
+	 * äº§ç”Ÿå¯†é’¥çš„å¯†é’¥ç®—æ³•+é•¿åº¦
 	 */
 	private KeypairAlgorithm keypairAlgorithm;
 	
 	
 	/**
-	 * ²úÉúÃÜÔ¿µÄÃÜÔ¿ÊıÁ¿
+	 * äº§ç”Ÿå¯†é’¥çš„å¯†é’¥æ•°é‡
 	 */
 	@Column(name = "kpg_key_amount") 	
 	private Integer kpgKeyAmount;
 
     /**
-     * ÈÎÎñ×´Ì¬  1 standby×¼±¸×´Ì¬£¬executingÕıÔÚÖ´ĞĞ£¬finishedÈÎÎñÍê³É£¬exceptionÒì³£½áÊø £¬interruptedÈË¹¤ÖĞ¶Ï
+     * ä»»åŠ¡çŠ¶æ€  1 standbyå‡†å¤‡çŠ¶æ€ï¼Œexecutingæ­£åœ¨æ‰§è¡Œï¼Œfinishedä»»åŠ¡å®Œæˆï¼Œexceptionå¼‚å¸¸ç»“æŸ ï¼Œinterruptedäººå·¥ä¸­æ–­
      */
     @JoinColumn(name = "task_status") 
 	private SysCode taskStatus; 
     
 		
 	/**
-	 * Éè¶¨ÈÎÎñ¿ªÊ¼Ê±¼ä
+	 * è®¾å®šä»»åŠ¡å¼€å§‹æ—¶é—´
 	 */
     @Column (name = "task_start_time" )
     private Date taskStartTime;
     
 
 	/**
-	 * ÈÎÎñËµÃ÷
+	 * ä»»åŠ¡è¯´æ˜
 	 */
 	@Column(name = "task_notes",length=256) 	
 	private String taskNotes;
@@ -57,14 +57,14 @@ public class KpgTask {
 
     
 	/**
-	 * ±¾´ÎÖ´ĞĞ¿ªÊ¼Ê±¼ä
+	 * æœ¬æ¬¡æ‰§è¡Œå¼€å§‹æ—¶é—´
 	 */
     @Column (name = "exe_task_start_time" )
     private Date exeTaskStartTime;
     
     
 	/**
-	 * ±¾´ÎÖ´ĞĞ½áÊøÊ±¼ä
+	 * æœ¬æ¬¡æ‰§è¡Œç»“æŸæ—¶é—´
 	 */
     @Column (name = "exe_task_end_time" )
     private Date exeTaskEndTime;
@@ -73,7 +73,7 @@ public class KpgTask {
 	
 	
 	/**
-	 * ÃÜÔ¿ÒÑ¾­´æ´¢»º³å¼ÇÂ¼ÊıÁ¿
+	 * å¯†é’¥å·²ç»å­˜å‚¨ç¼“å†²è®°å½•æ•°é‡
 	 */
     @Column (name = "dbcommit_bufsize")
 	private Integer dbCommitBufsize; 
@@ -81,13 +81,13 @@ public class KpgTask {
 	
 	
 	/**
-	 * ÃÜÔ¿ÒÑ¾­´æ´¢ÊıÁ¿
+	 * å¯†é’¥å·²ç»å­˜å‚¨æ•°é‡
 	 */
     @Column (name = "generated_key_amount")
 	private Integer generatedKeyAmount; 
 	
 	/**
-	 * ÈÎÎñÖ´ĞĞ½á¹ûËµÃ÷
+	 * ä»»åŠ¡æ‰§è¡Œç»“æœè¯´æ˜
 	 */
 	@Column(name = "task_exe_result",length=256) 	
 	private String taskExeResult;
@@ -190,11 +190,11 @@ public class KpgTask {
 	
 	
 	/**
-	 * Ö÷ÃÜÔ¿Ç©ÃûËã·¨
+	 * ä¸»å¯†é’¥ç­¾åç®—æ³•
 	 */	
 /*    @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "sign_algorithm_id")
-	private PkiAlgorithm sigAlg;//Ç©ÃûËã·¨
+	private PkiAlgorithm sigAlg;//ç­¾åç®—æ³•
 	*/
 	
 

@@ -18,19 +18,19 @@ public class AuditOpLog {
 	 */
 	@Id  @Column(name="id")             	private String id;
 	
-	@Column (name = "op_type") 				private long type;   //±íÊ¾²Ù×÷µÄÀàĞÍ¡£
-	@Column (name = "op_action")        	private String action; //±íÊ¾Ö´ĞĞµÄ²Ù×÷ÊÇÊ²Ã´
+	@Column (name = "op_type") 				private long type;   //è¡¨ç¤ºæ“ä½œçš„ç±»å‹ã€‚
+	@Column (name = "op_action")        	private String action; //è¡¨ç¤ºæ‰§è¡Œçš„æ“ä½œæ˜¯ä»€ä¹ˆ
 	
-	@Column (name = "op_action_ext1")  		private String actionExt1; //±íÊ¾Ö´ĞĞµÄ²Ù×÷À©Õ¹
-	@Column (name = "op_action_ext2")  		private String actionExt2; //±íÊ¾Ö´ĞĞµÄ²Ù×÷À©Õ¹
-	@Column (name = "op_action_ext3")  		private String actionExt3; //±íÊ¾Ö´ĞĞµÄ²Ù×÷À©Õ¹
-	@Column (name = "op_action_ext4")  		private String actionExt4; //±íÊ¾Ö´ĞĞµÄ²Ù×÷À©Õ¹
+	@Column (name = "op_action_ext1")  		private String actionExt1; //è¡¨ç¤ºæ‰§è¡Œçš„æ“ä½œæ‰©å±•
+	@Column (name = "op_action_ext2")  		private String actionExt2; //è¡¨ç¤ºæ‰§è¡Œçš„æ“ä½œæ‰©å±•
+	@Column (name = "op_action_ext3")  		private String actionExt3; //è¡¨ç¤ºæ‰§è¡Œçš„æ“ä½œæ‰©å±•
+	@Column (name = "op_action_ext4")  		private String actionExt4; //è¡¨ç¤ºæ‰§è¡Œçš„æ“ä½œæ‰©å±•
 
-	@Column (name = "op_message")           private String  message;   //±¾µØ»¯ÏûÏ¢
-	@Column (name = "op_timestamp")         private Date    timestamp; //Ö´ĞĞÉÏÊö²Ù×÷µÄÈÕÆÚºÍÊ±¼ä¡£ÒÔ GMT Ê±¼ä´æ´¢´ËÖµ
-	@Column (name = "op_ip")                private String  ip;        //¶ÔÆäÖ´ĞĞ²Ù×÷µÄIP
-	@Column (name = "op_operator")          private String  operator;  //¶ÔÆäÖ´ĞĞ²Ù×÷µÄÕÊ»§
-	@Column (name = "is_op_succ")			private Integer isOpSucc;  //±íÊ¾ÒÑÖ´ĞĞ²Ù×÷µÄ½á¹û
+	@Column (name = "op_message")           private String  message;   //æœ¬åœ°åŒ–æ¶ˆæ¯
+	@Column (name = "op_timestamp")         private Date    timestamp; //æ‰§è¡Œä¸Šè¿°æ“ä½œçš„æ—¥æœŸå’Œæ—¶é—´ã€‚ä»¥ GMT æ—¶é—´å­˜å‚¨æ­¤å€¼
+	@Column (name = "op_ip")                private String  ip;        //å¯¹å…¶æ‰§è¡Œæ“ä½œçš„IP
+	@Column (name = "op_operator")          private String  operator;  //å¯¹å…¶æ‰§è¡Œæ“ä½œçš„å¸æˆ·
+	@Column (name = "is_op_succ")			private Integer isOpSucc;  //è¡¨ç¤ºå·²æ‰§è¡Œæ“ä½œçš„ç»“æœ
 	
 	public String getId() {
 		return id;
