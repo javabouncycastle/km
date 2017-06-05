@@ -187,15 +187,5 @@ public class KpgTask {
 	public void setTaskExeResult(String taskExeResult) {
 		this.taskExeResult = taskExeResult;
 	}
-	
-	
-	/**
-	 * 主密钥签名算法
-	 */	
-/*    @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
-    @JoinColumn(name = "sign_algorithm_id")
-	private PkiAlgorithm sigAlg;//签名算法
-	*/
-	
 
 }

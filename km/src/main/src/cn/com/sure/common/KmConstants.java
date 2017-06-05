@@ -18,7 +18,6 @@ public class KmConstants {
 	
 	/*public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20L;        //执行状态 - 尚未开始
 	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21L;   //执行状态 - 任务已启动
-
 	
 	public static final long CODE_ID_TASK_STATUS_EXECUTING   = 22L;       //执行状态 - 正在执行
 	public static final long CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED = 23L;//执行状态 - 人工中断Manual interrupt

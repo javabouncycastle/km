@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=utf8" pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="/WEB-INF/c-1_0-rt.tld"%>
-<!DOCTYPE html>
 <%@ include file="../left.jsp" %>
 <%@ include file="../footer.jsp" %>
 <body>
@@ -36,21 +35,22 @@
 		                      <th width="10%">执行结束时间</th>
 		                      <th width="10%">任务结果</th>
 		                      <th width="10%">任务说明</th>
+		                      <th width="10%">操作</th>
 		                    </tr>
 		                  </thead>
                     <tbody id="id_tbody_upd_list"> 
                     <c:forEach var="row" items="${kpgTasks}">
-                    	<!--  修改密钥算法-->
+                    	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
 		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}, ${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
-		                    <td>${row.keypairAlgorithm}</td>
+		                    <td>${row.keypairAlgorithm.id}</td>
 		                    <td>${row.kpgKeyAmount}</td>
 		                    <td>${row.dbCommitBufsize}</td>
-		                    <td>${row.taskStatus}</td>
+		                    <td>${row.taskStatus.id}</td>
 		                    <td>${row.taskStartTime}</td>
 		                    <td>${row.exeTaskStartTime}</td>
 		                    <td>${row.exeTaskEndTime}</td>
@@ -68,13 +68,13 @@
        </div>
        
        
-        <!-- 弹出窗口 新增数据字典内容-->
+        <!-- 弹出窗口 新增密钥任务内容-->
  	<div class="modal fade" id="modal_insert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
            <div class="modal-content">
             	<div class="modal-header">
              	  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              	  <h4 class="modal-title" >新增密钥算法</h4>
+              	  <h4 class="modal-title" >新增密钥任务</h4>
                 </div>
           		<form action="insert.do" method="post">
             		<div class="modal-header">
@@ -109,14 +109,7 @@
 				                    <label for="paraCode" class="control-label">生成数量 </label>
 				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>
-				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">已生成数量</label>
-				                    <input type="text" class="form-control" id="dbCommitBufsize" name="dbCommitBufsize" value="${kpgTask.dbCommitBufsize}" required="required" />                 
-				                  </div>			
-				                </div>	
-                  
-				                <div class="row">		            
-				                  <div class="col-md-6 margin-bottom-15">
+				                  <%-- <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务状态</label>
 				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
 				                    	<option value="">--请选择--</option>
@@ -124,23 +117,16 @@
 				                    		<option value="${sc.id}">${sc.paraCode}</option>
 				                    	</c:forEach>
 				                    </select>                 
-				                  </div>
+				                  </div> --%>
+				                </div>	
+                  
+				               <%--  <div class="row">		            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务开始时间</label>
-				                    <input type="text" class="form-control" id="taskStartTime" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
+				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
 				                  </div>
-				                  </div>
+				                 </div> --%>
 				                  
-				                <div class="row">	            
-				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">执行开始时间</label>
-				                    <input type="text" class="form-control" id="exeTaskStartTime" name="exeTaskStartTime" value="${kpgTask.exeTaskStartTime}" required="required" />                 
-				                  </div>
-				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">执行结束时间</label>
-				                    <input type="text" class="form-control" id="exeTaskEndTime" name="exeTaskEndTime" value="${kpgTask.exeTaskEndTime}" required="required" />                 
-				                  </div>
-				                  </div>  
 				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
 				                    <label for="notes" class="control-label">备注 </label>
@@ -159,13 +145,13 @@
      	 </div>     
       </div>
        
-      <!-- 弹出窗口 ,修改数据字典内容-->
+      <!-- 弹出窗口 ,修改密钥任务内容-->
  	<div class="modal fade" id="modal_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" >数据字典修改</h4>
+              <h4 class="modal-title" >密钥任务修改</h4>
             </div>
        
 			<form action="update.do" method="post" >
@@ -193,35 +179,57 @@
 				                
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="notes" class="control-label">算法OID</label>
-				                    <input type="text" class="form-control" id="algorithmOid" name="algorithmOid" required="required"/>     
+				                    <label for="notes" class="control-label">算法</label>
+				                    <input type="text" class="form-control" id="keypairAlgorithm" name="keypairAlgorithm" required="required"/>     
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="paraCode" class="control-label">算法英文缩写 </label>
-				                    <input type="text" class="form-control" id="algorithmName" name="algorithmName" required="required" />                 
+				                    <label for="paraCode" class="control-label">生成数量</label>
+				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" required="required" />                 
 				                  </div>
 				                </div>	
                   
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">密钥长度</label>
-				                    <input type="text" class="form-control" id="keysize" name="keysize" required="required" />                 
+				                    <label for="color" class="control-label">已生成数量</label>
+				                    <input type="text" class="form-control" id="dbCommitBufsize" name="dbCommitBufsize" required="required" />                 
 				                  </div>					            
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="isValid" class="control-label">是否有效</label>
-				                     <select class="form-control margin-bottom-15" name="isValid" id="isValid"  >
-									      <option value="1"  >是</option>
-									      <option value="0"  >否</option>
-				                  	   </select>                 
+				                    <label for="color" class="control-label">任务状态</label>
+				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="sc" items="${sysCodes}">
+				                    		<option value="${sc.id}">${sc.paraCode}</option>
+				                    	</c:forEach>
+				                    </select>                
 				                  </div>
 				                </div>	
-				                  <div class="row">
+								<div class="row">
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="notes" class="control-label">任务开始时间</label>
+				                    <input type="text" class="form-control" id="taskStartTime" name="taskStartTime" required="required"/>     
+				                  </div>
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="paraCode" class="control-label">执行开始时间</label>
+				                    <input type="text" class="form-control" id="exeTaskStartTime" name="exeTaskStartTime" required="required" />                 
+				                  </div>
+				                </div>	 
+				                <div class="row">
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="notes" class="control-label">执行结束时间</label>
+				                    <input type="text" class="form-control" id="exeTaskEndTime" name="exeTaskEndTime" required="required"/>     
+				                  </div>
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="paraCode" class="control-label">任务结果</label>
+				                    <input type="text" class="form-control" id="taskExeResult" name="taskExeResult" required="required" />                 
+				                  </div>
+				                </div>
+				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
-				                    <label for="notes" class="control-label">备注 </label>
-				                    <textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
+				                    <label for="notes" class="control-label">任务说明 </label>
+				                    <textarea class="form-control" rows="3" id="notes" name="notes">${kpgTask.taskNotes}</textarea>
 				                  </div>
-				                </div>	
-            				</table>
+				                </div>	         				
+				          </table>
             			</div>          
 			            <div class="modal-footer">
 			            	<button type="submit" class="btn btn-primary">保存</button>
@@ -248,14 +256,18 @@ function activate(id){
      self.location.replace("activate.do?&id="+id);
 }
 //修改的初始化页面            
-function edit(id,name,algorithmOid,algorithmName,keysize,notes,isValid){
+function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,taskStatus,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
-			$("#modal_update input[name='algorithmOid']").val(algorithmOid);	
-			$("#modal_update input[name='algorithmName']").val(algorithmName);
-			$("#modal_update input[name='keysize']").val(keysize);	
-			$("#modal_update [id='notes']").val(notes);
-			$("#modal_update input[name='isValid']").val(isValid);
+			$("#modal_update select[name='keypairAlgorithm.id']").val(keypairAlgorithm);	
+			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
+		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
+			$("#modal_update select[name='taskStatus.id']").val(taskStatus.id);	
+			$("#modal_update input[name='taskStartTime']").val(taskStartTime);
+			$("#modal_update input[name='exeTaskStartTime']").val(exeTaskStartTime);
+			$("#modal_update input[name='exeTaskEndTime']").val(exeTaskEndTime);
+			$("#modal_update input[name='taskExeResult']").val(taskExeResult);	
+			$("#modal_update [id='taskNotes']").val(taskNotes);
 			$("#modal_update").modal('show');
 }
 function add(){

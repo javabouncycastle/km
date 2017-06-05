@@ -69,6 +69,8 @@ public class KpgTaskController {
 			return "redirect:/kpgTask/selectAll.do";
 		}
 		LOG.debug("insert - end");
+		attr.addFlashAttribute("success","true");
+		attr.addFlashAttribute("msg","保存【"+kpgTask.getName()+"】成功");
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
@@ -78,6 +80,8 @@ public class KpgTaskController {
 		LOG.debug("update - start");
 		this.kpgTaskService.update(kpgTask);
 		LOG.debug("update - end");
+		attr.addFlashAttribute("updateSuccess","true");
+		attr.addFlashAttribute("message","修改主键为【"+kpgTask.getId()+"】的信息成功！");
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
@@ -86,6 +90,8 @@ public class KpgTaskController {
 		LOG.debug("remove - start");
 		this.kpgTaskService.delete(id);
 		LOG.debug("remove - end");
+		attr.addFlashAttribute("success","true");
+		attr.addFlashAttribute("msg","删除主键为【"+id+"】成功！");
 				return "redirect:/kpgTask/selectAll.do";
 		
 	}

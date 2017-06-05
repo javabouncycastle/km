@@ -28,4 +28,5 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/unicorn.tables.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/My97DatePicker/WdatePicker.js"></script> 
       

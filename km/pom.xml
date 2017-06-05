@@ -219,6 +219,21 @@
 		    <version>3.3.1</version>
 		</dependency>
 		
+		     <!-- spring-support.jar 这个jar 文件包含支持UI模版（Velocity，FreeMarker，JasperReports），邮件服务，脚本服务(JRuby)， 缓存Cache（EHCache），任务计划Scheduling（uartz）方面的类。 
+            外部依赖spring-context, (spring-jdbc, Velocity, FreeMarker, JasperReports, BSH, Groovy, JRuby, Quartz, EHCache) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+        
+         <!-- quartz定时任务 -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+		
     </dependencies>  
 
 </project>

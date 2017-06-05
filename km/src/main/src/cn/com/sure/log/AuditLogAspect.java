@@ -62,7 +62,7 @@ public class AuditLogAspect {
 		
 	}
 	
-	@Around(value="insert()")
+	/*@Around(value="insert()")
 	public Object insertKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
 		LOG.debug("insertKeyPairAlgAroundsLogs - start");
 		KeypairAlgorithm keypairAlgorithm=(KeypairAlgorithm)pjp.getArgs()[0];
@@ -91,7 +91,7 @@ public class AuditLogAspect {
 		auditOpLogService.insert(auditOpLog);
 		LOG.debug("insertKeyPairAlgAroundsLogs - end");
 		return pjp;
-	}
+	}*/
 	
 	@Around(value="delete()")
 	public Object deleteKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
