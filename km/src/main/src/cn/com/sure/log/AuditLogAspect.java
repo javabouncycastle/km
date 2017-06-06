@@ -124,7 +124,7 @@ public class AuditLogAspect {
 		return pjp;
 	}
 	
-	@Around(value="update()")
+	/*@Around(value="update()")
 	public Object updateKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
 		LOG.debug("updateKeyPairAlgAroundsLogs - start");
 		KeypairAlgorithm keypairAlgorithm = (KeypairAlgorithm)pjp.getArgs()[0];
@@ -155,7 +155,7 @@ public class AuditLogAspect {
 		LOG.debug("updateKeyPairAlgAroundsLogs - end");
 		return pjp;
 	}
-	
+	*/
 	/**
 	 * 比较一下密钥算法更新更新了那些字段
 	 */

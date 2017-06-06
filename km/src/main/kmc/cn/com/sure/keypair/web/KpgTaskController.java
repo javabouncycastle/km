@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cn.com.sure.common.BaseController;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.entry.KeypairAlgorithm;
 import cn.com.sure.keypair.entry.KpgTask;
@@ -32,7 +33,7 @@ import cn.com.sure.syscode.service.SysCodeService;
  */
 @Controller
 @RequestMapping(value="kpgTask")
-public class KpgTaskController {
+public class KpgTaskController extends BaseController{
 	
 	private static final Log LOG = LogFactory.getLog(KpgTaskController.class);
 	
@@ -85,6 +86,7 @@ public class KpgTaskController {
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
+	@RequestMapping(value="remove")
 	public String remove(@RequestParam(value = "id", required = false)Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("remove - start");
@@ -92,7 +94,7 @@ public class KpgTaskController {
 		LOG.debug("remove - end");
 		attr.addFlashAttribute("success","true");
 		attr.addFlashAttribute("msg","删除主键为【"+id+"】成功！");
-				return "redirect:/kpgTask/selectAll.do";
+		return "redirect:/kpgTask/selectAll.do";
 		
 	}
 

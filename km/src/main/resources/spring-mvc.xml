@@ -59,5 +59,10 @@
 	</bean>
 	  	<!-- 加入Aspectj配置  2017.5.24bylimin--> 
     <aop:aspectj-autoproxy proxy-target-class="true" />  
+    <!-- 配置spring quartz -->
+    <bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject" ref="myBean" />  
+    <property name="targetMethod" value="printMessage" />  
+</bean> 
   
 </beans>  

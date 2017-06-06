@@ -180,7 +180,12 @@
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">算法</label>
-				                    <input type="text" class="form-control" id="keypairAlgorithm" name="keypairAlgorithm" required="required"/>     
+				                    	<select class="form-control margin-bottom-15" name="kpgAlg.id" id="paratypeInfo" required="required">
+					                    	<option value="">--请选择--</option>
+						                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
+						                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
+						                    	</c:forEach>
+				                   	   </select>
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">生成数量</label>
@@ -206,17 +211,18 @@
 								<div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">任务开始时间</label>
-				                    <input type="text" class="form-control" id="taskStartTime" name="taskStartTime" required="required"/>     
+				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
+				                       
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">执行开始时间</label>
-				                    <input type="text" class="form-control" id="exeTaskStartTime" name="exeTaskStartTime" required="required" />                 
+				                    <input type="date" class="form-control" id="exeTaskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="exeTaskStartTime" value="${kpgTask.exeTaskStartTime}" required="required" />                 
 				                  </div>
 				                </div>	 
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">执行结束时间</label>
-				                    <input type="text" class="form-control" id="exeTaskEndTime" name="exeTaskEndTime" required="required"/>     
+				                    <input type="date" class="form-control" id="exeTaskEndTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="exeTaskEndTime" value="${kpgTask.exeTaskEndTime}" required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">任务结果</label>
