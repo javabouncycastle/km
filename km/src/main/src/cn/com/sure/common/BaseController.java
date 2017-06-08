@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 public class BaseController {
 	@InitBinder
-	public void initBinder(ServletRequestDataBinder bind){
+	public void initBinder(ServletRequestDataBinder bind){ 
 		bind.registerCustomEditor(Date.class, new DateEditor());
 	}
 }
