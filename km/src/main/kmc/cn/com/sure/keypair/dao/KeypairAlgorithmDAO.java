@@ -20,4 +20,10 @@ public interface KeypairAlgorithmDAO {
 	
 	KeypairAlgorithm findByName(KeypairAlgorithm keypairAlgorithm);
 
+	/**
+	 * @return
+	 * 查询已启用的数据
+	 */
+	List<KeypairAlgorithm> selectOpYes(KeypairAlgorithm keypairAlgorithm);
+
 }

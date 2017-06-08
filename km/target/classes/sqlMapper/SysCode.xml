@@ -72,7 +72,7 @@
 			where para_code=#{paraCode}
 	</select>
 	
- 	<select id="findByType" parameterType="String" resultType="cn.com.sure.syscode.entry.SysCode">
+ 	<select id="findByType"  parameterType="cn.com.sure.syscode.entry.SysCode" resultType="cn.com.sure.syscode.entry.SysCode">
 		select 
 			ksc.id,
 			ksc.para_code as paraCode,
@@ -82,7 +82,8 @@
 			ksc.notes
 		from km_sys_code ksc,km_sys_param_type kspt
 			where ksc.para_type=kspt.id
-			and kspt.para_type=#{paraType}
+			and kspt.para_type=#{paraType.paraType}
+			and ksc.is_valid=#{isValid}
 			
 	</select>
 	

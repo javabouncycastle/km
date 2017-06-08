@@ -77,4 +77,16 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 		LOG.debug("activate - end");
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KeypairAlgorithmService#selectOpYes()
+	 */
+	@Override
+	public List<KeypairAlgorithm> selectOpYes(KeypairAlgorithm keypairAlgorithm) {
+		LOG.debug("selectOpYes - start");
+		keypairAlgorithm.setIsValid(KmConstants.YES_OR_NO_OPTION_YES);
+		List<KeypairAlgorithm> keypairAlgorithms = keypairAlgorithmDAO.selectOpYes(keypairAlgorithm);
+		LOG.debug("selectOpYes - start");
+		return keypairAlgorithms;
+	}
+
 }

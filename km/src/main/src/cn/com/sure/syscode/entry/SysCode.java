@@ -1,25 +1,20 @@
 package cn.com.sure.syscode.entry;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 public class SysCode {
 
 	@Id
-	@Column(name="ID")
     private Long id;
 	
 	/**
 	 * 参数名称
 	 */
-	@Column(name="para_code")
 	private String paraCode;
     
 	/**
 	 * 参数值(显示值)
 	 */
-    @Column (name = "para_value")
     private String paraValue;
     
 	/**
@@ -30,13 +25,11 @@ public class SysCode {
 	/**
 	 * 是否有效
 	 */
-    @Column (name = "is_valid")
     private Integer isValid;
         
 	/**
 	 * 备注
 	 */
-    @Column (name ="notes")
     private String notes;
     
 

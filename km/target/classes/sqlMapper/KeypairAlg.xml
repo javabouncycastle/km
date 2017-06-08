@@ -36,6 +36,20 @@
 		 from keypair_algorithm
 	</select>
 	
+	<select id="selectOpYes" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where
+		 	 is_valid=#{isValid}
+	</select>
+	
 	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
 		select 
 			id,

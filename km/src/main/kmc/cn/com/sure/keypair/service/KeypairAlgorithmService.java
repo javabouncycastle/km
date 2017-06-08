@@ -3,6 +3,7 @@ package cn.com.sure.keypair.service;
 import java.util.List;
 
 import cn.com.sure.keypair.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
 
 public interface KeypairAlgorithmService {
@@ -19,6 +20,12 @@ public interface KeypairAlgorithmService {
 
 	void activate(Long id);
 
-	
+	/**
+	 * @param kpgTask 
+	 * @param object
+	 * @return
+	 * 查询启用的数据
+	 */
+	List<KeypairAlgorithm> selectOpYes(KeypairAlgorithm keypairAlgorithm);
 
 }

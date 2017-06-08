@@ -1,5 +1,7 @@
 package cn.com.sure.common;
 
+import cn.com.sure.syscode.entry.SysCodeType;
+
 public class KmConstants {
 	
 	public static final int YES_OR_NO_OPTION_YES = 1;//停用启用-启用

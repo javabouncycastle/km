@@ -2,9 +2,7 @@ package cn.com.sure.keypair.entry;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 import cn.com.sure.syscode.entry.SysCode;
 
@@ -19,7 +17,6 @@ public class KpgTask {
 	/**
 	 * 别名
 	 */
-	@Column(name = "name",length=128) 	
 	private String name;
 	
 	/**
@@ -31,27 +28,23 @@ public class KpgTask {
 	/**
 	 * 产生密钥的密钥数量
 	 */
-	@Column(name = "kpg_key_amount") 	
 	private Integer kpgKeyAmount;
 
     /**
      * 任务状态  1 standby准备状态，executing正在执行，finished任务完成，exception异常结束 ，interrupted人工中断
      */
-    @JoinColumn(name = "task_status") 
 	private SysCode taskStatus; 
     
 		
 	/**
-	 * 设定任务开始时间
+	 * 设定任务新建时间
 	 */
-    @Column (name = "task_start_time" )
     private Date taskStartTime;
     
 
 	/**
 	 * 任务说明
 	 */
-	@Column(name = "task_notes",length=256) 	
 	private String taskNotes;
 
 
@@ -59,14 +52,12 @@ public class KpgTask {
 	/**
 	 * 本次执行开始时间
 	 */
-    @Column (name = "exe_task_start_time" )
     private Date exeTaskStartTime;
     
     
 	/**
 	 * 本次执行结束时间
 	 */
-    @Column (name = "exe_task_end_time" )
     private Date exeTaskEndTime;
     
     
@@ -75,7 +66,6 @@ public class KpgTask {
 	/**
 	 * 密钥已经存储缓冲记录数量
 	 */
-    @Column (name = "dbcommit_bufsize")
 	private Integer dbCommitBufsize; 
 	
 	
@@ -83,13 +73,11 @@ public class KpgTask {
 	/**
 	 * 密钥已经存储数量
 	 */
-    @Column (name = "generated_key_amount")
 	private Integer generatedKeyAmount; 
 	
 	/**
 	 * 任务执行结果说明
 	 */
-	@Column(name = "task_exe_result",length=256) 	
 	private String taskExeResult;
 
 	public Long getId() {

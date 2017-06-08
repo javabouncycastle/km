@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.common.BaseController;
-import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.entry.KeypairAlgorithm;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.keypair.service.KeypairAlgorithmService;
@@ -50,9 +49,11 @@ public class KpgTaskController extends BaseController{
 	public ModelAndView selectAll(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("selectAll - start");
+		KeypairAlgorithm keypairAlgorithm = new KeypairAlgorithm();
+		SysCode sysCode = new SysCode();
 		List<KpgTask> kpgTasks = this.kpgTaskService.selectAll();
-		List<KeypairAlgorithm> keypairAlgorithms = this.keypairAlgorithmService.selectAll(null);
-		List<SysCode> sysCodes = this.sysCodeService.selectByType(KmConstants.TYPE_ID_TASK_STATUS);
+		List<KeypairAlgorithm> keypairAlgorithms = this.keypairAlgorithmService.selectOpYes(keypairAlgorithm);
+		List<SysCode> sysCodes = this.sysCodeService.selectByType(sysCode);
 		LOG.debug("selectAll - end");
 		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keypairAlgorithms",keypairAlgorithms).addObject("sysCodes",sysCodes);
 		

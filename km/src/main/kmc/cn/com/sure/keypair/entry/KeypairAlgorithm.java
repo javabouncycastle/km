@@ -27,21 +27,20 @@ public class KeypairAlgorithm {
 	/**
 	 * 别名
 	 */
-	@Column(name = "name",length=64) 	
 	private String name;
 
 	
-	@Column(name = "alg_oid",length=256)                  private String algorithmOid;//算法OID
+	private String algorithmOid;//算法OID
 	
-	@Column(name = "alg_name",length=128)                 private String algorithmName;//算法英文缩写
+	private String algorithmName;//算法英文缩写
 	/**
 	 * 密钥长度
 	 */
-	@Column(name = "keysize",precision=12, scale=0) 		private Integer keysize;
+	private Integer keysize;
 	
-	@Column(name = "notes",length=256)                      private String notes;//
+	private String notes;//
 
-    @Column (name = "is_valid",precision=1, scale=0)        private Integer isValid;//是否有效,0无效，1有效
+    private Integer isValid;//是否有效,0无效，1有效
 
 	public Long getId() {
 		return id;

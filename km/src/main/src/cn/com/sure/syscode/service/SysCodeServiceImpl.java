@@ -16,6 +16,7 @@ import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
 import cn.com.sure.syscode.dao.SysCodeDAO;
 import cn.com.sure.syscode.entry.SysCode;
+import cn.com.sure.syscode.entry.SysCodeType;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Service("SysCodeService")
@@ -90,9 +91,13 @@ public class SysCodeServiceImpl implements SysCodeService{
 	 * @see cn.com.sure.syscode.service.SysCodeService#selectByType(java.lang.String)
 	 */
 	@Override
-	public List<SysCode> selectByType(String typeIdTaskStatus) {
+	public List<SysCode> selectByType(SysCode sysCode) {
 		LOG.debug("selectByType - start");
-		List<SysCode> sysCodes = this.sysCodeDAO.findByType(typeIdTaskStatus);
+		SysCodeType sysCodeType = new SysCodeType();
+		sysCodeType.setParaType(KmConstants.TYPE_ID_TASK_STATUS);
+		sysCode.setParaType(sysCodeType);
+		sysCode.setIsValid(KmConstants.YES_OR_NO_OPTION_YES);
+		List<SysCode> sysCodes = this.sysCodeDAO.findByType(sysCode);
 		LOG.debug("selectByType - end");
 		return sysCodes;
 	}

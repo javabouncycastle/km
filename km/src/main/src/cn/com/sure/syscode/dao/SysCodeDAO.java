@@ -20,6 +20,6 @@ public interface SysCodeDAO {
 
 	public void update(SysCode sysCode);
 	
-	public List<SysCode> findByType(String typeIdTaskStatus);
+	public List<SysCode> findByType(SysCode sysCode);
 
 }

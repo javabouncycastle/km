@@ -23,6 +23,6 @@ public interface SysCodeService {
 
 	List<SysCode> selectAll(SysCode sysCode);
 	
-	List<SysCode> selectByType(String typeIdTaskStatus);
+	List<SysCode> selectByType(SysCode sysCode);
 
 }

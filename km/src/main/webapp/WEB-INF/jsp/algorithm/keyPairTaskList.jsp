@@ -30,7 +30,7 @@
 		                      <th width="8%">生成数量</th>
 		                      <th width="8%">已生成数量</th>
 		                      <th width="10%">任务状态</th>
-		                      <th width="10%">任务开始时间</th>
+		                      <th width="10%">任务新建时间</th>
 		                      <th width="10%">执行开始时间</th>
 		                      <th width="10%">执行结束时间</th>
 		                      <th width="10%">任务结果</th>
@@ -43,14 +43,14 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}, ${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
-		                    <td>${row.keypairAlgorithm.id}</td>
+		                    <td>${row.keypairAlgorithm.name}</td>
 		                    <td>${row.kpgKeyAmount}</td>
 		                    <td>${row.dbCommitBufsize}</td>
-		                    <td>${row.taskStatus.id}</td>
+		                    <td>${row.taskStatus.paraCode}</td>
 		                    <td>${row.taskStartTime}</td>
 		                    <td>${row.exeTaskStartTime}</td>
 		                    <td>${row.exeTaskEndTime}</td>
@@ -91,11 +91,11 @@
 				                <div class="row"> 
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraValue" class="control-label">别名 </label>
-				                    <input type="text" class="form-control" id="name" name="name" value="${kpgTask.name}" required="required"/>                 
+				                    <input type="text" class="form-control" id="name" name="name" required="required"/>                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">密钥算法</label>
-				                    <select class="form-control margin-bottom-15" name="kpgAlg.id" id="paratypeInfo" required="required">
+				                    <select class="form-control margin-bottom-15" name="keypairAlgorithm.id" id="keypairAlgorithmInfo" required="required">
 				                    	<option value="">--请选择--</option>
 				                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
 				                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
@@ -109,7 +109,7 @@
 				                    <label for="paraCode" class="control-label">生成数量 </label>
 				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>
-				                  <%-- <div class="col-md-6 margin-bottom-15">
+				                <%-- <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务状态</label>
 				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
 				                    	<option value="">--请选择--</option>
@@ -120,12 +120,12 @@
 				                  </div> --%>
 				                </div>	
                   
-				               <%--  <div class="row">		            
+				               <div class="row">		            
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">任务开始时间</label>
+				                    <label for="color" class="control-label">任务新建时间</label>
 				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
 				                  </div>
-				                 </div> --%>
+				                 </div> 
 				                  
 				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
@@ -180,7 +180,7 @@
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">算法</label>
-				                    	<select class="form-control margin-bottom-15" name="kpgAlg.id" id="paratypeInfo" required="required">
+				                    	<select class="form-control margin-bottom-15" name="keypairAlgorithm.id" id="keypairAlgorithmInfo" required="required">
 					                    	<option value="">--请选择--</option>
 						                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
 						                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
@@ -200,17 +200,17 @@
 				                  </div>					            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务状态</label>
-				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
+				                    <select class="form-control margin-bottom-15" name="taskStatus.paraValue" id="paratypeInfo" required="required">
 				                    	<option value="">--请选择--</option>
 				                    	<c:forEach var="sc" items="${sysCodes}">
-				                    		<option value="${sc.id}">${sc.paraCode}</option>
+				                    		<option value="${sc.paraValue}">${sc.paraCode}</option>
 				                    	</c:forEach>
 				                    </select>                
 				                  </div>
 				                </div>	
 								<div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="notes" class="control-label">任务开始时间</label>
+				                    <label for="notes" class="control-label">任务新建时间</label>
 				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
 				                       
 				                  </div>
@@ -262,13 +262,13 @@ function activate(id){
      self.location.replace("activate.do?&id="+id);
 }
 //修改的初始化页面            
-function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,taskStatus,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
+function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
 			$("#modal_update select[name='keypairAlgorithm.id']").val(keypairAlgorithm);	
 			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
 		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
-			$("#modal_update select[name='taskStatus.id']").val(taskStatus.id);	
+			$("#modal_update select[name='taskStatus.paraValue']").val(paraValue);	
 			$("#modal_update input[name='taskStartTime']").val(taskStartTime);
 			$("#modal_update input[name='exeTaskStartTime']").val(exeTaskStartTime);
 			$("#modal_update input[name='exeTaskEndTime']").val(exeTaskEndTime);
