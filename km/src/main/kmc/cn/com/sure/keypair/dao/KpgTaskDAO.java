@@ -39,4 +39,20 @@ public interface KpgTaskDAO {
 	 */
 	void insert(KpgTask kpgTask);
 
+	/**
+	 * 
+	 */
+	KpgTask selectById(Long id);
+
+	/**
+	 * @return
+	 */
+	List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask);
+
+	/**
+	 * @param codeId
+	 * @return
+	 */
+	List<KpgTask> findByTaskStatus(Integer codeId);
+
 }

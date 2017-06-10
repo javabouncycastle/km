@@ -26,6 +26,76 @@ public class KeyPairInUse {
 	private String id;
 	
 	
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getPubKey() {
+		return pubKey;
+	}
+
+
+	public void setPubKey(String pubKey) {
+		this.pubKey = pubKey;
+	}
+
+
+	public String getPriKey() {
+		return priKey;
+	}
+
+
+	public void setPriKey(String priKey) {
+		this.priKey = priKey;
+	}
+
+
+	public KeypairAlgorithm getKeypairAlgorithm() {
+		return keypairAlgorithm;
+	}
+
+
+	public void setKeypairAlgorithm(KeypairAlgorithm keypairAlgorithm) {
+		this.keypairAlgorithm = keypairAlgorithm;
+	}
+
+
+	public KpgTask getKpgTask() {
+		return kpgTask;
+	}
+
+
+	public void setKpgTask(KpgTask kpgTask) {
+		this.kpgTask = kpgTask;
+	}
+
+
+	public Date getInUseTime() {
+		return inUseTime;
+	}
+
+
+	public void setInUseTime(Date inUseTime) {
+		this.inUseTime = inUseTime;
+	}
+
+
+	public Date getGenTime() {
+		return genTime;
+	}
+
+
+	public void setGenTime(Date genTime) {
+		this.genTime = genTime;
+	}
+
+
 	/**
 	 * 公钥 base64格式
 	 */

@@ -81,4 +81,50 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("delete - end");
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#selectById()
+	 */
+	@Override
+	public KpgTask selectById(Long id) {
+		LOG.debug("selectById - start");
+		KpgTask kpgTask=this.kpgTaskDAO.selectById(id);
+		LOG.debug("selectById - end");
+		return kpgTask;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#findAllUnExecutedTask()
+	 */
+	@Override
+	public List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask) {
+		LOG.debug("KpgTask - start");
+		SysCode sysCode = new SysCode();
+		sysCode.setParaValue(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED.toString());
+		kpgTask.setTaskStatus(sysCode);
+		List<KpgTask>kpgTasks=this.kpgTaskDAO.findAllUnExecutedTask(kpgTask);
+		LOG.debug("KpgTask - end");
+		return kpgTasks;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#findByTaskStatus(java.lang.Integer)
+	 */
+	@Override
+	public List<KpgTask> findByTaskStatus(
+			Integer codeId) {
+		LOG.debug("findByTaskStatus - start");
+		List<KpgTask> kpgTasks = kpgTaskDAO.findByTaskStatus(codeId);
+		LOG.debug("findByTaskStatus - start");
+		return kpgTasks;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#updateGeneratedKeyAmount(java.lang.Long, int)
+	 */
+	@Override
+	public void updateGeneratedKeyAmount(Long taskId, int sliceSize) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -34,8 +34,8 @@
 		                      <th width="10%">执行开始时间</th>
 		                      <th width="10%">执行结束时间</th>
 		                      <th width="10%">任务结果</th>
-		                      <th width="10%">任务说明</th>
-		                      <th width="10%">操作</th>
+		                      <th width="7%">任务说明</th>
+		                      <th width="13">操作</th>
 		                    </tr>
 		                  </thead>
                     <tbody id="id_tbody_upd_list"> 
@@ -57,6 +57,7 @@
 		                    <td>${row.taskExeResult}</td>
 		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
+		                    <a href="javascript:genKeypair('${row.id}')"  class="btn btn-link">启动</a>
 							</td>      		
 	                    </tr>
                 	</c:forEach>
@@ -255,12 +256,6 @@ function remove(id){
      self.location.replace("remove.do?&id="+id);
    }
 }   
-function suspend(id){
-     self.location.replace("suspend.do?&id="+id);
-}
-function activate(id){
-     self.location.replace("activate.do?&id="+id);
-}
 //修改的初始化页面            
 function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
 			$("#modal_update input[name='id']").val(id);
@@ -278,6 +273,10 @@ function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,ta
 }
 function add(){
 	$("#modal_insert").modal('show');
+}
+
+function genKeypair(id){
+	window.location.href="genKeypair.do?&id="+id;
 }
 </script>
 

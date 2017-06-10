@@ -35,5 +35,33 @@ public interface KpgTaskService {
 	 */
 	void delete(Long id);
 
+	/**
+	 * @param id 
+	 * @return 
+	 * 
+	 */
+	KpgTask selectById(Long id);
+
+    /**
+     * 
+     *  功能描述：查询所有需要执行的任务
+     *  @param taskStatus
+     *  @return
+     */
+    public List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask);
+
+	/**
+	 * @param codeIdTaskStatusWaitingForExecuting
+	 * @return
+	 */
+	List<KpgTask> findByTaskStatus(Integer codeId);
+
+	/**
+	 * @param taskId
+	 * @param sliceSize
+	 */
+	void updateGeneratedKeyAmount(Long taskId, int sliceSize);
+
+
 
 }

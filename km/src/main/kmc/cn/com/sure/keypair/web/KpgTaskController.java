@@ -3,6 +3,8 @@
  */
 package cn.com.sure.keypair.web;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ import cn.com.sure.common.BaseController;
 import cn.com.sure.keypair.entry.KeypairAlgorithm;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.keypair.service.KeypairAlgorithmService;
+import cn.com.sure.keypair.service.KpgTaskExecuteService;
 import cn.com.sure.keypair.service.KpgTaskService;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.syscode.entry.SysCode;
@@ -44,6 +47,10 @@ public class KpgTaskController extends BaseController{
 	
 	@Autowired
 	private SysCodeService sysCodeService;
+	
+	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
+	
+	private KpgTask kpgTask;
 	
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KpgTask kpgTask,Model model, 
@@ -97,6 +104,17 @@ public class KpgTaskController extends BaseController{
 		attr.addFlashAttribute("msg","删除主键为【"+id+"】成功！");
 		return "redirect:/kpgTask/selectAll.do";
 		
+	}
+	
+	@RequestMapping(value="genKeypair")
+	public String genKeypair(Long id,Model model, 
+			RedirectAttributes attr,HttpServletRequest request) throws NoSuchAlgorithmException, KmApplicationexception, NoSuchProviderException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+		
+		LOG.debug("genKeypair - start");
+		kpgTask = kpgTaskService.selectById(id);
+		kpgTaskExecuteService.executeTaskSlice(id);
+		LOG.debug("genKeypair - end");
+		return null;
 	}
 
 }

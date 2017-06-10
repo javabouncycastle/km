@@ -25,6 +25,7 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	private KeypairAlgorithmDAO keypairAlgorithmDAO;
 
 	@Override
+	@Transactional(value="txManager" )//配置事务，基本形式
 	public void insert(KeypairAlgorithm keypairAlgorithm) throws KmApplicationexception {
 		LOG.debug("insert - start");
 		KeypairAlgorithm dbkeypairAlgorithm = this.keypairAlgorithmDAO.findByName(keypairAlgorithm);
@@ -45,6 +46,7 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
+	@Transactional(value="txManager" )
 	public void update(KeypairAlgorithm keypairAlgorithm) {
 		LOG.debug("update - start");
 		keypairAlgorithmDAO.update(keypairAlgorithm);
@@ -52,6 +54,7 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
+	@Transactional(value="txManager" )
 	public void delete(Long id) {
 		LOG.debug("delete - start");
 		keypairAlgorithmDAO.delete(id);
@@ -59,6 +62,7 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
+	@Transactional(value="txManager" )
 	public void suspend(Long id) {
 		LOG.debug("suspend - start");
 		KeypairAlgorithm keypairAlgorithm = keypairAlgorithmDAO.findById(id);
@@ -69,6 +73,7 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
+	@Transactional(value="txManager" )
 	public void activate(Long id) {
 		LOG.debug("activate - start");
 		KeypairAlgorithm keypairAlgorithm = keypairAlgorithmDAO.findById(id);

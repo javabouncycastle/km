@@ -2,14 +2,18 @@ package cn.com.sure.km;
 
 public interface KmErrorMessageConstants {
 	
-	public static final int unknownError = -1;  // Î´Öª´íÎó
+	public static final int unknownError = -1;  // ä½ç½®é”™è¯¯
 	
-	public static final int nameExist = 101; //±ğÃûÒÑ´æÔÚ
+	public static final int nameExist = 101; //åˆ«åå·²å­˜åœ¨
 	
-	public static final int paraValueExist = 103;//Êı¾İ×ÖµäÒÑ´æÔÚ
+	public static final int paraValueExist = 103;//æ•°æ®å­—å…¸å·²å­˜åœ¨
 	
-	public static final int paraTypeValueExist = 104;//Êı¾İ×ÖµäÀà±ğÒÑ´æÔÚ
+	public static final int paraTypeValueExist = 104;//æ•°æ®å­—å…¸ç±»åˆ«å·²å­˜åœ¨
 	
-	public static final int kpgTaskNameExist = 105;//ÈÎÎñÒÑ´æÔÚ
+	public static final int kpgTaskNameExist = 105;//ä»»åŠ¡å·²å­˜åœ¨
+	
+	public static final int taskExecuting = 115;//ä»»åŠ¡å·²å¯åŠ¨ï¼Œæ— æ³•å†æ¬¡å¯åŠ¨
+	
+	public static final int taskFinished = 115;//ä»»åŠ¡å·²ç»“æŸï¼Œæ— æ³•å†æ¬¡å¯åŠ¨
 
 }
