@@ -2,7 +2,6 @@ package cn.com.sure.log.entry;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
 public class AuditOpLog {
@@ -16,21 +15,22 @@ public class AuditOpLog {
 	/**
 	 * ID
 	 */
-	@Id  @Column(name="id")             	private String id;
+	@Id 
+	private String id;
 	
-	@Column (name = "op_type") 				private long type;   //表示操作的类型。
-	@Column (name = "op_action")        	private String action; //表示执行的操作是什么
+	private long type;   //表示操作的类型。
+	private String action; //表示执行的操作是什么
 	
-	@Column (name = "op_action_ext1")  		private String actionExt1; //表示执行的操作扩展
-	@Column (name = "op_action_ext2")  		private String actionExt2; //表示执行的操作扩展
-	@Column (name = "op_action_ext3")  		private String actionExt3; //表示执行的操作扩展
-	@Column (name = "op_action_ext4")  		private String actionExt4; //表示执行的操作扩展
+	private String actionExt1; //表示执行的操作扩展
+	private String actionExt2; //表示执行的操作扩展
+	private String actionExt3; //表示执行的操作扩展
+	private String actionExt4; //表示执行的操作扩展
 
-	@Column (name = "op_message")           private String  message;   //本地化消息
-	@Column (name = "op_timestamp")         private Date    timestamp; //执行上述操作的日期和时间。以 GMT 时间存储此值
-	@Column (name = "op_ip")                private String  ip;        //对其执行操作的IP
-	@Column (name = "op_operator")          private String  operator;  //对其执行操作的帐户
-	@Column (name = "is_op_succ")			private Integer isOpSucc;  //表示已执行操作的结果
+	private String  message;   //本地化消息
+	private Date    timestamp; //执行上述操作的日期和时间。以 GMT 时间存储此值
+	private String  ip;        //对其执行操作的IP
+	private String  operator;  //对其执行操作的帐户
+	private Integer isOpSucc;  //表示已执行操作的结果
 	
 	public String getId() {
 		return id;

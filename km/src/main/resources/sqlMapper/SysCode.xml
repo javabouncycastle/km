@@ -106,4 +106,34 @@
 		delete from km_sys_code where id=#{id}
 	</delete>
 	
+	 <select id="serachByContion" parameterType="cn.com.sure.syscode.entry.SysCode" resultMap="SysCodeResultMap">
+		select 
+			ks.id as id,
+			ks.para_code as paraCode,
+			ks.para_value as paraValue,
+			ks.para_type as paraType,
+			ks.is_valid as isValid,
+			ks.notes as note,
+			ksty.id as TypeId,
+			ksty.para_type as typeParaType,
+			ksty.notes as typeNotes
+		 from km_sys_code ks,km_sys_param_type ksty
+		 where 
+		 	ks.para_type=ksty.id
+		 	<!-- <if test="username != null and password != null">
+				username =#{username} and password =#{password}
+			</if> -->
+			<if test="id!=null and id!='' ">
+				and ks.id=#{id}
+			</if>
+		 	<if test="paraValue!=null and paraValue!='' ">
+		 		and ks.para_value = #{paraValue}
+		 	</if>
+		 	<if test="paraType!=null and paraType!='' ">
+		 		<if test="paraType.id!=null and paraType.id!='' ">
+		 			and ks.para_type=#{paraType.id}
+		 		</if>
+		 	</if>
+	</select>
+	
 </mapper>

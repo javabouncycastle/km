@@ -112,7 +112,7 @@ public class SysCodeController {
 	
 	
 	/**
-	* UC-SYS01-17 停用数据字典内容
+	*  停用数据字典内容
 	* @return "redirect:/syscode/selectAll.do"
 	*/
 	@RequestMapping(value = "suspend")
@@ -131,7 +131,7 @@ public class SysCodeController {
 	
 	
 	/**
-	 *  UC-SYS01-18 启用数据字典内容
+	 *  启用数据字典内容
 	 * @return "redirect:/syscode/list"
 	 */
 	
@@ -150,6 +150,17 @@ public class SysCodeController {
 		
 	}
 	
+	/**
+	 * 按条件查询
+	 */
+	@RequestMapping(value = "searchByCondition")
+	public ModelAndView searchByCondition(SysCode sysCode, Model model,RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("searchByCondition - start");
+		List<SysCode> sysCodes  = sysCodeService.searchByCondition(sysCode);
+		LOG.debug("searchByCondition - end");
+		return new ModelAndView("syscode/syscodeList").addObject("sysCodes", sysCodes);
+		
+	}
 	
 
 

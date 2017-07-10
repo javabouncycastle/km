@@ -62,6 +62,4 @@ public interface KpgTaskService {
 	 */
 	void updateGeneratedKeyAmount(Long taskId, int sliceSize);
 
-
-
 }

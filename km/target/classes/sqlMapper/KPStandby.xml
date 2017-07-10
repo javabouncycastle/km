@@ -3,7 +3,7 @@
 <mapper namespace="cn.com.sure.keypair.dao.KeypairStandbyDAO">  
 
 	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KeypairStandby">
-		insert into keypair_standby(
+		insert into keypair_standby_1024(
 			pub_key,
 			pri_key,
 			kpg_algorithm,
@@ -12,7 +12,7 @@
 		)values(
 			#{pubKey},
 			#{priKey},
-			#{keypairAlgorithm.name},
+			#{keypairAlgorithm.algorithmName},
 			#{KpgTask.name},
 			#{genTime}
 		)

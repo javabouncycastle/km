@@ -31,7 +31,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	
 	@Autowired
 	private KpgTaskDAO kpgTaskDAO;
-
+	
 	/* (non-Javadoc)
 	 * @see cn.com.sure.keypair.service.KpgTaskService#selectAll()
 	 */
@@ -123,8 +123,16 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	 */
 	@Override
 	public void updateGeneratedKeyAmount(Long taskId, int sliceSize) {
-		// TODO Auto-generated method stub
+		LOG.debug("updateGeneratedKeyAmount - start");
 		
+		KpgTask kpgTask = kpgTaskDAO.selectById(taskId);	
+		
+		kpgTask.setGeneratedKeyAmount(kpgTask.getGeneratedKeyAmount()+sliceSize);
+		
+		kpgTaskDAO.update(kpgTask);
+		
+		LOG.debug("updateGeneratedKeyAmount - end");
 	}
+
 
 }

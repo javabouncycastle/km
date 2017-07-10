@@ -9,6 +9,8 @@ public class KmApplicationexception extends Exception{
 	Exception underlyingException;
     int errorCode = -1;
     
+
+    
     public KmApplicationexception(String message){
     	super(message);
     }
@@ -55,6 +57,5 @@ public class KmApplicationexception extends Exception{
 	    	throw new KmApplicationexception(errCode,message);
 	    }
 
-	
-
+	 
 }

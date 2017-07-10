@@ -30,7 +30,17 @@ public class KeypairStandbyServiceImpl implements KeypairStandbyService{
 	 * @see cn.com.sure.keypair.service.KeypairStandbyService#insert()
 	 */
 	@Override
-	public void insert(KeypairStandby keypairStandby) {
+	public void insert1024(KeypairStandby keypairStandby) {
+		LOG.debug("insert - start");
+		this.keypairStandbyDAO.insert(keypairStandby);
+		LOG.debug("insert - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KeypairStandbyService#insert2048(cn.com.sure.keypair.entry.KeypairStandby)
+	 */
+	@Override
+	public void insert2048(KeypairStandby keypairStandby) {
 		LOG.debug("insert - start");
 		this.keypairStandbyDAO.insert(keypairStandby);
 		LOG.debug("insert - end");

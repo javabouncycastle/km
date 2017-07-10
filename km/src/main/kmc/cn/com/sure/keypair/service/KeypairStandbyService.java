@@ -14,6 +14,11 @@ public interface KeypairStandbyService {
 	/**
 	 * 
 	 */
-	void insert(KeypairStandby keypairStandby);
+	void insert1024(KeypairStandby keypairStandby);
+
+	/**
+	 * @param keypairStandby
+	 */
+	void insert2048(KeypairStandby keypairStandby);
 
 }

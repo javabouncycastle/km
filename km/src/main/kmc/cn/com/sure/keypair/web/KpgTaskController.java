@@ -50,7 +50,7 @@ public class KpgTaskController extends BaseController{
 	
 	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
 	
-	private KpgTask kpgTask;
+	/*private KpgTask kpgTask;*/
 	
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KpgTask kpgTask,Model model, 
@@ -106,12 +106,11 @@ public class KpgTaskController extends BaseController{
 		
 	}
 	
-	@RequestMapping(value="genKeypair")
+	@RequestMapping(value="start")
 	public String genKeypair(Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request) throws NoSuchAlgorithmException, KmApplicationexception, NoSuchProviderException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		
 		LOG.debug("genKeypair - start");
-		kpgTask = kpgTaskService.selectById(id);
 		kpgTaskExecuteService.executeTaskSlice(id);
 		LOG.debug("genKeypair - end");
 		return null;

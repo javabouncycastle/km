@@ -43,8 +43,8 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus.paraValue}',
-		                    	'${row.taskStartTime}','${row.exeTaskStartTime}, ${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
+		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
 		                    <td>${row.keypairAlgorithm.name}</td>
@@ -212,18 +212,18 @@
 								<div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">任务新建时间</label>
-				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
+				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime"  required="required" />                 
 				                       
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">执行开始时间</label>
-				                    <input type="date" class="form-control" id="exeTaskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="exeTaskStartTime" value="${kpgTask.exeTaskStartTime}" required="required" />                 
+				                    <input type="date" class="form-control" id="exeTaskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="exeTaskStartTime"  required="required" />                 
 				                  </div>
 				                </div>	 
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">执行结束时间</label>
-				                    <input type="date" class="form-control" id="exeTaskEndTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="exeTaskEndTime" value="${kpgTask.exeTaskEndTime}" required="required" />                 
+				                    <input type="date" class="form-control" id="exeTaskEndTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd '})" class="MyWdate" name="exeTaskEndTime"  required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="paraCode" class="control-label">任务结果</label>
@@ -233,7 +233,7 @@
 				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
 				                    <label for="notes" class="control-label">任务说明 </label>
-				                    <textarea class="form-control" rows="3" id="notes" name="notes">${kpgTask.taskNotes}</textarea>
+				                    <textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
 				                  </div>
 				                </div>	         				
 				          </table>
@@ -258,25 +258,39 @@ function remove(id){
 }   
 //修改的初始化页面            
 function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
+			debugger;
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
 			$("#modal_update select[name='keypairAlgorithm.id']").val(keypairAlgorithm);	
 			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
 		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
 			$("#modal_update select[name='taskStatus.paraValue']").val(paraValue);	
-			$("#modal_update input[name='taskStartTime']").val(taskStartTime);
-			$("#modal_update input[name='exeTaskStartTime']").val(exeTaskStartTime);
-			$("#modal_update input[name='exeTaskEndTime']").val(exeTaskEndTime);
+			$("#modal_update input[name='taskStartTime']").val(FormatDate(taskStartTime));
+			$("#modal_update input[name='exeTaskStartTime']").val(FormatDate(exeTaskStartTime));
+			$("#modal_update input[name='exeTaskEndTime']").val(FormatDate(exeTaskEndTime));
 			$("#modal_update input[name='taskExeResult']").val(taskExeResult);	
-			$("#modal_update [id='taskNotes']").val(taskNotes);
+			$("#modal_update [id='taskNotes']").text(taskNotes);
 			$("#modal_update").modal('show');
+}
+
+function FormatDate (strTime) {
+    var date = new Date(strTime);
+    var month=date.getMonth()+1;
+    if(month<10){
+    	month="0"+month;
+    }
+    var dd=date.getDate();
+    if(dd<10){
+    	dd="0"+dd;
+    }
+    return date.getFullYear()+"-"+month+"-"+dd;
 }
 function add(){
 	$("#modal_insert").modal('show');
 }
 
 function genKeypair(id){
-	window.location.href="genKeypair.do?&id="+id;
+	window.location.href="start.do?&id="+id;
 }
 </script>
 

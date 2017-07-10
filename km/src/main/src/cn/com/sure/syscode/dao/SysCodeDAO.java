@@ -22,4 +22,10 @@ public interface SysCodeDAO {
 	
 	public List<SysCode> findByType(SysCode sysCode);
 
+	/**
+	 * @param sysCode
+	 * @return 
+	 */
+	public List<SysCode> serachByContion(SysCode sysCode);
+
 }

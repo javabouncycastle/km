@@ -21,7 +21,6 @@ public class KeypairAlgorithm {
 	 * 主键
 	 */
 	@Id
-	@Column(name = "id",length=32) 	
 	private Long id;
 	
 	/**

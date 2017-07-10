@@ -102,4 +102,15 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return sysCodes;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeService#searchByCondition(cn.com.sure.syscode.entry.SysCode)
+	 */
+	@Override
+	public List<SysCode> searchByCondition(SysCode sysCode) {
+		LOG.debug("searchByCondition - start");
+		List<SysCode> sysCodes = sysCodeDAO.serachByContion(sysCode);
+		LOG.debug("searchByCondition - end");
+		return sysCodes;
+	}
+
 }

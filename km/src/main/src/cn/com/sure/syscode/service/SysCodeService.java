@@ -25,4 +25,10 @@ public interface SysCodeService {
 	
 	List<SysCode> selectByType(SysCode sysCode);
 
+	/**
+	 * @param sysCode
+	 * @return 
+	 */
+	List<SysCode> searchByCondition(SysCode sysCode);
+
 }

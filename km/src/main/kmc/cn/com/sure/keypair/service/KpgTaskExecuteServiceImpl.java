@@ -63,7 +63,8 @@ import cn.com.sure.km.KmApplicationexception;
 			
 			
 			//3.判断本次任务片段总共生成多少密钥
-			int sliceSize = kpgTask.getDbCommitBufsize().intValue();//缓冲数量
+			//3.1缓冲数量
+			int sliceSize = kpgTask.getDbCommitBufsize().intValue();
 			
 			if((kpgTask.getKpgKeyAmount().intValue()- kpgTask.getGeneratedKeyAmount().intValue())< kpgTask.getDbCommitBufsize().intValue()){//(总共生成数量-已经生成数量)<缓冲数量|| 最后一片了
 				sliceSize = kpgTask.getKpgKeyAmount().intValue()- kpgTask.getGeneratedKeyAmount().intValue();
@@ -72,11 +73,8 @@ import cn.com.sure.km.KmApplicationexception;
 			//3.+ 生成完毕
 			if(sliceSize==0) return;
 			
-				
-			//**********************************************************
 			LOG.info("执行任务块-["+taskId+"]任务数量："+sliceSize);
 
-			
 			//4.获取provider 产生KeyPairGenerator 
 			KeyPairGenerator kpg =	KeyPairGenerator.getInstance(kpgTask.getKeypairAlgorithm().getName());
 			kpg.initialize(kpgTask.getKeypairAlgorithm().getKeysize());
@@ -106,7 +104,12 @@ import cn.com.sure.km.KmApplicationexception;
 				keypairStandby.setPriKey(prikey);
 				keypairStandby.setPubKey(pubkey);
 				
-				keypairStandbyService.insert(keypairStandby);
+				if(kpgTask.getKeypairAlgorithm().getKeysize()==1024){
+					keypairStandbyService.insert1024(keypairStandby);
+				}if(kpgTask.getKeypairAlgorithm().getKeysize()==2048){
+					keypairStandbyService.insert2048(keypairStandby);
+				}
+				
 
 				long exeEndMills = System.currentTimeMillis();
 
