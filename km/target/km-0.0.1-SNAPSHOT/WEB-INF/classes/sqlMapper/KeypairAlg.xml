@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.com.sure.keypair.dao.KeypairAlgorithmDAO">  
+
+	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+		insert into keypair_algorithm(
+			name,
+			alg_oid,
+			alg_name,
+			keysize,
+			notes,
+			is_valid
+		)values(
+			#{name},
+			#{algorithmOid},
+			#{algorithmName},
+			#{keysize},
+			#{notes},
+			#{isValid}
+		)
+	</insert>
+	
+	<select id="findNameCountById" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="int">
+	 select count(0) from keypair_algorithm where name=#{name}
+	</select>
+	
+	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+	</select>
+	
+	<select id="selectOpYes" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where
+		 	 is_valid=#{isValid}
+	</select>
+	
+	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where name=#{name}
+	</select>
+	
+	<select id="findById" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where id=#{id}
+	</select>
+	
+	<update id="update" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+		update keypair_algorithm
+		set
+		 name = #{name},
+		 alg_oid=#{algorithmOid},
+		 alg_name=#{algorithmName},
+		 keysize=#{keysize},
+		 notes=#{notes},
+		 is_valid=#{isValid}
+		 where
+		 id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from keypair_algorithm where id=#{id}
+	</delete>
+    
+</mapper>
