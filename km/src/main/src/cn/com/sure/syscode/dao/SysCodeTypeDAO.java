@@ -38,4 +38,10 @@ public interface SysCodeTypeDAO {
 	 * @param id
 	 */
 	public void delete(Long id);
+
+	/**
+	 * @param sysCodeType
+	 * @return
+	 */
+	public List<SysCodeType> searchByCondition(SysCodeType sysCodeType);
 }

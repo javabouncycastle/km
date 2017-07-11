@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 
 
 /*密钥归档*/
-public class KeypairArchive {
+public class KeyPairArchive {
 	/**
 	 * 主键KID唯一的
 	 */
@@ -44,7 +44,7 @@ public class KeypairArchive {
 	 */
     @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "kpg_algorithm_id")
-	private KeypairAlgorithm keypairAlgorithm;
+	private KeyPairAlgorithm keyPairAlgorithm;
 	
 	/**
 	 * 所属任务
@@ -103,13 +103,13 @@ public class KeypairArchive {
 	}
 
 
-	public KeypairAlgorithm getKeypairAlgorithm() {
-		return keypairAlgorithm;
+	public KeyPairAlgorithm getKeyPairAlgorithm() {
+		return keyPairAlgorithm;
 	}
 
 
-	public void setKeypairAlgorithm(KeypairAlgorithm keypairAlgorithm) {
-		this.keypairAlgorithm = keypairAlgorithm;
+	public void setKeyPairAlgorithm(KeyPairAlgorithm keyPairAlgorithm) {
+		this.keyPairAlgorithm = keyPairAlgorithm;
 	}
 
 

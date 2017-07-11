@@ -14,7 +14,7 @@
 		<result column="dbCommitBufsize" javaType="Integer" property="dbCommitBufsize"/>
 		<result column="generatedKeyAmount" javaType="Integer" property="generatedKeyAmount"/>
 		<result column="task_exe_result" javaType="String" property="task_exe_result"/>
-		<association property="keypairAlgorithm" javaType="cn.com.sure.keypair.entry.KeypairAlgorithm" >
+		<association property="keyPairAlgorithm" javaType="cn.com.sure.keypair.entry.KeyPairAlgorithm" >
 			<id column="kpgAlgId" javaType="long" property="id"/>
 			<result column="algName" javaType="String" property="name"/>
 			<result column="algorithmOid" javaType="String" property="algorithmOid"/>
@@ -52,7 +52,7 @@
 			task_exe_result
 		)values(
 			#{name},
-			#{keypairAlgorithm.id},
+			#{keyPairAlgorithm.id},
 			#{kpgKeyAmount},
 			#{taskStatus.paraValue},
 			#{taskStartTime},
@@ -69,7 +69,7 @@
 		select 
 			t1.id as id,
 			t1.name as name,
-			t1.kpg_algorithm as keypairAlgorithm,
+			t1.kpg_algorithm as keyPairAlgorithm,
 			t1.kpg_key_amount as kpgKeyAmount,
 			t1.task_status as taskStatus,
 			t1.task_start_time as taskStartTime,
@@ -105,7 +105,7 @@
 		select 
 			t1.id as id,
 			t1.name as name,
-			t1.kpg_algorithm as keypairAlgorithm,
+			t1.kpg_algorithm as keyPairAlgorithm,
 			t1.kpg_key_amount as kpgKeyAmount,
 			t1.task_status as taskStatus,
 			t1.task_start_time as taskStartTime,
@@ -142,7 +142,7 @@
 		select 
 			id,
 			name,
-			kpg_algorithm as keypairAlgorithm,
+			kpg_algorithm as keyPairAlgorithm,
 			kpg_key_amount as kpgKeyAmount,
 			task_status as taskStatus,
 			task_start_time as taskStartTime,
@@ -160,7 +160,7 @@
 		select 
 			id,
 			name,
-			kpg_algorithm as keypairAlgorithm,
+			kpg_algorithm as keyPairAlgorithm,
 			kpg_key_amount as kpgKeyAmount,
 			task_status as taskStatus,
 			task_start_time as taskStartTime,
@@ -179,7 +179,7 @@
 		select 
 			id,
 			name,
-			kpg_algorithm as keypairAlgorithm,
+			kpg_algorithm as keyPairAlgorithm,
 			kpg_key_amount as kpgKeyAmount,
 			task_status as taskStatus,
 			task_start_time as taskStartTime,
@@ -192,30 +192,12 @@
 		 from kpg_task
 		 where task_status=#{taskStatus}
 	</select>
-<!-- 	
-		<select id="findById" parameterType="Integer" resultType="cn.com.sure.keypair.entry.KpgTask">
-		select 
-			id,
-			name,
-			kpg_algorithm as keypairAlgorithm,
-			kpg_key_amount as kpgKeyAmount,
-			task_status as taskStatus,
-			task_start_time as taskStartTime,
-			task_notes as taskNotes,
-			exe_task_start_time as exeTaskStartTime,
-			exe_task_end_time as exeTaskEndTime,
-			dbcommit_bufsize as dbCommitBufsize,
-			generated_key_amount generatedKeyAmount,
-			task_exe_result as taskExeResult
-		 from kpg_task
-		 where id=#{id}
-	</select> -->
 	
 	<update id="update" parameterType="cn.com.sure.keypair.entry.KpgTask">
 		update kpg_task
 		set
 		 	name = #{name},
-			kpg_algorithm = #{keypairAlgorithm.id},
+			kpg_algorithm = #{keyPairAlgorithm.id},
 			kpg_key_amount=#{kpgKeyAmount},
 			task_status=#{taskStatus.paraValue},
 			task_start_time=#{taskStartTime},
@@ -232,5 +214,54 @@
 	<delete id="delete" parameterType="long">
 		delete from kpg_task where id=#{id}
 	</delete>
+	
+	<select id="searchByCondition" parameterType="cn.com.sure.keypair.entry.KpgTask" resultMap="KpgTaskResultMap">
+		select 
+			t1.id as id,
+			t1.name as name,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.kpg_key_amount as kpgKeyAmount,
+			t1.task_status as taskStatus,
+			t1.task_start_time as taskStartTime,
+			t1.task_notes as taskNotes,
+			t1.exe_task_start_time as exeTaskStartTime,
+			t1.exe_task_end_time as exeTaskEndTime,
+			t1.dbcommit_bufsize as dbCommitBufsize,
+			t1.generated_key_amount generatedKeyAmount,
+			t1.task_exe_result as taskExeResult,
+			t2.id as kpgAlgId,
+			t2.name as algName ,
+			t2.alg_oid as algorithmOid,
+			t2.alg_name as algorithmName,
+			t2.keysize as keysize,
+			t2.notes as notes,
+			t2.is_valid as isValid,
+			t3.id as SysCodeId,
+			t3.para_code as paraCode,
+			t3.para_value as paraValue,
+			t3.para_type as paraType,
+			t3.is_valid as SysIsValid,
+			t3.notes as SysNotes,
+			t4.id as TypeId,
+			t4.para_type as typeParaType,
+			t4.notes as typeNotes
+		 from kpg_task t1,keypair_algorithm t2,km_sys_code t3,km_sys_param_type t4
+		 where 
+		 	t1.kpg_algorithm=t2.id
+		 	and t3.para_type=t4.id
+		 	and t1.task_status=t3.para_value
+		 	<if test="id!=null and id!='' ">
+		 		id=#{id}
+		 	</if>
+		 	<if test="name!=null and name!='' ">
+		 	 	name=#{name}
+		 	</if>
+		 	<if test="keyPairAlgorithm!=null and keyPairAlgorithm!='' ">
+		 		keyPairAlgorithm=#{keyPairAlgorithm}
+		 	</if>
+		 	<if test="taskStartTime!=null and taskStartTime!='' ">
+		 		taskStartTime=#{taskStartTime}
+		 	</if>
+	</select>
     
 </mapper>

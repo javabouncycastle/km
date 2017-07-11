@@ -1,37 +1,20 @@
 package cn.com.sure.log;
 
-import java.net.InetAddress;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.dao.KeypairAlgorithmDAO;
-import cn.com.sure.keypair.entry.KeypairAlgorithm;
-import cn.com.sure.log.entry.AuditOpLog;
-import cn.com.sure.log.service.AuditOpLogService;
 
 
 @Service(value="auditLogAspect")
 @Aspect
 public class AuditLogAspect {
 	
-	private static final Log LOG = LogFactory.getLog(AuditLogAspect.class);
+	/*private static final Log LOG = LogFactory.getLog(AuditLogAspect.class);
 
 	@Autowired
 	private AuditOpLogService auditOpLogService;
 	
 	@Autowired
-	private KeypairAlgorithmDAO keypairAlgorithmDAO;
+	private KeyPairAlgorithmDAO keypairAlgorithmDAO;
 	
 	//获取当前时间，并且把时间转化为自定义格式
 	
@@ -40,29 +23,29 @@ public class AuditLogAspect {
 	String date1 = dateFormat.format(date);
 	
 	
-    /** 
+    *//** 
      * 添加业务逻辑方法切入点 ,insert KeyPairAlg方法
-     */  
+     *//*  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.insert(..))")  
 	 public void insert() {
 		
 	} 
-	/** 
+	*//** 
      * 添加业务逻辑方法切入点 ,delete方法
-     */  
+     *//*  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.delete*(..))")
 	public void delete(){
 		
 	}
-	/** 
+	*//** 
      * 添加业务逻辑方法切入点 ,update方法
-     */  
+     *//*  
 	@Pointcut("execution(* cn.com.sure.keypair.service.*.update*(..))")
 	public void update(){
 		
 	}
 	
-	/*@Around(value="insert()")
+	@Around(value="insert()")
 	public Object insertKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
 		LOG.debug("insertKeyPairAlgAroundsLogs - start");
 		KeypairAlgorithm keypairAlgorithm=(KeypairAlgorithm)pjp.getArgs()[0];
@@ -91,7 +74,7 @@ public class AuditLogAspect {
 		auditOpLogService.insert(auditOpLog);
 		LOG.debug("insertKeyPairAlgAroundsLogs - end");
 		return pjp;
-	}*/
+	}
 	
 	@Around(value="delete()")
 	public Object deleteKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
@@ -124,7 +107,7 @@ public class AuditLogAspect {
 		return pjp;
 	}
 	
-	/*@Around(value="update()")
+	@Around(value="update()")
 	public Object updateKeyPairAlgAroundsLogs(ProceedingJoinPoint pjp)throws Throwable{
 		LOG.debug("updateKeyPairAlgAroundsLogs - start");
 		KeypairAlgorithm keypairAlgorithm = (KeypairAlgorithm)pjp.getArgs()[0];
@@ -155,10 +138,10 @@ public class AuditLogAspect {
 		LOG.debug("updateKeyPairAlgAroundsLogs - end");
 		return pjp;
 	}
-	*/
-	/**
+	
+	*//**
 	 * 比较一下密钥算法更新更新了那些字段
-	 */
+	 *//*
 	public String compairKPAlg(KeypairAlgorithm keypairAlgorithmNew){
 		LOG.debug("compairKPAlg - start");
 		String resultString="";
@@ -189,15 +172,15 @@ public class AuditLogAspect {
 		return resultString;
 		
 	}
-	/**
+	*//**
 	 * 根据id查询
-	 */
+	 *//*
 	private KeypairAlgorithm find(Long id){
 		LOG.debug("find - start");
 		KeypairAlgorithm keypairAlgorithm=keypairAlgorithmDAO.findById(id);
 		LOG.debug("find - end");
 		return keypairAlgorithm;
 		}
-	
+	*/
 	
 }

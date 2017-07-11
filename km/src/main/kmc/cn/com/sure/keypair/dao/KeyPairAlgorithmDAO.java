@@ -2,35 +2,29 @@ package cn.com.sure.keypair.dao;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 
-public interface KeypairAlgorithmDAO {
+public interface KeyPairAlgorithmDAO {
 
-/*	*//**
-	 * 
-	 * @param keypairAlgorithm
-	 * @return
-	 *//*
-	int findNameCountById(KeypairAlgorithm keypairAlgorithm);*/
 
 	/**
 	 * 增加密钥算法
 	 * @param keypairAlgorithm
 	 */
-	void insert(KeypairAlgorithm keypairAlgorithm);
+	void insert(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 查询全部密钥算法
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	List<KeypairAlgorithm> selectAll(KeypairAlgorithm keypairAlgorithm);
+	List<KeyPairAlgorithm> selectAll(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 更新密钥算法
 	 * @param keypairAlgorithm
 	 */
-	void update(KeypairAlgorithm keypairAlgorithm);
+	void update(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 删除密钥算法
@@ -43,19 +37,24 @@ public interface KeypairAlgorithmDAO {
 	 * @param id
 	 * @return
 	 */
-	KeypairAlgorithm findById(Long id);
+	KeyPairAlgorithm findById(Long id);
 	
 	/**
 	 * 根据name查找密钥算法
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	KeypairAlgorithm findByName(KeypairAlgorithm keypairAlgorithm);
+	KeyPairAlgorithm findByName(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * @return
 	 * 查询已启用的数据
 	 */
-	List<KeypairAlgorithm> selectOpYes(KeypairAlgorithm keypairAlgorithm);
+	List<KeyPairAlgorithm> selectOpYes(KeyPairAlgorithm keyPairAlgorithm);
+
+	/**
+	 * @return
+	 */
+	List<KeyPairAlgorithm> searchByCondition(KeyPairAlgorithm keyPairAlgorithm);
 
 }

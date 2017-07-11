@@ -51,7 +51,7 @@
 	              		</li>
             		</ul>
           		</li>
-         		<li class="sub open">
+         		<li class="sub">
 		            <a href="javascript:;">
 		              <i class="fa fa-database"></i><font style='font-family:"微软雅黑"'>日志管理</font><div class="pull-right"><span class="caret"></span></div>
 		            </a>
@@ -59,14 +59,14 @@
 		              <li  ><a href="<%=request.getContextPath()%>/conf/log/list"><font style='font-family:"微软雅黑"'>日志列表</font></a></li>
 		            </ul>               
           		</li>
-            	<li class="sub open">
+            	<li class="sub">
 		            <a href="javascript:;">
 		              <i class="fa fa-database"></i><font style='font-family:"微软雅黑"'>管理员管理</font><div class="pull-right"><span class="caret"></span></div>
 		            </a>
 		            <ul class="templatemo-submenu">
 		              <li  ><a href="<%=request.getContextPath()%>/conf/syscode/list"><font style='font-family:"微软雅黑"'>管理员列表</font></a></li>
 		            </ul>               
-         	   </li>
+         		</li>
           	   <li>
           	   	   <a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a>
           	   </li>

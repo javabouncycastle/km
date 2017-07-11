@@ -53,16 +53,5 @@
 				</li>
 			</ul>
 		</div>
-		
-		<!-- <div id="content">
-			<div id="contentIframeDiv">
-				<iframe id="contentIframe" src=""></iframe>
-			</div>
-			<div id="footer" class="span12">
-				Copyright © 2016 suresec.net/ All Rights Reserved　山东确信信息产业股份有限公司　版权所有　鲁ICP备13015085号-4 </br>
-				电话：400-006-8211 　 地址：济南市高新区舜华路2000号舜泰广场11号楼北区203室
-			</div>
-				
-	  </div> -->
 	</body>
 </html>

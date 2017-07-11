@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-<mapper namespace="cn.com.sure.keypair.dao.KeypairAlgorithmDAO">  
+<mapper namespace="cn.com.sure.keypair.dao.KeyPairAlgorithmDAO">  
 
-	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		insert into keypair_algorithm(
 			name,
 			alg_oid,
@@ -20,11 +20,11 @@
 		)
 	</insert>
 	
-	<select id="findNameCountById" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="int">
+	<select id="findNameCountById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="int">
 	 select count(0) from keypair_algorithm where name=#{name}
 	</select>
 	
-	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		select 
 			id,
 			name,
@@ -36,7 +36,7 @@
 		 from keypair_algorithm
 	</select>
 	
-	<select id="selectOpYes" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<select id="selectOpYes" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 	select 
 			id,
 			name,
@@ -50,7 +50,7 @@
 		 	 is_valid=#{isValid}
 	</select>
 	
-	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		select 
 			id,
 			name,
@@ -63,7 +63,7 @@
 		 where name=#{name}
 	</select>
 	
-	<select id="findById" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm" resultType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<select id="findById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		select 
 			id,
 			name,
@@ -76,7 +76,7 @@
 		 where id=#{id}
 	</select>
 	
-	<update id="update" parameterType="cn.com.sure.keypair.entry.KeypairAlgorithm">
+	<update id="update" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		update keypair_algorithm
 		set
 		 name = #{name},
@@ -92,5 +92,31 @@
 	<delete id="delete" parameterType="long">
 		delete from keypair_algorithm where id=#{id}
 	</delete>
+	
+	<select id="searchByCondition" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
+		select 
+			id,
+			name,
+			alg_oid as algorithmOid,
+			alg_name as algorithmName,
+			keysize,
+			notes,
+			is_valid as isValid
+		 from keypair_algorithm
+		 where 1=1
+			 <if test="id!=null and id!='' ">
+			 	and id=#{id}
+			 </if>
+			 <if test="algorithmOid!=null and algorithmOid!='' ">
+			 	and alg_oid = #{algorithmOid}
+			 </if>
+			 <if test="name!=null and name!='' ">
+			 	and name=#{name}
+			 </if>
+			 <if test="keysize!=null and keysize!='' ">
+			 	and keysize=#{keysize}
+			 </if>
+		 	
+	</select>
     
 </mapper>

@@ -20,9 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.common.BaseController;
-import cn.com.sure.keypair.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 import cn.com.sure.keypair.entry.KpgTask;
-import cn.com.sure.keypair.service.KeypairAlgorithmService;
+import cn.com.sure.keypair.service.KeyPairAlgorithmService;
 import cn.com.sure.keypair.service.KpgTaskExecuteService;
 import cn.com.sure.keypair.service.KpgTaskService;
 import cn.com.sure.km.KmApplicationexception;
@@ -43,7 +43,7 @@ public class KpgTaskController extends BaseController{
 	private KpgTaskService kpgTaskService;
 	
 	@Autowired
-	private KeypairAlgorithmService keypairAlgorithmService;
+	private KeyPairAlgorithmService keyPairAlgorithmService;
 	
 	@Autowired
 	private SysCodeService sysCodeService;
@@ -56,13 +56,13 @@ public class KpgTaskController extends BaseController{
 	public ModelAndView selectAll(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("selectAll - start");
-		KeypairAlgorithm keypairAlgorithm = new KeypairAlgorithm();
+		KeyPairAlgorithm keyPairAlgorithm = new KeyPairAlgorithm();
 		SysCode sysCode = new SysCode();
 		List<KpgTask> kpgTasks = this.kpgTaskService.selectAll();
-		List<KeypairAlgorithm> keypairAlgorithms = this.keypairAlgorithmService.selectOpYes(keypairAlgorithm);
+		List<KeyPairAlgorithm> keyPairAlgorithms = this.keyPairAlgorithmService.selectOpYes(keyPairAlgorithm);
 		List<SysCode> sysCodes = this.sysCodeService.selectByType(sysCode);
 		LOG.debug("selectAll - end");
-		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keypairAlgorithms",keypairAlgorithms).addObject("sysCodes",sysCodes);
+		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keyPairAlgorithms",keyPairAlgorithms).addObject("sysCodes",sysCodes);
 		
 	}
 	
@@ -109,11 +109,20 @@ public class KpgTaskController extends BaseController{
 	@RequestMapping(value="start")
 	public String genKeypair(Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request) throws NoSuchAlgorithmException, KmApplicationexception, NoSuchProviderException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-		
 		LOG.debug("genKeypair - start");
 		kpgTaskExecuteService.executeTaskSlice(id);
 		LOG.debug("genKeypair - end");
-		return null;
+		return "redirect:/kpgTask/selectAll.do";
+	}
+	
+	@RequestMapping(value = "searchByCondition")
+	public ModelAndView searchByCondition(KpgTask kpgTask,Model model, 
+			RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("searchByCondition - start");
+		List<KpgTask> kpgTasks = this.kpgTaskService.searchByCondition(kpgTask);
+		LOG.debug("searchByCondition - end");
+		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks);
+		
 	}
 
 }

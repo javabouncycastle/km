@@ -55,4 +55,10 @@ public interface KpgTaskDAO {
 	 */
 	List<KpgTask> findByTaskStatus(Integer codeId);
 
+	/**
+	 * @param kpgTask
+	 * @return
+	 */
+	List<KpgTask> searchByCondition(KpgTask kpgTask);
+
 }

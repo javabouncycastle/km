@@ -120,9 +120,6 @@
 		 from km_sys_code ks,km_sys_param_type ksty
 		 where 
 		 	ks.para_type=ksty.id
-		 	<!-- <if test="username != null and password != null">
-				username =#{username} and password =#{password}
-			</if> -->
 			<if test="id!=null and id!='' ">
 				and ks.id=#{id}
 			</if>

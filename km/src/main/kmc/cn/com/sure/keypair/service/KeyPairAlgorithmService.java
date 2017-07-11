@@ -2,30 +2,30 @@ package cn.com.sure.keypair.service;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KeypairAlgorithm;
+import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 
-public interface KeypairAlgorithmService {
+public interface KeyPairAlgorithmService {
 	
 	/**
 	 * 增加密钥算法
 	 * @param keypairAlgorithm
 	 * @throws KmApplicationexception
 	 */
-	void insert(KeypairAlgorithm keypairAlgorithm) throws  KmApplicationexception;
+	void insert(KeyPairAlgorithm keyPairAlgorithm) throws  KmApplicationexception;
 
 	/**
 	 * 查询全部密钥算法
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	List<KeypairAlgorithm> selectAll(KeypairAlgorithm keypairAlgorithm);
+	List<KeyPairAlgorithm> selectAll(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 更新密钥算法
 	 * @param keypairAlgorithm
 	 */
-	void update(KeypairAlgorithm keypairAlgorithm);
+	void update(KeyPairAlgorithm keyPairAlgorithm);
 	
 	/**
 	 * 删除密钥算法
@@ -51,6 +51,12 @@ public interface KeypairAlgorithmService {
 	 * @return
 	 * 查询启用的数据
 	 */
-	List<KeypairAlgorithm> selectOpYes(KeypairAlgorithm keypairAlgorithm);
+	List<KeyPairAlgorithm> selectOpYes(KeyPairAlgorithm keyPairAlgorithm);
+
+	/**
+	 * @param keypairAlgorithm
+	 * @return
+	 */
+	List<KeyPairAlgorithm> searchByCondition(KeyPairAlgorithm keyPairAlgorithm);
 
 }

@@ -76,4 +76,15 @@ public class SysCodeTypeServiceImpl implements SysCodeTypeService {
 		return sysCodeTypes;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeTypeService#searchByCondition(cn.com.sure.syscode.entry.SysCodeType)
+	 */
+	@Override
+	public List<SysCodeType> searchByCondition(SysCodeType sysCodeType) {
+		LOG.debug("searchByCondition - start");
+		List<SysCodeType> sysCodeTypes = sysCodeTypeDAO.searchByCondition(sysCodeType);
+		LOG.debug("searchByCondition - end");
+		return sysCodeTypes;
+	}
+
 }

@@ -13,7 +13,7 @@ import javax.persistence.Lob;
  * @author Limin
  *
  */
-public class KeypairStandby {
+public class KeyPairStandby1024 {
 	
 	/**
 	 * 主键KID唯一的
@@ -40,7 +40,7 @@ public class KeypairStandby {
 	/**
 	 * 密钥算法
 	 */
-	private KeypairAlgorithm keypairAlgorithm;
+	private KeyPairAlgorithm keyPairAlgorithm;
 	
 	/**
 	 * 所属任务
@@ -84,14 +84,13 @@ public class KeypairStandby {
 		this.priKey = priKey;
 	}
 
-
-	public KeypairAlgorithm getKeypairAlgorithm() {
-		return keypairAlgorithm;
+	public KeyPairAlgorithm getKeyPairAlgorithm() {
+		return keyPairAlgorithm;
 	}
 
 
-	public void setKeypairAlgorithm(KeypairAlgorithm keypairAlgorithm) {
-		this.keypairAlgorithm = keypairAlgorithm;
+	public void setKeyPairAlgorithm(KeyPairAlgorithm keyPairAlgorithm) {
+		this.keyPairAlgorithm = keyPairAlgorithm;
 	}
 
 

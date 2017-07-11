@@ -2,7 +2,7 @@ package cn.com.sure.keypair.service;
 
 import cn.com.sure.framework.PaginatedParam;
 
-public class KeypairAlgorithmSearchbycondition extends PaginatedParam{
+public class KeyPairAlgorithmSearchbycondition extends PaginatedParam{
 	
 	private Long id;
 	

@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Encoder;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.entry.KeypairStandby;
+import cn.com.sure.keypair.entry.KeyPairStandby1024;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
 
@@ -35,7 +35,7 @@ import cn.com.sure.km.KmApplicationexception;
 		private static final Log LOG = LogFactory.getLog(KpgTaskExecuteServiceImpl.class);
 		
 		@Autowired
-		private KeypairStandbyService keypairStandbyService;
+		private KeyPairStandby1024Service keyPairStandby1024Service;
 		
 		@Autowired
 		private KpgTaskService kpgTaskService;
@@ -76,8 +76,8 @@ import cn.com.sure.km.KmApplicationexception;
 			LOG.info("执行任务块-["+taskId+"]任务数量："+sliceSize);
 
 			//4.获取provider 产生KeyPairGenerator 
-			KeyPairGenerator kpg =	KeyPairGenerator.getInstance(kpgTask.getKeypairAlgorithm().getName());
-			kpg.initialize(kpgTask.getKeypairAlgorithm().getKeysize());
+			KeyPairGenerator kpg =	KeyPairGenerator.getInstance(kpgTask.getKeyPairAlgorithm().getName());
+			kpg.initialize(kpgTask.getKeyPairAlgorithm().getKeysize());
 			
 			//5.循环执行************************************************
 			for(int i=1;i<=sliceSize;i++)	{
@@ -97,20 +97,16 @@ import cn.com.sure.km.KmApplicationexception;
 				String pubkey = new BASE64Encoder().encode(publicKey.getEncoded());
 				
 				//5.2将密钥存储到数据库中
-				KeypairStandby keypairStandby = new KeypairStandby();
-				keypairStandby.setGenTime(new Date());
-				keypairStandby.setKeypairAlgorithm(kpgTask.getKeypairAlgorithm());
-				keypairStandby.setKpgTask(kpgTask);
-				keypairStandby.setPriKey(prikey);
-				keypairStandby.setPubKey(pubkey);
+				KeyPairStandby1024 keyPairStandby1024 = new KeyPairStandby1024();
+				keyPairStandby1024.setGenTime(new Date());
+				keyPairStandby1024.setKeyPairAlgorithm(kpgTask.getKeyPairAlgorithm());
+				keyPairStandby1024.setKpgTask(kpgTask);
+				keyPairStandby1024.setPriKey(prikey);
+				keyPairStandby1024.setPubKey(pubkey);
 				
-				if(kpgTask.getKeypairAlgorithm().getKeysize()==1024){
-					keypairStandbyService.insert1024(keypairStandby);
-				}if(kpgTask.getKeypairAlgorithm().getKeysize()==2048){
-					keypairStandbyService.insert2048(keypairStandby);
-				}
 				
-
+				keyPairStandby1024Service.insert1024(keyPairStandby1024);
+				
 				long exeEndMills = System.currentTimeMillis();
 
 				LOG.info("执行任务块-["+taskId+"]任务小段序号["+i+"]完成.所用时间："+(exeEndMills-exeStartMills)+"毫秒");

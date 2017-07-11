@@ -29,6 +29,21 @@
 			where para_type=#{paraType}
 	</select>
 	
+	<select id="searchByCondition" parameterType="cn.com.sure.syscode.entry.SysCodeType" resultType="cn.com.sure.syscode.entry.SysCodeType">
+		select 
+			id,
+			para_type as paraType,
+			notes
+		 from km_sys_param_type
+		 where 1=1
+		 	<if test="id!=null and id!='' ">
+		 		and id=#{id}
+		 	</if>
+		 	<if test="paraType!=null and paraType!='' ">
+		 		and para_type = #{paraType}
+		 	</if>
+	</select>
+	
 	<update id="update" parameterType="cn.com.sure.syscode.entry.SysCodeType">
 	 update km_sys_param_type 
 		set 

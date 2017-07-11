@@ -34,5 +34,11 @@ public interface SysCodeTypeService {
 	 * @return
 	 */
 	List<SysCodeType> selectAll(SysCodeType sysCodeType);
+
+	/**
+	 * @param sysCodeType
+	 * @return
+	 */
+	List<SysCodeType> searchByCondition(SysCodeType sysCodeType);
 	
 }

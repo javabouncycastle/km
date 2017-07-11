@@ -22,7 +22,7 @@ public class KpgTask {
 	/**
 	 * 产生密钥的密钥算法+长度
 	 */
-	private KeypairAlgorithm keypairAlgorithm;
+	private KeyPairAlgorithm keyPairAlgorithm;
 	
 	
 	/**
@@ -96,12 +96,12 @@ public class KpgTask {
 		this.name = name;
 	}
 
-	public KeypairAlgorithm getKeypairAlgorithm() {
-		return keypairAlgorithm;
+	public KeyPairAlgorithm getKeyPairAlgorithm() {
+		return keyPairAlgorithm;
 	}
 
-	public void setKeypairAlgorithm(KeypairAlgorithm keypairAlgorithm) {
-		this.keypairAlgorithm = keypairAlgorithm;
+	public void setKeyPairAlgorithm(KeyPairAlgorithm keyPairAlgorithm) {
+		this.keyPairAlgorithm = keyPairAlgorithm;
 	}
 
 	public Integer getKpgKeyAmount() {

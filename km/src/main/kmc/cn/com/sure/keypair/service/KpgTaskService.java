@@ -62,4 +62,10 @@ public interface KpgTaskService {
 	 */
 	void updateGeneratedKeyAmount(Long taskId, int sliceSize);
 
+	/**
+	 * @param kpgTask
+	 * @return
+	 */
+	List<KpgTask> searchByCondition(KpgTask kpgTask);
+
 }

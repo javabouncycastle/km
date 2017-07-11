@@ -31,8 +31,6 @@
 	                  	     <label for="id" class="control-label">主键标识</label>
 			                 <input type="number" min="0" class="form-control" name="id" id="id"/>     
 		                  </div>
-		                 
-		             
 		                </div>
 		                  <div class="row">
 		                  <div class="col-md-6 margin-bottom-15">

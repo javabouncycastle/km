@@ -134,5 +134,16 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("updateGeneratedKeyAmount - end");
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#searchByCondition(cn.com.sure.keypair.entry.KpgTask)
+	 */
+	@Override
+	public List<KpgTask> searchByCondition(KpgTask kpgTask) {
+		LOG.debug("searchByCondition - start");
+		List<KpgTask> kpgTasks = this.kpgTaskDAO.searchByCondition(kpgTask);
+		LOG.debug("searchByCondition - end");
+		return null;
+	}
+
 
 }

@@ -56,13 +56,13 @@ public class KeyPairInUse {
 	}
 
 
-	public KeypairAlgorithm getKeypairAlgorithm() {
-		return keypairAlgorithm;
+	public KeyPairAlgorithm getKeyPairAlgorithm() {
+		return keyPairAlgorithm;
 	}
 
 
-	public void setKeypairAlgorithm(KeypairAlgorithm keypairAlgorithm) {
-		this.keypairAlgorithm = keypairAlgorithm;
+	public void setKeyPairAlgorithm(KeyPairAlgorithm keyPairAlgorithm) {
+		this.keyPairAlgorithm = keyPairAlgorithm;
 	}
 
 
@@ -118,7 +118,7 @@ public class KeyPairInUse {
 	 */
     @ManyToOne(cascade = { CascadeType.REFRESH }, optional = true)   
     @JoinColumn(name = "kpg_algorithm_id")
-	private KeypairAlgorithm keypairAlgorithm;
+	private KeyPairAlgorithm keyPairAlgorithm;
 	
 	/**
 	 * 所属任务

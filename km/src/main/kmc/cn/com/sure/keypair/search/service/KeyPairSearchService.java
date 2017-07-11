@@ -1,5 +1,5 @@
 package cn.com.sure.keypair.search.service;
 
-public interface KeypairSearchService {
+public interface KeyPairSearchService {
 
 }

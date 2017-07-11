@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf8" pageEncoding="utf8" %>
+<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%> --%>
 <%@ taglib prefix="c" uri="/WEB-INF/c-1_0-rt.tld"%>
 <%@ include file="../left.jsp" %>
 <%@ include file="../footer.jsp" %>
@@ -9,7 +10,7 @@
 	            <li><a href="<%=request.getContextPath()%>/main">主页面</a></li>
 	            <li class="active">密钥任务</li>
 	            <li><a href="../../sign-in.html">Sign In Form</a></li>
-	             <li><a href="javascript:add()">增加密钥任务</a></li>
+	             <li><a href="javascript:add()">增加密钥任务 / </a><a href="javascript:searchByCondition()"> 查询</a></li>
 	          </ol>
         <div class="row">
             <div class="col-md-12">
@@ -21,6 +22,38 @@
 	             </c:if> 
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">密钥任务列表</h4>
+                       <!-- 查询条件div -->
+                 <div class="row" id="searchCondition" style="display:none">
+		            <div class="col-md-12">
+		              <form id="templatemo-preferences-form" action="searchByCondition.do" method="post" >
+		                <div class="row">
+	                	  <div class="col-md-6 margin-bottom-15">
+	                  	     <label for="id" class="control-label">主键标识</label>
+			                 <input type="number" min="0" class="form-control" name="id" id="id"/>     
+		                  </div>
+		                  <div class="col-md-6 margin-bottom-15">
+	                  	     <label for="name" class="control-label">别名</label>
+			                 <input type="number" min="0" class="form-control" name="name" id="name"/>     
+		                  </div>
+		                </div>
+		                  <div class="row">
+		                  <div class="col-md-6 margin-bottom-15">
+			                    <label for="KeyPairAlgorithm" class="control-label">密钥算法 </label>
+			                    <input type="text" class="form-control" id="KeyPairAlgorithm" name="KeyPairAlgorithm" />                 
+		                  </div>
+		                  <div class="col-md-6 margin-bottom-15">
+		                  	<label for="taskStartTime" class="control-label">创建时间 </label>
+			                    <input type="text" class="form-control" id="taskStartTime" name="taskStartTime" />             
+		                  </div>
+		                </div>
+		                <div class="row templatemo-form-buttons">
+			                <div class="col-md-12">
+			                  <button type="submit" class="btn btn-primary">查询</button>
+			               	 </div>
+		            	 </div>
+		               </form>
+		             </div>
+		          </div>
                 <table class="table table-striped table-hover table-bordered">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
@@ -43,17 +76,17 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keypairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
-		                    <td>${row.keypairAlgorithm.name}</td>
+		                    <td>${row.keyPairAlgorithm.name}</td>
 		                    <td>${row.kpgKeyAmount}</td>
 		                    <td>${row.dbCommitBufsize}</td>
 		                    <td>${row.taskStatus.paraCode}</td>
-		                    <td>${row.taskStartTime}</td>
-		                    <td>${row.exeTaskStartTime}</td>
-		                    <td>${row.exeTaskEndTime}</td>
+		                    <td><fmt:formatDate value="${row.taskStartTime}" type="date" pattern="yyyy-MM-dd"/></td>
+		                    <td><fmt:formatDate value="${row.exeTaskStartTime}" type="date" pattern="yyyy-MM-dd"/></td>
+		                    <td><fmt:formatDate value="${row.exeTaskEndTime}" type="date" pattern="yyyy-MM-dd"/></td>
 		                    <td>${row.taskExeResult}</td>
 		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
@@ -96,9 +129,9 @@
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">密钥算法</label>
-				                    <select class="form-control margin-bottom-15" name="keypairAlgorithm.id" id="keypairAlgorithmInfo" required="required">
+				                    <select class="form-control margin-bottom-15" name="keyPairAlgorithm.id" id="keyPairAlgorithmInfo" required="required">
 				                    	<option value="">--请选择--</option>
-				                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
+				                    	<c:forEach var="kpgAlg" items="${keyPairAlgorithms}">
 				                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
 				                    	</c:forEach>
 				                    </select>
@@ -110,15 +143,6 @@
 				                    <label for="paraCode" class="control-label">生成数量 </label>
 				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>
-				                <%-- <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">任务状态</label>
-				                    <select class="form-control margin-bottom-15" name="sc.id" id="paratypeInfo" required="required">
-				                    	<option value="">--请选择--</option>
-				                    	<c:forEach var="sc" items="${sysCodes}">
-				                    		<option value="${sc.id}">${sc.paraCode}</option>
-				                    	</c:forEach>
-				                    </select>                 
-				                  </div> --%>
 				                </div>	
                   
 				               <div class="row">		            
@@ -181,9 +205,9 @@
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">算法</label>
-				                    	<select class="form-control margin-bottom-15" name="keypairAlgorithm.id" id="keypairAlgorithmInfo" required="required">
+				                    	<select class="form-control margin-bottom-15" name="keyPairAlgorithm.id" id="keyPairAlgorithmInfo" required="required">
 					                    	<option value="">--请选择--</option>
-						                    	<c:forEach var="kpgAlg" items="${keypairAlgorithms}">
+						                    	<c:forEach var="kpgAlg" items="${keyPairAlgorithms}">
 						                    		<option value="${kpgAlg.id}">${kpgAlg.name}</option>
 						                    	</c:forEach>
 				                   	   </select>
@@ -257,11 +281,11 @@ function remove(id){
    }
 }   
 //修改的初始化页面            
-function edit(id,name,keypairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
+function edit(id,name,keyPairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
 			debugger;
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
-			$("#modal_update select[name='keypairAlgorithm.id']").val(keypairAlgorithm);	
+			$("#modal_update select[name='keyPairAlgorithm.id']").val(keyPairAlgorithm);	
 			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
 		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
 			$("#modal_update select[name='taskStatus.paraValue']").val(paraValue);	
@@ -291,6 +315,13 @@ function add(){
 
 function genKeypair(id){
 	window.location.href="start.do?&id="+id;
+}
+function searchByCondition(){
+	if($("#searchCondition").is(":hidden")){
+		$("#searchCondition").show();
+	}else{
+		$("#searchCondition").hide();
+	}
 }
 </script>
 

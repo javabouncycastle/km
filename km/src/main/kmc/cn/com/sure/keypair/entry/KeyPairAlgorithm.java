@@ -7,13 +7,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "keypair_algorithm")
-public class KeypairAlgorithm {
+public class KeyPairAlgorithm {
 	
-	public KeypairAlgorithm(){
+	public KeyPairAlgorithm(){
 		
 	}
 	
-	public KeypairAlgorithm(Long id){
+	public KeyPairAlgorithm(Long id){
 		this.id=id;
 	}
 	

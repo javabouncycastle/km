@@ -117,6 +117,25 @@ public class SysCodeTypeController {
 		return new ModelAndView("syscode/syscodeTypeList").addObject("sysCodeTypes", sysCodeTypes);
 		
 	}
+	
+	
+	/**
+	 * 
+	 * @param sysCodeType
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "searchByCondition")	
+	public ModelAndView searchByCondition(SysCodeType sysCodeType,
+			Model model, RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("searchByCondition - start");
+		List<SysCodeType> sysCodeTypes=this.sysCodeTypeService.searchByCondition(sysCodeType);
+		LOG.debug("searchByCondition - end");
+		return new ModelAndView("syscode/syscodeTypeList").addObject("sysCodeTypes", sysCodeTypes);
+		
+	}
 
 
 }
