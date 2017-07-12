@@ -3,6 +3,7 @@
  */
 package cn.com.sure.keypair.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -52,8 +53,9 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		KpgTask dbKpgTask = this.kpgTaskDAO.findByName(kpgTask.getName());
 		if(dbKpgTask==null){
 			SysCode taskStatus=new SysCode();
-			taskStatus.setParaValue((KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED).toString());
+			taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
 			kpgTask.setTaskStatus(taskStatus);
+			kpgTask.setTaskStartTime(new Date());
 			this.kpgTaskDAO.insert(kpgTask);
 		}if(dbKpgTask!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.kpgTaskNameExist, new String[]{kpgTask.getName()});
@@ -87,7 +89,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	@Override
 	public KpgTask selectById(Long id) {
 		LOG.debug("selectById - start");
-		KpgTask kpgTask=this.kpgTaskDAO.selectById(id);
+		KpgTask kpgTask=this.kpgTaskDAO.findById(id);
 		LOG.debug("selectById - end");
 		return kpgTask;
 	}
@@ -99,7 +101,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	public List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask) {
 		LOG.debug("KpgTask - start");
 		SysCode sysCode = new SysCode();
-		sysCode.setParaValue(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED.toString());
+		sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED));
 		kpgTask.setTaskStatus(sysCode);
 		List<KpgTask>kpgTasks=this.kpgTaskDAO.findAllUnExecutedTask(kpgTask);
 		LOG.debug("KpgTask - end");
@@ -125,7 +127,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	public void updateGeneratedKeyAmount(Long taskId, int sliceSize) {
 		LOG.debug("updateGeneratedKeyAmount - start");
 		
-		KpgTask kpgTask = kpgTaskDAO.selectById(taskId);	
+		KpgTask kpgTask = kpgTaskDAO.findById(taskId);	
 		
 		kpgTask.setGeneratedKeyAmount(kpgTask.getGeneratedKeyAmount()+sliceSize);
 		
@@ -142,7 +144,23 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("searchByCondition - start");
 		List<KpgTask> kpgTasks = this.kpgTaskDAO.searchByCondition(kpgTask);
 		LOG.debug("searchByCondition - end");
-		return null;
+		return kpgTasks;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#start(java.lang.Long)
+	 */
+	@Override
+	public void start(Long id) {
+		LOG.debug("start - start");
+		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
+		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)).equals(kpgTask.getTaskStatus().getParaValue())) {
+			SysCode sysCode = new  SysCode();
+			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
+			kpgTask.setTaskStatus(sysCode);
+		} 
+		
+		LOG.debug("start - end");
 	}
 
 

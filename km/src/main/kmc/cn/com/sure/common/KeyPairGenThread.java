@@ -37,14 +37,6 @@ public class KeyPairGenThread extends Thread{
 		this.kpgTask=kpgTask;
 	}
 	
-/*	public KpgQuartzTaskExecutorService getKpgQuartzTaskExecutorService() {
-		return kpgQuartzTaskExecutorService;
-	}
-
-	public void setKpgQuartzTaskExecutorService(KpgQuartzTaskExecutorService kpgQuartzTaskExecutorService) {
-		this.kpgQuartzTaskExecutorService = kpgQuartzTaskExecutorService;
-	}
-*/
 	public void run(){
 		
 		do {
@@ -61,7 +53,7 @@ public class KeyPairGenThread extends Thread{
 				kpgTask = kpgTaskService.selectById(kpgTask.getId());
 				kpgTask.setExeTaskEndTime(new Date());
 				SysCode sysCode = new SysCode();
-				sysCode.setParaValue(KmConstants.CODE_ID_TASK_STATUS_EXCEPTION.toString());
+				sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXCEPTION));
 				kpgTask.setTaskStatus(sysCode);
 				kpgTask.setTaskExeResult(e.getMessage());
 				kpgTaskService.update(kpgTask);
@@ -74,7 +66,7 @@ public class KeyPairGenThread extends Thread{
 			
 			if(kpgTask.getGeneratedKeyAmount().intValue() == kpgTask.getKpgKeyAmount().intValue()){
 				SysCode sysCode = new SysCode();
-				sysCode.setParaValue(KmConstants.CODE_ID_TASK_STATUS_FINISHED.toString());
+				sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_FINISHED));
 				kpgTask.setTaskStatus(sysCode);
 				kpgTask.setExeTaskEndTime(new Date());
 				kpgTask.setTaskExeResult("成功");
@@ -83,15 +75,10 @@ public class KeyPairGenThread extends Thread{
 			}
 			
 			
-		} while (kpgTask.getTaskStatus().getParaValue() == KmConstants.CODE_ID_TASK_STATUS_EXECUTING.toString());
+		} while (kpgTask.getTaskStatus().getParaValue() == String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
 		
 		
 		LOG.info("run - end at "+ new Date());
-		/*try {
-			kpgQuartzTaskExecutorService.executeTask(kpgTask);
-		} catch (NoSuchAlgorithmException | KmApplicationexception e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	public KpgTask getKpgTask() {

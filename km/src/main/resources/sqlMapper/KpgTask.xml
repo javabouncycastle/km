@@ -101,7 +101,7 @@
 		 and t1.task_status=t3.para_value
 	</select>
 	
-	<select id="selectById" parameterType="long" resultMap="KpgTaskResultMap">
+	<select id="findById" parameterType="long" resultMap="KpgTaskResultMap">
 		select 
 			t1.id as id,
 			t1.name as name,

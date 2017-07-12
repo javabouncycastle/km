@@ -42,7 +42,7 @@ public interface KpgTaskDAO {
 	/**
 	 * 
 	 */
-	KpgTask selectById(Long id);
+	KpgTask findById(Long id);
 
 	/**
 	 * @return

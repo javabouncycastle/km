@@ -68,4 +68,9 @@ public interface KpgTaskService {
 	 */
 	List<KpgTask> searchByCondition(KpgTask kpgTask);
 
+	/**
+	 * @param id
+	 */
+	void start(Long id);
+
 }

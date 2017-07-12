@@ -58,17 +58,18 @@
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
 		                      <th width="5%">主键</th>
-		                      <th width="8%">别名</th>
-		                      <th width="8%">算法</th>
-		                      <th width="8%">生成数量</th>
-		                      <th width="8%">已生成数量</th>
+		                      <th width="10%">别名</th>
+		                      <th width="10%">算法</th>
+		                      <th width="10%">生成数量</th>
+		                      <!-- <th width="8%">缓冲数量</th> -->
+		                      <th width="10%">已生成数量</th>
 		                      <th width="10%">任务状态</th>
 		                      <th width="10%">任务新建时间</th>
-		                      <th width="10%">执行开始时间</th>
-		                      <th width="10%">执行结束时间</th>
-		                      <th width="10%">任务结果</th>
-		                      <th width="7%">任务说明</th>
-		                      <th width="13">操作</th>
+		                     <!--  <th width="10%">执行开始时间</th>
+		                      <th width="10%">执行结束时间</th> -->
+		                      <th width="10%"></th>
+		                      <th width="10%">任务说明</th>
+		                      <th width="5">操作</th>
 		                    </tr>
 		                  </thead>
                     <tbody id="id_tbody_upd_list"> 
@@ -76,17 +77,18 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.dbCommitBufsize}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
 		                    <td>${row.keyPairAlgorithm.name}</td>
 		                    <td>${row.kpgKeyAmount}</td>
-		                    <td>${row.dbCommitBufsize}</td>
+		                    <%-- <td>${row.dbCommitBufsize}</td> --%>
+		                    <td>${row.generatedKeyAmount}</td>
 		                    <td>${row.taskStatus.paraCode}</td>
-		                    <td><fmt:formatDate value="${row.taskStartTime}" type="date" pattern="yyyy-MM-dd"/></td>
-		                    <td><fmt:formatDate value="${row.exeTaskStartTime}" type="date" pattern="yyyy-MM-dd"/></td>
-		                    <td><fmt:formatDate value="${row.exeTaskEndTime}" type="date" pattern="yyyy-MM-dd"/></td>
+		                    <td><fmt:formatDate value="${row.taskStartTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		                    <%-- <td><fmt:formatDate value="${row.exeTaskStartTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		                    <td><fmt:formatDate value="${row.exeTaskEndTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td> --%>
 		                    <td>${row.taskExeResult}</td>
 		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
@@ -140,17 +142,11 @@
 				                
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="paraCode" class="control-label">生成数量 </label>
-				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
+				                    <label for="paraCode" class="control-label">缓存数量 </label>
+				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.dbCommitBufsize}" required="required" />                 
 				                  </div>
+				                  
 				                </div>	
-                  
-				               <div class="row">		            
-				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">任务新建时间</label>
-				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime" value="${kpgTask.taskStartTime}" required="required" />                 
-				                  </div>
-				                 </div> 
 				                  
 				                <div class="row">
 				                  <div class="col-md-12 margin-bottom-15">
@@ -220,7 +216,11 @@
                   
 				                <div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="color" class="control-label">已生成数量</label>
+				                    <label for="generatedKeyAmount" class="control-label">已生成数量</label>
+				                    <input type="text" class="form-control" id="generatedKeyAmount" name="generatedKeyAmount" required="required" />                 
+				                  </div>
+				                   <div class="col-md-6 margin-bottom-15">
+				                    <label for="color" class="control-label">缓存数量</label>
 				                    <input type="text" class="form-control" id="dbCommitBufsize" name="dbCommitBufsize" required="required" />                 
 				                  </div>					            
 				                  <div class="col-md-6 margin-bottom-15">
@@ -236,7 +236,7 @@
 								<div class="row">
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="notes" class="control-label">任务新建时间</label>
-				                    <input type="date" class="form-control" id="taskStartTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd'})" class="MyWdate" name="taskStartTime"  required="required" />                 
+				                    <input type="datetime" class="form-control" id="taskStartTime" name="taskStartTime"  required="required" />                 
 				                       
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
@@ -250,8 +250,8 @@
 				                    <input type="date" class="form-control" id="exeTaskEndTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd '})" class="MyWdate" name="exeTaskEndTime"  required="required" />                 
 				                  </div>
 				                  <div class="col-md-6 margin-bottom-15">
-				                    <label for="paraCode" class="control-label">任务结果</label>
-				                    <input type="text" class="form-control" id="taskExeResult" name="taskExeResult" required="required" />                 
+				                    <label for="paraCode" class="control-label"></label>
+				                    <input type="text" class="form-control" id="taskExeResult" name="taskExeResult"  />                 
 				                  </div>
 				                </div>
 				                <div class="row">
@@ -281,13 +281,13 @@ function remove(id){
    }
 }   
 //修改的初始化页面            
-function edit(id,name,keyPairAlgorithm,kpgKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
-			debugger;
+function edit(id,name,keyPairAlgorithm,kpgKeyAmount,generatedKeyAmount,dbCommitBufsize,paraValue,taskStartTime,exeTaskStartTime,exeTaskEndTime,taskExeResult,taskNotes){
 			$("#modal_update input[name='id']").val(id);
 			$("#modal_update input[name='name']").val(name);	
 			$("#modal_update select[name='keyPairAlgorithm.id']").val(keyPairAlgorithm);	
 			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
 		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
+		 	$("#modal_update input[name='generatedKeyAmount']").val(generatedKeyAmount);
 			$("#modal_update select[name='taskStatus.paraValue']").val(paraValue);	
 			$("#modal_update input[name='taskStartTime']").val(FormatDate(taskStartTime));
 			$("#modal_update input[name='exeTaskStartTime']").val(FormatDate(exeTaskStartTime));

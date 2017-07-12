@@ -4,8 +4,6 @@
 package cn.com.sure.keypair.service;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,11 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.sure.common.KeyPairGenThread;
-import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
-import cn.com.sure.syscode.entry.SysCode;
 
 	/**
 	 * @author Limin
@@ -38,7 +33,7 @@ import cn.com.sure.syscode.entry.SysCode;
 		@Override
 		public void executeTask(KpgTask kpgTask) throws NoSuchAlgorithmException, KmApplicationexception {
 			
-			LOG.info("Quartz:executeTask NotStartedTask - start at " + new Date());
+			/*LOG.info("Quartz:executeTask NotStartedTask - start at " + new Date());
 			
 			//1.启动新任务
 			List<KpgTask> list = kpgTaskService.findAllUnExecutedTask(kpgTask);
@@ -50,7 +45,7 @@ import cn.com.sure.syscode.entry.SysCode;
 				
 				//更新任务状态
 				SysCode sysCode = new SysCode();
-				sysCode.setParaValue(KmConstants.CODE_ID_TASK_STATUS_EXECUTING.toString());
+				sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
 				task.setTaskStatus(sysCode);
 				
 				kpgTaskService.update(task);
@@ -81,7 +76,7 @@ import cn.com.sure.syscode.entry.SysCode;
 				
 				new Thread(new KeyPairGenThread(kpgTaskService,task)).start();
 				
-			}
+			}*/
 			
 		}
 	

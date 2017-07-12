@@ -50,8 +50,15 @@ public class KpgTaskController extends BaseController{
 	
 	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
 	
-	/*private KpgTask kpgTask;*/
 	
+	/**
+	 * 查询所有
+	 * @param kpgTask
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
@@ -66,6 +73,14 @@ public class KpgTaskController extends BaseController{
 		
 	}
 	
+	/**
+	 * 增加密钥任务
+	 * @param kpgTask
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="insert")
 	public String insert(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
@@ -83,6 +98,14 @@ public class KpgTaskController extends BaseController{
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
+	/**
+	 * 更新密钥任务
+	 * @param kpgTask
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="update")
 	public String update(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
@@ -94,6 +117,14 @@ public class KpgTaskController extends BaseController{
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
+	/**
+	 * 删除密钥任务
+	 * @param id
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="remove")
 	public String remove(@RequestParam(value = "id", required = false)Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
@@ -106,15 +137,37 @@ public class KpgTaskController extends BaseController{
 		
 	}
 	
+	/**
+	 * 启动密钥生成任务
+	 * @param id
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws KmApplicationexception
+	 * @throws NoSuchProviderException
+	 * @throws ClassNotFoundException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
 	@RequestMapping(value="start")
 	public String genKeypair(Long id,Model model, 
 			RedirectAttributes attr,HttpServletRequest request) throws NoSuchAlgorithmException, KmApplicationexception, NoSuchProviderException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		LOG.debug("genKeypair - start");
-		kpgTaskExecuteService.executeTaskSlice(id);
+		kpgTaskService.start(id);
 		LOG.debug("genKeypair - end");
 		return "redirect:/kpgTask/selectAll.do";
 	}
 	
+	/**
+	 * 按条件查询
+	 * @param kpgTask
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "searchByCondition")
 	public ModelAndView searchByCondition(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){

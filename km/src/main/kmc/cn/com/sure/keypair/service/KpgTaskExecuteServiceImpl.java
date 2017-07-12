@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Encoder;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.entry.KeyPairStandby1024;
+import cn.com.sure.keypair.entry.KeyPairStandby;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
 
@@ -28,6 +28,7 @@ import cn.com.sure.km.KmApplicationexception;
 	 * @author Limin
 	 *
 	 */
+	@SuppressWarnings("restriction")
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Service("kpgTaskExecuteService")
 	public class KpgTaskExecuteServiceImpl implements KpgTaskExecuteService{
@@ -35,8 +36,8 @@ import cn.com.sure.km.KmApplicationexception;
 		private static final Log LOG = LogFactory.getLog(KpgTaskExecuteServiceImpl.class);
 		
 		@Autowired
-		private KeyPairStandby1024Service keyPairStandby1024Service;
-		
+		private KeyPairStandbyService keyPairStandbyService;
+				
 		@Autowired
 		private KpgTaskService kpgTaskService;
 		
@@ -54,9 +55,7 @@ import cn.com.sure.km.KmApplicationexception;
 			
 			
 			//2.判断状态
-			if(kpgTask.getTaskStatus().getParaValue()==KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED.toString()||
-					kpgTask.getTaskStatus().getParaValue()==KmConstants.CODE_ID_TASK_STATUS_MANUAL_PAUSED.toString()||
-					kpgTask.getTaskStatus().getParaValue()==KmConstants.CODE_ID_TASK_STATUS_EXCEPTION.toString()){
+			if(kpgTask.getTaskStatus().getId()!=KmConstants.CODE_ID_TASK_STATUS_EXECUTING){
 				LOG.info("无法继续执行任务块-["+taskId+"]任务状态："+kpgTask.getTaskStatus().getParaValue());
 				return;
 			}
@@ -97,26 +96,27 @@ import cn.com.sure.km.KmApplicationexception;
 				String pubkey = new BASE64Encoder().encode(publicKey.getEncoded());
 				
 				//5.2将密钥存储到数据库中
-				KeyPairStandby1024 keyPairStandby1024 = new KeyPairStandby1024();
-				keyPairStandby1024.setGenTime(new Date());
-				keyPairStandby1024.setKeyPairAlgorithm(kpgTask.getKeyPairAlgorithm());
-				keyPairStandby1024.setKpgTask(kpgTask);
-				keyPairStandby1024.setPriKey(prikey);
-				keyPairStandby1024.setPubKey(pubkey);
+				KeyPairStandby keyPairStandby = new KeyPairStandby();
+				keyPairStandby.setGenTime(new Date());
+				keyPairStandby.setKeyPairAlgorithm(kpgTask.getKeyPairAlgorithm());
+				keyPairStandby.setKpgTask(kpgTask);
+				keyPairStandby.setPriKey(prikey);
+				keyPairStandby.setPubKey(pubkey);
 				
+				if(kpgTask.getKeyPairAlgorithm().getKeysize()==1024){
+					keyPairStandbyService.insert1024(keyPairStandby);
+				}if(kpgTask.getKeyPairAlgorithm().getKeysize()==2018){
+					keyPairStandbyService.insert2048(keyPairStandby);
+				}
 				
-				keyPairStandby1024Service.insert1024(keyPairStandby1024);
 				
 				long exeEndMills = System.currentTimeMillis();
 
 				LOG.info("执行任务块-["+taskId+"]任务小段序号["+i+"]完成.所用时间："+(exeEndMills-exeStartMills)+"毫秒");
 			}
-			
+				
 			//6.更新执行数量
 			kpgTaskService.updateGeneratedKeyAmount(taskId, sliceSize);
 			LOG.debug("executeTaskSlice - end");
 		}
-
-		
-	
 	}
