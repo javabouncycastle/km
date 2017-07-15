@@ -19,7 +19,7 @@ public interface KeypairAlgorithmDAO {
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	List<KeyPairAlgorithm> selectAll(KeyPairAlgorithm keyPairAlgorithm);
+	List<KeyPairAlgorithm> selectAll();
 
 	/**
 	 * 更新密钥算法

@@ -133,4 +133,37 @@
 		 	</if>
 	</select>
 	
+	<select id="countNum" parameterType="String" resultType="java.lang.Integer" >
+		select 
+		count(*)
+		from
+			keypair_standby
+		whwere
+			km_sys_code=#{algorithmName}
+	</select>
+	
+	<select id="selectMin" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="java.lang.String">
+	
+		select 
+			ks.para_value as paraValue
+		 from 
+		 	km_sys_code ks,km_sys_param_type ksty
+		 where 
+		 	ks.para_type=ksty.id
+		 	and ksty.para_type='keyNumMin'
+		<!-- select 
+			ks.id as id,
+			ks.para_code as paraCode,
+			ks.para_value as paraValue,
+			ks.para_type as paraType,
+			ks.is_valid as isValid,
+			ks.notes as note,
+			ksty.id as TypeId,
+			ksty.para_type as typeParaType,
+			ksty.notes as typeNotes
+		 from km_sys_code ks,km_sys_param_type ksty
+		 where ks.para_type=ksty.id
+		 and ksty.para_type=#{paraType.paraType} -->
+	</select>
+	
 </mapper>

@@ -174,10 +174,7 @@ public class SysCodeController {
 	
 	/**
 	 *  启用数据字典内容
-	 * @return "redirect:/syscode/list"
 	 */
-	
-	
 	@RequestMapping(value = "activate")
 	public String activate(
 	@RequestParam(value = "id", required = false)Long id,

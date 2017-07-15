@@ -5,7 +5,7 @@ import java.util.List;
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 
-public interface KeyPairAlgorithmService {
+public interface KeypairAlgorithmService {
 	
 	/**
 	 * 增加密钥算法
@@ -20,7 +20,7 @@ public interface KeyPairAlgorithmService {
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	List<KeyPairAlgorithm> selectAll(KeyPairAlgorithm keyPairAlgorithm);
+	List<KeyPairAlgorithm> selectAll();
 
 	/**
 	 * 更新密钥算法
@@ -68,5 +68,6 @@ public interface KeyPairAlgorithmService {
 	 * @return
 	 */
 	KeyPairAlgorithm selectById(Long id);
+
 
 }

@@ -17,19 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
-import cn.com.sure.algorthm.service.KeyPairAlgorithmService;
+import cn.com.sure.algorthm.service.KeypairAlgorithmService;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.log.service.AuditOpLogService;
 
 @Controller
 @RequestMapping(value="algorithm")
-public class KeyPairAlgorithmController {
+public class KeypairAlgorithmController {
 
-	private static final Log LOG = LogFactory.getLog(KeyPairAlgorithmController.class);
+	private static final Log LOG = LogFactory.getLog(KeypairAlgorithmController.class);
 	
 	@Autowired
-	private KeyPairAlgorithmService keyPairAlgorithmService;
+	private KeypairAlgorithmService keyPairAlgorithmService;
 	
 	@Autowired
 	private AuditOpLogService auditOpLogService;
@@ -75,7 +75,7 @@ public class KeyPairAlgorithmController {
 			RedirectAttributes attr,HttpServletRequest request){
 		System.out.println(request.getRemoteAddr());
 		LOG.debug("selectAll - start");
-		List <KeyPairAlgorithm> keyPairAlgorithms = keyPairAlgorithmService.selectAll(keyPairAlgorithm);
+		List <KeyPairAlgorithm> keyPairAlgorithms = keyPairAlgorithmService.selectAll();
 		LOG.debug("selectAll - end");
 		return new ModelAndView("algorithm/keyPairAlgList").addObject("keyPairAlgorithms", keyPairAlgorithms);
 		

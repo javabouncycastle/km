@@ -24,7 +24,11 @@ public class KmConstants {
 	// 任务状态
 	public static final String TYPE_ID_TASK_STATUS = "status";    // 任务状态TYPE
 	
+	//密钥最小数量
+	public static final String KEY_NUM_MIN="keyNumMin";
 	
+	//密钥生成数量
+	public static final String KEY_NUM_EXE="keyNumExe";
 	
 	public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20;        //执行状态 - 尚未开始
 	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21;   //执行状态 - 任务已启动

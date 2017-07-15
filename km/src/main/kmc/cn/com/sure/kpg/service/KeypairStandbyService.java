@@ -26,4 +26,11 @@ public interface KeypairStandbyService {
 	 */
 	List<KeypairStandby> selectAll();
 
+
+	/**
+	 * @param algorithmName
+	 * @return
+	 */
+	int countNum(String algorithmName);
+
 }

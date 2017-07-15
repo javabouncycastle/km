@@ -35,4 +35,11 @@ public interface SysCodeService {
 	 */
 	SysCode selectById(Long id);
 
+	/**
+	 * @return
+	 */
+	String selectMin();
+
+
+
 }

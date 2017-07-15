@@ -117,4 +117,20 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return sysCodes;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeService#selectMin()
+	 */
+	@Override
+	public String selectMin() {
+		LOG.debug("selectMin - start");
+		SysCodeType sysCodeType = new SysCodeType();
+		sysCodeType.setParaType(KmConstants.KEY_NUM_MIN);
+		SysCode sysCode = new SysCode();
+		sysCode.setParaType(sysCodeType);
+		String min = sysCodeDAO.selectMin(sysCode);
+		LOG.debug("selectMin - end");
+		return min;
+	}
+
+
 }

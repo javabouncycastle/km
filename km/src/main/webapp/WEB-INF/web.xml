@@ -39,6 +39,9 @@
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
+    <listener>
+    <listener-class>cn.com.sure.auto.kpg.AutoKpg</listener-class>
+  </listener>
   
   <servlet>
     <servlet-name>SpringMVC</servlet-name>
@@ -59,4 +62,5 @@
   <welcome-file-list>
     <welcome-file>welcome.jsp</welcome-file>
   </welcome-file-list>
+  
 </web-app>

@@ -28,4 +28,17 @@ public interface SysCodeDAO {
 	 */
 	public List<SysCode> serachByContion(SysCode sysCode);
 
+	/**
+	 * @param algorithmName
+	 * @return
+	 */
+	public int countNum(String algorithmName);
+
+	/**
+	 * @param sysCode
+	 * @return
+	 */
+	public String selectMin(SysCode sysCode);
+
+
 }

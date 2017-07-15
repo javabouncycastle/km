@@ -17,9 +17,9 @@ import cn.com.sure.km.KmErrorMessageConstants;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Service("keypairAlgorithmService")
-public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
+public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	
-	private static final Log LOG = LogFactory.getLog(KeyPairAlgorithmService.class);
+	private static final Log LOG = LogFactory.getLog(KeypairAlgorithmService.class);
 	
 	@Autowired
 	private KeypairAlgorithmDAO keyPairAlgorithmDAO;
@@ -28,21 +28,22 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 	@Transactional(value="txManager" )//配置事务，基本形式
 	public int insert(KeyPairAlgorithm keyPairAlgorithm) throws KmApplicationexception {
 		LOG.debug("insert - start");
-		KeyPairAlgorithm dbkeyPairAlgorithm = this.keyPairAlgorithmDAO.selectByName(keyPairAlgorithm);
+		int i = keyPairAlgorithmDAO.insert(keyPairAlgorithm);
+		/*KeyPairAlgorithm dbkeyPairAlgorithm = this.keyPairAlgorithmDAO.selectByName(keyPairAlgorithm);
 		int i=0;
 		if (dbkeyPairAlgorithm.equals(keyPairAlgorithm)){
 			KmApplicationexception.throwException(KmErrorMessageConstants.nameExist, new String[]{keyPairAlgorithm.getName()});
 		}if(!dbkeyPairAlgorithm.equals(keyPairAlgorithm)){
 			i = keyPairAlgorithmDAO.insert(keyPairAlgorithm);
-		}
+		}*/
 		LOG.debug("insert - end");
 		return i;
 	}
 
 	@Override
-	public List<KeyPairAlgorithm> selectAll(KeyPairAlgorithm keyPairAlgorithm) {
+	public List<KeyPairAlgorithm> selectAll() {
 		LOG.debug("selectAll - start");
-		List<KeyPairAlgorithm> keyPairAlgorithms = keyPairAlgorithmDAO.selectAll(keyPairAlgorithm);
+		List<KeyPairAlgorithm> keyPairAlgorithms = keyPairAlgorithmDAO.selectAll();
 		LOG.debug("selectAll - end");
 		return keyPairAlgorithms;
 	}

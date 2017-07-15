@@ -26,4 +26,10 @@ public interface KeyPairStandbyDAO {
 	 */
 	List<KeypairStandby> selectAll();
 
+
+	/**
+	 * @return
+	 */
+	int countNum(String algorithmName);
+
 }

@@ -72,7 +72,7 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>

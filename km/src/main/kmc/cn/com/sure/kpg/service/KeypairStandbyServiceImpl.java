@@ -55,4 +55,17 @@ public class KeypairStandbyServiceImpl implements KeypairStandbyService{
 
 
 
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairStandbyService#countNum(java.lang.String)
+	 */
+	@Override
+	public int countNum(String algorithmName) {
+		LOG.debug("countNum - start");
+		int keyNum = keyPairStandbyDAO.countNum(algorithmName);
+		LOG.debug("countNum - end");
+		return keyNum;
+	}
+
+
 }

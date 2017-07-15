@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
-import cn.com.sure.algorthm.service.KeyPairAlgorithmService;
+import cn.com.sure.algorthm.service.KeypairAlgorithmService;
 import cn.com.sure.common.BaseController;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
@@ -47,7 +47,7 @@ public class KpgTaskController extends BaseController{
 	private KpgTaskService kpgTaskService;
 	
 	@Autowired
-	private KeyPairAlgorithmService keyPairAlgorithmService;
+	private KeypairAlgorithmService keyPairAlgorithmService;
 	
 	@Autowired
 	private SysCodeService sysCodeService;
