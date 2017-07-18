@@ -26,39 +26,38 @@ public class SysCodeServiceImpl implements SysCodeService{
 	
 	@Autowired
 	private SysCodeDAO sysCodeDAO;
+	
 
 	@Override
-	public void insert(SysCode sysCode, HttpServletRequest request)
+	public int insert(SysCode sysCode, HttpServletRequest request)
 			throws KmApplicationexception {
 		LOG.debug("insert - start");
 		SysCode dbSysCode = sysCodeDAO.findByName(sysCode);
+		int i = 0 ;
 		if(dbSysCode==null){
-			sysCodeDAO.insert(sysCode);
+			i =sysCodeDAO.insert(sysCode);
 		}if(dbSysCode!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.paraValueExist, new String[]{sysCode.getParaValue()});
 		}
 		
 		LOG.debug("insert - end");
+		return i;
 	}
 
 	@Override
-	public SysCode find(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(SysCode sysCode) {
+	public int update(SysCode sysCode) {
 		LOG.debug("update - start");
-		this.sysCodeDAO.update(sysCode);
+		int i = sysCodeDAO.update(sysCode);
 		LOG.debug("update - end");
+		return i;
 	}
 
 	@Override
-	public void remove(Long id) {
+	public int remove(Long id) {
 		LOG.debug("remove - start");
-		this.sysCodeDAO.delete(id);
+		int i = sysCodeDAO.delete(id);
 		LOG.debug("remove - end");
+		return i;
 	}
 
 	@Override
@@ -87,9 +86,6 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return sysCodes;
 	}
 
-	/* (non-Javadoc)
-	 * @see cn.com.sure.syscode.service.SysCodeService#selectByType(java.lang.String)
-	 */
 	@Override
 	public List<SysCode> selectByType(SysCode sysCode) {
 		LOG.debug("selectByType - start");
@@ -102,14 +98,22 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return sysCodes;
 	}
 
-	/* (non-Javadoc)
-	 * @see cn.com.sure.syscode.service.SysCodeService#searchByCondition(cn.com.sure.syscode.entry.SysCode)
-	 */
 	@Override
 	public List<SysCode> searchByCondition(SysCode sysCode) {
 		LOG.debug("searchByCondition - start");
 		List<SysCode> sysCodes = sysCodeDAO.serachByContion(sysCode);
 		LOG.debug("searchByCondition - end");
+		return sysCodes;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeService#selectById(java.lang.Long)
+	 */
+	@Override
+	public SysCode selectById(Long id) {
+		LOG.debug("selectById - start");
+		SysCode sysCodes = sysCodeDAO.findById(id);
+		LOG.debug("selectById - end");
 		return sysCodes;
 	}
 

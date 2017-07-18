@@ -22,13 +22,15 @@ public interface KpgTaskService {
 
 	/**
 	 * @param kpgTask
+	 * @return 
 	 */
-	void insert(KpgTask kpgTask)throws KmApplicationexception;
+	int insert(KpgTask kpgTask)throws KmApplicationexception;
 
 	/**
 	 * @param kpgTask
+	 * @return 
 	 */
-	void update(KpgTask kpgTask);
+	int update(KpgTask kpgTask);
 
 	/**
 	 * @param id
@@ -48,13 +50,13 @@ public interface KpgTaskService {
      *  @param taskStatus
      *  @return
      */
-    public List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask);
+    public List<KpgTask> findAllUnExecutedTask();
 
 	/**
 	 * @param codeIdTaskStatusWaitingForExecuting
 	 * @return
 	 */
-	List<KpgTask> findByTaskStatus(Integer codeId);
+	List<KpgTask> findByTaskStatus(Long codeId);
 
 	/**
 	 * @param taskId

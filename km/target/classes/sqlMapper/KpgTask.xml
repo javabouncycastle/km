@@ -99,6 +99,7 @@
 		 where t1.kpg_algorithm=t2.id
 		 and t3.para_type=t4.id
 		 and t1.task_status=t3.para_value
+		 ORDER BY id asc
 	</select>
 	
 	<select id="findById" parameterType="long" resultMap="KpgTaskResultMap">
@@ -156,26 +157,36 @@
 		 where name=#{name}
 	</select>
 	
-	<select id="findAllUnExecutedTask" parameterType="String" resultType="cn.com.sure.keypair.entry.KpgTask">
-		select 
-			id,
-			name,
-			kpg_algorithm as keyPairAlgorithm,
-			kpg_key_amount as kpgKeyAmount,
-			task_status as taskStatus,
-			task_start_time as taskStartTime,
-			task_notes as taskNotes,
-			exe_task_start_time as exeTaskStartTime,
-			exe_task_end_time as exeTaskEndTime,
-			dbcommit_bufsize as dbCommitBufsize,
-			generated_key_amount generatedKeyAmount,
-			task_exe_result as taskExeResult
-		 from kpg_task
-		 where task_status=#{taskStatus}
-		 	and task_start_time>#{taskStartTime}
+	<select id="findAllUnExecutedTask" parameterType="cn.com.sure.keypair.entry.KpgTask" resultMap="KpgTaskResultMap">
+	 select
+			t1.id as id,
+			t1.name as name,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.kpg_key_amount as kpgKeyAmount,
+			t1.task_status as taskStatus,
+			t1.task_start_time as taskStartTime,
+			t1.task_notes as taskNotes,
+			t1.exe_task_start_time as exeTaskStartTime,
+			t1.exe_task_end_time as exeTaskEndTime,
+			t1.dbcommit_bufsize as dbCommitBufsize,
+			t1.generated_key_amount as generatedKeyAmount,
+			t1.task_exe_result as taskExeResult,
+			t2.id as kpgAlgId,
+			t2.name as algName ,
+			t2.alg_oid as algorithmOid,
+			t2.alg_name as algorithmName,
+			t2.keysize as keysize,
+			t2.notes as notes,
+			t2.is_valid as isValid
+		from kpg_task t1,keypair_algorithm t2
+		 where 
+		 	t1.task_status=#{taskStatus.paraValue}
+		 and
+		 	t1.kpg_algorithm=t2.id
+			<![CDATA[ and task_start_time <=#{taskStartTime}]]>
 	</select>
 	
-	<select id="findByTaskStatus" parameterType="Integer" resultType="cn.com.sure.keypair.entry.KpgTask">
+	<select id="findByTaskStatus" parameterType="Long" resultType="cn.com.sure.keypair.entry.KpgTask">
 		select 
 			id,
 			name,
@@ -190,10 +201,28 @@
 			generated_key_amount generatedKeyAmount,
 			task_exe_result as taskExeResult
 		 from kpg_task
-		 where task_status=#{taskStatus}
+		 where task_status=#{codeId}
 	</select>
 	
 	<update id="update" parameterType="cn.com.sure.keypair.entry.KpgTask">
+		update kpg_task
+		set
+		 	name = #{name},
+			kpg_algorithm = #{keyPairAlgorithm.id},
+			kpg_key_amount=#{kpgKeyAmount},
+			task_status=#{taskStatus.paraValue},
+			task_start_time=#{taskStartTime},
+			task_notes=#{taskNotes},
+			exe_task_start_time=#{exeTaskStartTime},
+			exe_task_end_time=#{exeTaskEndTime},
+			dbcommit_bufsize=#{dbCommitBufsize},
+			generated_key_amount=#{generatedKeyAmount},
+			task_exe_result=#{taskExeResult}
+		 where
+		 	id=#{id}
+	</update>
+	
+	<update id="start" parameterType="cn.com.sure.keypair.entry.KpgTask">
 		update kpg_task
 		set
 		 	name = #{name},

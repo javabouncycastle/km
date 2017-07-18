@@ -48,29 +48,32 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	 * @see cn.com.sure.keypair.service.KpgTaskService#insert(cn.com.sure.keypair.entry.KpgTask)
 	 */
 	@Override
-	public void insert(KpgTask kpgTask) throws KmApplicationexception {
+	public int insert(KpgTask kpgTask) throws KmApplicationexception {
 		LOG.debug("insert - start");
 		KpgTask dbKpgTask = this.kpgTaskDAO.findByName(kpgTask.getName());
+		int i=0;
 		if(dbKpgTask==null){
 			SysCode taskStatus=new SysCode();
 			taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
 			kpgTask.setTaskStatus(taskStatus);
 			kpgTask.setTaskStartTime(new Date());
-			this.kpgTaskDAO.insert(kpgTask);
+			i = kpgTaskDAO.insert(kpgTask);
 		}if(dbKpgTask!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.kpgTaskNameExist, new String[]{kpgTask.getName()});
 		}
 		LOG.debug("insert - end");
+		return i;
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.com.sure.keypair.service.KpgTaskService#update(cn.com.sure.keypair.entry.KpgTask)
 	 */
 	@Override
-	public void update(KpgTask kpgTask) {
+	public int update(KpgTask kpgTask) {
 		LOG.debug("update -start");
-		this.kpgTaskDAO.update(kpgTask);
+		int i = kpgTaskDAO.update(kpgTask);
 		LOG.debug("update - end");
+		return i;
 	}
 
 	/* (non-Javadoc)
@@ -98,12 +101,15 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	 * @see cn.com.sure.keypair.service.KpgTaskService#findAllUnExecutedTask()
 	 */
 	@Override
-	public List<KpgTask> findAllUnExecutedTask(KpgTask kpgTask) {
+	public List<KpgTask> findAllUnExecutedTask() {
 		LOG.debug("KpgTask - start");
 		SysCode sysCode = new SysCode();
-		sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED));
+		KpgTask kpgTask =new KpgTask();
+		sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING));
 		kpgTask.setTaskStatus(sysCode);
-		List<KpgTask>kpgTasks=this.kpgTaskDAO.findAllUnExecutedTask(kpgTask);
+		Date date=new Date();
+		kpgTask.setTaskStartTime(date);
+		List<KpgTask> kpgTasks=this.kpgTaskDAO.findAllUnExecutedTask(kpgTask);
 		LOG.debug("KpgTask - end");
 		return kpgTasks;
 	}
@@ -112,11 +118,10 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	 * @see cn.com.sure.keypair.service.KpgTaskService#findByTaskStatus(java.lang.Integer)
 	 */
 	@Override
-	public List<KpgTask> findByTaskStatus(
-			Integer codeId) {
+	public List<KpgTask> findByTaskStatus(Long codeId) {
 		LOG.debug("findByTaskStatus - start");
 		List<KpgTask> kpgTasks = kpgTaskDAO.findByTaskStatus(codeId);
-		LOG.debug("findByTaskStatus - start");
+		LOG.debug("findByTaskStatus - end");
 		return kpgTasks;
 	}
 
@@ -156,12 +161,14 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
 		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)).equals(kpgTask.getTaskStatus().getParaValue())) {
 			SysCode sysCode = new  SysCode();
-			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
+			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING));
 			kpgTask.setTaskStatus(sysCode);
+			kpgTaskDAO.start(kpgTask);
 		} 
 		
 		LOG.debug("start - end");
 	}
+
 
 
 }

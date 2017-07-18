@@ -1,7 +1,10 @@
 package cn.com.sure.log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Service;
+
+import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 
 
 @Service(value="auditLogAspect")
@@ -142,40 +145,44 @@ public class AuditLogAspect {
 	*//**
 	 * 比较一下密钥算法更新更新了那些字段
 	 *//*
-	public String compairKPAlg(KeypairAlgorithm keypairAlgorithmNew){
-		LOG.debug("compairKPAlg - start");
-		String resultString="";
-		if(keypairAlgorithmNew!=null&&!"".equals(keypairAlgorithmNew)){
-			KeypairAlgorithm keypairAlgorithmDB=this.find(keypairAlgorithmNew.getId());
-			if(StringUtils.isNotBlank(keypairAlgorithmDB.getAlgorithmName())&&StringUtils.isNotBlank(keypairAlgorithmNew.getAlgorithmName())){
-				if(!keypairAlgorithmDB.getAlgorithmName().equals(keypairAlgorithmNew.getAlgorithmName())){
-					resultString+="算法英文缩写由"+keypairAlgorithmDB.getAlgorithmName()+"变更为"+keypairAlgorithmNew.getAlgorithmName()+";";
-				}
-			if(keypairAlgorithmDB.getAlgorithmOid()!=null&&keypairAlgorithmNew.getAlgorithmOid()!=null){
-				if(!keypairAlgorithmDB.getAlgorithmOid().equals(keypairAlgorithmNew.getAlgorithmOid())){
-					resultString+="算法OID由"+keypairAlgorithmDB.getAlgorithmOid()+"变更为"+keypairAlgorithmNew.getAlgorithmOid()+";";
-				}
-			}
-			if(keypairAlgorithmDB.getKeysize()!=null&&keypairAlgorithmNew!=null){
-				if(!keypairAlgorithmDB.equals(keypairAlgorithmNew)){
-					resultString+="密钥长度由"+keypairAlgorithmDB.getKeysize()+"变更为"+keypairAlgorithmNew.getKeysize()+";";
-				}
-			}
-			if(keypairAlgorithmDB.getName()!=null&&keypairAlgorithmNew.getName()!=null){
-				if(!keypairAlgorithmDB.equals(keypairAlgorithmNew)){
-					resultString+="别名由"+keypairAlgorithmDB.getName()+"变更为"+keypairAlgorithmNew.getName()+";";
-				}
-			}
-			}
-		}
-		LOG.debug("compairKPAlg - end");
-		return resultString;
-		
-	}
-	*//**
+	  /**
+  	 * 比较一下密钥算法更新更新了那些字段
+  	 */
+/*  	public String compairKPAlg(KeyPairAlgorithm keyPairAlgorithmNew){
+  		LOG.debug("compairKPAlg - start");
+  		String resultString="";
+  		if(keyPairAlgorithmNew!=null&&!"".equals(keyPairAlgorithmNew)){
+  			KeyPairAlgorithm keyPairAlgorithmDB=this.find(keyPairAlgorithmNew.getId());
+  			if(StringUtils.isNotBlank(keyPairAlgorithmDB.getAlgorithmName())&&StringUtils.isNotBlank(keyPairAlgorithmNew.getAlgorithmName())){
+  				if(!keyPairAlgorithmDB.getAlgorithmName().equals(keyPairAlgorithmNew.getAlgorithmName())){
+  					resultString+="算法英文缩写由"+keyPairAlgorithmDB.getAlgorithmName()+"变更为"+keyPairAlgorithmNew.getAlgorithmName()+";";
+  				}
+  			if(keyPairAlgorithmDB.getAlgorithmOid()!=null&&keyPairAlgorithmNew.getAlgorithmOid()!=null){
+  				if(!keyPairAlgorithmDB.getAlgorithmOid().equals(keyPairAlgorithmNew.getAlgorithmOid())){
+  					resultString+="算法OID由"+keyPairAlgorithmDB.getAlgorithmOid()+"变更为"+keyPairAlgorithmNew.getAlgorithmOid()+";";
+  				}
+  			}
+  			if(keyPairAlgorithmDB.getKeysize()!=null&&keyPairAlgorithmNew!=null){
+  				if(!keyPairAlgorithmDB.equals(keyPairAlgorithmNew)){
+  					resultString+="密钥长度由"+keyPairAlgorithmDB.getKeysize()+"变更为"+keyPairAlgorithmNew.getKeysize()+";";
+  				}
+  			}
+  			if(keyPairAlgorithmDB.getName()!=null&&keyPairAlgorithmNew.getName()!=null){
+  				if(!keyPairAlgorithmDB.equals(keyPairAlgorithmNew)){
+  					resultString+="别名由"+keyPairAlgorithmDB.getName()+"变更为"+keyPairAlgorithmNew.getName()+";";
+  				}
+  			}
+  			}
+  		}
+  		LOG.debug("compairKPAlg - end");
+  		return resultString;
+  		
+  	}
+}*/
+	/**
 	 * 根据id查询
-	 *//*
-	private KeypairAlgorithm find(Long id){
+	 */
+	/*private KeypairAlgorithm find(Long id){
 		LOG.debug("find - start");
 		KeypairAlgorithm keypairAlgorithm=keypairAlgorithmDAO.findById(id);
 		LOG.debug("find - end");

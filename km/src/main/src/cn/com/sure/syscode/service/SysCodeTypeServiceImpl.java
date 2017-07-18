@@ -34,35 +34,39 @@ public class SysCodeTypeServiceImpl implements SysCodeTypeService {
 	 * @see cn.com.sure.syscode.service.SysCodeTypeService#insert(cn.com.sure.syscode.entry.SysCodeType)
 	 */
 	@Override
-	public void insert(SysCodeType sysCodeType) throws KmApplicationexception {
+	public int insert(SysCodeType sysCodeType) throws KmApplicationexception {
 		LOG.debug("insert - start");
 		SysCodeType dbSysCodeType = sysCodeTypeDAO.findByType(sysCodeType.getParaType());
+		int i = 0;
 		if(dbSysCodeType==null){
-			this.sysCodeTypeDAO.insert(sysCodeType);
+			i = sysCodeTypeDAO.insert(sysCodeType);
 		}if(dbSysCodeType!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.paraTypeValueExist, new String[]{sysCodeType.getParaType()});
 		}
 		LOG.debug("insert - start");
+		return i;
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.com.sure.syscode.service.SysCodeTypeService#update(cn.com.sure.syscode.entry.SysCodeType)
 	 */
 	@Override
-	public void update(SysCodeType sysCodeType) {
+	public int update(SysCodeType sysCodeType) {
 		LOG.debug("update - start");
-		this.sysCodeTypeDAO.update(sysCodeType);
+		int i = sysCodeTypeDAO.update(sysCodeType);
 		LOG.debug("update - start");
+		return i;
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.com.sure.syscode.service.SysCodeTypeService#delete(java.lang.Long)
 	 */
 	@Override
-	public void delete(Long id) {
+	public int delete(Long id) {
 		LOG.debug("delete - start");
-		this.sysCodeTypeDAO.delete(id);
+		int i = sysCodeTypeDAO.delete(id);
 		LOG.debug("delete - start");
+		return i;
 	}
 
 	/* (non-Javadoc)
@@ -84,6 +88,17 @@ public class SysCodeTypeServiceImpl implements SysCodeTypeService {
 		LOG.debug("searchByCondition - start");
 		List<SysCodeType> sysCodeTypes = sysCodeTypeDAO.searchByCondition(sysCodeType);
 		LOG.debug("searchByCondition - end");
+		return sysCodeTypes;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeTypeService#selectById(java.lang.Long)
+	 */
+	@Override
+	public SysCodeType selectById(Long id) {
+		LOG.debug("selectById - start");
+		SysCodeType sysCodeTypes = sysCodeTypeDAO.selectById(id);
+		LOG.debug("selectById - end");
 		return sysCodeTypes;
 	}
 

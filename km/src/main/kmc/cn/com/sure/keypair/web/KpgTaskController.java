@@ -5,10 +5,12 @@ package cn.com.sure.keypair.web;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.common.BaseController;
+import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.keypair.service.KeyPairAlgorithmService;
 import cn.com.sure.keypair.service.KpgTaskExecuteService;
 import cn.com.sure.keypair.service.KpgTaskService;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.log.service.AuditOpLogService;
 import cn.com.sure.syscode.entry.SysCode;
 import cn.com.sure.syscode.service.SysCodeService;
 
@@ -48,7 +52,12 @@ public class KpgTaskController extends BaseController{
 	@Autowired
 	private SysCodeService sysCodeService;
 	
+	@Autowired
+	private AuditOpLogService auditOpLogService;
+	
 	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
+	
+	Date date = new Date();
 	
 	
 	/**
@@ -86,7 +95,18 @@ public class KpgTaskController extends BaseController{
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("insert - start");
 		try {
-			this.kpgTaskService.insert(kpgTask);
+			int i = kpgTaskService.insert(kpgTask);
+			//添加是否成功
+			int result;
+			if(i==-1){
+				result = KmConstants.SUCCESS_OR_FAILD_OPTION_FAILD;
+			}else{
+				result = KmConstants.SUCCESS_OR_FAILD_OPTION_SUCCESS;
+			}
+			// 添加审计日志
+			auditOpLogService.insert(KmConstants.OPERATION_TYPE_INSERT, "增加", "数据字典类别", null,
+					kpgTask.getName(), null, null, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+					result);
 		} catch (KmApplicationexception e) {
 			attr.addFlashAttribute("messageInsert",e.getMessage());
 			attr.addFlashAttribute("kpgTask",kpgTask);
@@ -110,7 +130,19 @@ public class KpgTaskController extends BaseController{
 	public String update(KpgTask kpgTask,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("update - start");
-		this.kpgTaskService.update(kpgTask);
+		//比较更新前后字段的变化
+		String str = compare(kpgTask);
+		int i = kpgTaskService.update(kpgTask);
+		int result;
+		if(i==-1){
+			result = KmConstants.SUCCESS_OR_FAILD_OPTION_FAILD;
+		}else{
+			result = KmConstants.SUCCESS_OR_FAILD_OPTION_SUCCESS;
+		}
+		//添加审计日志
+		auditOpLogService.insert(KmConstants.OPERATION_TYPE_UPDATE, "更新", "数据字典类别", kpgTask.getId().toString(), null, null, 
+				str, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+				result);
 		LOG.debug("update - end");
 		attr.addFlashAttribute("updateSuccess","true");
 		attr.addFlashAttribute("message","修改主键为【"+kpgTask.getId()+"】的信息成功！");
@@ -177,5 +209,54 @@ public class KpgTaskController extends BaseController{
 		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks);
 		
 	}
+	
+
+	/**
+	 * 获取ip地址
+	 * @param request
+	 * @return
+	 */
+    public  String getIp(HttpServletRequest request) {
+           String ip = request.getHeader("X-Forwarded-For");
+           if(StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)){
+               //多次反向代理后会有多个ip值，第一个ip才是真实ip
+               int index = ip.indexOf(",");
+               if(index != -1){
+                   return ip.substring(0,index);
+               }else{
+                   return ip;
+                }
+            }
+            ip = request.getHeader("X-Real-IP");
+            if(StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)){
+                return ip;
+            }
+            return request.getRemoteAddr();
+       }
+    
+    
+    //比较更新了那些字段
+    public String compare(KpgTask kpgTaskNew){
+    	String resultString="";
+		
+    	if(kpgTaskNew!=null&&!"".equals(kpgTaskNew)&&kpgTaskNew.getId()!=null){
+    		//查询数据库中未更新前的数据
+    		KpgTask kpgTaskDB = kpgTaskService.selectById(kpgTaskNew.getId());
+    		if(StringUtils.isNotBlank(kpgTaskNew.getName())&&StringUtils.isNotBlank(kpgTaskDB.getName())){
+    			if(!kpgTaskNew.getName().equals(kpgTaskDB.getName())){
+    				resultString+="别名由"+kpgTaskDB.getName()+"变更为"+kpgTaskNew.getName();
+    			}
+    		}if(kpgTaskDB.getKeyPairAlgorithm()!=null&&kpgTaskNew.getKeyPairAlgorithm()!=null){
+    			if(!kpgTaskDB.getKeyPairAlgorithm().equals(kpgTaskNew.getKeyPairAlgorithm())){
+    				resultString+="密钥算法由"+kpgTaskDB.getKeyPairAlgorithm()+"变更为"+kpgTaskNew.getKeyPairAlgorithm();
+    			}
+    		}
+    	}
+    	
+		
+    	
+		return resultString;
+    	
+    }
 
 }

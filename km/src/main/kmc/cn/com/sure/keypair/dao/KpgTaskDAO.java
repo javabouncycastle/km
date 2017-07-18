@@ -26,8 +26,9 @@ public interface KpgTaskDAO {
 
 	/**
 	 * @param kpgTask
+	 * @return 
 	 */
-	void update(KpgTask kpgTask);
+	int update(KpgTask kpgTask);
 
 	/**
 	 * @param id
@@ -36,8 +37,9 @@ public interface KpgTaskDAO {
 
 	/**
 	 * @param kpgTask
+	 * @return 
 	 */
-	void insert(KpgTask kpgTask);
+	int insert(KpgTask kpgTask);
 
 	/**
 	 * 
@@ -53,12 +55,17 @@ public interface KpgTaskDAO {
 	 * @param codeId
 	 * @return
 	 */
-	List<KpgTask> findByTaskStatus(Integer codeId);
+	List<KpgTask> findByTaskStatus(Long codeId);
 
 	/**
 	 * @param kpgTask
 	 * @return
 	 */
 	List<KpgTask> searchByCondition(KpgTask kpgTask);
+
+	/**
+	 * @param kpgTask
+	 */
+	void start(KpgTask kpgTask);
 
 }

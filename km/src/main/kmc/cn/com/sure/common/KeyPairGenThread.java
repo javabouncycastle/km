@@ -3,6 +3,8 @@
  */
 package cn.com.sure.common;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +13,8 @@ import org.apache.commons.logging.LogFactory;
 import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.keypair.service.KpgTaskExecuteService;
 import cn.com.sure.keypair.service.KpgTaskService;
+import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.quartz.KpgQuartzTaskExecutor;
 import cn.com.sure.syscode.entry.SysCode;
 
 /**
@@ -22,34 +26,35 @@ public class KeyPairGenThread extends Thread{
 	private static final Log LOG = LogFactory.getLog(KeyPairGenThread.class);
 	
 	private KpgTask kpgTask;
-	
 	private KpgTaskExecuteService kpgTaskExecuteService;
-	
 	private KpgTaskService kpgTaskService;
 	
 	//线程传值只能用构造方法传值，没法注入，注入进来是空！！
-/*	public KeyPairGenThread(KpgQuartzTaskExecutorService kpgQuartzTaskExecutorService2, KpgTask kpgTask){
+	/**
+	 * @param kpgTaskService
+	 * @param task
+	 * @param kpgTaskExecuteService
+	 */
+	public KeyPairGenThread(KpgTaskService kpgTaskService, KpgTask kpgTask,
+			KpgTaskExecuteService kpgTaskExecuteService) {
 		this.kpgTask=kpgTask;
-		this.kpgQuartzTaskExecutorService=kpgQuartzTaskExecutorService2;
-	}*/
-	
-	public KeyPairGenThread(KpgTaskService kpgTaskService, KpgTask kpgTask){
-		this.kpgTask=kpgTask;
+		this.kpgTaskExecuteService=kpgTaskExecuteService;
+		this.kpgTaskService=kpgTaskService;
 	}
-	
+
 	public void run(){
 		
-		do {
+		do{
 			LOG.info("执行TASK"+kpgTask.getId()+","+kpgTask.getName());
 			LOG.info("run - start at " + new Date());
 			
-
+			
 			try {
 				kpgTaskExecuteService.executeTaskSlice(kpgTask.getId());
 			} catch (Exception e) {
-				LOG.error("执行TASK出现异常！");
+				LOG.error("执行出现异常"+kpgTask.getId());
 				LOG.error(e);
-
+				
 				kpgTask = kpgTaskService.selectById(kpgTask.getId());
 				kpgTask.setExeTaskEndTime(new Date());
 				SysCode sysCode = new SysCode();
@@ -60,6 +65,7 @@ public class KeyPairGenThread extends Thread{
 				
 				LOG.error("executeTask - exception - end at " + new Date());
 				return;
+				
 			}
 			
 			kpgTask = kpgTaskService.selectById(kpgTask.getId());
@@ -74,8 +80,7 @@ public class KeyPairGenThread extends Thread{
 				return;
 			}
 			
-			
-		} while (kpgTask.getTaskStatus().getParaValue() == String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
+		}while(kpgTask.getTaskStatus().getParaValue() .equals(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)) );
 		
 		
 		LOG.info("run - end at "+ new Date());

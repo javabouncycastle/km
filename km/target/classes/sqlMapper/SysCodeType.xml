@@ -12,6 +12,16 @@
 		)
 	</insert>
 	
+	<select id="selectById" parameterType="cn.com.sure.syscode.entry.SysCodeType" resultType="cn.com.sure.syscode.entry.SysCodeType">
+		select 
+			id,
+			para_type as paraType,
+			notes
+		 from km_sys_param_type
+		 where
+		  id=#{id}
+	</select>
+	
 	<select id="selectAll" parameterType="cn.com.sure.syscode.entry.SysCodeType" resultType="cn.com.sure.syscode.entry.SysCodeType">
 		select 
 			id,

@@ -60,9 +60,6 @@ public class KpgTask {
 	 */
     private Date exeTaskEndTime;
     
-    
-	
-	
 	/**
 	 * 密钥已经存储缓冲记录数量
 	 */

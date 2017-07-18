@@ -63,17 +63,47 @@
 	</bean>
 	  	<!-- 加入Aspectj配置  2017.5.24bylimin--> 
     <aop:aspectj-autoproxy proxy-target-class="true" />  
-<!--     配置spring quartz
-    <bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
-	    <property name="targetObject" ref="myBean" />  
-	    <property name="targetMethod" value="printMessage" />  
-	</bean>  -->
-  
-<!-- 第一种加事务的方式：注解方式，需要在要添加事务的方法类上添加注解 @Transaction(value="txManager") -->
+    
+	<!-- 第一种加事务的方式：注解方式，需要在要添加事务的方法类上添加注解 @Transaction(value="txManager") -->
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     	<property name="dataSource" ref="dataSource"></property>
     </bean>
     
     <!-- 事务注解驱动，标注@Transactional的类和方法将具有事务性    -->
 	<tx:annotation-driven transaction-manager="txManager" />
+	
+	
+	<!-- quartz -->
+	<!-- 工作的bean -->  
+   <bean id="myJob" class="cn.com.sure.quartz.KpgQuartzTaskExecutorImpl" />  
+   <!-- job的配置开始 -->  
+   <bean id="myJobDetail"  
+       class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+       <property name="targetObject">  
+           <ref bean="myJob" />  
+       </property>  
+       <property name="targetMethod">  
+           <value>executeTask</value>  
+       </property>  
+   </bean>  
+  
+   <!-- 调度的配置开始 -->  
+   <bean id="crontestJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail">  
+           <ref bean="myJobDetail" />  
+       </property>  
+       <property name="cronExpression">  
+           <value>10 0/1 * * * ?</value>  <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每10分钟执行一次。  -->  
+       </property>  
+   </bean>  
+  
+   <!-- 启动触发器的配置开始 -->  
+   <bean name="startQuertz" lazy-init="false" autowire="no"  
+       class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+       <property name="triggers">  
+           <list>  
+               <ref bean="crontestJobTrigger" />  
+           </list>  
+       </property>  
+   </bean>  
 </beans>  

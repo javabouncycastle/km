@@ -14,6 +14,13 @@ public class KmConstants {
 	public static final int SUCCESS_OR_FAILD_OPTION_SUCCESS=1;//操作成功
 	public static final int SUCCESS_OR_FAILD_OPTION_FAILD=0;//操作失败	
 	
+	//Session存放的管理员信息
+	public static final String SESSION_ADMIN_ID       = "OLTAX_ADMIN_ID";
+	public static final String SESSION_ADMIN_NAME     = "OLTAX_ADMIN_NAME";
+	public static final String SESSION_ADMIN_REF      = "OLTAX_ADMIN_REF";
+	public static final String SESSION_ADMIN_TERM_ID  = "OLTAX_ADMIN_TERM_ID";
+	public static final String SESSION_ADMIN_DN       = "OLTAX_ADMIN_DN";
+	
 	// 任务状态
 	public static final String TYPE_ID_TASK_STATUS = "status";    // 任务状态TYPE
 	

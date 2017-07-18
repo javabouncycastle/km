@@ -27,5 +27,25 @@ insert into km_audit_log(
 	#{operator},
 	#{isOpSucc}
 )
+
 </insert>
+
+	<select id="selectAll" parameterType="cn.com.sure.log.entry.AuditOpLog" resultType="cn.com.sure.log.entry.AuditOpLog">
+		select 
+			id,
+			op_type as type,
+			op_action as action,
+			op_action_ext1 as actionExt1,
+			op_action_ext2 as actionExt2,
+			op_action_ext3 as actionExt3,
+			op_action_ext4 as actionExt4,
+			op_message,
+			op_timestamp as timestamp,
+			op_ip as ip,
+			op_operator as operator,
+			is_op_succ as isOpSucc
+		 from km_audit_log
+	</select>
+
+
 </mapper>

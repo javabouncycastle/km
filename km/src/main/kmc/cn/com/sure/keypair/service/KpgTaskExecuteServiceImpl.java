@@ -55,7 +55,7 @@ import cn.com.sure.km.KmApplicationexception;
 			
 			
 			//2.判断状态
-			if(kpgTask.getTaskStatus().getId()!=KmConstants.CODE_ID_TASK_STATUS_EXECUTING){
+			if(!kpgTask.getTaskStatus().getParaValue().equals(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING))){
 				LOG.info("无法继续执行任务块-["+taskId+"]任务状态："+kpgTask.getTaskStatus().getParaValue());
 				return;
 			}

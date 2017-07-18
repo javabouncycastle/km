@@ -26,15 +26,17 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 
 	@Override
 	@Transactional(value="txManager" )//配置事务，基本形式
-	public void insert(KeyPairAlgorithm keyPairAlgorithm) throws KmApplicationexception {
+	public int insert(KeyPairAlgorithm keyPairAlgorithm) throws KmApplicationexception {
 		LOG.debug("insert - start");
-		KeyPairAlgorithm dbkeyPairAlgorithm = this.keyPairAlgorithmDAO.findByName(keyPairAlgorithm);
+		KeyPairAlgorithm dbkeyPairAlgorithm = this.keyPairAlgorithmDAO.selectByName(keyPairAlgorithm);
+		int i=0;
 		if (dbkeyPairAlgorithm!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.nameExist, new String[]{keyPairAlgorithm.getName()});
 		}if(dbkeyPairAlgorithm==null){
-			keyPairAlgorithmDAO.insert(keyPairAlgorithm);
+			i = keyPairAlgorithmDAO.insert(keyPairAlgorithm);
 		}
 		LOG.debug("insert - end");
+		return i;
 	}
 
 	@Override
@@ -47,25 +49,27 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 
 	@Override
 	@Transactional(value="txManager" )
-	public void update(KeyPairAlgorithm keyPairAlgorithm) {
+	public int update(KeyPairAlgorithm keyPairAlgorithm) {
 		LOG.debug("update - start");
-		keyPairAlgorithmDAO.update(keyPairAlgorithm);
+		int i = keyPairAlgorithmDAO.update(keyPairAlgorithm);
 		LOG.debug("update - end");
+		return i;
 	}
 
 	@Override
 	@Transactional(value="txManager" )
-	public void delete(Long id) {
+	public int delete(Long id) {
 		LOG.debug("delete - start");
-		keyPairAlgorithmDAO.delete(id);
+		int i = keyPairAlgorithmDAO.delete(id);
 		LOG.debug("delete - end");
+		return i;
 	}
 
 	@Override
 	@Transactional(value="txManager" )
 	public void suspend(Long id) {
 		LOG.debug("suspend - start");
-		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.findById(id);
+		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.selectById(id);
 		keyPairAlgorithm.setIsValid(KmConstants.YES_OR_NO_OPTION_NO);
 		keyPairAlgorithmDAO.update(keyPairAlgorithm);
 		LOG.debug("suspend - end");
@@ -76,7 +80,7 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 	@Transactional(value="txManager" )
 	public void activate(Long id) {
 		LOG.debug("activate - start");
-		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.findById(id);
+		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.selectById(id);
 		keyPairAlgorithm.setIsValid(KmConstants.YES_OR_NO_OPTION_YES);
 		keyPairAlgorithmDAO.update(keyPairAlgorithm);
 		LOG.debug("activate - end");
@@ -102,6 +106,17 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 		LOG.debug("searchByCondition - start");
 		List<KeyPairAlgorithm> keyPairAlgorithms = this.keyPairAlgorithmDAO.searchByCondition(keyPairAlgorithm);
 		LOG.debug("searchByCondition - end");
+		return keyPairAlgorithms;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KeyPairAlgorithmService#selectById(java.lang.Long)
+	 */
+	@Override
+	public KeyPairAlgorithm selectById(Long id) {
+		LOG.debug("selectById - start");
+		KeyPairAlgorithm keyPairAlgorithms = keyPairAlgorithmDAO.selectById(id);
+		LOG.debug("selectById - end");
 		return keyPairAlgorithms;
 	}
 

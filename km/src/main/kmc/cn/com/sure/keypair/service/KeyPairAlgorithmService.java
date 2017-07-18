@@ -10,9 +10,10 @@ public interface KeyPairAlgorithmService {
 	/**
 	 * 增加密钥算法
 	 * @param keypairAlgorithm
+	 * @return 
 	 * @throws KmApplicationexception
 	 */
-	void insert(KeyPairAlgorithm keyPairAlgorithm) throws  KmApplicationexception;
+	int insert(KeyPairAlgorithm keyPairAlgorithm) throws  KmApplicationexception;
 
 	/**
 	 * 查询全部密钥算法
@@ -24,14 +25,16 @@ public interface KeyPairAlgorithmService {
 	/**
 	 * 更新密钥算法
 	 * @param keypairAlgorithm
+	 * @return 
 	 */
-	void update(KeyPairAlgorithm keyPairAlgorithm);
+	int update(KeyPairAlgorithm keyPairAlgorithm);
 	
 	/**
 	 * 删除密钥算法
 	 * @param id
+	 * @return 
 	 */
-	void delete(Long id);
+	int delete(Long id);
 
 	/**
 	 * 停用密钥算法
@@ -58,5 +61,11 @@ public interface KeyPairAlgorithmService {
 	 * @return
 	 */
 	List<KeyPairAlgorithm> searchByCondition(KeyPairAlgorithm keyPairAlgorithm);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	KeyPairAlgorithm selectById(Long id);
 
 }

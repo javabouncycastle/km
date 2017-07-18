@@ -102,7 +102,7 @@
 	 where id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="long" >
 		delete from km_sys_code where id=#{id}
 	</delete>
 	

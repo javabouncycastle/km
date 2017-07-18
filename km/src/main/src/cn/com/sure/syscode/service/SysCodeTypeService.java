@@ -16,18 +16,21 @@ public interface SysCodeTypeService {
 
 	/**
 	 * @param sysCodeType
+	 * @return 
 	 */
-	void insert(SysCodeType sysCodeType)throws KmApplicationexception;
+	int insert(SysCodeType sysCodeType)throws KmApplicationexception;
 
 	/**
 	 * @param sysCodeType
+	 * @return 
 	 */
-	void update(SysCodeType sysCodeType);
+	int update(SysCodeType sysCodeType);
 
 	/**
 	 * @param id
+	 * @return 
 	 */
-	void delete(Long id);
+	int delete(Long id);
 
 	/**
 	 * @param sysCodeType
@@ -40,5 +43,11 @@ public interface SysCodeTypeService {
 	 * @return
 	 */
 	List<SysCodeType> searchByCondition(SysCodeType sysCodeType);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	SysCodeType selectById(Long id);
 	
 }

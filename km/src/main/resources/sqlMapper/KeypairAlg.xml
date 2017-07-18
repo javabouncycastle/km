@@ -20,7 +20,7 @@
 		)
 	</insert>
 	
-	<select id="findNameCountById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="int">
+	<select id="selectNameCountById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="int">
 	 select count(0) from keypair_algorithm where name=#{name}
 	</select>
 	
@@ -50,7 +50,7 @@
 		 	 is_valid=#{isValid}
 	</select>
 	
-	<select id="findByName" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
+	<select id="selectByName" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		select 
 			id,
 			name,
@@ -63,7 +63,7 @@
 		 where name=#{name}
 	</select>
 	
-	<select id="findById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
+	<select id="selectById" parameterType="cn.com.sure.keypair.entry.KeyPairAlgorithm" resultType="cn.com.sure.keypair.entry.KeyPairAlgorithm">
 		select 
 			id,
 			name,

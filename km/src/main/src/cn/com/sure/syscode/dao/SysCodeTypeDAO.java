@@ -21,13 +21,15 @@ public interface SysCodeTypeDAO {
 
 	/**
 	 * @param sysCodeType
+	 * @return 
 	 */
-	public void insert(SysCodeType sysCodeType);
+	public int insert(SysCodeType sysCodeType);
 
 	/**
 	 * @param sysCodeType
+	 * @return 
 	 */
-	public void update(SysCodeType sysCodeType);
+	public int update(SysCodeType sysCodeType);
 
 	/**
 	 * @param sysCodeType
@@ -36,12 +38,19 @@ public interface SysCodeTypeDAO {
 
 	/**
 	 * @param id
+	 * @return 
 	 */
-	public void delete(Long id);
+	public int delete(Long id);
 
 	/**
 	 * @param sysCodeType
 	 * @return
 	 */
 	public List<SysCodeType> searchByCondition(SysCodeType sysCodeType);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public SysCodeType selectById(Long id);
 }

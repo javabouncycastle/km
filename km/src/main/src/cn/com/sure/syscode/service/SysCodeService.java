@@ -9,13 +9,11 @@ import cn.com.sure.syscode.entry.SysCode;
 
 public interface SysCodeService {
 
-	void insert(SysCode sysCode, HttpServletRequest request)throws  KmApplicationexception ;
+	int insert(SysCode sysCode, HttpServletRequest request)throws  KmApplicationexception ;
 
-	SysCode find(Long id);
+	int update(SysCode sysCode);
 
-	void update(SysCode sysCode);
-
-	void remove(Long id);
+	int remove(Long id);
 
 	void suspend(Long id);
 
@@ -30,5 +28,11 @@ public interface SysCodeService {
 	 * @return 
 	 */
 	List<SysCode> searchByCondition(SysCode sysCode);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	SysCode selectById(Long id);
 
 }

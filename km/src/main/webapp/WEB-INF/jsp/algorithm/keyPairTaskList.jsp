@@ -87,8 +87,6 @@
 		                    <td>${row.generatedKeyAmount}</td>
 		                    <td>${row.taskStatus.paraCode}</td>
 		                    <td><fmt:formatDate value="${row.taskStartTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-		                    <%-- <td><fmt:formatDate value="${row.exeTaskStartTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-		                    <td><fmt:formatDate value="${row.exeTaskEndTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td> --%>
 		                    <td>${row.taskExeResult}</td>
 		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>

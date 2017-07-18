@@ -10,8 +10,9 @@ public interface KeyPairAlgorithmDAO {
 	/**
 	 * 增加密钥算法
 	 * @param keypairAlgorithm
+	 * @return 
 	 */
-	void insert(KeyPairAlgorithm keyPairAlgorithm);
+	int insert(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 查询全部密钥算法
@@ -23,28 +24,30 @@ public interface KeyPairAlgorithmDAO {
 	/**
 	 * 更新密钥算法
 	 * @param keypairAlgorithm
+	 * @return 
 	 */
-	void update(KeyPairAlgorithm keyPairAlgorithm);
+	int update(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * 删除密钥算法
 	 * @param id
+	 * @return 
 	 */
-	void delete(Long id);
+	int delete(Long id);
 
 	/**
 	 * 根据id查找密钥算法
 	 * @param id
 	 * @return
 	 */
-	KeyPairAlgorithm findById(Long id);
+	KeyPairAlgorithm selectById(Long id);
 	
 	/**
 	 * 根据name查找密钥算法
 	 * @param keypairAlgorithm
 	 * @return
 	 */
-	KeyPairAlgorithm findByName(KeyPairAlgorithm keyPairAlgorithm);
+	KeyPairAlgorithm selectByName(KeyPairAlgorithm keyPairAlgorithm);
 
 	/**
 	 * @return
@@ -56,5 +59,7 @@ public interface KeyPairAlgorithmDAO {
 	 * @return
 	 */
 	List<KeyPairAlgorithm> searchByCondition(KeyPairAlgorithm keyPairAlgorithm);
+
+	
 
 }
