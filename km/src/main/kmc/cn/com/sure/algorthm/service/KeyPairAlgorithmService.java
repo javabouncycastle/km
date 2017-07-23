@@ -1,8 +1,8 @@
-package cn.com.sure.keypair.service;
+package cn.com.sure.algorthm.service;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KeyPairAlgorithm;
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 
 public interface KeyPairAlgorithmService {
@@ -26,8 +26,9 @@ public interface KeyPairAlgorithmService {
 	 * 更新密钥算法
 	 * @param keypairAlgorithm
 	 * @return 
+	 * @throws KmApplicationexception 
 	 */
-	int update(KeyPairAlgorithm keyPairAlgorithm);
+	int update(KeyPairAlgorithm keyPairAlgorithm) throws KmApplicationexception;
 	
 	/**
 	 * 删除密钥算法

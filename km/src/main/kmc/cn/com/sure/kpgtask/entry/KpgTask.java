@@ -1,9 +1,10 @@
-package cn.com.sure.keypair.entry;
+package cn.com.sure.kpgtask.entry;
 
 import java.util.Date;
 
 import javax.persistence.Id;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.syscode.entry.SysCode;
 
 public class KpgTask {
@@ -172,5 +173,6 @@ public class KpgTask {
 	public void setTaskExeResult(String taskExeResult) {
 		this.taskExeResult = taskExeResult;
 	}
+
 
 }

@@ -18,7 +18,7 @@
           		<li class="sub">
             		<a href="javascript:;">
               			<i class="fa fa-database"></i>
-              			<font style='font-family:"微软雅黑"'>密钥管理</font>
+              			<font style='font-family:"微软雅黑"'>任务管理</font>
               			<div class="pull-right"><span class="caret"></span>
               		</div>
             		</a>
@@ -30,6 +30,29 @@
             		<ul class="templatemo-submenu">
 	              		<li>
 	              			<a href="<%=request.getContextPath()%>/kpgTask/selectAll.do"><font style='font-family:"微软雅黑"'>密钥任务列表</font></a>
+	              		</li>
+            		</ul>
+          		</li>
+          			<li class="sub">
+            		<a href="javascript:;">
+              			<i class="fa fa-database"></i>
+              			<font style='font-family:"微软雅黑"'>密钥管理</font>
+              			<div class="pull-right"><span class="caret"></span>
+              		</div>
+            		</a>
+            		<ul class="templatemo-submenu">
+	              		<li>
+	              			<a href="<%=request.getContextPath()%>/keyPairStandby/selectAll.do"><font style='font-family:"微软雅黑"'>备用密钥列表</font></a>
+	              		</li>
+            		</ul>
+            		<ul class="templatemo-submenu">
+	              		<li>
+	              			<a href="<%=request.getContextPath()%>/keyPairInuse/selectAll.do"><font style='font-family:"微软雅黑"'>在用密钥列表列表</font></a>
+	              		</li>
+            		</ul>
+            		<ul class="templatemo-submenu">
+	              		<li>
+	              			<a href="<%=request.getContextPath()%>/kpArchive/selectAll.do"><font style='font-family:"微软雅黑"'>历史密钥列表列表</font></a>
 	              		</li>
             		</ul>
           		</li>

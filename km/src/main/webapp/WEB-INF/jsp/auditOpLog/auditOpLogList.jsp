@@ -9,7 +9,7 @@
 	          <ol class="breadcrumb">
 	            <li><a href="<%=request.getContextPath()%>/main">主页面</a></li>
 	            <li class="active">日志列表</li>
-	            <li><a href="../../sign-in.html">Sign In Form /</a><a href="javascript:searchByCondition()"> 查询</a></li>
+	            <li><a href="../../sign-in.html">Sign In Form /</a><a href="javascript:searchByCondition()"> 查询/</a><a href="javascript:exportExcel()"> 导出</a></li>
 	          </ol>
         <div class="row">
             <div class="col-md-12">
@@ -36,10 +36,10 @@
 		                  </div>
 		                </div>
 		                  <div class="row">
-		                  <div class="col-md-6 margin-bottom-15">
+		                 <!--  <div class="col-md-6 margin-bottom-15">
 			                    <label for="timestamp" class="control-label">时间 </label>
-			                    <input type="text" class="form-control" id="timestamp" name="timestamp" />                 
-		                  </div>
+			                    <input type="date" class="form-control" id="timestamp" name="timestamp" />                 
+		                  </div> -->
 		                  <div class="col-md-6 margin-bottom-15">
 				                <label for="action" class="control-label">执行的操作 </label>
 			                    <input type="text" class="form-control" id="action" name="action" />  
@@ -50,7 +50,7 @@
 			                  <button type="submit" class="btn btn-primary">查询</button>
 			               	 </div>
 		            	 </div>
-		               </form>
+		               </form> 
 		             </div>
 		          </div>
                 <table class="table table-striped table-hover table-bordered data-table">
@@ -108,6 +108,9 @@ function searchByCondition(){
 	}else{
 		$("#searchCondition").hide();
 	}
+}
+function exportExcel(){
+	window.location.href="exportExcel.do";
 }
 </script>
 

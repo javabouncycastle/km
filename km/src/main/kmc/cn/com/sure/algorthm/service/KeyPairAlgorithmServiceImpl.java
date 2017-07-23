@@ -1,4 +1,4 @@
-package cn.com.sure.keypair.service;
+package cn.com.sure.algorthm.service;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.dao.KeyPairAlgorithmDAO;
-import cn.com.sure.keypair.entry.KeyPairAlgorithm;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
 
@@ -30,9 +30,9 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 		LOG.debug("insert - start");
 		KeyPairAlgorithm dbkeyPairAlgorithm = this.keyPairAlgorithmDAO.selectByName(keyPairAlgorithm);
 		int i=0;
-		if (dbkeyPairAlgorithm!=null){
+		if (dbkeyPairAlgorithm.equals(keyPairAlgorithm)){
 			KmApplicationexception.throwException(KmErrorMessageConstants.nameExist, new String[]{keyPairAlgorithm.getName()});
-		}if(dbkeyPairAlgorithm==null){
+		}if(!dbkeyPairAlgorithm.equals(keyPairAlgorithm)){
 			i = keyPairAlgorithmDAO.insert(keyPairAlgorithm);
 		}
 		LOG.debug("insert - end");
@@ -48,10 +48,16 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 	}
 
 	@Override
-	@Transactional(value="txManager" )
-	public int update(KeyPairAlgorithm keyPairAlgorithm) {
+	public int update(KeyPairAlgorithm keyPairAlgorithm) throws KmApplicationexception {
 		LOG.debug("update - start");
-		int i = keyPairAlgorithmDAO.update(keyPairAlgorithm);
+		KeyPairAlgorithm keyPairAlgorithmDB = keyPairAlgorithmDAO.selectById(keyPairAlgorithm.getId());
+		int i = 0 ;
+		if(keyPairAlgorithmDB.equals(keyPairAlgorithm)){
+			KmApplicationexception.throwException(KmErrorMessageConstants.nameExist, new String[]{keyPairAlgorithm.getName()});
+		}if(!keyPairAlgorithmDB.equals(keyPairAlgorithm)){
+			i = keyPairAlgorithmDAO.update(keyPairAlgorithm);
+		}
+		
 		LOG.debug("update - end");
 		return i;
 	}

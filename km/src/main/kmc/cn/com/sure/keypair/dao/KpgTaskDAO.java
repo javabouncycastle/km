@@ -5,7 +5,7 @@ package cn.com.sure.keypair.dao;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KpgTask;
+import cn.com.sure.kpgtask.entry.KpgTask;
 
 /**
  * @author Limin
@@ -67,5 +67,20 @@ public interface KpgTaskDAO {
 	 * @param kpgTask
 	 */
 	void start(KpgTask kpgTask);
+
+	/**
+	 * @param id
+	 */
+	void suspend(Long id);
+
+	/**
+	 * @param id
+	 */
+	void stop(Long id);
+
+	/**
+	 * @param id
+	 */
+	void continuation(Long id);
 
 }

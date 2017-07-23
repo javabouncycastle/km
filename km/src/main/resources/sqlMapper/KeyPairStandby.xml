@@ -18,4 +18,20 @@
 		)
 	</insert>
 	
+		<insert id="insert2048" parameterType="cn.com.sure.keypair.entry.KeyPairStandby">
+		insert into keypair_standby_2048(
+			pub_key,
+			pri_key,
+			kpg_algorithm,
+			km_kpg_task,
+			gen_time
+		)values(
+			#{pubKey},
+			#{priKey},
+			#{keyPairAlgorithm.algorithmName},
+			#{KpgTask.name},
+			#{genTime}
+		)
+	</insert>
+	
 </mapper>

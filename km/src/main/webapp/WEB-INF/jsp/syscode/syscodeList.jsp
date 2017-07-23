@@ -82,7 +82,7 @@
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
 		                    <c:if test="${row.isValid==1}">
 					      		<a href="javascript:suspend('${row.id}')"  class="btn btn-link">停用</a> 
-						      </c:if>
+						    </c:if>
 						      <c:if test="${row.isValid==0}">
 						            <a href="javascript:activate('${row.id}')"  class="btn btn-link">启用</a>
 						      </c:if> 

@@ -1,4 +1,4 @@
-package cn.com.sure.keypair.web;
+package cn.com.sure.algorthm.web;
 
 import java.util.Date;
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
+import cn.com.sure.algorthm.service.KeyPairAlgorithmService;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.entry.KeyPairAlgorithm;
-import cn.com.sure.keypair.service.KeyPairAlgorithmService;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.log.service.AuditOpLogService;
 import cn.com.sure.syscode.entry.SysCodeType;
@@ -85,10 +85,11 @@ public class KeyPairAlgorithmController {
 	
 	/**
 	 * 更新密钥算法
+	 * @throws KmApplicationexception 
 	 */
 	@RequestMapping(value="update")
 	public String update(KeyPairAlgorithm keyPairAlgorithm,Model model, 
-			RedirectAttributes attr,HttpServletRequest request){
+			RedirectAttributes attr,HttpServletRequest request) throws KmApplicationexception{
 		LOG.debug("update - start");
 		String str = compare(keyPairAlgorithm);
 		int i = keyPairAlgorithmService.update(keyPairAlgorithm);

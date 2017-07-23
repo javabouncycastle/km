@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.sure.keypair.service;
+package cn.com.sure.kpgtask.service;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.dao.KpgTaskDAO;
-import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
+import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.syscode.entry.SysCode;
 
 /**
@@ -55,6 +55,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		if(dbKpgTask==null){
 			SysCode taskStatus=new SysCode();
 			taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
+			kpgTask.setGeneratedKeyAmount(0);
 			kpgTask.setTaskStatus(taskStatus);
 			kpgTask.setTaskStartTime(new Date());
 			i = kpgTaskDAO.insert(kpgTask);
@@ -167,6 +168,58 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		} 
 		
 		LOG.debug("start - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#suspend(java.lang.Long)
+	 */
+	@Override
+	public void suspend(Long id) {
+		LOG.debug("suspend - start");
+		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
+		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)).equals(kpgTask.getTaskStatus().getParaValue())) {
+			SysCode sysCode = new  SysCode();
+			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_PAUSED));
+			kpgTask.setTaskStatus(sysCode);
+			kpgTaskDAO.suspend(id);
+		} 
+		
+		LOG.debug("suspend - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#stop(java.lang.Long)
+	 */
+	@Override
+	public void stop(Long id) {
+		LOG.debug("stop - start");
+		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
+		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)).equals(kpgTask.getTaskStatus().getParaValue())) {
+			SysCode sysCode = new  SysCode();
+			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED));
+			kpgTask.setTaskStatus(sysCode);
+			kpgTaskDAO.stop(id);
+		} 
+		
+		LOG.debug("stop - end");
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.keypair.service.KpgTaskService#continute(java.lang.Long)
+	 */
+	@Override
+	public void continuation(Long id) {
+		LOG.debug("continute - start");
+		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
+		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_PAUSED)).equals(kpgTask.getTaskStatus().getParaValue())) {
+			SysCode sysCode = new  SysCode();
+			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_RESUMED));
+			kpgTask.setTaskStatus(sysCode);
+			kpgTaskDAO.stop(id);
+		} 
+		LOG.debug("continute - end");
+		
 	}
 
 

@@ -2,7 +2,7 @@ package cn.com.sure.keypair.dao;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KeyPairAlgorithm;
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 
 public interface KeyPairAlgorithmDAO {
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.sure.keypair.service;
+package cn.com.sure.kpgtask.service;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -21,8 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.entry.KeyPairStandby;
-import cn.com.sure.keypair.entry.KpgTask;
+import cn.com.sure.keypair.service.KeyPairStandbyService;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.kpgtask.entry.KpgTask;
 
 	/**
 	 * @author Limin
@@ -105,7 +106,7 @@ import cn.com.sure.km.KmApplicationexception;
 				
 				if(kpgTask.getKeyPairAlgorithm().getKeysize()==1024){
 					keyPairStandbyService.insert1024(keyPairStandby);
-				}if(kpgTask.getKeyPairAlgorithm().getKeysize()==2018){
+				}if(kpgTask.getKeyPairAlgorithm().getKeysize()==2048){
 					keyPairStandbyService.insert2048(keyPairStandby);
 				}
 				

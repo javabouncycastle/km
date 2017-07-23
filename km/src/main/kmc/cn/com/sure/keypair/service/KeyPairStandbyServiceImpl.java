@@ -24,7 +24,7 @@ public class KeyPairStandbyServiceImpl implements KeyPairStandbyService{
 	private static final Log LOG = LogFactory.getLog(KeyPairStandbyServiceImpl.class);
 	
 	@Autowired
-	private KeyPairStandbyDAO keyPairStandby1024DAO;
+	private KeyPairStandbyDAO keyPairStandbyDAO;
 	
 
 
@@ -34,7 +34,7 @@ public class KeyPairStandbyServiceImpl implements KeyPairStandbyService{
 	@Override
 	public void insert1024(KeyPairStandby keyPairStandby) {
 		LOG.debug("insert - start");
-		this.keyPairStandby1024DAO.insert1024(keyPairStandby);
+		this.keyPairStandbyDAO.insert1024(keyPairStandby);
 		LOG.debug("insert - end");
 	}
 
@@ -45,8 +45,9 @@ public class KeyPairStandbyServiceImpl implements KeyPairStandbyService{
 	 */
 	@Override
 	public void insert2048(KeyPairStandby keyPairStandby2048) {
-		// TODO Auto-generated method stub
-		
+		LOG.debug("insert2048 - start");
+		this.keyPairStandbyDAO.insert2048(keyPairStandby2048);
+		LOG.debug("insert2048 - end");
 	}
 
 

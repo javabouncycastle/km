@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.sure.keypair.service;
+package cn.com.sure.kpgtask.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;

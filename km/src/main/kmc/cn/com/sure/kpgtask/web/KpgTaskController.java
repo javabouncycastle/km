@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.sure.keypair.web;
+package cn.com.sure.kpgtask.web;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
+import cn.com.sure.algorthm.service.KeyPairAlgorithmService;
 import cn.com.sure.common.BaseController;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.entry.KeyPairAlgorithm;
-import cn.com.sure.keypair.entry.KpgTask;
-import cn.com.sure.keypair.service.KeyPairAlgorithmService;
-import cn.com.sure.keypair.service.KpgTaskExecuteService;
-import cn.com.sure.keypair.service.KpgTaskService;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.kpgtask.entry.KpgTask;
+import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
+import cn.com.sure.kpgtask.service.KpgTaskService;
 import cn.com.sure.log.service.AuditOpLogService;
 import cn.com.sure.syscode.entry.SysCode;
 import cn.com.sure.syscode.service.SysCodeService;
@@ -56,8 +56,6 @@ public class KpgTaskController extends BaseController{
 	private AuditOpLogService auditOpLogService;
 	
 	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
-	
-	Date date = new Date();
 	
 	
 	/**
@@ -105,7 +103,7 @@ public class KpgTaskController extends BaseController{
 			}
 			// 添加审计日志
 			auditOpLogService.insert(KmConstants.OPERATION_TYPE_INSERT, "增加", "数据字典类别", null,
-					kpgTask.getName(), null, null, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+					kpgTask.getName(), null, null, new Date(), getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
 					result);
 		} catch (KmApplicationexception e) {
 			attr.addFlashAttribute("messageInsert",e.getMessage());
@@ -141,7 +139,7 @@ public class KpgTaskController extends BaseController{
 		}
 		//添加审计日志
 		auditOpLogService.insert(KmConstants.OPERATION_TYPE_UPDATE, "更新", "数据字典类别", kpgTask.getId().toString(), null, null, 
-				str, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+				str, new Date(), getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
 				result);
 		LOG.debug("update - end");
 		attr.addFlashAttribute("updateSuccess","true");
@@ -209,6 +207,52 @@ public class KpgTaskController extends BaseController{
 		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks);
 		
 	}
+	
+	/**
+	 * 暂停
+	 * @param id
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
+	public String suspend(Long id,Model model, 
+			RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("suspend - start");
+		kpgTaskService.suspend(id);
+		LOG.debug("suspend - end");
+		return null;
+		
+	}
+	
+	/**
+	 * 停止任务
+	 */
+	public String stop(Long id,Model model, 
+			RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("stop - start");
+		kpgTaskService.stop(id);
+		LOG.debug("stop - end");
+		return null;
+	}
+	
+	/**
+	 * 继续执行暂停的任务
+	 * @param id
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
+	public String continuation(Long id,Model model, 
+			RedirectAttributes attr,HttpServletRequest request){
+		LOG.debug("continuation - start");
+		kpgTaskService.continuation(id);
+		LOG.debug("continuation - end");
+				return null;
+		
+	}
+	
 	
 
 	/**

@@ -3,6 +3,8 @@ package cn.com.sure.log.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+
 import cn.com.sure.log.entry.AuditOpLog;
 
 public interface AuditOpLogService {
@@ -27,5 +29,13 @@ public interface AuditOpLogService {
 	 * @return
 	 */
 	List<AuditOpLog> searchByCondition(AuditOpLog auditOpLog);
+
+
+	/**
+	 * @param out 
+	 * @param titles 
+	 * 
+	 */
+	void exportExcel(String[] titles, ServletOutputStream out)throws Exception;
 	
 }

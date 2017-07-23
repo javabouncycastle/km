@@ -1,12 +1,12 @@
 /**
  * 
  */
-package cn.com.sure.keypair.service;
+package cn.com.sure.kpgtask.service;
 
 import java.util.List;
 
-import cn.com.sure.keypair.entry.KpgTask;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.kpgtask.entry.KpgTask;
 
 /**
  * @author Limin
@@ -74,5 +74,20 @@ public interface KpgTaskService {
 	 * @param id
 	 */
 	void start(Long id);
+
+	/**
+	 * @param id
+	 */
+	void suspend(Long id);
+
+	/**
+	 * @param id
+	 */
+	void stop(Long id);
+
+	/**
+	 * @param id
+	 */
+	void continuation(Long id);
 
 }

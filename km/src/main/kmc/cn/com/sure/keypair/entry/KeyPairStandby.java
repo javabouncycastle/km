@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
+import cn.com.sure.kpgtask.entry.KpgTask;
+
 /**
  * @author Limin
  *

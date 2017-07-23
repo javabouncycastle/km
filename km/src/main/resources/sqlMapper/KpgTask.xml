@@ -3,7 +3,7 @@
 <mapper namespace="cn.com.sure.keypair.dao.KpgTaskDAO">  
 
 
-	<resultMap type="cn.com.sure.keypair.entry.KpgTask" id="KpgTaskResultMap">
+	<resultMap type="cn.com.sure.kpgtask.entry.KpgTask" id="KpgTaskResultMap">
 		<id column="id" javaType="long" property="id"/>
 		<result column="name" javaType="String" property="name"/>
 		<result column="kpgKeyAmount" javaType="Integer" property="kpgKeyAmount"/>
@@ -14,7 +14,7 @@
 		<result column="dbCommitBufsize" javaType="Integer" property="dbCommitBufsize"/>
 		<result column="generatedKeyAmount" javaType="Integer" property="generatedKeyAmount"/>
 		<result column="task_exe_result" javaType="String" property="task_exe_result"/>
-		<association property="keyPairAlgorithm" javaType="cn.com.sure.keypair.entry.KeyPairAlgorithm" >
+		<association property="keyPairAlgorithm" javaType="cn.com.sure.algorthm.entry.KeyPairAlgorithm" >
 			<id column="kpgAlgId" javaType="long" property="id"/>
 			<result column="algName" javaType="String" property="name"/>
 			<result column="algorithmOid" javaType="String" property="algorithmOid"/>
@@ -37,7 +37,7 @@
 		</association>
 	</resultMap>
 
-	<insert id="insert" parameterType="cn.com.sure.keypair.entry.KpgTask">
+	<insert id="insert" parameterType="cn.com.sure.kpgtask.entry.KpgTask">
 		insert into kpg_task(
 			name,
 			kpg_algorithm,
@@ -65,7 +65,7 @@
 		)
 	</insert>
 	
-	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KpgTask" resultMap="KpgTaskResultMap">
+	<select id="selectAll" parameterType="cn.com.sure.kpgtask.entry.KpgTask" resultMap="KpgTaskResultMap">
 		select 
 			t1.id as id,
 			t1.name as name,
@@ -99,7 +99,6 @@
 		 where t1.kpg_algorithm=t2.id
 		 and t3.para_type=t4.id
 		 and t1.task_status=t3.para_value
-		 ORDER BY id asc
 	</select>
 	
 	<select id="findById" parameterType="long" resultMap="KpgTaskResultMap">
@@ -139,7 +138,7 @@
 		 and t1.id=#{id}
 	</select>
 	
-	<select id="findByName" parameterType="String" resultType="cn.com.sure.keypair.entry.KpgTask">
+	<select id="findByName" parameterType="String" resultType="cn.com.sure.kpgtask.entry.KpgTask">
 		select 
 			id,
 			name,
@@ -157,7 +156,7 @@
 		 where name=#{name}
 	</select>
 	
-	<select id="findAllUnExecutedTask" parameterType="cn.com.sure.keypair.entry.KpgTask" resultMap="KpgTaskResultMap">
+	<select id="findAllUnExecutedTask" parameterType="cn.com.sure.kpgtask.entry.KpgTask" resultMap="KpgTaskResultMap">
 	 select
 			t1.id as id,
 			t1.name as name,
@@ -186,7 +185,7 @@
 			<![CDATA[ and task_start_time <=#{taskStartTime}]]>
 	</select>
 	
-	<select id="findByTaskStatus" parameterType="Long" resultType="cn.com.sure.keypair.entry.KpgTask">
+	<select id="findByTaskStatus" parameterType="Long" resultType="cn.com.sure.kpgtask.entry.KpgTask">
 		select 
 			id,
 			name,
@@ -204,7 +203,7 @@
 		 where task_status=#{codeId}
 	</select>
 	
-	<update id="update" parameterType="cn.com.sure.keypair.entry.KpgTask">
+	<update id="update" parameterType="cn.com.sure.kpgtask.entry.KpgTask">
 		update kpg_task
 		set
 		 	name = #{name},
@@ -222,7 +221,7 @@
 		 	id=#{id}
 	</update>
 	
-	<update id="start" parameterType="cn.com.sure.keypair.entry.KpgTask">
+	<update id="start" parameterType="cn.com.sure.kpgtask.entry.KpgTask">
 		update kpg_task
 		set
 		 	name = #{name},
@@ -244,7 +243,7 @@
 		delete from kpg_task where id=#{id}
 	</delete>
 	
-	<select id="searchByCondition" parameterType="cn.com.sure.keypair.entry.KpgTask" resultMap="KpgTaskResultMap">
+	<select id="searchByCondition" parameterType="cn.com.sure.kpgtask.entry.KpgTask" resultMap="KpgTaskResultMap">
 		select 
 			t1.id as id,
 			t1.name as name,

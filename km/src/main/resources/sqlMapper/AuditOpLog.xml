@@ -46,6 +46,35 @@ insert into km_audit_log(
 			is_op_succ as isOpSucc
 		 from km_audit_log
 	</select>
+	
+		<select id="searchByCondition" parameterType="cn.com.sure.log.entry.AuditOpLog" resultType="cn.com.sure.log.entry.AuditOpLog">
+		select 
+			id,
+			op_type as type,
+			op_action as action,
+			op_action_ext1 as actionExt1,
+			op_action_ext2 as actionExt2,
+			op_action_ext3 as actionExt3,
+			op_action_ext4 as actionExt4,
+			op_message,
+			op_timestamp as timestamp,
+			op_ip as ip,
+			op_operator as operator,
+			is_op_succ as isOpSucc
+		 from 
+		 	km_audit_log
+		 where 1=1
+		 	 <if test="operator!=null and operator!='' ">
+			 	and operator=#{operator}
+			 </if>
+			 <if test="actionExt1!=null and actionExt1!='' ">
+			 	and op_action_ext1=#{actionExt1}
+			 </if>
+			 <if test="action!=null and action!='' ">
+			 	and op_action=#{action}
+			 </if>
+		 	
+	</select>
 
 
 </mapper>

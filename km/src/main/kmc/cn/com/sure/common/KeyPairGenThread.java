@@ -3,18 +3,14 @@
  */
 package cn.com.sure.common;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.com.sure.keypair.entry.KpgTask;
-import cn.com.sure.keypair.service.KpgTaskExecuteService;
-import cn.com.sure.keypair.service.KpgTaskService;
-import cn.com.sure.km.KmApplicationexception;
-import cn.com.sure.quartz.KpgQuartzTaskExecutor;
+import cn.com.sure.kpgtask.entry.KpgTask;
+import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
+import cn.com.sure.kpgtask.service.KpgTaskService;
 import cn.com.sure.syscode.entry.SysCode;
 
 /**
@@ -52,8 +48,9 @@ public class KeyPairGenThread extends Thread{
 			try {
 				kpgTaskExecuteService.executeTaskSlice(kpgTask.getId());
 			} catch (Exception e) {
-				LOG.error("执行出现异常"+kpgTask.getId());
 				LOG.error(e);
+				LOG.error("执行出现异常"+kpgTask.getId());
+				
 				
 				kpgTask = kpgTaskService.selectById(kpgTask.getId());
 				kpgTask.setExeTaskEndTime(new Date());
