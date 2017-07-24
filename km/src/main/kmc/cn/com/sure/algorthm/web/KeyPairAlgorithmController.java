@@ -21,7 +21,6 @@ import cn.com.sure.algorthm.service.KeyPairAlgorithmService;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.log.service.AuditOpLogService;
-import cn.com.sure.syscode.entry.SysCodeType;
 
 @Controller
 @RequestMapping(value="algorithm")
@@ -35,7 +34,6 @@ public class KeyPairAlgorithmController {
 	@Autowired
 	private AuditOpLogService auditOpLogService;
 	
-	Date date = new Date();
 	
 	/**
 	 * 增加密钥算法
@@ -55,7 +53,7 @@ public class KeyPairAlgorithmController {
 			}
 			//添加审计日志
 			auditOpLogService.insert(KmConstants.OPERATION_TYPE_INSERT, "增加", "数据字典类别", null,
-					keyPairAlgorithm.getAlgorithmName(), null, null, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+					keyPairAlgorithm.getAlgorithmName(), null, null, new Date(), getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
 					result);
 		}catch(KmApplicationexception e){
 			attr.addFlashAttribute("messageInsert",e.getMessage());
@@ -100,7 +98,7 @@ public class KeyPairAlgorithmController {
 			result = KmConstants.SUCCESS_OR_FAILD_OPTION_SUCCESS;
 		}
 		auditOpLogService.insert(KmConstants.OPERATION_TYPE_UPDATE, "更新", "数据字典类别", keyPairAlgorithm.getId().toString(), null, null, 
-				str, date, getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
+				str, new Date(), getIp(request), (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), 
 				result);
 		
 		LOG.debug("update - end");
@@ -126,7 +124,7 @@ public class KeyPairAlgorithmController {
 			result = KmConstants.SUCCESS_OR_FAILD_OPTION_SUCCESS;
 		}
 		auditOpLogService.insert(KmConstants.OPERATION_TYPE_DELETE, "删除", "数据字典类别", id.toString(), null, null, null, 
-				date,getIp(request),  (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), result);
+				new Date(),getIp(request),  (String)request.getSession().getAttribute(KmConstants.SESSION_ADMIN_NAME), result);
 		LOG.debug("delete - end");
 		attr.addFlashAttribute("success","true");
 		attr.addFlashAttribute("msg","删除主键为【"+id+"】成功！");

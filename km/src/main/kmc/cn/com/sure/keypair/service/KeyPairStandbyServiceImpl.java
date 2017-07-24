@@ -3,6 +3,8 @@
  */
 package cn.com.sure.keypair.service;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +34,23 @@ public class KeyPairStandbyServiceImpl implements KeyPairStandbyService{
 	 * @see cn.com.sure.keypair.service.KeypairStandbyService#insert()    
 	 */
 	@Override
-	public void insert1024(KeyPairStandby keyPairStandby) {
+	public void insert(KeyPairStandby keyPairStandby) {
 		LOG.debug("insert - start");
-		this.keyPairStandbyDAO.insert1024(keyPairStandby);
+		this.keyPairStandbyDAO.insert(keyPairStandby);
 		LOG.debug("insert - end");
 	}
 
 
 
 	/* (non-Javadoc)
-	 * @see cn.com.sure.keypair.service.KeyPairStandbyService#insert2048(cn.com.sure.keypair.entry.KeyPairStandby)
+	 * @see cn.com.sure.keypair.service.KeyPairStandbyService#selectAll()
 	 */
 	@Override
-	public void insert2048(KeyPairStandby keyPairStandby2048) {
-		LOG.debug("insert2048 - start");
-		this.keyPairStandbyDAO.insert2048(keyPairStandby2048);
-		LOG.debug("insert2048 - end");
+	public List<KeyPairStandby> selectAll() {
+		LOG.debug("selectAll - start");
+		List<KeyPairStandby> keyPairStandbys = keyPairStandbyDAO.selectAll();
+		LOG.debug("selectAll - end");
+		return keyPairStandbys;
 	}
 
 

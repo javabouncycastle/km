@@ -48,7 +48,7 @@ public class KeyPairStandby {
 	/**
 	 * 所属任务
 	 */	
-	private KpgTask KpgTask;
+	private KpgTask kpgTask;
 
 	/**
 	 * 密钥生成时间
@@ -98,12 +98,12 @@ public class KeyPairStandby {
 
 
 	public KpgTask getKpgTask() {
-		return KpgTask;
+		return kpgTask;
 	}
 
 
 	public void setKpgTask(KpgTask kpgTask) {
-		KpgTask = kpgTask;
+		this.kpgTask = kpgTask;
 	}
 
 

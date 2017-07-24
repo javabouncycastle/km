@@ -104,12 +104,8 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 				keyPairStandby.setPriKey(prikey);
 				keyPairStandby.setPubKey(pubkey);
 				
-				if(kpgTask.getKeyPairAlgorithm().getKeysize()==1024){
-					keyPairStandbyService.insert1024(keyPairStandby);
-				}if(kpgTask.getKeyPairAlgorithm().getKeysize()==2048){
-					keyPairStandbyService.insert2048(keyPairStandby);
-				}
 				
+				keyPairStandbyService.insert(keyPairStandby);
 				
 				long exeEndMills = System.currentTimeMillis();
 

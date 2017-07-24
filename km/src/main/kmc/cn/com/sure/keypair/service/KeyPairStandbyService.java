@@ -3,6 +3,8 @@
  */
 package cn.com.sure.keypair.service;
 
+import java.util.List;
+
 import cn.com.sure.keypair.entry.KeyPairStandby;
 
 
@@ -15,8 +17,13 @@ public interface KeyPairStandbyService {
 	/**
 	 * 
 	 */
-	void insert1024(KeyPairStandby keyPairStandby);
+	void insert(KeyPairStandby keyPairStandby);
 
-	void insert2048(KeyPairStandby keyPairStandby);
+
+	/**
+	 * @return 
+	 * 
+	 */
+	List<KeyPairStandby> selectAll();
 
 }

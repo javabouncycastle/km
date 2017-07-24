@@ -28,11 +28,11 @@
 		                <div class="row">
 	                	  <div class="col-md-6 margin-bottom-15">
 	                  	     <label for="operator" class="control-label">管理员</label>
-			                 <input type="text" class="form-control" id="operator" name="operator" />   
+			                 <input type="text" class="form-control" id="operator" name="operator" value="${auditOpLog.operator}"/>   
 		                  </div>
 		                   <div class="col-md-6 margin-bottom-15">
 	                  	     <label for="actionExt1" class="control-label">操作扩展</label>
-			                 <input type="text" class="form-control" id="actionExt1" name="actionExt1" />   
+			                 <input type="text" class="form-control" id="actionExt1" name="actionExt1" value="${auditOpLog.actionExt1}" />   
 		                  </div>
 		                </div>
 		                  <div class="row">
@@ -42,7 +42,7 @@
 		                  </div> -->
 		                  <div class="col-md-6 margin-bottom-15">
 				                <label for="action" class="control-label">执行的操作 </label>
-			                    <input type="text" class="form-control" id="action" name="action" />  
+			                    <input type="text" class="form-control" id="action" name="action" value="${auditOpLog.action}"/>  
 		                  </div>
 		                </div>
 		                <div class="row templatemo-form-buttons">
@@ -110,7 +110,7 @@ function searchByCondition(){
 	}
 }
 function exportExcel(){
-	window.location.href="exportExcel.do";
+	window.location.href="exportExcel.do?operator="+$("#operator").val()+"&actionExt1="+$("#actionExt1").val()+"&action="+$("#action").val();
 }
 </script>
 

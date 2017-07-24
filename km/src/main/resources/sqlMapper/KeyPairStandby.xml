@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.keypair.dao.KeyPairStandbyDAO">  
 
+ 	<resultMap type="cn.com.sure.keypair.entry.KeyPairStandby" id="KpgResultMap">
+		<id column="id" javaType="long" property="id"/>
+		<result column="name" javaType="String" property="name"/>
+	</resultMap>
+
 	<insert id="insert1024" parameterType="cn.com.sure.keypair.entry.KeyPairStandby">
 		insert into keypair_standby_1024(
 			pub_key,
@@ -18,20 +23,18 @@
 		)
 	</insert>
 	
-		<insert id="insert2048" parameterType="cn.com.sure.keypair.entry.KeyPairStandby">
-		insert into keypair_standby_2048(
-			pub_key,
-			pri_key,
-			kpg_algorithm,
-			km_kpg_task,
-			gen_time
-		)values(
-			#{pubKey},
-			#{priKey},
-			#{keyPairAlgorithm.algorithmName},
-			#{KpgTask.name},
-			#{genTime}
-		)
-	</insert>
+
+	
+	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KeyPairStandby" resultType="cn.com.sure.keypair.entry.KeyPairStandby">
+		select
+			id,
+			pub_key as pubKey,
+			pri_key as priKey,
+			kpg_algorithm as keyPairAlgorithm,
+			km_kpg_task as kpgTask,
+			gen_time as genTime
+		from
+			keypair_standby_1024
+	</select>
 	
 </mapper>
