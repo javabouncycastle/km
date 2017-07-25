@@ -77,6 +77,10 @@ public class KpgTask {
 	 * 任务执行结果说明
 	 */
 	private String taskExeResult;
+	
+	
+	private Date startTime;
+	private Date endTime;
 
 	public Long getId() {
 		return id;
@@ -172,6 +176,22 @@ public class KpgTask {
 
 	public void setTaskExeResult(String taskExeResult) {
 		this.taskExeResult = taskExeResult;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cn.com.sure.common.BaseController;
 import cn.com.sure.log.entry.AuditOpLog;
 import cn.com.sure.log.service.AuditOpLogService;
 import cn.com.sure.syscode.web.SysCodeController;
@@ -31,7 +32,7 @@ import cn.com.sure.syscode.web.SysCodeController;
  */
 @Controller
 @RequestMapping(value="auditOpLog")
-public class AuditOpLogController {
+public class AuditOpLogController extends BaseController {
 	
 	private static final Log LOG = LogFactory.getLog(SysCodeController.class);
 	

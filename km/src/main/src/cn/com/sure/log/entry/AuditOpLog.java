@@ -32,6 +32,10 @@ public class AuditOpLog {
 	private String  operator;  //对其执行操作的帐户
 	private Integer isOpSucc;  //表示已执行操作的结果
 	
+	private Date startTime;//查询时使用的时间段开始时间
+	private Date endTime;//查询时使用的时间段的结束时间
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -104,6 +108,22 @@ public class AuditOpLog {
 	}
 	public void setIsOpSucc(Integer isOpSucc) {
 		this.isOpSucc = isOpSucc;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	
 	

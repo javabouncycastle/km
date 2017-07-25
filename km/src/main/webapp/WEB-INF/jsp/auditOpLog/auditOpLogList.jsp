@@ -35,11 +35,17 @@
 			                 <input type="text" class="form-control" id="actionExt1" name="actionExt1" value="${auditOpLog.actionExt1}" />   
 		                  </div>
 		                </div>
+		            <%--     <div class="row">
+	                	  <div class="col-md-6 margin-bottom-15">
+	                  	     <label for="startTime" class="control-label">开始时间</label>
+			                 <input type="date" class="form-control" id="startTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd '})" class="MyWdate" name="startTime" value="${auditOpLog.startTime}"/>   
+		                  </div>
+		                   <div class="col-md-6 margin-bottom-15">
+	                  	     <label for="endTime" class="control-label">结束时间</label>
+	                  	     <input type="date" class="form-control" id="startTime" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy-MM-dd '})" class="MyWdate" name="startTime" value="${auditOpLog.endTime}"/>   
+		                  </div>
+		                </div> --%>
 		                  <div class="row">
-		                 <!--  <div class="col-md-6 margin-bottom-15">
-			                    <label for="timestamp" class="control-label">时间 </label>
-			                    <input type="date" class="form-control" id="timestamp" name="timestamp" />                 
-		                  </div> -->
 		                  <div class="col-md-6 margin-bottom-15">
 				                <label for="action" class="control-label">执行的操作 </label>
 			                    <input type="text" class="form-control" id="action" name="action" value="${auditOpLog.action}"/>  

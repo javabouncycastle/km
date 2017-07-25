@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.keypair.dao.KeyPairStandbyDAO">  
 
- 	<resultMap type="cn.com.sure.keypair.entry.KeyPairStandby" id="KpgResultMap">
+ 	<resultMap type="cn.com.sure.kpg.entry.KeypairStandby" id="KpgResultMap">
 		<id column="id" javaType="long" property="id"/>
 		<result column="name" javaType="String" property="name"/>
 	</resultMap>
 
-	<insert id="insert1024" parameterType="cn.com.sure.keypair.entry.KeyPairStandby">
-		insert into keypair_standby_1024(
+	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairStandby">
+		insert into keypair_standby(
 			pub_key,
 			pri_key,
 			kpg_algorithm,
@@ -25,7 +25,7 @@
 	
 
 	
-	<select id="selectAll" parameterType="cn.com.sure.keypair.entry.KeyPairStandby" resultType="cn.com.sure.keypair.entry.KeyPairStandby">
+	<select id="selectAll" parameterType="cn.com.sure.kpg.entry.KeypairStandby" resultType="cn.com.sure.kpg.entry.KeypairStandby">
 		select
 			id,
 			pub_key as pubKey,
@@ -34,7 +34,7 @@
 			km_kpg_task as kpgTask,
 			gen_time as genTime
 		from
-			keypair_standby_1024
+			keypair_standby
 	</select>
 	
 </mapper>

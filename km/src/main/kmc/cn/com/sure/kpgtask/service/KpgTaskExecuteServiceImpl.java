@@ -20,9 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Encoder;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.entry.KeyPairStandby;
-import cn.com.sure.keypair.service.KeyPairStandbyService;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.kpg.entry.KeypairStandby;
+import cn.com.sure.kpg.service.KeypairStandbyService;
 import cn.com.sure.kpgtask.entry.KpgTask;
 
 	/**
@@ -37,7 +37,7 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 		private static final Log LOG = LogFactory.getLog(KpgTaskExecuteServiceImpl.class);
 		
 		@Autowired
-		private KeyPairStandbyService keyPairStandbyService;
+		private KeypairStandbyService keyPairStandbyService;
 				
 		@Autowired
 		private KpgTaskService kpgTaskService;
@@ -97,7 +97,7 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 				String pubkey = new BASE64Encoder().encode(publicKey.getEncoded());
 				
 				//5.2将密钥存储到数据库中
-				KeyPairStandby keyPairStandby = new KeyPairStandby();
+				KeypairStandby keyPairStandby = new KeypairStandby();
 				keyPairStandby.setGenTime(new Date());
 				keyPairStandby.setKeyPairAlgorithm(kpgTask.getKeyPairAlgorithm());
 				keyPairStandby.setKpgTask(kpgTask);

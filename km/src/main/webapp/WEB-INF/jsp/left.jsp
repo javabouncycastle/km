@@ -42,12 +42,12 @@
             		</a>
             		<ul class="templatemo-submenu">
 	              		<li>
-	              			<a href="<%=request.getContextPath()%>/keyPairStandby/selectAll.do"><font style='font-family:"微软雅黑"'>备用密钥列表</font></a>
+	              			<a href="<%=request.getContextPath()%>/keypairStandby/selectAll.do"><font style='font-family:"微软雅黑"'>备用密钥列表</font></a>
 	              		</li>
             		</ul>
             		<ul class="templatemo-submenu">
 	              		<li>
-	              			<a href="<%=request.getContextPath()%>/keyPairInuse/selectAll.do"><font style='font-family:"微软雅黑"'>在用密钥列表列表</font></a>
+	              			<a href="<%=request.getContextPath()%>/keypairInuse/selectAll.do"><font style='font-family:"微软雅黑"'>在用密钥列表列表</font></a>
 	              		</li>
             		</ul>
             		<ul class="templatemo-submenu">

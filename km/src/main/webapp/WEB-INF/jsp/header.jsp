@@ -11,7 +11,8 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width">        
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/templatemo_main.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/unicorn.main.css" type="text/css"></link>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/uniform.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/unicorn.main.css" type="text/css"></link>
 </head>
 <body>
   <div class="navbar navbar-inverse" role="navigation">
@@ -30,4 +31,5 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/unicorn.tables.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/My97DatePicker/WdatePicker.js"></script> 
-      
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/select2.min.js"></script> 
+	<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.uniform.js"></script>  --%>

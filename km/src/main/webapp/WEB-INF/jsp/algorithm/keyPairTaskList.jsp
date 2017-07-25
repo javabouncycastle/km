@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=utf8" pageEncoding="utf8" %>
-<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%> --%>
 <%@ taglib prefix="c" uri="/WEB-INF/c-1_0-rt.tld"%>
 <%@ include file="../left.jsp" %>
 <%@ include file="../footer.jsp" %>
@@ -64,7 +63,6 @@
 		                      <th width="10%">已生成数量</th>
 		                      <th width="10%">任务状态</th>
 		                      <th width="10%">任务新建时间</th>
-		                      <th width="10%"></th>
 		                      <th width="10%">任务说明</th>
 		                      <th width="5">操作</th>
 		                    </tr>
@@ -74,7 +72,7 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus.paraValue}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
@@ -83,7 +81,6 @@
 		                    <td>${row.generatedKeyAmount}</td>
 		                    <td>${row.taskStatus.paraCode}</td>
 		                    <td><fmt:formatDate value="${row.taskStartTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-		                    <td>${row.taskExeResult}</td>
 		                    <td>${row.taskNotes}</td>
 		                    <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a>
 		                    <c:if test="${row.taskStatus.paraValue==20}"><!-- 20状态为 任务新建完成未 -->
@@ -291,8 +288,8 @@ function edit(id,name,keyPairAlgorithm,kpgKeyAmount,generatedKeyAmount,dbCommitB
 			$("#modal_update input[name='name']").val(name);	
 			$("#modal_update select[name='keyPairAlgorithm.id']").val(keyPairAlgorithm);	
 			$("#modal_update input[name='kpgKeyAmount']").val(kpgKeyAmount);
-		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
 		 	$("#modal_update input[name='generatedKeyAmount']").val(generatedKeyAmount);
+		 	$("#modal_update input[name='dbCommitBufsize']").val(dbCommitBufsize);
 			$("#modal_update select[name='taskStatus.paraValue']").val(paraValue);	
 			$("#modal_update input[name='taskStartTime']").val(FormatDate(taskStartTime));
 			$("#modal_update input[name='exeTaskStartTime']").val(FormatDate(exeTaskStartTime));

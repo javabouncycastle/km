@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.com.sure.keypair.dao.KeypairInuseDAO">  
+
+ 	<resultMap type="cn.com.sure.kpg.entry.KeypairInuse" id="KpgResultMap">
+		<id column="id" javaType="long" property="id"/>
+		<result column="name" javaType="String" property="name"/>
+	</resultMap>
+
+	<select id="selectAll" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+		select
+			id,
+			pub_key as pubKey,
+			pri_key as priKey,
+			kpg_algorithm as keyPairAlgorithm,
+			km_kpg_task as kpgTask,
+			gen_time as genTime,
+			start_time as startTime,
+			end_time as endTime,
+			cert_sn as certSn,
+			cert_dn as certDn
+		from
+			keypair_inuse
+	</select>
+	
+</mapper>

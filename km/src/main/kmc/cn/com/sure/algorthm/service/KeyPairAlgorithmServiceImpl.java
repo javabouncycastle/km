@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.keypair.dao.KeyPairAlgorithmDAO;
+import cn.com.sure.keypair.dao.KeypairAlgorithmDAO;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
 
@@ -22,7 +22,7 @@ public class KeyPairAlgorithmServiceImpl implements KeyPairAlgorithmService{
 	private static final Log LOG = LogFactory.getLog(KeyPairAlgorithmService.class);
 	
 	@Autowired
-	private KeyPairAlgorithmDAO keyPairAlgorithmDAO;
+	private KeypairAlgorithmDAO keyPairAlgorithmDAO;
 
 	@Override
 	@Transactional(value="txManager" )//配置事务，基本形式
