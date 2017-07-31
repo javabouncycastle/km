@@ -38,7 +38,23 @@ public interface SysCodeService {
 	/**
 	 * @return
 	 */
-	String selectMin();
+	List<SysCode> selectMin();
+
+	/**
+	 * @return
+	 */
+	List<SysCode> selectBuffer();
+
+	/**
+	 * @return
+	 */
+	List<SysCode> selectGenKeyNum();
+
+	/**
+	 * @param sysCode
+	 * @return
+	 */
+	List<SysCode> selectBufSize(SysCode sysCode);
 
 
 

@@ -64,7 +64,7 @@ public class KpgTask {
 	/**
 	 * 密钥已经存储缓冲记录数量
 	 */
-	private Integer dbCommitBufsize; 
+	private SysCode dbCommitBufsize; 
 	
 	
 	
@@ -154,11 +154,11 @@ public class KpgTask {
 		this.exeTaskEndTime = exeTaskEndTime;
 	}
 
-	public Integer getDbCommitBufsize() {
+	public SysCode getDbCommitBufsize() {
 		return dbCommitBufsize;
 	}
 
-	public void setDbCommitBufsize(Integer dbCommitBufsize) {
+	public void setDbCommitBufsize(SysCode dbCommitBufsize) {
 		this.dbCommitBufsize = dbCommitBufsize;
 	}
 

@@ -74,9 +74,10 @@ public class KpgTaskController extends BaseController{
 		SysCode sysCode = new SysCode();
 		List<KpgTask> kpgTasks = this.kpgTaskService.selectAll();
 		List<KeyPairAlgorithm> keyPairAlgorithms = this.keyPairAlgorithmService.selectOpYes(keyPairAlgorithm);
+		List<SysCode> codeBuf = this.sysCodeService.selectBufSize(sysCode);
 		List<SysCode> sysCodes = this.sysCodeService.selectByType(sysCode);
 		LOG.debug("selectAll - end");
-		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keyPairAlgorithms",keyPairAlgorithms).addObject("sysCodes",sysCodes);
+		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keyPairAlgorithms",keyPairAlgorithms).addObject("sysCodes",sysCodes).addObject("codeBuf",codeBuf);
 		
 	}
 	

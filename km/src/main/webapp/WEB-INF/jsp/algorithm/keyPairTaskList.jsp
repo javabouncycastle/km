@@ -72,7 +72,7 @@
                     	<!--  修改密钥任务-->
 	                    <tr id="upd_list_row_id_${row.id}" >
 		                     <td>
-		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.dbCommitBufsize}','${row.taskStatus.paraValue}',
+		                    	<a href="javascript:edit('${row.id}','${row.name}','${row.keyPairAlgorithm.id}','${row.kpgKeyAmount}','${row.generatedKeyAmount}','${row.dbCommitBufsize.paraValue}','${row.taskStatus.paraValue}',
 		                    	'${row.taskStartTime}','${row.exeTaskStartTime}', '${row.exeTaskEndTime}','${row.taskExeResult}','${row.taskNotes }')" class="btn btn-link">${row.id}</a>
 		                    </td>
 		                    <td>${row.name}</td>
@@ -147,7 +147,15 @@
 				                    <input type="text" class="form-control" id="kpgKeyAmount" name="kpgKeyAmount" value="${kpgTask.kpgKeyAmount}" required="required" />                 
 				                  </div>
 				                
-				                  
+				                  <div class="col-md-6 margin-bottom-15">
+				                    <label for="kpgKeyAmount" class="control-label">缓存数量 </label>
+				                    <select class="form-control margin-bottom-15" name="dbCommitBufsize.paraValue" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="scBuf" items="${codeBuf}">
+				                    		<option value="${scBuf.paraValue}">${scBuf.paraValue}</option>
+				                    	</c:forEach>
+				                    </select>
+				                  </div>
 				                </div>	
 				                  
 				                <div class="row">
@@ -223,7 +231,12 @@
 				                  </div>
 				                   <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">缓存数量</label>
-				                    <input type="text" class="form-control" id="dbCommitBufsize" name="dbCommitBufsize" required="required" />                 
+				                    <select class="form-control margin-bottom-15" name="dbCommitBufsize.paraValue" id="paratypeInfo" required="required">
+				                    	<option value="">--请选择--</option>
+				                    	<c:forEach var="sc" items="${sysCodes}">
+				                    		<option value="${sc.paraValue}">${sc.paraCode}</option>
+				                    	</c:forEach>
+				                    </select>
 				                  </div>					            
 				                  <div class="col-md-6 margin-bottom-15">
 				                    <label for="color" class="control-label">任务状态</label>

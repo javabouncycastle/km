@@ -11,7 +11,6 @@
 		<result column="taskNotes" javaType="String" property="taskNotes"/>
 		<result column="exeTaskStartTime" javaType="Date" property="exeTaskStartTime"/>
 		<result column="exeTaskEndTime" javaType="Date" property="exeTaskEndTime"/>
-		<result column="dbCommitBufsize" javaType="Integer" property="dbCommitBufsize"/>
 		<result column="generatedKeyAmount" javaType="Integer" property="generatedKeyAmount"/>
 		<result column="task_exe_result" javaType="String" property="task_exe_result"/>
 		<association property="keyPairAlgorithm" javaType="cn.com.sure.algorthm.entry.KeyPairAlgorithm" >
@@ -22,6 +21,18 @@
 			<result column="keysize" javaType="Integer" property="keysize"/>
 			<result column="notes" javaType="String" property="notes"/>
 			<result column="isValid" javaType="Integer" property="isValid"/>
+		</association>
+		<association property="dbCommitBufsize" javaType="cn.com.sure.syscode.entry.SysCode" >
+			<id column="SysCodeIdDb" javaType="long" property="id"/>
+			<result column="paraCodeDb" javaType="String" property="paraCode"/>
+			<result column="paraValueDb" javaType="String" property="paraValue"/>
+			<result column="SysIsValidDb" javaType="Integer" property="isValid"/>
+			<result column="SysNotesDb" javaType="String" property="notes"/>
+			<association property="paraType" javaType="cn.com.sure.syscode.entry.SysCodeType" >
+				<id column="TypeIdDb" javaType="long" property="id"/>
+				<result column="typeParaTypeDb" javaType="String" property="paraType"/>
+				<result column="typeNotesDb" javaType="String" property="notes"/>
+			</association>
 		</association>
 		<association property="taskStatus" javaType="cn.com.sure.syscode.entry.SysCode" >
 			<id column="SysCodeId" javaType="long" property="id"/>
@@ -37,7 +48,7 @@
 		</association>
 	</resultMap>
 
-	<insert id="insert" parameterType="cn.com.sure.kpgtask.entry.KpgTask">
+	<insert id="insert" parameterType="cn.com.sure.kpgtask.entry.KpgTask" useGeneratedKeys="true" keyProperty="id">
 		insert into kpg_task(
 			name,
 			kpg_algorithm,
@@ -59,7 +70,7 @@
 			#{taskNotes},
 			#{exeTaskStartTime},
 			#{exeTaskEndTime},
-			#{dbCommitBufsize},
+			#{dbCommitBufsize.paraValue},
 			#{generatedKeyAmount},
 			#{taskExeResult}
 		)
@@ -128,13 +139,24 @@
 			t3.para_type as paraType,
 			t3.is_valid as SysIsValid,
 			t3.notes as SysNotes,
+			t5.id as SysCodeIdDb,
+			t5.para_code as paraCodeDb,
+			t5.para_value as paraValueDb,
+			t5.para_type as paraTypeDb,
+			t5.is_valid as SysIsValidDb,
+			t5.notes as SysNotesDb,
 			t4.id as TypeId,
 			t4.para_type as typeParaType,
-			t4.notes as typeNotes
-		 from kpg_task t1,keypair_algorithm t2,km_sys_code t3,km_sys_param_type t4
+			t4.notes as typeNotes,
+			t6.id as TypeIdDb,
+			t6.para_type as typeParaTypeDb,
+			t6.notes as typeNotesDb
+		 from kpg_task t1,keypair_algorithm t2,km_sys_code t3,km_sys_param_type t4,km_sys_code t5,km_sys_param_type t6
 		 where t1.kpg_algorithm=t2.id
 		 and t3.para_type=t4.id
+		 and t5.para_type=t6.id
 		 and t1.task_status=t3.para_value
+		 and t1.dbcommit_bufsize = t5.para_value
 		 and t1.id=#{id}
 	</select>
 	
@@ -176,13 +198,23 @@
 			t2.alg_name as algorithmName,
 			t2.keysize as keysize,
 			t2.notes as notes,
-			t2.is_valid as isValid
-		from kpg_task t1,keypair_algorithm t2
+			t2.is_valid as isValid,
+			t3.id as SysCodeIdDb,
+			t3.para_code as paraCodeDb,
+			t3.para_value as paraValueDb,
+			t3.para_type as TypeIdDb,
+			t3.is_valid as SysIsValid,
+			t3.notes as SysNotes,
+		
+			t4.para_type as typeParaTypeDb,
+			t4.notes as typeNotesDb
+		from kpg_task t1,keypair_algorithm t2,km_sys_code t3,km_sys_param_type t4
 		 where 
 		 	t1.task_status=#{taskStatus.paraValue}
-		 and
-		 	t1.kpg_algorithm=t2.id
-			<![CDATA[ and task_start_time <=#{taskStartTime}]]>
+		 and t1.kpg_algorithm=t2.id
+		 and t1.dbcommit_bufsize = t3.para_value
+		 and t3.para_type = t4.id
+		<![CDATA[ and task_start_time <=#{taskStartTime}]]>
 	</select>
 	
 	<select id="findByTaskStatus" parameterType="Long" resultType="cn.com.sure.kpgtask.entry.KpgTask">
@@ -214,7 +246,7 @@
 			task_notes=#{taskNotes},
 			exe_task_start_time=#{exeTaskStartTime},
 			exe_task_end_time=#{exeTaskEndTime},
-			dbcommit_bufsize=#{dbCommitBufsize},
+			dbcommit_bufsize=#{dbCommitBufsize.paraValue},
 			generated_key_amount=#{generatedKeyAmount},
 			task_exe_result=#{taskExeResult}
 		 where
@@ -232,7 +264,7 @@
 			task_notes=#{taskNotes},
 			exe_task_start_time=#{exeTaskStartTime},
 			exe_task_end_time=#{exeTaskEndTime},
-			dbcommit_bufsize=#{dbCommitBufsize},
+			dbcommit_bufsize=#{dbCommitBufsize.paraValue},
 			generated_key_amount=#{generatedKeyAmount},
 			task_exe_result=#{taskExeResult}
 		 where

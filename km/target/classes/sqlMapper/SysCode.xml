@@ -142,7 +142,7 @@
 			km_sys_code=#{algorithmName}
 	</select>
 	
-	<select id="selectMin" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="java.lang.String">
+	<select id="selectMin" parameterType="cn.com.sure.syscode.entry.SysCode" resultMap="SysCodeResultMap">
 	
 		select 
 			ks.para_value as paraValue
@@ -150,20 +150,31 @@
 		 	km_sys_code ks,km_sys_param_type ksty
 		 where 
 		 	ks.para_type=ksty.id
-		 	and ksty.para_type='keyNumMin'
-		<!-- select 
-			ks.id as id,
-			ks.para_code as paraCode,
-			ks.para_value as paraValue,
-			ks.para_type as paraType,
-			ks.is_valid as isValid,
-			ks.notes as note,
-			ksty.id as TypeId,
-			ksty.para_type as typeParaType,
-			ksty.notes as typeNotes
-		 from km_sys_code ks,km_sys_param_type ksty
-		 where ks.para_type=ksty.id
-		 and ksty.para_type=#{paraType.paraType} -->
+		 	and ksty.para_type=#{paraType.paraType}
+		 	and ks.is_valid=#{isValid}
 	</select>
 	
+	<select id="selectBuffer" parameterType="cn.com.sure.syscode.entry.SysCode" resultMap="SysCodeResultMap">
+	
+		select 
+			ks.para_value as paraValue
+		 from 
+		 	km_sys_code ks,km_sys_param_type ksty
+		 where 
+		 	ks.para_type=ksty.id
+		 	and ksty.para_type=#{paraType.paraType}
+		 	and ks.is_valid=#{isValid}
+	</select>
+	
+	<select id="selectGenKeyNum" parameterType="cn.com.sure.syscode.entry.SysCode" resultType="java.lang.String">
+	
+		select 
+			ks.para_value as paraValue
+		 from 
+		 	km_sys_code ks,km_sys_param_type ksty
+		 where 
+		 	ks.para_type=ksty.id
+		 	and ksty.para_type=#{paraType.paraType}
+		 	and ks.is_valid=#{isValid}
+	</select>
 </mapper>

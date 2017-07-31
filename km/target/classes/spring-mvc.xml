@@ -75,9 +75,10 @@
 	
 	<!-- quartz -->
 	<!-- 工作的bean -->  
-    <!-- <bean id="myJob" class="cn.com.sure.quartz.KpgQuartzTaskExecutorImpl" /> -->
+   <bean id="myJob" class="cn.com.sure.quartz.KpgQuartzTaskExecutorImpl" />
+   <bean id="autoKpg" class="cn.com.sure.auto.kpg.AutoKpg" />
    <!-- job的配置开始 -->  
-    <!-- <bean id="myJobDetail"  
+   <bean id="myJobDetail"  
        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
        <property name="targetObject">  
            <ref bean="myJob" />  
@@ -85,25 +86,50 @@
        <property name="targetMethod">  
            <value>executeTask</value>  
        </property>  
-   </bean> -->
+   </bean> 
+   <bean id="myJobDetail2"  
+       class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+       <property name="targetObject">  
+           <ref bean="autoKpg" />  
+       </property>  
+       <property name="targetMethod">  
+           <value>autoKpg</value>  
+       </property>  
+   </bean> 
   
    <!-- 调度的配置开始 -->  
-   <!-- <bean id="crontestJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+   <bean id="crontestJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
        <property name="jobDetail">  
            <ref bean="myJobDetail" />  
        </property>  
        <property name="cronExpression">  
-           <value>10 0/1 * * * ?</value>  Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。   
+           <value>10 0/1 * * * ?</value>  <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。   --> 
        </property>  
-   </bean> -->
+   </bean>
+   <bean id="crontestJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail">  
+           <ref bean="myJobDetail2" />  
+       </property>  
+       <property name="cronExpression">  
+           <value>10 0/1 * * * ?</value>  <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。   --> 
+       </property>  
+   </bean>
   
    <!-- 启动触发器的配置开始 -->  
-    <!-- <bean name="startQuertz" lazy-init="false" autowire="no"  
+    <bean name="startQuertz" lazy-init="false" autowire="no"  
        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
        <property name="triggers">  
            <list>  
                <ref bean="crontestJobTrigger" />  
            </list>  
        </property>  
-   </bean>  --> 
+   </bean> 
+   <bean name="startAutoKpg" lazy-init="false" autowire="no"  
+       class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+       <property name="triggers">  
+           <list>  
+               <ref bean="crontestJobTrigger2" />  
+           </list>  
+       </property>  
+   </bean> 
 </beans>  

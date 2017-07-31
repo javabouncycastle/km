@@ -51,7 +51,6 @@ public class KeyPairGenThread extends Thread{
 				LOG.error(e);
 				LOG.error("执行出现异常"+kpgTask.getId());
 				
-				
 				kpgTask = kpgTaskService.selectById(kpgTask.getId());
 				kpgTask.setExeTaskEndTime(new Date());
 				SysCode sysCode = new SysCode();

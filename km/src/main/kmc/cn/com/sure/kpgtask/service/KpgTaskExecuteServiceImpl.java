@@ -64,9 +64,9 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 			
 			//3.判断本次任务片段总共生成多少密钥
 			//3.1缓冲数量
-			int sliceSize = kpgTask.getDbCommitBufsize().intValue();
+			int sliceSize = Integer.parseInt(kpgTask.getDbCommitBufsize().getParaValue());
 			
-			if((kpgTask.getKpgKeyAmount().intValue()- kpgTask.getGeneratedKeyAmount().intValue())< kpgTask.getDbCommitBufsize().intValue()){//(总共生成数量-已经生成数量)<缓冲数量|| 最后一片了
+			if((kpgTask.getKpgKeyAmount().intValue()- kpgTask.getGeneratedKeyAmount().intValue())< Integer.parseInt(kpgTask.getDbCommitBufsize().getParaValue())){//(总共生成数量-已经生成数量)<缓冲数量|| 最后一片了
 				sliceSize = kpgTask.getKpgKeyAmount().intValue()- kpgTask.getGeneratedKeyAmount().intValue();
 			}
 			

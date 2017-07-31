@@ -38,7 +38,19 @@ public interface SysCodeDAO {
 	 * @param sysCode
 	 * @return
 	 */
-	public String selectMin(SysCode sysCode);
+	public List<SysCode> selectMin(SysCode sysCode);
+
+	/**
+	 * @param sysCode
+	 * @return
+	 */
+	public List<SysCode> selectBuffer(SysCode sysCode);
+
+	/**
+	 * @param sysCode
+	 * @return
+	 */
+	public List<SysCode> selectBufSize(SysCode sysCode);
 
 
 }

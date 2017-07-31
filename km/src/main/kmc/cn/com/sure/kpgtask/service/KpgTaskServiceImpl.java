@@ -50,18 +50,23 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	@Override
 	public int insert(KpgTask kpgTask) throws KmApplicationexception {
 		LOG.debug("insert - start");
-		KpgTask dbKpgTask = this.kpgTaskDAO.findByName(kpgTask.getName());
+		//KpgTask dbKpgTask = this.kpgTaskDAO.findByName(kpgTask.getName());
 		int i=0;
-		if(dbKpgTask==null){
+		/*if(dbKpgTask==null){*/
 			SysCode taskStatus=new SysCode();
-			taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
+			if("".equals(kpgTask.getTaskStatus())||kpgTask.getTaskStatus()==null){
+				taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
+			}else{
+				taskStatus.setParaValue(kpgTask.getTaskStatus().getParaValue());
+			}
+			
 			kpgTask.setGeneratedKeyAmount(0);
 			kpgTask.setTaskStatus(taskStatus);
 			kpgTask.setTaskStartTime(new Date());
 			i = kpgTaskDAO.insert(kpgTask);
-		}if(dbKpgTask!=null){
+		/*}if(dbKpgTask!=null){
 			KmApplicationexception.throwException(KmErrorMessageConstants.kpgTaskNameExist, new String[]{kpgTask.getName()});
-		}
+		}*/
 		LOG.debug("insert - end");
 		return i;
 	}
