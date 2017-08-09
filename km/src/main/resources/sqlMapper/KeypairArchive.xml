@@ -19,4 +19,49 @@
 		keypair_archive
 </select>
 	
+	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairArchive">
+		insert into keypair_inuse(
+			pub_key,
+			pri_key,
+			kpg_algorithm,
+			km_kpg_task,
+			gen_time,
+			start_time,
+			end_time,
+			cert_sn,
+			cert_dn,
+			arch_time
+		)values(
+			#{pubKey},
+			#{priKey},
+			#{keyPairAlgorithm.algorithmName},
+			#{kpgTask.name},
+			#{genTime},
+			#{startTime},
+			#{endTime},
+			#{certSn},
+			#{certDn},
+			#{archTime}
+		)
+	</insert>
+	
+	<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairArchive" resultType="cn.com.sure.kpg.entry.KeypairArchive">
+	select
+		id,
+		pub_key as pubKey,
+		pri_key as priKey,
+		kpg_algorithm as keyPairAlgorithm,
+		km_kpg_task as kpgTask,
+		gen_time as genTime,
+		start_time as startTime,
+		end_time as endTime,
+		cert_sn as certSn,
+		cert_dn as certDn,
+		arch_time as atchTime
+	from
+		keypair_archive
+	where
+		cert_sn=#{certSn}
+</select>
+	
 </mapper>

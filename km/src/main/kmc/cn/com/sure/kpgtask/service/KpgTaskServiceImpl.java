@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.dao.KpgTaskDAO;
 import cn.com.sure.km.KmApplicationexception;
-import cn.com.sure.km.KmErrorMessageConstants;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.syscode.entry.SysCode;
 
@@ -77,9 +76,14 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	@Override
 	public int update(KpgTask kpgTask) {
 		LOG.debug("update -start");
+		/*KpgTask dbKpgTask = kpgTaskDAO.findById(kpgTask.getId());
+		if(dbKpgTask.getTaskStatus().getId()!=KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED){
+			throw new KmApplicationexception("任务["+kpgTask.getName()+"]已经启动，无法修改!");
+		}*/
 		int i = kpgTaskDAO.update(kpgTask);
 		LOG.debug("update - end");
 		return i;
+	
 	}
 
 	/* (non-Javadoc)

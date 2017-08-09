@@ -39,4 +39,45 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 		return keyPairInUses;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#findKeypair()
+	 */
+	@Override
+	public void findKeypair() {
+		LOG.debug("findKeypair - start");
+		
+		LOG.debug("findKeypair - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#insert(cn.com.sure.kpg.entry.KeypairInuse)
+	 */
+	@Override
+	public void insert(KeypairInuse inuse) {
+		LOG.debug("insert - start");
+		keyPairInUseDAO.insert(inuse);
+		LOG.debug("insert - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#findBySn(cn.com.sure.kpg.entry.KeypairInuse)
+	 */
+	@Override
+	public KeypairInuse findBySn(KeypairInuse kpInuse) {
+		LOG.debug("findBySn - start");
+		keyPairInUseDAO.findBySn(kpInuse);
+		LOG.debug("findBySn - end");
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#delete(java.lang.String)
+	 */
+	@Override
+	public void delete(String id) {
+		LOG.debug("delete - start");
+		keyPairInUseDAO.delete(id);
+		LOG.debug("delete - end");
+	}
+
 }

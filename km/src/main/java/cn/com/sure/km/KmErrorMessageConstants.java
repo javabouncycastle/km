@@ -15,5 +15,9 @@ public interface KmErrorMessageConstants {
 	public static final int taskExecuting = 115;//任务已启动，无法再次启动
 	
 	public static final int taskFinished = 115;//任务已结束，无法再次启动
+	
+	public static final int snNotFound = 10001;//找不到这条记录
+	
+	public static final int revokeKpSuce = 10002;//注销密钥成功
 
 }

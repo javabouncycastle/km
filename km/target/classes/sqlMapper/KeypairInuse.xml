@@ -23,4 +23,52 @@
 			keypair_inuse
 	</select>
 	
+	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairInuse">
+		insert into keypair_inuse(
+			pub_key,
+			pri_key,
+			kpg_algorithm,
+			km_kpg_task,
+			gen_time,
+			start_time,
+			end_time,
+			cert_sn,
+			cert_dn,
+			inuse_time
+		)values(
+			#{pubKey},
+			#{priKey},
+			#{keyPairAlgorithm.algorithmName},
+			#{kpgTask.name},
+			#{genTime},
+			#{startTime},
+			#{endTime},
+			#{certSn},
+			#{certDn},
+			#{inuseTime}
+		)
+	</insert>
+	
+		<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+		select
+			id,
+			pub_key as pubKey,
+			pri_key as priKey,
+			kpg_algorithm as keyPairAlgorithm,
+			km_kpg_task as kpgTask,
+			gen_time as genTime,
+			start_time as startTime,
+			end_time as endTime,
+			cert_sn as certSn,
+			cert_dn as certDn
+		from
+			keypair_inuse
+		where
+			cert_sn=#{certSn}
+	</select>
+	
+		<delete id="delete" parameterType="long">
+		delete from keypair_inuse where id=#{id}
+	</delete>
+	
 </mapper>

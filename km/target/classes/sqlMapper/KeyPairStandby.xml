@@ -2,11 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.keypair.dao.KeyPairStandbyDAO">  
 
-<!--  	<resultMap type="cn.com.sure.kpg.entry.KeypairStandby" id="KpgResultMap">
-		<id column="id" javaType="long" property="id"/>
-		<result column="name" javaType="String" property="name"/>
-	</resultMap> -->
-
 	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairStandby">
 		insert into keypair_standby(
 			pub_key,
@@ -46,6 +41,25 @@
 		where
 			kpg_algorithm=#{algorithmName}
 	</select>
+	
+	<select id="obtKpStandby" parameterType="cn.com.sure.kpg.entry.KeypairStandby" resultType="cn.com.sure.kpg.entry.KeypairStandby">
+		select
+			id,
+			pub_key as pubKey,
+			pri_key as priKey,
+			kpg_algorithm as keyPairAlgorithm,
+			km_kpg_task as kpgTask,
+			gen_time as genTime
+		from
+			keypair_standby
+		where
+			kpg_algorithm=#{algorithmName}
+		limit 
+			0,1
+	</select>
     
+    <delete id="delete" parameterType="long">
+		delete from keypair_standby where id=#{id}
+	</delete>
 	
 </mapper>

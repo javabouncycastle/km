@@ -180,4 +180,21 @@ public class SysCodeServiceImpl implements SysCodeService{
 		return codeBufSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.syscode.service.SysCodeService#getServicePort()
+	 */
+	@Override
+	public List<SysCode> selectServicePort() {
+		LOG.debug("getServicePort - start");
+		SysCodeType sysCodeType = new SysCodeType();
+		sysCodeType.setParaType(KmConstants.TYPE_ID_TASK_STATUS);
+		SysCode sysCode = new SysCode();
+		sysCode.setParaType(sysCodeType);
+		sysCode.setIsValid(KmConstants.YES_OR_NO_OPTION_YES);
+		List<SysCode> sysCodes = this.sysCodeDAO.findByType(sysCode);
+		LOG.debug("getServicePort - start");
+		return sysCodes;
+	}
+
+
 }

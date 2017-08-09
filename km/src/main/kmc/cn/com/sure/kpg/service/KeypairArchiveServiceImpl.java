@@ -34,9 +34,31 @@ public class KeypairArchiveServiceImpl implements KeypairArchiveService{
 	@Override
 	public List<KeypairArchive> selectAll() {
 		LOG.debug("selectAll - start");
-		keyPairArchiveDAO.selectAll();
+		List<KeypairArchive>keypairArchives= keyPairArchiveDAO.selectAll();
 		LOG.debug("selectAll - end");
-		return null;
+		return keypairArchives;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairArchiveService#insert(cn.com.sure.kpg.entry.KeypairArchive)
+	 */
+	@Override
+	public void insert(KeypairArchive kpArchive) {
+		LOG.debug("selectAll - start");
+		keyPairArchiveDAO.insert(kpArchive);
+		LOG.debug("selectAll - end");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairArchiveService#findBySn(java.lang.String)
+	 */
+	@Override
+	public KeypairArchive findBySn(String certSn) {
+		LOG.debug("findBySn - start");
+		KeypairArchive kpArchive = keyPairArchiveDAO.findBySn(certSn);
+		LOG.debug("findBySn");
+		
+		return kpArchive;
 	}
 
 }

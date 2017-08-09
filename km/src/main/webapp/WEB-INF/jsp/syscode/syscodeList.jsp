@@ -55,7 +55,7 @@
 		               </form>
 		             </div>
 		          </div>
-                <table class="table table-striped table-hover table-bordered" class="table table-bordered table-striped table-hover data-table">
+                <table class="table table-bordered table-striped table-hover data-table">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
 		                      <th width="8%">主键</th>
@@ -241,6 +241,15 @@
        
    </body>     
  <script type="text/javascript">
+  $(document).ready(function(){
+	
+	$('.data-table').dataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"sDom": '<""l>t<"F"fp>'
+	});
+ });
+ 
 function remove(id){
    if (confirm("您确实要刪除该记录吗？")){
      self.location.replace("remove.do?&id="+id);

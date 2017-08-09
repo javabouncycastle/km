@@ -53,7 +53,7 @@
 		               </form>
 		             </div>
 		          </div>
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-striped table-hover table-bordered data-table">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF">
 		                      <th width="5%">主键</th>
@@ -97,7 +97,6 @@
 	                    </tr>
                 	</c:forEach>
                </table>
-            	 共找到${totalCount}条记录 ,当前显示1到${totalCount}条.
             </div>
           </div>
         </div>
@@ -290,6 +289,14 @@
        
    </body>     
  <script type="text/javascript">
+  $(document).ready(function(){
+	
+	$('.data-table').dataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"sDom": '<""l>t<"F"fp>'
+	});
+ });
 function remove(id){
    if (confirm("您确实要刪除该记录吗？")){
      self.location.replace("remove.do?&id="+id);

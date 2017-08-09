@@ -29,7 +29,6 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 	 * @author Limin
 	 *
 	 */
-	@SuppressWarnings("restriction")
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Service("kpgTaskExecuteService")
 	public class KpgTaskExecuteServiceImpl implements KpgTaskExecuteService{

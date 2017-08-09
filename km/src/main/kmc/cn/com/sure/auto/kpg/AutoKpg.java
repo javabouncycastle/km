@@ -22,6 +22,8 @@ import cn.com.sure.kpg.service.KeypairStandbyService;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
 import cn.com.sure.kpgtask.service.KpgTaskService;
+import cn.com.sure.socket.SocketService;
+import cn.com.sure.socket.SocketThread;
 import cn.com.sure.syscode.entry.SysCode;
 import cn.com.sure.syscode.service.SysCodeService;
 
@@ -47,16 +49,19 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	private KpgTaskExecuteService kpgTaskExecuteService;
 	
+	@Autowired
+	private SocketService socketService;
 	
+
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
 	   if (event.getSource() instanceof XmlWebApplicationContext) {
            if (((XmlWebApplicationContext) event.getSource()).getDisplayName().equals("Root WebApplicationContext")) {
-        	   
+        	   //自动生成密钥
         	   autoKpg();
-      
+        	   startsocket();
            }
        }
 	}
@@ -93,12 +98,12 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
     				SysCode codeAlg = new SysCode();
     				codeAlg.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
     				task.setTaskStatus(codeAlg);
-    				//用当前时间来明明任务名称
+    				//用当前时间来命名任务名称
     				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     				task.setName("系统自动生成密钥"+sdf.format(new Date()));
     				task.setStartTime(new Date());
     				try {
-    					//插入
+    					//插入一条任务
     					kpgTaskService.insert(task);
     				} catch (KmApplicationexception e) {
     					e.printStackTrace();
@@ -107,8 +112,10 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
     				//启动线程，自动生成密钥
     				new Thread(new KeyPairGenThread(kpgTaskService,task,kpgTaskExecuteService)).start();
     			}
-    			
     		}
-  	   
      }
+	 
+	 public void startsocket(){
+		 new Thread(new SocketThread(socketService)).start();
+	 }
 }

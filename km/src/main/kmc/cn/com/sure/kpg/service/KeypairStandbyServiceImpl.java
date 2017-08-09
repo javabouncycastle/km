@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.keypair.dao.KeyPairStandbyDAO;
 import cn.com.sure.kpg.entry.KeypairStandby;
 
@@ -67,5 +68,29 @@ public class KeypairStandbyServiceImpl implements KeypairStandbyService{
 		return keyNum;
 	}
 
+
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairStandbyService#obtKpStandby()
+	 */
+	@Override
+	public KeypairStandby obtKpStandby(KeyPairAlgorithm kpAlg) {
+		LOG.debug("obtKpStandby - start");
+		KeypairStandby kpStandby = keyPairStandbyDAO.obtKpStandby(kpAlg);
+		LOG.debug("obtKpStandby - end");
+		return kpStandby;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairStandbyService#delete(java.lang.String)
+	 */
+	@Override
+	public void delete(String id) {
+		LOG.debug("obtKpStandby - start");
+		keyPairStandbyDAO.delete(id);
+		LOG.debug("obtKpStandby - end");
+	}
 
 }

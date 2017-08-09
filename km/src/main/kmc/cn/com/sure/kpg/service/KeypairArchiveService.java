@@ -18,4 +18,15 @@ public interface KeypairArchiveService {
 	 */
 	List <KeypairArchive> selectAll();
 
+	/**
+	 * @param kpArchive
+	 */
+	void insert(KeypairArchive kpArchive);
+
+	/**
+	 * @param certSn
+	 * @return 
+	 */
+	KeypairArchive findBySn(String certSn);
+
 }

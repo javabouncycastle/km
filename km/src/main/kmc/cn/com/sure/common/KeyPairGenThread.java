@@ -76,7 +76,7 @@ public class KeyPairGenThread extends Thread{
 				return;
 			}
 			
-		}while(kpgTask.getTaskStatus().getParaValue() .equals(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)) );
+		}while(kpgTask.getTaskStatus().getParaValue().equals(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)) );
 		
 		
 		LOG.info("run - end at "+ new Date());

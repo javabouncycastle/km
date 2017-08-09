@@ -56,6 +56,10 @@ public interface SysCodeService {
 	 */
 	List<SysCode> selectBufSize(SysCode sysCode);
 
-
+	/**
+	 * @return 
+	 * 
+	 */
+	List<SysCode> selectServicePort();
 
 }

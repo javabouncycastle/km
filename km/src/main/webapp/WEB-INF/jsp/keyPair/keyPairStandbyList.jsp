@@ -56,7 +56,7 @@
 		             </div>
 		          </div>
 		          <div class="widget-box">
-	                <table class="table table-striped table-hover table-bordered with-check">
+	                <table class="table table-striped table-hover table-bordered with-check data-table">
 		                  <thead>
 		                    <tr bgcolor="CFCFCF" >
 		                      <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" width="5%"/>全选</th>
@@ -83,6 +83,14 @@
        </div>
    </body>     
  <script type="text/javascript">
+ $(document).ready(function(){
+	
+	$('.data-table').dataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"sDom": '<""l>t<"F"fp>'
+	});
+ });
 function remove(id){
    if (confirm("您确实要刪除该记录吗？")){
      self.location.replace("remove.do?&id="+id);

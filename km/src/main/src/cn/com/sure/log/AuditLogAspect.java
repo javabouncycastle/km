@@ -1,10 +1,7 @@
 package cn.com.sure.log;
 
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Service;
-
-import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 
 
 @Service(value="auditLogAspect")

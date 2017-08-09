@@ -45,7 +45,7 @@ public class KeypairInuse {
 	/**
 	 * 所属任务
 	 */	
-	private KpgTask KpgTask;
+	private KpgTask kpgTask;
 
 	/**
 	 * 密钥生成时间
@@ -76,6 +76,17 @@ public class KeypairInuse {
      */
     @Column (name = "cert_dn" )
     private String certDn;
+    
+    private Date inuseTime;
+    
+
+	public Date getInuseTime() {
+		return inuseTime;
+	}
+
+	public void setInuseTime(Date inuseTime) {
+		this.inuseTime = inuseTime;
+	}
 
 	public String getId() {
 		return id;
@@ -110,11 +121,11 @@ public class KeypairInuse {
 	}
 
 	public KpgTask getKpgTask() {
-		return KpgTask;
+		return kpgTask;
 	}
 
 	public void setKpgTask(KpgTask kpgTask) {
-		KpgTask = kpgTask;
+		this.kpgTask = kpgTask;
 	}
 
 	public Date getGenTime() {

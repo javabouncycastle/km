@@ -5,6 +5,7 @@ package cn.com.sure.keypair.dao;
 
 import java.util.List;
 
+import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.kpg.entry.KeypairStandby;
 
 
@@ -31,5 +32,17 @@ public interface KeyPairStandbyDAO {
 	 * @return
 	 */
 	int countNum(String algorithmName);
+
+
+	/**
+	 * @return
+	 */
+	KeypairStandby obtKpStandby(KeyPairAlgorithm kpAlg);
+
+
+	/**
+	 * @param id
+	 */
+	void delete(String id);
 
 }

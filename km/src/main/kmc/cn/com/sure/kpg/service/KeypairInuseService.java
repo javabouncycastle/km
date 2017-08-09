@@ -18,4 +18,25 @@ public interface KeypairInuseService {
 	 */
 	List<KeypairInuse> selectAll();
 
+	/**
+	 * 
+	 */
+	void findKeypair();
+
+	/**
+	 * @param inuse
+	 */
+	void insert(KeypairInuse inuse);
+
+	/**
+	 * @param kpInuse
+	 * @return
+	 */
+	KeypairInuse findBySn(KeypairInuse kpInuse);
+
+	/**
+	 * @param id
+	 */
+	void delete(String id);
+
 }

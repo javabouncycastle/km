@@ -18,4 +18,19 @@ public interface KeypairInuseDAO {
 	 */
 	List<KeypairInuse> selectAll();
 
+	/**
+	 * @param inuse
+	 */
+	void insert(KeypairInuse inuse);
+
+	/**
+	 * @param kpInuse
+	 */
+	void findBySn(KeypairInuse kpInuse);
+
+	/**
+	 * @param id
+	 */
+	void delete(String id);
+
 }
