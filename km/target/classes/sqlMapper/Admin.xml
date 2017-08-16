@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.com.sure.log.dao.AdminDAO">  
+
+<select id="fingByAdmId" parameterType="Integer" resultType="cn.com.sure.log.Admin">
+		select 
+			id,
+			cert,
+			pfx_cert as pfxCert,
+			start_time as startTime,
+			end_time as endTime,
+			cert_dn as certDn,
+			cert_sn as certSn,
+			admin_id as adminId
+		 from 
+		 	km_admin
+		 where
+		 	admin_id=#{adminId}
+	</select>
+	
+
+</mapper>

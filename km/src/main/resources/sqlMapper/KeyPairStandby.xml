@@ -58,7 +58,7 @@
 			0,1
 	</select>
     
-    <delete id="delete" parameterType="long">
+    <delete id="delete" parameterType="String">
 		delete from keypair_standby where id=#{id}
 	</delete>
 	

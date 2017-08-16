@@ -54,6 +54,7 @@ public class KeypairArchiveServiceImpl implements KeypairArchiveService{
 	 */
 	@Override
 	public KeypairArchive findBySn(String certSn) {
+		
 		LOG.debug("findBySn - start");
 		KeypairArchive kpArchive = keyPairArchiveDAO.findBySn(certSn);
 		LOG.debug("findBySn");

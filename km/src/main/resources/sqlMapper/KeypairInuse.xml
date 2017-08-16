@@ -49,7 +49,7 @@
 		)
 	</insert>
 	
-		<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+	<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
 		select
 			id,
 			pub_key as pubKey,
@@ -67,7 +67,7 @@
 			cert_sn=#{certSn}
 	</select>
 	
-		<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="String">
 		delete from keypair_inuse where id=#{id}
 	</delete>
 	

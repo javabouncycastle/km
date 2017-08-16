@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.sure.admin.entry;
+package cn.com.sure.log;
 
 import java.util.Date;
 
@@ -15,14 +15,11 @@ public class Admin {
 	
 	private String cert;
 	private String pfxCert;
-	
 	private Date startTime;
 	private Date endTime;
-	
 	private String certDn;
 	private String certSn;
-	
-	
+	private String adminId;
 	public String getId() {
 		return id;
 	}
@@ -65,8 +62,12 @@ public class Admin {
 	public void setCertSn(String certSn) {
 		this.certSn = certSn;
 	}
-	
-	
+	public String getAdminId() {
+		return adminId;
+	}
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
+	}
 	
 
 }

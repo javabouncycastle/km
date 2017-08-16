@@ -10,6 +10,7 @@ import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -30,7 +31,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Decoder;
-import cn.com.sure.admin.service.AdminService;
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
@@ -66,24 +66,47 @@ public class SocketServiceImpl implements SocketService{
 	
 
 	@Override
-	public byte[] handleSocket(String requestInfo) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException, KmApplicationexception, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+	public byte[] handleSocket(byte[] requestInfoByte) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException, KmApplicationexception, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, CertificateException {
+		
 		LOG.debug("handleSocket - start");
 		
+		//0、验证签名
 		
 		//1.对requestInfo信息进行处理
 		//1.1去掉requestInfo中的 '
+		String requestInfo=new String(requestInfoByte);
+		
+		String certDN = null;
+		String certSn = null;
+		String certStartTime = null;
+		String certEndTime = null;
+		String algSize = null;
+		String certOperType = null;
+		
+		requestInfo=requestInfo.replaceAll(" ","");
+		
 		if(requestInfo.contains("\'")){
 			requestInfo=requestInfo.replace("\'", "");
 		}
-		String[] reqInfo = requestInfo.split(",");
-		
-		//1.2获取证书dn项，证书sn，证书开始时间，证书结束时间，证书
-		String certDN = reqInfo[0];
-		String certSn = reqInfo[1];
-		String certStartTime = reqInfo[2];
-		String certEndTime = reqInfo[3];
-		String algSize=reqInfo[4];
-		String certOperType=reqInfo[5];
+		String[] reqInfo = requestInfo.split(";");
+		if(reqInfo.length!=6){
+			if(reqInfo.length!=2){
+				return "信息格式错误".getBytes();
+			}
+			
+		}
+		if(reqInfo.length==6){
+			//1.2获取证书dn项，证书sn，证书开始时间，证书结束时间，证书
+			certDN = reqInfo[0];
+			certSn = reqInfo[1];
+			certStartTime = reqInfo[2];
+			certEndTime = reqInfo[3];
+			algSize=reqInfo[4];
+			certOperType=reqInfo[5];
+		}if(reqInfo.length==2){
+			certSn = reqInfo[0];
+			certOperType = reqInfo[1];
+		}
 		
 		Integer operType= Integer.parseInt(certOperType);
 		
@@ -92,6 +115,8 @@ public class SocketServiceImpl implements SocketService{
 		KeypairArchive kpArchive = new KeypairArchive();
 		
 		switch (operType) {
+		
+		//2.新办或者更新
 		case KmConstants.TYPE_ID_CERT_NEW_OR_UPDATE_STATUS:
 			//2获取密钥对
 			kpAlg.setAlgorithmName(algSize);
@@ -124,12 +149,13 @@ public class SocketServiceImpl implements SocketService{
 	        //4返回密钥对信息
 			return resultByte;
 
+		//注销
 		case KmConstants.TYPE_ID_CERT_REVOKE_STATUS:
 			
 			//5注销，将密钥归档
-			kpInuse.setCertSn(certSn);
 			
 			//5.1根据sn查询密钥
+			kpInuse.setCertSn(certSn);
 			kpInuse = inuseService.findBySn(kpInuse);
 			
 			
@@ -150,9 +176,10 @@ public class SocketServiceImpl implements SocketService{
 			//5.3删除在用库中的信息
 			inuseService.delete(kpInuse.getId());
 			
-			KmApplicationexception.throwException(KmErrorMessageConstants.revokeKpSuce, new String[]{kpArchive.getCertSn()});
+			//KmApplicationexception.throwException(KmErrorMessageConstants.revokeKpSuce, new String[]{kpArchive.getCertSn()});
 			return "注销密钥成功".getBytes();
 			
+		//密钥恢复
 		case KmConstants.TYPE_ID_CERT_RECOVER_STATUS:
 			
 			//6根据sn查询密钥
@@ -178,6 +205,13 @@ public class SocketServiceImpl implements SocketService{
 	
 		LOG.debug("handleSocket - end");
 		return null;
+	}
+	
+	boolean verifySignature(String requestInfo){
+		LOG.debug("verifySignature - start");
+		
+		LOG.debug("verifySignature - end");
+		return false;
 	}
 	
 

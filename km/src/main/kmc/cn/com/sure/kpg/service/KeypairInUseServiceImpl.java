@@ -65,9 +65,9 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 	@Override
 	public KeypairInuse findBySn(KeypairInuse kpInuse) {
 		LOG.debug("findBySn - start");
-		keyPairInUseDAO.findBySn(kpInuse);
+		KeypairInuse inuse = keyPairInUseDAO.findBySn(kpInuse);
 		LOG.debug("findBySn - end");
-		return null;
+		return inuse;
 	}
 
 	/* (non-Javadoc)

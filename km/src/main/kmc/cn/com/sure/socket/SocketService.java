@@ -6,6 +6,7 @@ package cn.com.sure.socket;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.security.spec.InvalidKeySpecException;
 import java.text.ParseException;
 
@@ -22,6 +23,6 @@ import cn.com.sure.km.KmApplicationexception;
 public interface SocketService {
 
 
-	byte[] handleSocket(String requestInfo) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException,KmApplicationexception,InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException;
+	byte[] handleSocket(byte[] requestInfo) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException,KmApplicationexception,InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException,CertificateException;
 
 }

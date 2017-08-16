@@ -20,7 +20,7 @@
 </select>
 	
 	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairArchive">
-		insert into keypair_inuse(
+		insert into keypair_archive(
 			pub_key,
 			pri_key,
 			kpg_algorithm,

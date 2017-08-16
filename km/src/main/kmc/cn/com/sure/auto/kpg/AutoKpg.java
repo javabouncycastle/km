@@ -3,10 +3,14 @@
  */
 package cn.com.sure.auto.kpg;
 
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,6 +22,7 @@ import cn.com.sure.algorthm.service.KeypairAlgorithmService;
 import cn.com.sure.common.KeyPairGenThread;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
+import cn.com.sure.km.ResourceBundleSocketMessage;
 import cn.com.sure.kpg.service.KeypairStandbyService;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
@@ -52,10 +57,15 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	private SocketService socketService;
 	
-
+	private ServerSocket serverSocket;
+	
+	
+	
+	private static final Log LOG = LogFactory.getLog(AutoKpg.class);
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		
 		
 	   if (event.getSource() instanceof XmlWebApplicationContext) {
            if (((XmlWebApplicationContext) event.getSource()).getDisplayName().equals("Root WebApplicationContext")) {
@@ -116,6 +126,30 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
      }
 	 
 	 public void startsocket(){
-		 new Thread(new SocketThread(socketService)).start();
+		 
+		 try {  
+	            if(null == serverSocket){  
+	            	//1.启动一个新的socketServer
+	            	ResourceBundleSocketMessage rbem = ResourceBundleSocketMessage.getInstance();
+	                this.serverSocket = new ServerSocket(Integer.parseInt(rbem.getMessage("port",  new Object[]{ "",""})));  
+	                LOG.debug("socket端口"+Integer.parseInt(rbem.getMessage("port",  new Object[]{ "",""})));
+	                LOG.debug("socket start");
+	                
+	                while (true) {
+	                    // 侦听并接受到此Socket的连接,请求到来则产生一个Socket对象，并继续执行
+	                    Socket socket = serverSocket.accept();
+	                    
+	                    new Thread(new SocketThread(socket,socketService)).start();
+	                   
+	                } 
+	                   
+	                }  
+	            
+		     }catch (Exception e) {  
+		            System.out.println("SocketThread创建socket服务出错");  
+		            e.printStackTrace();  
+		      }
+		 
+		 
 	 }
 }

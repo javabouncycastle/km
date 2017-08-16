@@ -25,8 +25,9 @@ public interface KeypairInuseDAO {
 
 	/**
 	 * @param kpInuse
+	 * @return 
 	 */
-	void findBySn(KeypairInuse kpInuse);
+	KeypairInuse findBySn(KeypairInuse kpInuse);
 
 	/**
 	 * @param id

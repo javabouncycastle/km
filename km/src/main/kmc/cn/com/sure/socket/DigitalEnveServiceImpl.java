@@ -3,6 +3,7 @@
  */
 package cn.com.sure.socket;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -11,6 +12,9 @@ import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -31,9 +35,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Decoder;
-
-import cn.com.sure.admin.service.AdminService;
 import cn.com.sure.common.KmConstants;
+import cn.com.sure.log.Admin;
+import cn.com.sure.log.service.AdminService;
 
 /**
  * @author Limin
@@ -50,7 +54,7 @@ public class DigitalEnveServiceImpl implements DigitalEnveService{
 	
 	
 	@Override
-	public byte[] digEve(KeyPair keypair) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, IOException {
+	public byte[] digEve(KeyPair keypair) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, IOException, CertificateException {
 		LOG.debug("digEve - start");
 		
 		//生成随机数，作为md5的密钥
@@ -60,8 +64,18 @@ public class DigitalEnveServiceImpl implements DigitalEnveService{
 		byte[] encryptedKeyPair = desEncrypt(keypair,desKey.getBytes());
 		
 		//用管理员证书对md5的随机数进行加密
-		 String cert = adminService.obtAdmCert(KmConstants.ADMIN_AUTH_NUM);
-		byte[] encryptedDesKey = rsaEncrypt(desKey.getBytes(),obtPubkey(cert));
+		String cert = adminService.fingByAdmId(KmConstants.ADMIN_AUTH_NUM).getCert();
+		
+		//cert证书获取公钥
+		// Base64解码
+		byte[] byteCert = new BASE64Decoder().decodeBuffer(cert);
+		//转换成二进制流
+		ByteArrayInputStream bain = new ByteArrayInputStream(byteCert);
+		CertificateFactory cf = CertificateFactory.getInstance("X.509");
+		X509Certificate oCert = (X509Certificate)cf.generateCertificate(bain);
+		PublicKey pubkey = oCert.getPublicKey();
+		
+		byte[] encryptedDesKey = rsaEncrypt(desKey.getBytes(),pubkey);
 		
 		byte[] resultByte = addBytes(encryptedKeyPair, encryptedDesKey);
 		
@@ -76,7 +90,7 @@ public class DigitalEnveServiceImpl implements DigitalEnveService{
 		
 		 try {  
 			 
-			 byte[] kpByt = ObjectToByte(keypair);
+			byte[] kpByt = ObjectToByte(keypair);
 			 
             DESKeySpec keySpec=new DESKeySpec(keyBytes);  
             SecretKeyFactory keyFactory=SecretKeyFactory.getInstance("DES");              
@@ -125,17 +139,6 @@ public class DigitalEnveServiceImpl implements DigitalEnveService{
         return bytes;  
     }
 
-	//string格式的公钥转为publickey格式的
-	private PublicKey obtPubkey(String pubKey) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-		LOG.debug("obtPubkey - start");
-		 X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(new BASE64Decoder().decodeBuffer(pubKey));
-	     KeyFactory pubKeyFactory = KeyFactory.getInstance("RSA");
-	     PublicKey publicKey = pubKeyFactory.generatePublic(pubKeySpec);
-		LOG.debug("obtPubkey - end");
-		return publicKey;
-		
-	}
-	
 	
 	public static byte[] addBytes(byte[] encryptedKeyPair, byte[] encrypted) {  
 	    byte[] resultByte = new byte[encryptedKeyPair.length + encrypted.length];  
