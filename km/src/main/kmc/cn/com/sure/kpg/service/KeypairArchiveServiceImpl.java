@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.com.sure.keypair.dao.KeypairArchiveDAO;
 import cn.com.sure.kpg.entry.KeypairArchive;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 /**
  * @author Limin
  *
@@ -60,6 +62,17 @@ public class KeypairArchiveServiceImpl implements KeypairArchiveService{
 		LOG.debug("findBySn");
 		
 		return kpArchive;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairArchiveService#seleExpireKp(com.mysql.fabric.xmlrpc.base.Data)
+	 */
+	@Override
+	public List<KeypairArchive> seleExpireKp(Data data) {
+		LOG.debug("seleExpireKp - start");
+		List<KeypairArchive>keypairArchives = keyPairArchiveDAO.seleExpireKp(data);
+		LOG.debug("seleExpireKp - end");
+		return keypairArchives;
 	}
 
 }

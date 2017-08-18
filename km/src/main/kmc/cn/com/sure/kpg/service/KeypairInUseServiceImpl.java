@@ -3,6 +3,7 @@
  */
 package cn.com.sure.kpg.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.sure.keypair.dao.KeypairInuseDAO;
+import cn.com.sure.kpg.entry.KeypairArchive;
 import cn.com.sure.kpg.entry.KeypairInuse;
 
 /**
@@ -27,6 +29,8 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 	
 	@Autowired
 	private KeypairInuseDAO keyPairInUseDAO;
+	@Autowired
+	private KeypairArchiveService archiveService;
 
 	/* (non-Javadoc)
 	 * @see cn.com.sure.keypair.service.KeyPairInUseService#selectAll()
@@ -37,16 +41,6 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 		List<KeypairInuse> keyPairInUses = keyPairInUseDAO.selectAll();
 		LOG.debug("selectAll - start");
 		return keyPairInUses;
-	}
-
-	/* (non-Javadoc)
-	 * @see cn.com.sure.kpg.service.KeypairInuseService#findKeypair()
-	 */
-	@Override
-	public void findKeypair() {
-		LOG.debug("findKeypair - start");
-		
-		LOG.debug("findKeypair - end");
 	}
 
 	/* (non-Javadoc)
@@ -78,6 +72,54 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 		LOG.debug("delete - start");
 		keyPairInUseDAO.delete(id);
 		LOG.debug("delete - end");
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#seleExpireKpg(com.mysql.fabric.xmlrpc.base.Data)
+	 */
+	@Override
+	public List<KeypairInuse> seleExpireKpg(Date date) {
+		LOG.debug("seleExpireKpg - start");
+		KeypairInuse inuse = new KeypairInuse();
+		inuse.setEndTime(date);
+		List<KeypairInuse> keyPairInUses = keyPairInUseDAO.seleExpireKpg(inuse);
+		LOG.debug("seleExpireKpg - end");
+		return keyPairInUses;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#executeAutoArchKpg()
+	 */
+	@Override
+	public void executeAutoArchKpg() {
+		LOG.debug("executeAutoArchKpg - start");
+		//1.查询出来到期密钥
+			List<KeypairInuse> list = seleExpireKpg(new Date());
+			for(KeypairInuse inuse:list){
+				
+				//1.1将查询出来的在用密钥复制到历史密钥中
+				KeypairArchive archive = new KeypairArchive();
+				archive.setPriKey(inuse.getPriKey());
+				archive.setPubKey(inuse.getPubKey());
+				archive.setKeyPairAlgorithm(inuse.getKeyPairAlgorithm());
+				archive.setKpgTask(inuse.getKpgTask());
+				archive.setGenTime(inuse.getGenTime());
+				archive.setArchTime(new Date());
+				archive.setCertDn(inuse.getCertDn());
+				archive.setCertSn(inuse.getCertSn());
+				archive.setEndTime(inuse.getEndTime());
+				archive.setStartTime(inuse.getStartTime());
+				
+				//1.2插入历史密钥中
+				archiveService.insert(archive);
+				
+				//1.3删除在用表中的那条信息
+				delete(inuse.getId());
+				
+			}
+		LOG.debug("executeAutoArchKpg - end");		
 	}
 
 }

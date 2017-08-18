@@ -5,6 +5,8 @@ package cn.com.sure.kpg.service;
 
 import java.util.List;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import cn.com.sure.kpg.entry.KeypairArchive;
 
 /**
@@ -28,5 +30,11 @@ public interface KeypairArchiveService {
 	 * @return 
 	 */
 	KeypairArchive findBySn(String certSn);
+
+	/**
+	 * @param data
+	 * @return
+	 */
+	List<KeypairArchive> seleExpireKp(Data data);
 
 }

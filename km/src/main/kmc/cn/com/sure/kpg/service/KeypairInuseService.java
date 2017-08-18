@@ -3,6 +3,7 @@
  */
 package cn.com.sure.kpg.service;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.com.sure.kpg.entry.KeypairInuse;
@@ -18,10 +19,6 @@ public interface KeypairInuseService {
 	 */
 	List<KeypairInuse> selectAll();
 
-	/**
-	 * 
-	 */
-	void findKeypair();
 
 	/**
 	 * @param inuse
@@ -38,5 +35,18 @@ public interface KeypairInuseService {
 	 * @param id
 	 */
 	void delete(String id);
+
+
+	/**
+	 * @param data
+	 * @return
+	 */
+	List<KeypairInuse> seleExpireKpg(Date date);
+
+
+	/**
+	 * 
+	 */
+	void executeAutoArchKpg();
 
 }

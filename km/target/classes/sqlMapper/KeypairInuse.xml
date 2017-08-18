@@ -71,4 +71,31 @@
 		delete from keypair_inuse where id=#{id}
 	</delete>
 	
+	<select id="countArchNum" resultType="int" parameterType="date">
+		select 
+			count(0)
+		from 
+			keypair_inuse
+		where
+			<![CDATA[ end_time <=#{endTime}]]>
+	</select>
+	
+	<select id="seleExpireKpg" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+		select
+			id,
+			pub_key as pubKey,
+			pri_key as priKey,
+			kpg_algorithm as keyPairAlgorithm,
+			km_kpg_task as kpgTask,
+			gen_time as genTime,
+			start_time as startTime,
+			end_time as endTime,
+			cert_sn as certSn,
+			cert_dn as certDn
+		from
+			keypair_inuse
+		where
+			<![CDATA[ end_time <=#{endTime}]]>
+	</select>
+	
 </mapper>

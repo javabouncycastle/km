@@ -27,7 +27,7 @@ import cn.com.sure.syscode.entry.SysCode;
  *
  */
 @Transactional(propagation = Propagation.REQUIRED)
-@Service("kpgQuartzTaskExecutorService")
+@Service("kpgQuartzTaskExecutor")
 public class KpgQuartzTaskExecutorImpl implements KpgQuartzTaskExecutor{
 
 	private static final Log LOG = LogFactory.getLog(KpgQuartzTaskExecutorImpl.class);

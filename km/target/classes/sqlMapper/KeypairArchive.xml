@@ -63,5 +63,25 @@
 	where
 		cert_sn=#{certSn}
 </select>
+
+<select id="seleExpireKp" parameterType="cn.com.sure.kpg.entry.KeypairArchive" resultType="cn.com.sure.kpg.entry.KeypairArchive">
+	select
+		id,
+		pub_key as pubKey,
+		pri_key as priKey,
+		kpg_algorithm as keyPairAlgorithm,
+		km_kpg_task as kpgTask,
+		gen_time as genTime,
+		start_time as startTime,
+		end_time as endTime,
+		cert_sn as certSn,
+		cert_dn as certDn,
+		arch_time as atchTime
+	from
+		keypair_archive
+	where 
+	<![CDATA[ and end_time <=#{endTime}]]>
+		
+</select>
 	
 </mapper>

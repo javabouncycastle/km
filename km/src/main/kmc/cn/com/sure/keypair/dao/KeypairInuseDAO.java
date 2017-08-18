@@ -34,4 +34,15 @@ public interface KeypairInuseDAO {
 	 */
 	void delete(String id);
 
+	/**
+	 * @return
+	 */
+	int countArchNum(KeypairInuse inuse);
+
+	/**
+	 * @param data
+	 * @return
+	 */
+	List<KeypairInuse> seleExpireKpg(KeypairInuse inuse);
+
 }

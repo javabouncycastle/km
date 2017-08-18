@@ -5,6 +5,8 @@ package cn.com.sure.keypair.dao;
 
 import java.util.List;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import cn.com.sure.kpg.entry.KeypairArchive;
 
 /**
@@ -29,5 +31,12 @@ public interface KeypairArchiveDAO {
 	 * @return 
 	 */
 	public KeypairArchive findBySn(String certSn);
+
+	/**
+	 * @param data
+	 * @return
+	 */
+	public List<KeypairArchive> seleExpireKp(Data data);
+
 
 }
