@@ -45,4 +45,10 @@ public interface KeypairInuseDAO {
 	 */
 	List<KeypairInuse> seleExpireKpg(KeypairInuse inuse);
 
+	/**
+	 * @param keypairInuse
+	 * @return
+	 */
+	List<KeypairInuse> searchByCondition(KeypairInuse keypairInuse);
+
 }

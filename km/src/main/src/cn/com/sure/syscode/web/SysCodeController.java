@@ -42,7 +42,7 @@ public class SysCodeController {
 	Date date = new Date();
 	
 	/**
-	* UC-SYS01-11 新增数据字典内容
+	* UC-SYS01-05新增数据字典内容
 	* @return "redirect:/list"
 	*/
 	@RequestMapping(value = "insert")
@@ -76,7 +76,7 @@ public class SysCodeController {
 	}
 	
 	/**
-	 * 数据字典列表
+	 * UC-SYS01-08查询数据字典内容
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -90,12 +90,12 @@ public class SysCodeController {
 		List<SysCode> sysCodes = this.sysCodeService.selectAll(sysCode);
 		List<SysCodeType> sysCodeTypes = this.sysCodeTypeService.selectAll(null);
 		LOG.debug("selectAll - end");
-		return new ModelAndView("syscode/syscodeList").addObject("sysCodes", sysCodes).addObject("sysCodeTypes",sysCodeTypes);
+		return new ModelAndView("syscode/syscodeLists").addObject("sysCodes", sysCodes).addObject("sysCodeTypes",sysCodeTypes);
 	}
 	
 	
 	/**
-	* 更新UC-SYS01-12 修改数据字典内容
+	* UC-SYS01-02修改数据字典
 	* @return "redirect:/syscode/selectAll.do"
 	*/
 	@RequestMapping(value = "update")
@@ -126,7 +126,7 @@ public class SysCodeController {
 	
 	
 	/**
-	* UC-SYS01-13 删除数据字典内容
+	* UC-SYS01-03删除数据字典
 	* @return "redirect:/syscode/selectAll.dot"
 	*/
 	@RequestMapping(value = "remove")
@@ -154,7 +154,7 @@ public class SysCodeController {
 	
 	
 	/**
-	*  停用数据字典内容
+	*  UC-SYS01-09停用数据字典内容
 	* @return "redirect:/syscode/selectAll.do"
 	*/
 	@RequestMapping(value = "suspend")
@@ -173,7 +173,7 @@ public class SysCodeController {
 	
 	
 	/**
-	 *  启用数据字典内容
+	 *   UC-SYS01-10启用数据字典内容
 	 */
 	@RequestMapping(value = "activate")
 	public String activate(
@@ -190,7 +190,7 @@ public class SysCodeController {
 	}
 	
 	/**
-	 * 按条件查询
+	 * UC-SYS01-11按条件查询字典内容
 	 */
 	@RequestMapping(value = "searchByCondition")
 	public ModelAndView searchByCondition(SysCode sysCode, Model model,RedirectAttributes attr,HttpServletRequest request){

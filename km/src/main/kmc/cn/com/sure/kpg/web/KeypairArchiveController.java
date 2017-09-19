@@ -32,13 +32,21 @@ public class KeypairArchiveController {
 	@Autowired
 	private KeypairArchiveService keypairArchiveService;
 	
+	/**
+	 * 
+	 * @param keypairArchive
+	 * @param model
+	 * @param attr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KeypairArchive keypairArchive,Model model, 
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("selectAll - start");
 		List<KeypairArchive> keypairArchives=keypairArchiveService.selectAll();
 		LOG.debug("selectAll - end");
-		return new ModelAndView("keypair/keypairArchList").addObject("keypairArchives", keypairArchives);
+		return new ModelAndView("keyPair/kpArchList").addObject("keypairArchives", keypairArchives);
 		
 	}
 

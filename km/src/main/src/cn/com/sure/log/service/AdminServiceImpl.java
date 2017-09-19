@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.sure.log.Admin;
+import cn.com.sure.admin.entry.Admin;
 import cn.com.sure.log.dao.AdminDAO;
 import cn.com.sure.socket.DigitalEnveServiceImpl;
 

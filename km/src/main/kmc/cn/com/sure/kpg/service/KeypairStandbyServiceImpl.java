@@ -5,6 +5,8 @@ package cn.com.sure.kpg.service;
 
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +93,32 @@ public class KeypairStandbyServiceImpl implements KeypairStandbyService{
 		LOG.debug("obtKpStandby - start");
 		keyPairStandbyDAO.delete(id);
 		LOG.debug("obtKpStandby - end");
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairStandbyService#backups(java.lang.Long)
+	 */
+	@Override
+	public void backups(KeypairStandby keypairStandby,ServletOutputStream out) {
+		LOG.debug("backups - start");
+		
+		LOG.debug("backups - start");
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairStandbyService#searchByCondition(cn.com.sure.kpg.entry.KeypairStandby)
+	 */
+	@Override
+	public List<KeypairStandby> searchByCondition(KeypairStandby keypairStandby) {
+		LOG.debug("searchByCondition - start");
+		List<KeypairStandby> keypairStandbys = keyPairStandbyDAO.searchByCondition(keypairStandby);
+		LOG.debug("searchByCondition - end");
+		return keypairStandbys;
 	}
 
 }

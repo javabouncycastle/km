@@ -35,8 +35,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Decoder;
+import cn.com.sure.admin.entry.Admin;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.log.Admin;
 import cn.com.sure.log.service.AdminService;
 
 /**

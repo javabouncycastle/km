@@ -122,4 +122,15 @@ public class KeypairInUseServiceImpl implements KeypairInuseService{
 		LOG.debug("executeAutoArchKpg - end");		
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.sure.kpg.service.KeypairInuseService#searchByCondition(cn.com.sure.kpg.entry.KeypairInuse)
+	 */
+	@Override
+	public List<KeypairInuse> searchByCondition(KeypairInuse keypairInuse) {
+		LOG.debug("searchByCondition - start");
+		List<KeypairInuse> keypairInuses = keyPairInUseDAO.searchByCondition(keypairInuse);
+		LOG.debug("searchByCondition - end");
+		return null;
+	}
+
 }

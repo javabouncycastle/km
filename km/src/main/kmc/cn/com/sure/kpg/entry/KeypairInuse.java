@@ -2,10 +2,8 @@ package cn.com.sure.kpg.entry;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
@@ -25,16 +23,12 @@ public class KeypairInuse {
 	/**
 	 * 公钥 base64格式
 	 */
-	@Lob
-	@Column(name = "pub_key",length=8192) 	
 	private String pubKey;
 	
 	
 	/**
 	 * 私钥 base64格式
 	 */
-	@Lob
-	@Column(name = "pri_key",length=8192) 	
 	private String priKey;
 	
 	/**
@@ -50,31 +44,26 @@ public class KeypairInuse {
 	/**
 	 * 密钥生成时间
 	 */
-    @Column (name = "gen_time" )
     private Date genTime;
     
     /**
      * 密钥使用开始时间
      */
-    @Column (name = "start_time" )
     private Date startTime;
     
     /**
      * 密钥使用结束时间时间
      */
-    @Column (name = "end_time" )
     private Date endTime;
     
     /**
      * 证书系列号
      */
-    @Column (name = "cert_sn" )
     private String certSn;
     
     /**
      * 证书标识
      */
-    @Column (name = "cert_dn" )
     private String certDn;
     
     private Date inuseTime;

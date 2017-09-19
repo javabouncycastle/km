@@ -9,7 +9,7 @@
         <div class="templatemo-content">
 	          <ol class="breadcrumb">
 	            <li><a href="<%=request.getContextPath()%>/main">主页面</a></li>
-	            <li class="active">密钥管理</li>
+	            <li class="active">在用密钥管理</li>
 	            <li><a href="../../sign-in.html">Sign In Form</a></li>
 	             <li><a href="javascript:searchByCondition()"> 查询</a></li>
 	          </ol>
@@ -22,31 +22,17 @@
 	                    </div>
 	             </c:if> 
               <div class="table-responsive">
-                <h4 class="margin-bottom-15">密钥列表</h4>
-                <!-- 查询条件div -->
+                <h4 class="margin-bottom-15">密钥在用列表</h4>
+                 <!-- 查询条件div -->
                  <div class="row" id="searchCondition" style="display:none">
 		            <div class="col-md-12">
 		              <form id="templatemo-preferences-form" action="searchByCondition.do" method="post" >
 		                <div class="row">
 	                	  <div class="col-md-6 margin-bottom-15">
-	                  	     <label for="id" class="control-label">主键标识</label>
-			                 <input type="number" min="0" class="form-control" name="id" id="id"/>     
+	                  	     <label for="certSn" class="control-label">证书SN</label>
+			                 <input type="text" min="0" class="form-control"  id="certSn" name="certSn"/>     
 		                  </div>
-		                   <div class="col-md-6 margin-bottom-15">
-			                    <label for="name" class="control-label">别名 </label>
-			                    <input type="text" class="form-control" id="name" name="name" />                 
-		                  </div>
-		                </div>
-		                  <div class="row">
-		                  <div class="col-md-6 margin-bottom-15">
-			                    <label for="algorithmOid" class="control-label">算法OID </label>
-			                    <input type="text" class="form-control" id="algorithmOid" name="algorithmOid" />                 
-		                  </div>
-		                  <div class="col-md-6 margin-bottom-15">
-		                  	<label for="keysize" class="control-label">密钥长度 </label>
-			                    <input type="text" class="form-control" id="keysize" name="keysize" />           
-		                  </div>
-		                </div>
+		                </div> 
 		                <div class="row templatemo-form-buttons">
 			                <div class="col-md-12">
 			                  <button type="submit" class="btn btn-primary">查询</button>
@@ -62,18 +48,24 @@
 		                      <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" width="5%"/>全选</th>
 		                      <th width="8%" >主键</th>
 		                      <th width="10%">算法+长度</th>
-		                      <th width="10%">任务</th>
-		                      <th width="10%">生成时间</th>
+		                      <th width="10%">证书SN</th>
+		                      <th width="10%">证书DN</th>
+		                      <th width="10%">开始时间</th>
+		                      <th width="10%">结束时间</th>
 		                    </tr>
 		                  </thead>
 	                    <tbody id="id_tbody_upd_list"> 
-	                    <c:forEach var="row" items="${keyPairStandbys}">
+	                    <c:forEach var="row" items="${keypairInuses}">
+	                    <tr>
 	                    	<td><input type="checkbox"/></td>
 	                    	<td>${row.id}</td>
-		                    <td>${row.keyPairAlgorithm}</td>
-		                    <td>${row.kpgTask}</td>
-		                    <td><fmt:formatDate value="${row.genTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		                    <td>${row.keyPairAlgorithm.algorithmName}</td>
+		                    <td>${row.certSn}</td>
+		                    <td>${row.certDn}</td>
+		                    <td><fmt:formatDate value="${row.startTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		                    <td><fmt:formatDate value="${row.endTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		                    <%-- <td> <a href="javascript:remove('${row.id}')"  class="btn btn-link">删除</a> --%>
+		                    </tr>
 	                	</c:forEach>
 	               </table>
 	          </div>

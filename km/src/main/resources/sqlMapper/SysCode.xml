@@ -84,7 +84,6 @@
 			where ksc.para_type=kspt.id
 			and kspt.para_type=#{paraType.paraType}
 			and ksc.is_valid=#{isValid}
-			
 	</select>
 	
 	<update id="updateValid" parameterType="cn.com.sure.syscode.entry.SysCode">

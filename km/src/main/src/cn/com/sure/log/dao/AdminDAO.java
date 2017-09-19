@@ -3,7 +3,7 @@
  */
 package cn.com.sure.log.dao;
 
-import cn.com.sure.log.Admin;
+import cn.com.sure.admin.entry.Admin;
 
 /**
  * @author Limin

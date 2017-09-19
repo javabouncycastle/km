@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.com.sure.common.BaseController;
+import cn.com.sure.km.KmErrorMessageConstants;
 import cn.com.sure.log.entry.AuditOpLog;
 import cn.com.sure.log.service.AuditOpLogService;
 import cn.com.sure.syscode.web.SysCodeController;
@@ -40,7 +41,7 @@ public class AuditOpLogController extends BaseController {
 	private AuditOpLogService auditOpLogService;
 	
 	/**
-	 * 
+	 * 查询所有日志
 	 * @return
 	 */
 	@RequestMapping(value="selectAll")
@@ -76,13 +77,13 @@ public class AuditOpLogController extends BaseController {
 		 try {
 			ServletOutputStream out=response.getOutputStream();
 			String fileName=new String(("日志表"+ new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getBytes(),"UTF-8");
-			 response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
-			 String[] titles = { "", "", "", "","","","","","","" }; 
-			 auditOpLogService.exportExcel(titles, out);
-			 return "redirect:/auditOpLog/selectAll.do.do";
+			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
+			String[] titles = { "", "", "", "","","","","","","" }; 
+			auditOpLogService.exportExcel(titles, out,auditOpLog);
+		 return "redirect:/auditOpLog/selectAll.do.do";
 		} catch (IOException e) {
 			e.printStackTrace();
-			 return "导出信息失败";
+			return String.valueOf(KmErrorMessageConstants.exportError);
 		}
 		
 	}

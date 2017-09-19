@@ -45,4 +45,11 @@ public interface KeyPairStandbyDAO {
 	 */
 	void delete(String id);
 
+
+	/**
+	 * @param keypairStandby
+	 * @return
+	 */
+	List<KeypairStandby> searchByCondition(KeypairStandby keypairStandby);
+
 }

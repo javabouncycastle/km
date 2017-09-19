@@ -46,9 +46,9 @@ public class KeypairArchiveServiceImpl implements KeypairArchiveService{
 	 */
 	@Override
 	public void insert(KeypairArchive kpArchive) {
-		LOG.debug("selectAll - start");
+		LOG.debug("insert - start");
 		keyPairArchiveDAO.insert(kpArchive);
-		LOG.debug("selectAll - end");
+		LOG.debug("insert - end");
 	}
 
 	/* (non-Javadoc)

@@ -36,7 +36,7 @@ public class KeypairAlgorithmController {
 	
 	
 	/**
-	 * 增加密钥算法
+	 * UC-ALG02-01 新增密钥算法
 	 */
 	@RequestMapping(value="insert")
 	public String insert(KeyPairAlgorithm keyPairAlgorithm,Model model, 
@@ -68,7 +68,7 @@ public class KeypairAlgorithmController {
 	}
 	
 	/**
-	 * 查询密钥算法列表
+	 * UC- ALG02-06查询所有密钥算法
 	 */
 	@RequestMapping(value="selectAll")
 	public ModelAndView selectAll(KeyPairAlgorithm keyPairAlgorithm,Model model, 
@@ -82,7 +82,7 @@ public class KeypairAlgorithmController {
 	}
 	
 	/**
-	 * 更新密钥算法
+	 * UC- ALG02-02修改密钥算法
 	 * @throws KmApplicationexception 
 	 */
 	@RequestMapping(value="update")
@@ -109,7 +109,7 @@ public class KeypairAlgorithmController {
 	
 	
 	/**
-	 *  删除密钥算法
+	 *  UC- ALG02-03删除密钥算法
 	 */
 	@RequestMapping(value="remove")
 	public String delete(
@@ -134,7 +134,7 @@ public class KeypairAlgorithmController {
 	
 	
 	/**
-	* UC-SYS01-17 停用
+	* UC- ALG02-04停用密钥算法
 	* @return "redirect:/list"
 	*/
 	@RequestMapping(value = "suspend")
@@ -151,7 +151,7 @@ public class KeypairAlgorithmController {
 	}
 	
 	/**
-	 *  UC-SYS01-18 启用
+	 *  UC- ALG02-05启用密钥算法
 	 * @return "redirect:/list"
 	 */
 	
@@ -171,7 +171,7 @@ public class KeypairAlgorithmController {
 	
 
 	/**
-	 * 
+	 * UC- ALG02-07按条件查询密钥算法
 	 * @param keypairAlgorithm
 	 * @param model
 	 * @param attr

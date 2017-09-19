@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=utf8" pageEncoding="utf8" %>
-
 <%@ include file="header.jsp" %>
 <!DOCTYPE html>
  <body>

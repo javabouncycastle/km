@@ -19,5 +19,7 @@ public interface KmErrorMessageConstants {
 	public static final int snNotFound = 10001;//找不到这条记录
 	
 	public static final int revokeKpSuce = 10002;//注销密钥成功
+	
+	public static final int exportError = 117;//excel导出失败
 
 }

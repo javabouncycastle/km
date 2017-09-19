@@ -222,7 +222,7 @@ public class KpgTaskController extends BaseController{
 		LOG.debug("suspend - start");
 		kpgTaskService.suspend(id);
 		LOG.debug("suspend - end");
-		return null;
+		return "redirect:/kpgTask/selectAll.do";
 		
 	}
 	
@@ -234,7 +234,7 @@ public class KpgTaskController extends BaseController{
 		LOG.debug("stop - start");
 		kpgTaskService.stop(id);
 		LOG.debug("stop - end");
-		return null;
+		return "redirect:/kpgTask/selectAll.do";
 	}
 	
 	/**
@@ -250,7 +250,7 @@ public class KpgTaskController extends BaseController{
 		LOG.debug("continuation - start");
 		kpgTaskService.continuation(id);
 		LOG.debug("continuation - end");
-				return null;
+				return "redirect:/kpgTask/selectAll.do";
 		
 	}
 	
@@ -297,8 +297,6 @@ public class KpgTaskController extends BaseController{
     			}
     		}
     	}
-    	
-		
     	
 		return resultString;
     	

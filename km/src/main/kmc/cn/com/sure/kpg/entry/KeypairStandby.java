@@ -5,9 +5,7 @@ package cn.com.sure.kpg.entry;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.kpgtask.entry.KpgTask;
@@ -28,16 +26,12 @@ public class KeypairStandby {
 	/**
 	 * 公钥 base64格式
 	 */
-	@Lob
-	@Column(name = "pub_key",length=8192) 	
 	private String pubKey;
 	
 	
 	/**
 	 * 私钥 base64格式
 	 */
-	@Lob
-	@Column(name = "pri_key",length=8192) 	
 	private String priKey;
 	
 	/**
@@ -53,8 +47,11 @@ public class KeypairStandby {
 	/**
 	 * 密钥生成时间
 	 */
-    @Column (name = "gen_time" )
     private Date genTime;
+    
+    
+    private Date startTime;
+    private Date endTime;
 
     
     
@@ -114,6 +111,26 @@ public class KeypairStandby {
 
 	public void setGenTime(Date genTime) {
 		this.genTime = genTime;
+	}
+
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 

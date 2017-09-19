@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.log.service.AuditOpLogService;
-import cn.com.sure.syscode.entry.SysCode;
 import cn.com.sure.syscode.entry.SysCodeType;
 import cn.com.sure.syscode.service.SysCodeTypeService;
 
@@ -45,7 +44,7 @@ public class SysCodeTypeController {
 	Date date = new Date();
 	
 	/**
-	 * 增加数据字典类别
+	 * UC-SYS01-01 新增数据字典类别
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -82,7 +81,7 @@ public class SysCodeTypeController {
 	}
 	
 	/**
-	 * 更新数据字典类别
+	 * UC-SYS01-02修改数据字典类别
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -114,7 +113,7 @@ public class SysCodeTypeController {
 	}
 	
 	/**
-	 * 删除数据字典类别
+	 * UC-SYS01-03删除数据字典类别
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -142,7 +141,7 @@ public class SysCodeTypeController {
 	}
 	
 	/**
-	 * 查询数据字典类别
+	 * UC-SYS01-04查询全部数据字典类别
 	 * @param sysCode
 	 * @param model
 	 * @param attr
@@ -161,7 +160,7 @@ public class SysCodeTypeController {
 	
 	
 	/**
-	 * 
+	 * UC-SYS01-12按条件查询字典类别
 	 * @param sysCodeType
 	 * @param model
 	 * @param attr

@@ -49,4 +49,12 @@ public interface KeypairInuseService {
 	 */
 	void executeAutoArchKpg();
 
+
+	/**
+	 * @param keypairInuse
+	 * @return
+	 */
+	List<KeypairInuse> searchByCondition(
+			KeypairInuse keypairInuse);
+
 }

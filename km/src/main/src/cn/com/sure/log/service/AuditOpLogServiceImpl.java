@@ -74,7 +74,7 @@ public class AuditOpLogServiceImpl implements AuditOpLogService{
 		auditOpLog.setMessage(message);
 		auditOpLog.setTimestamp(timestamp);
 		auditOpLog.setIp(ip);
-		auditOpLog.setOperator(operator);
+		auditOpLog.setOperatorSn(operator);
 		auditOpLog.setIsOpSucc(isOpSucc);
 		
 		auditOpLogDAO.insert(auditOpLog);
@@ -88,7 +88,7 @@ public class AuditOpLogServiceImpl implements AuditOpLogService{
 	 * @see cn.com.sure.log.service.AuditOpLogService#exportExcel(java.lang.String[], javax.servlet.ServletOutputStream)
 	 */
 	@Override
-	public void exportExcel(String[] titles, ServletOutputStream out) throws Exception {
+	public void exportExcel(String[] titles, ServletOutputStream out,AuditOpLog auditOpLog) throws Exception {
 		LOG.debug("exportExcel - start");
 		// 第一步，创建一个workbook，对应一个Excel文件
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -109,45 +109,45 @@ public class AuditOpLogServiceImpl implements AuditOpLogService{
 			}
 		
 		  // 第五步，写入实体数据 
-		 List <AuditOpLog> auditOpLogs = auditOpLogDAO.selectAll();            
+		 List <AuditOpLog> auditOpLogs = auditOpLogDAO.searchByCondition(auditOpLog);
 		
 		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 if(auditOpLogs != null && !auditOpLogs.isEmpty()){
 		     for (int i = 0; i < auditOpLogs.size(); i++) {
 		         hssfRow = hssfSheet.createRow(i+1);                
-		         AuditOpLog auditOpLog = auditOpLogs.get(i);
+		         AuditOpLog opLog = auditOpLogs.get(i);
 		      // 第六步，创建单元格，并设置值
-		      String id = auditOpLog.getId();
+		      String id = opLog.getId();
 		      hssfRow.createCell(0).setCellValue(id);
 		      
-		      String action = auditOpLog.getAction();
+		      String action = opLog.getAction();
 		      hssfRow.createCell(1).setCellValue(action);
 		      
-		      String actioneExt1 = auditOpLog.getActionExt1();
+		      String actioneExt1 = opLog.getActionExt1();
 		      hssfRow.createCell(2).setCellValue(actioneExt1);
 		      
-		      String actioneExt2 = auditOpLog.getActionExt2();
+		      String actioneExt2 = opLog.getActionExt2();
 		      hssfRow.createCell(3).setCellValue(actioneExt2);
 		      
-		      String actioneExt3 = auditOpLog.getActionExt3();
+		      String actioneExt3 = opLog.getActionExt3();
 		      hssfRow.createCell(4).setCellValue(actioneExt3);
 		      
-		      String actioneExt4 = auditOpLog.getActionExt4();
+		      String actioneExt4 = opLog.getActionExt4();
 		      hssfRow.createCell(5).setCellValue(actioneExt4);
 		      
-		      String message = auditOpLog.getMessage();
+		      String message = opLog.getMessage();
 		      hssfRow.createCell(6).setCellValue(message);
 		      
-		      Date timestamp = auditOpLog.getTimestamp();
+		      Date timestamp = opLog.getTimestamp();
 		      hssfRow.createCell(7).setCellValue(sdf.format(timestamp));
 		      
-		      String ip = auditOpLog.getIp();
+		      String ip = opLog.getIp();
 		      hssfRow.createCell(8).setCellValue(ip);
 		      
-		      String operator = auditOpLog.getOperator();
+		      String operator = opLog.getOperatorSn();
 		      hssfRow.createCell(9).setCellValue(operator); 
 		      
-		      Integer isOpSucc = auditOpLog.getIsOpSucc();
+		      Integer isOpSucc = opLog.getIsOpSucc();
 		      hssfRow.createCell(9).setCellValue(isOpSucc); 
 		      
 		     }

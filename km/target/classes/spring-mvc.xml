@@ -135,7 +135,7 @@
            <ref bean="myJobDetail3" />  
        </property>  
        <property name="cronExpression">  
-           <value>10 0/1440 * * * ?</value>  <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。 -->   
+           <value>10 0/1 * * * ?</value>  <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。 -->   
        </property>  
    </bean> 
   

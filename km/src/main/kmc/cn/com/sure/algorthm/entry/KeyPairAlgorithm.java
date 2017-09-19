@@ -96,6 +96,4 @@ public class KeyPairAlgorithm {
 		this.isValid = isValid;
 	}
 
-    
-
 }

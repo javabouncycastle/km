@@ -32,4 +32,3 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/My97DatePicker/WdatePicker.js"></script> 
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/select2.min.js"></script> 
-	<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.uniform.js"></script>  --%>

@@ -2,25 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.keypair.dao.KeypairInuseDAO">  
 
- 	<resultMap type="cn.com.sure.kpg.entry.KeypairInuse" id="KpgResultMap">
-		<id column="id" javaType="long" property="id"/>
-		<result column="name" javaType="String" property="name"/>
+	<resultMap type="cn.com.sure.kpg.entry.KeypairInuse" id="KeypairInuseResultMap">
+		<id column="id" javaType="String" property="id"/>
+		<result column="pubKey" javaType="String" property="pubKey"/>
+		<result column="priKey" javaType="String" property="priKey"/>
+		<result column="genTime" javaType="Date" property="genTime"/>
+		<result column="startTime" javaType="Date" property="startTime" />
+		<result column="endTime" javaType="Date" property="endTime" />
+		<result column="inuseTime" javaType="Date" property="inuseTime" />
+		<result column="certDn" javaType="String" property="certDn" />
+		<result column="certSn" javaType="String" property="certSn" />
+		<association property="keyPairAlgorithm" javaType="cn.com.sure.algorthm.entry.KeyPairAlgorithm" >
+			<id column="kpgAlgId" javaType="long" property="id"/>
+			<result column="algName" javaType="String" property="name"/>
+			<result column="algorithmOid" javaType="String" property="algorithmOid"/>
+			<result column="algorithmName" javaType="String" property="algorithmName"/>
+			<result column="keysize" javaType="Integer" property="keysize"/>
+			<result column="notes" javaType="String" property="notes"/>
+			<result column="isValid" javaType="Integer" property="isValid"/>
+		</association>
+		<association property="kpgTask" javaType="cn.com.sure.kpgtask.entry.KpgTask">
+			<id column="kpgTaskId" javaType="Long" property="id"/>
+			<result column="name" javaType="String" property="name"/>
+			<association property="keyPairAlgorithm" javaType="cn.com.sure.algorthm.entry.KeyPairAlgorithm">
+				<id column="kpgAlgIds" javaType="long" property="id"/>
+				<result column="algNames" javaType="String" property="name"/>
+				<result column="algorithmOids" javaType="String" property="algorithmOid"/>
+				<result column="algorithmNames" javaType="String" property="algorithmName"/>
+			</association>
+		</association>
 	</resultMap>
 
-	<select id="selectAll" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+	<select id="selectAll" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultMap="KeypairInuseResultMap">
 		select
-			id,
-			pub_key as pubKey,
-			pri_key as priKey,
-			kpg_algorithm as keyPairAlgorithm,
-			km_kpg_task as kpgTask,
-			gen_time as genTime,
-			start_time as startTime,
-			end_time as endTime,
-			cert_sn as certSn,
-			cert_dn as certDn
+			t1.id,
+			t1.pub_key as pubKey,
+			t1.pri_key as priKey,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.km_kpg_task as kpgTask,
+			t1.gen_time as genTime,
+			t1.start_time as startTime,
+			t1.end_time as endTime,
+			t1.cert_sn as certSn,
+			t1.cert_dn as certDn,
+			t2.name as name,
+			t2.kpg_algorithm as keyPairAlgorithm,
+			t3.alg_name as algorithmName
 		from
-			keypair_inuse
+			keypair_inuse t1,kpg_task t2,keypair_algorithm t3
+		WHERE
+			t1.kpg_algorithm=t3.alg_name
+		AND
+			t2.kpg_algorithm=t3.id
+		AND
+			t1.km_kpg_task=t2.name
+	
 	</select>
 	
 	<insert id="insert" parameterType="cn.com.sure.kpg.entry.KeypairInuse">
@@ -49,21 +85,30 @@
 		)
 	</insert>
 	
-	<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
+	<select id="findBySn" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultMap="KeypairInuseResultMap">
 		select
-			id,
-			pub_key as pubKey,
-			pri_key as priKey,
-			kpg_algorithm as keyPairAlgorithm,
-			km_kpg_task as kpgTask,
-			gen_time as genTime,
-			start_time as startTime,
-			end_time as endTime,
-			cert_sn as certSn,
-			cert_dn as certDn
+			t1.id,
+			t1.pub_key as pubKey,
+			t1.pri_key as priKey,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.km_kpg_task as kpgTask,
+			t1.gen_time as genTime,
+			t1.start_time as startTime,
+			t1.end_time as endTime,
+			t1.cert_sn as certSn,
+			t1.cert_dn as certDn,
+			t2.name as name,
+			t2.kpg_algorithm as keyPairAlgorithm,
+			t3.alg_name as algorithmName
 		from
-			keypair_inuse
-		where
+			keypair_inuse t1,kpg_task t2,keypair_algorithm t3
+		WHERE
+			t1.kpg_algorithm=t3.alg_name
+		AND
+			t2.kpg_algorithm=t3.id
+		AND
+			t1.km_kpg_task=t2.name
+		and
 			cert_sn=#{certSn}
 	</select>
 	
@@ -80,22 +125,63 @@
 			<![CDATA[ end_time <=#{endTime}]]>
 	</select>
 	
-	<select id="seleExpireKpg" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultType="cn.com.sure.kpg.entry.KeypairInuse">
-		select
-			id,
-			pub_key as pubKey,
-			pri_key as priKey,
-			kpg_algorithm as keyPairAlgorithm,
-			km_kpg_task as kpgTask,
-			gen_time as genTime,
-			start_time as startTime,
-			end_time as endTime,
-			cert_sn as certSn,
-			cert_dn as certDn
+	<select id="seleExpireKpg" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultMap="KeypairInuseResultMap">
+					select
+			t1.id,
+			t1.pub_key as pubKey,
+			t1.pri_key as priKey,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.km_kpg_task as kpgTask,
+			t1.gen_time as genTime,
+			t1.start_time as startTime,
+			t1.end_time as endTime,
+			t1.cert_sn as certSn,
+			t1.cert_dn as certDn,
+			t2.name as name,
+			t2.kpg_algorithm as keyPairAlgorithm,
+			t3.alg_name as algorithmName
 		from
-			keypair_inuse
-		where
+			keypair_inuse t1,kpg_task t2,keypair_algorithm t3
+		WHERE
+			t1.kpg_algorithm=t3.alg_name
+		AND
+			t2.kpg_algorithm=t3.id
+		AND
+			t1.km_kpg_task=t2.name
+		and
 			<![CDATA[ end_time <=#{endTime}]]>
+	</select>
+	
+	<select id="searchByCondition" parameterType="cn.com.sure.kpg.entry.KeypairInuse" resultMap="KeypairInuseResultMap">
+		select
+			t1.id,
+			t1.pub_key as pubKey,
+			t1.pri_key as priKey,
+			t1.kpg_algorithm as keyPairAlgorithm,
+			t1.km_kpg_task as kpgTask,
+			t1.gen_time as genTime,
+			t1.start_time as startTime,
+			t1.end_time as endTime,
+			t1.cert_sn as certSn,
+			t1.cert_dn as certDn,
+			t2.name as name,
+			t2.kpg_algorithm as keyPairAlgorithm,
+			t3.alg_name as algorithmName
+		from
+			keypair_inuse t1,kpg_task t2,keypair_algorithm t3
+		WHERE
+			t1.kpg_algorithm=t3.alg_name
+		AND
+			t2.kpg_algorithm=t3.id
+		AND
+			t1.km_kpg_task=t2.name
+			
+		<if test="certDn!=null and certDn!='' "/>
+			and	certDn LIKE '%${certDn}%'
+			
+		<if test="certSn!=null and certSn!='' "/>
+			and	certSn LIKE '%${certSn}%'
+			
 	</select>
 	
 </mapper>

@@ -36,6 +36,6 @@ public interface AuditOpLogService {
 	 * @param titles 
 	 * 
 	 */
-	void exportExcel(String[] titles, ServletOutputStream out)throws Exception;
+	void exportExcel(String[] titles, ServletOutputStream out,AuditOpLog auditOpLog)throws Exception;
 	
 }

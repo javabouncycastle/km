@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="cn.com.sure.log.dao.AdminDAO">  
 
-<select id="fingByAdmId" parameterType="Integer" resultType="cn.com.sure.log.Admin">
+<select id="fingByAdmId" parameterType="Integer" resultType="cn.com.sure.admin.entry.Admin">
 		select 
 			id,
 			cert,
