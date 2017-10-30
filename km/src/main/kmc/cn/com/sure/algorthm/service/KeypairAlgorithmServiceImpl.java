@@ -64,7 +64,6 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
-	@Transactional(value="txManager" )
 	public int delete(Long id) {
 		LOG.debug("delete - start");
 		int i = keyPairAlgorithmDAO.delete(id);
@@ -73,7 +72,6 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
-	@Transactional(value="txManager" )
 	public void suspend(Long id) {
 		LOG.debug("suspend - start");
 		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.selectById(id);
@@ -84,7 +82,6 @@ public class KeypairAlgorithmServiceImpl implements KeypairAlgorithmService{
 	}
 
 	@Override
-	@Transactional(value="txManager" )
 	public void activate(Long id) {
 		LOG.debug("activate - start");
 		KeyPairAlgorithm keyPairAlgorithm = keyPairAlgorithmDAO.selectById(id);

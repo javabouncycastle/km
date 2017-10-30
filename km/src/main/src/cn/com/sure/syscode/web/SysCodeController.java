@@ -90,7 +90,7 @@ public class SysCodeController {
 		List<SysCode> sysCodes = this.sysCodeService.selectAll(sysCode);
 		List<SysCodeType> sysCodeTypes = this.sysCodeTypeService.selectAll(null);
 		LOG.debug("selectAll - end");
-		return new ModelAndView("syscode/syscodeLists").addObject("sysCodes", sysCodes).addObject("sysCodeTypes",sysCodeTypes);
+		return new ModelAndView("syscode/syscodeList").addObject("sysCodes", sysCodes).addObject("sysCodeTypes",sysCodeTypes);
 	}
 	
 	

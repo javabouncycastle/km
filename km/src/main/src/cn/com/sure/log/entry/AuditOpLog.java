@@ -29,7 +29,7 @@ public class AuditOpLog {
 	private String  message;   //本地化消息
 	private Date    timestamp; //执行上述操作的日期和时间。以 GMT 时间存储此值
 	private String  ip;        //对其执行操作的IP
-	private String  operatorSn;  //对其执行操作的帐户的证书序列号
+	private String  operator;  //对其执行操作的帐户的证书序列号
 	private Integer isOpSucc;  //表示已执行操作的结果
 	
 	private Date startTime;//查询时使用的时间段开始时间
@@ -97,12 +97,14 @@ public class AuditOpLog {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public String getOperatorSn() {
-		return operatorSn;
+
+
+	public String getOperator() {
+		return operator;
 	}
 
-	public void setOperatorSn(String operatorSn) {
-		this.operatorSn = operatorSn;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
 	public Integer getIsOpSucc() {

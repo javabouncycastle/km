@@ -74,7 +74,7 @@ public class AuditOpLogServiceImpl implements AuditOpLogService{
 		auditOpLog.setMessage(message);
 		auditOpLog.setTimestamp(timestamp);
 		auditOpLog.setIp(ip);
-		auditOpLog.setOperatorSn(operator);
+		auditOpLog.setOperator(operator);
 		auditOpLog.setIsOpSucc(isOpSucc);
 		
 		auditOpLogDAO.insert(auditOpLog);
@@ -144,7 +144,7 @@ public class AuditOpLogServiceImpl implements AuditOpLogService{
 		      String ip = opLog.getIp();
 		      hssfRow.createCell(8).setCellValue(ip);
 		      
-		      String operator = opLog.getOperatorSn();
+		      String operator = opLog.getOperator();
 		      hssfRow.createCell(9).setCellValue(operator); 
 		      
 		      Integer isOpSucc = opLog.getIsOpSucc();
