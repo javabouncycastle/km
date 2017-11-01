@@ -10,8 +10,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.com.sure.km.ResourceBundleSocketMessage;
-import cn.com.sure.socket.SocketService;
-import cn.com.sure.socket.SocketThread;
+import cn.com.sure.socket.KmSocketService;
+import cn.com.sure.socket.KmSocketThread;
 
 /**
  * @author Limin
@@ -21,13 +21,13 @@ public class StartSocketThread extends Thread{
 	
 	private static final Log LOG = LogFactory.getLog(StartSocketThread.class);
 	
-	private SocketService socketService; 
+	private KmSocketService socketService; 
 	private ServerSocket serverSocket;
 
 	/**
 	 * @param socketService
 	 */
-	public StartSocketThread(SocketService socketService,ServerSocket serverSocket) {
+	public StartSocketThread(KmSocketService socketService,ServerSocket serverSocket) {
 		this.socketService=socketService;
 		this.serverSocket=serverSocket;
 	}
@@ -46,7 +46,7 @@ public class StartSocketThread extends Thread{
 	                while (true) {
 	                    // 侦听并接受到此Socket的连接,请求到来则产生一个Socket对象，并继续执行
 	                    Socket socket = serverSocket.accept();
-	                    new Thread(new SocketThread(socket,socketService)).start();
+	                    new Thread(new KmSocketThread(socket,socketService)).start();
 	                   
 	                	} 
 	                }  

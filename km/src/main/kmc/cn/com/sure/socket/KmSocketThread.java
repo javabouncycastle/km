@@ -17,9 +17,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import cn.com.sure.km.KmApplicationexception;
 
 
@@ -27,16 +24,14 @@ import cn.com.sure.km.KmApplicationexception;
  * @author Limin
  *
  */
-public class SocketThread extends Thread{
+public class KmSocketThread extends Thread{
 	
-	private static final Log LOG = LogFactory.getLog(SocketThread.class);
 
-	private SocketService socketService;
+	private KmSocketService socketService;
 	
 	private Socket socket;
 	
-
-	public SocketThread(Socket socket,SocketService socketService) {
+	public KmSocketThread(Socket socket,KmSocketService socketService) {
 		this.socket=socket;
 		this.socketService=socketService;
 	}
@@ -49,9 +44,9 @@ public class SocketThread extends Thread{
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			dis = new DataInputStream(socket.getInputStream());  
 	         
-			byte[] reqlenbyte = new byte[4];//请求的byte的长度
+			byte[] reqlenbyte = new byte[4];//返回的byte的长度
 			int reqlen = 0;
-			byte[] buffer = new byte[1024];//缓存数据，每次读取byte的一部分
+			byte[] buffer = new byte[4];//缓存数据，每次读取byte的一部分
 			int bufbuflength = 0;
 			
 			int bufferlength = dis.read(reqlenbyte);
@@ -73,10 +68,10 @@ public class SocketThread extends Thread{
 				}
 			}
 			
-			byte[] responseByte=null;
+			byte[] response=null;
  	        
  	        try {
-				responseByte = socketService.handleSocket(reqinfo);
+				response = socketService.handleSocket(reqinfo);
 				
 				
 			} catch (InvalidKeyException | NoSuchAlgorithmException
@@ -87,14 +82,14 @@ public class SocketThread extends Thread{
 				e.printStackTrace();
 			}
 	        
-	        
-	        
-	        
 	        //返回 
 	        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			byte[] byt = responseByte;
-	        
-	        dos.write(byt);
+			
+			byte[] responseLength = intToByte(response.length);
+			
+			dos.write(responseLength);
+	        dos.flush();
+	        dos.write(response);
 	        dos.flush();
 	        
 	        
@@ -108,11 +103,22 @@ public class SocketThread extends Thread{
 		
 		
 	}
+	
+	public static byte[] intToByte(int nValue) {         
+		byte[] byaValue = new byte[4];         
+		for (int i = 0; i < 4; i++) {             
+			byaValue[i] = (byte) (nValue >> 8 * (3 - i) & 0xFF);
+		}
+		return byaValue;
+	}
+	
+	
 	public static int byteToInt(byte[] byaValue) {         
 		int nValue = 0; 
 		for (int i = 0; i < byaValue.length; i++){          
 			nValue += (byaValue[i] & 0xFF) << (8 * (3 - i)); 
 		}
 		return nValue;
+		
 	}
 }

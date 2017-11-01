@@ -24,7 +24,7 @@ import cn.com.sure.kpg.service.KeypairStandbyService;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
 import cn.com.sure.kpgtask.service.KpgTaskService;
-import cn.com.sure.socket.SocketService;
+import cn.com.sure.socket.KmSocketService;
 import cn.com.sure.syscode.entry.SysCode;
 import cn.com.sure.syscode.service.SysCodeService;
 
@@ -51,7 +51,7 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
 	private KpgTaskExecuteService kpgTaskExecuteService;
 	
 	@Autowired
-	private SocketService socketService;
+	private KmSocketService socketService;
 	
 	private ServerSocket serverSocket;
 	

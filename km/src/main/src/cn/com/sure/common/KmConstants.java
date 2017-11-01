@@ -35,6 +35,9 @@ public class KmConstants {
 	//缓存数量
 	public static final String DB_COMMIT_BUFFER = "dbCommitBufsize";
 	
+	//
+	public static final String SYNCHRONOUS_KPG="synchronousKpg";
+	
 	public static final long CODE_ID_TASK_STATUS_NOT_STARTED = 20;        //执行状态 - 尚未开始
 	public static final long CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING = 21;   //执行状态 - 任务已启动
 	

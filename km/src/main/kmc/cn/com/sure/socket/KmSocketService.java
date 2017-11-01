@@ -20,7 +20,7 @@ import cn.com.sure.km.KmApplicationexception;
  * @author Limin
  *
  */
-public interface SocketService {
+public interface KmSocketService {
 
 
 	byte[] handleSocket(byte[] requestInfo) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException,KmApplicationexception,InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException,CertificateException;

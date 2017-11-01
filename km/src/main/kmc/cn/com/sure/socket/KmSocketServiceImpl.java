@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -32,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Decoder;
 import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
+import cn.com.sure.algorthm.service.KeypairAlgorithmService;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.km.KmErrorMessageConstants;
@@ -48,9 +50,9 @@ import cn.com.sure.kpg.service.KeypairStandbyService;
  */
 @Transactional(propagation = Propagation.REQUIRED)
 @Service("socketService")
-public class SocketServiceImpl implements SocketService{
+public class KmSocketServiceImpl implements KmSocketService{
 	
-	private static final Log LOG = LogFactory.getLog(SocketServiceImpl.class);
+	private static final Log LOG = LogFactory.getLog(KmSocketServiceImpl.class);
 	
 	@Autowired
 	private KeypairStandbyService keypairStandbyService;
@@ -64,6 +66,9 @@ public class SocketServiceImpl implements SocketService{
 	@Autowired
 	private DigitalEnveService digitalEnveService;
 	
+	@Autowired
+	private KeypairAlgorithmService keypairAlgorithmService;
+	
 
 	@Override
 	public byte[] handleSocket(byte[] requestInfoByte) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException, KmApplicationexception, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, CertificateException {
@@ -73,8 +78,17 @@ public class SocketServiceImpl implements SocketService{
 		//0、验证签名
 		
 		//1.对requestInfo信息进行处理
-		//1.1去掉requestInfo中的 '
 		String requestInfo=new String(requestInfoByte);
+		
+		if(requestInfo.equals(KmConstants.SYNCHRONOUS_KPG)){
+			
+			//1.1.1 查询密钥算法，并返回到ca
+			List<KeyPairAlgorithm> algorithms = keypairAlgorithmService.selectAll();
+			
+			LOG.debug("selectAll - end");
+			
+			return algorithms.toString().getBytes();
+		}
 		
 		String certDN = null;
 		String certSn = null;
