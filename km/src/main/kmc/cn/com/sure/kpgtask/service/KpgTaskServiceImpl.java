@@ -17,7 +17,7 @@ import cn.com.sure.common.KmConstants;
 import cn.com.sure.keypair.dao.KpgTaskDAO;
 import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.kpgtask.entry.KpgTask;
-import cn.com.sure.syscode.entry.SysCode;
+import cn.com.sure.syscode.entry.KmSysCode;
 
 /**
  * @author Limin
@@ -52,7 +52,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		//KpgTask dbKpgTask = this.kpgTaskDAO.findByName(kpgTask.getName());
 		int i=0;
 		/*if(dbKpgTask==null){*/
-			SysCode taskStatus=new SysCode();
+			KmSysCode taskStatus=new KmSysCode();
 			if("".equals(kpgTask.getTaskStatus())||kpgTask.getTaskStatus()==null){
 				taskStatus.setParaValue((String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)));
 			}else{
@@ -113,7 +113,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 	@Override
 	public List<KpgTask> findAllUnExecutedTask() {
 		LOG.debug("KpgTask - start");
-		SysCode sysCode = new SysCode();
+		KmSysCode sysCode = new KmSysCode();
 		KpgTask kpgTask =new KpgTask();
 		sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING));
 		kpgTask.setTaskStatus(sysCode);
@@ -170,7 +170,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("start - start");
 		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
 		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_NOT_STARTED)).equals(kpgTask.getTaskStatus().getParaValue())) {
-			SysCode sysCode = new  SysCode();
+			KmSysCode sysCode = new  KmSysCode();
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_WAITING_FOR_EXECUTING));
 			kpgTask.setTaskStatus(sysCode);
 			kpgTaskDAO.start(kpgTask);
@@ -187,7 +187,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("suspend - start");
 		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
 		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)).equals(kpgTask.getTaskStatus().getParaValue())) {
-			SysCode sysCode = new  SysCode();
+			KmSysCode sysCode = new  KmSysCode();
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_PAUSED));
 			kpgTask.setTaskStatus(sysCode);
 			kpgTaskDAO.suspend(id);
@@ -204,7 +204,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("stop - start");
 		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
 		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING)).equals(kpgTask.getTaskStatus().getParaValue())) {
-			SysCode sysCode = new  SysCode();
+			KmSysCode sysCode = new  KmSysCode();
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_INTERRUPTED));
 			kpgTask.setTaskStatus(sysCode);
 			kpgTaskDAO.stop(id);
@@ -222,7 +222,7 @@ public class KpgTaskServiceImpl implements KpgTaskService{
 		LOG.debug("continute - start");
 		KpgTask kpgTask = this.kpgTaskDAO.findById(id);
 		if(kpgTask!=null&&(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_PAUSED)).equals(kpgTask.getTaskStatus().getParaValue())) {
-			SysCode sysCode = new  SysCode();
+			KmSysCode sysCode = new  KmSysCode();
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_MANUAL_RESUMED));
 			kpgTask.setTaskStatus(sysCode);
 			kpgTaskDAO.stop(id);

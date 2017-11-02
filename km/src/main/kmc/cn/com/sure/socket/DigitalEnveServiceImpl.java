@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sun.misc.BASE64Decoder;
 import cn.com.sure.common.KmConstants;
-import cn.com.sure.log.service.AdminService;
+import cn.com.sure.log.service.KmAdminService;
 
 /**
  * @author Limin
@@ -45,7 +45,7 @@ import cn.com.sure.log.service.AdminService;
 public class DigitalEnveServiceImpl implements DigitalEnveService{
 	
 	@Autowired 
-	AdminService adminService;
+	KmAdminService adminService;
 	
 	private static final Log LOG = LogFactory.getLog(DigitalEnveServiceImpl.class);
 	

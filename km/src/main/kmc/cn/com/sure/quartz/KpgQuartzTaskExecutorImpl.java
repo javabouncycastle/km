@@ -20,7 +20,7 @@ import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
 import cn.com.sure.kpgtask.service.KpgTaskService;
-import cn.com.sure.syscode.entry.SysCode;
+import cn.com.sure.syscode.entry.KmSysCode;
 
 /**
  * @author Limin
@@ -52,7 +52,7 @@ public class KpgQuartzTaskExecutorImpl implements KpgQuartzTaskExecutor{
 			task.setExeTaskStartTime(new Date());
 			
 			//更新任务状态
-			SysCode sysCode = new SysCode();
+			KmSysCode sysCode = new KmSysCode();
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
 			task.setTaskStatus(sysCode);
 			
@@ -72,7 +72,7 @@ public class KpgQuartzTaskExecutorImpl implements KpgQuartzTaskExecutor{
 		
 		for(KpgTask task:list){
 			
-			SysCode sysCode = new SysCode();
+			KmSysCode sysCode = new KmSysCode();
 			
 			sysCode.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
 			

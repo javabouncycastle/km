@@ -44,6 +44,8 @@ import cn.com.sure.kpg.service.KeypairArchiveService;
 import cn.com.sure.kpg.service.KeypairInuseService;
 import cn.com.sure.kpg.service.KeypairStandbyService;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * @author Limin
  *
@@ -86,8 +88,9 @@ public class KmSocketServiceImpl implements KmSocketService{
 			List<KeyPairAlgorithm> algorithms = keypairAlgorithmService.selectAll();
 			
 			LOG.debug("selectAll - end");
+			String jsonStr=JSON.toJSONString(algorithms);
 			
-			return algorithms.toString().getBytes();
+			return jsonStr.getBytes();
 		}
 		
 		String certDN = null;

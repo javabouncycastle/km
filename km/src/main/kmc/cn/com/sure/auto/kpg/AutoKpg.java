@@ -25,8 +25,8 @@ import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
 import cn.com.sure.kpgtask.service.KpgTaskService;
 import cn.com.sure.socket.KmSocketService;
-import cn.com.sure.syscode.entry.SysCode;
-import cn.com.sure.syscode.service.SysCodeService;
+import cn.com.sure.syscode.entry.KmSysCode;
+import cn.com.sure.syscode.service.KmSysCodeService;
 
 /**
  * @author Limin
@@ -36,7 +36,7 @@ import cn.com.sure.syscode.service.SysCodeService;
 public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
-	private SysCodeService sysCodeService;
+	private KmSysCodeService sysCodeService;
 	
 	@Autowired
 	private KeypairStandbyService keypairStandbyService;
@@ -82,7 +82,7 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
     			if(keypairStandbyService.countNum(kpa.getAlgorithmName())<Integer.parseInt(sysCodeService.selectMin().get(0).getParaValue())){//密钥数量<密钥数量最小值
     				
     				//1.4新建一个任务,生成密钥
-    				SysCode sysCode = new SysCode();
+    				KmSysCode sysCode = new KmSysCode();
     				KpgTask task = new KpgTask();
     				
     				//1.4.1缓存数量，默认获取第一条
@@ -90,7 +90,7 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
     				task.setDbCommitBufsize(sysCode);
     				
     				//1.4.2生成最小数量，默认取第一条
-    				SysCode code = new SysCode();
+    				KmSysCode code = new KmSysCode();
     				code.setParaValue(sysCodeService.selectGenKeyNum().get(0).getParaValue());
     				task.setKpgKeyAmount(Integer.parseInt(code.getParaValue()));
     				
@@ -100,7 +100,7 @@ public class AutoKpg implements ApplicationListener<ContextRefreshedEvent>{
     				task.setKeyPairAlgorithm(algorithm);
     				
     				//1.4.4
-    				SysCode codeAlg = new SysCode();
+    				KmSysCode codeAlg = new KmSysCode();
     				codeAlg.setParaValue(String.valueOf(KmConstants.CODE_ID_TASK_STATUS_EXECUTING));
     				task.setTaskStatus(codeAlg);
     				//用当前时间来命名任务名称

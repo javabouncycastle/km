@@ -20,7 +20,7 @@ import cn.com.sure.algorthm.entry.KeyPairAlgorithm;
 import cn.com.sure.algorthm.service.KeypairAlgorithmService;
 import cn.com.sure.common.KmConstants;
 import cn.com.sure.km.KmApplicationexception;
-import cn.com.sure.log.service.AuditOpLogService;
+import cn.com.sure.log.service.KmAuditOpLogService;
 
 @Controller
 @RequestMapping(value="algorithm")
@@ -32,7 +32,7 @@ public class KeypairAlgorithmController {
 	private KeypairAlgorithmService keyPairAlgorithmService;
 	
 	@Autowired
-	private AuditOpLogService auditOpLogService;
+	private KmAuditOpLogService auditOpLogService;
 	
 	
 	/**

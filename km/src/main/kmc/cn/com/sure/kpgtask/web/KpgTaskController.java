@@ -29,9 +29,9 @@ import cn.com.sure.km.KmApplicationexception;
 import cn.com.sure.kpgtask.entry.KpgTask;
 import cn.com.sure.kpgtask.service.KpgTaskExecuteService;
 import cn.com.sure.kpgtask.service.KpgTaskService;
-import cn.com.sure.log.service.AuditOpLogService;
-import cn.com.sure.syscode.entry.SysCode;
-import cn.com.sure.syscode.service.SysCodeService;
+import cn.com.sure.log.service.KmAuditOpLogService;
+import cn.com.sure.syscode.entry.KmSysCode;
+import cn.com.sure.syscode.service.KmSysCodeService;
 
 /**
  * @author Limin
@@ -50,10 +50,10 @@ public class KpgTaskController extends BaseController{
 	private KeypairAlgorithmService keyPairAlgorithmService;
 	
 	@Autowired
-	private SysCodeService sysCodeService;
+	private KmSysCodeService sysCodeService;
 	
 	@Autowired
-	private AuditOpLogService auditOpLogService;
+	private KmAuditOpLogService auditOpLogService;
 	
 	@Autowired KpgTaskExecuteService kpgTaskExecuteService;
 	
@@ -71,11 +71,11 @@ public class KpgTaskController extends BaseController{
 			RedirectAttributes attr,HttpServletRequest request){
 		LOG.debug("selectAll - start");
 		KeyPairAlgorithm keyPairAlgorithm = new KeyPairAlgorithm();
-		SysCode sysCode = new SysCode();
+		KmSysCode sysCode = new KmSysCode();
 		List<KpgTask> kpgTasks = this.kpgTaskService.selectAll();
 		List<KeyPairAlgorithm> keyPairAlgorithms = this.keyPairAlgorithmService.selectOpYes(keyPairAlgorithm);
-		List<SysCode> codeBuf = this.sysCodeService.selectBufSize(sysCode);
-		List<SysCode> sysCodes = this.sysCodeService.selectByType(sysCode);
+		List<KmSysCode> codeBuf = this.sysCodeService.selectBufSize(sysCode);
+		List<KmSysCode> sysCodes = this.sysCodeService.selectByType(sysCode);
 		LOG.debug("selectAll - end");
 		return new ModelAndView("algorithm/keyPairTaskList").addObject("kpgTasks", kpgTasks).addObject("keyPairAlgorithms",keyPairAlgorithms).addObject("sysCodes",sysCodes).addObject("codeBuf",codeBuf);
 		
