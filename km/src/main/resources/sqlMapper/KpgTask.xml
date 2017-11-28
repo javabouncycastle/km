@@ -22,25 +22,25 @@
 			<result column="notes" javaType="String" property="notes"/>
 			<result column="isValid" javaType="Integer" property="isValid"/>
 		</association>
-		<association property="dbCommitBufsize" javaType="cn.com.sure.syscode.entry.SysCode" >
+		<association property="dbCommitBufsize" javaType="cn.com.sure.syscode.entry.KmSysCode" >
 			<id column="SysCodeIdDb" javaType="long" property="id"/>
 			<result column="paraCodeDb" javaType="String" property="paraCode"/>
 			<result column="paraValueDb" javaType="String" property="paraValue"/>
 			<result column="SysIsValidDb" javaType="Integer" property="isValid"/>
 			<result column="SysNotesDb" javaType="String" property="notes"/>
-			<association property="paraType" javaType="cn.com.sure.syscode.entry.SysCodeType" >
+			<association property="paraType" javaType="cn.com.sure.syscode.entry.KmSysCodeType" >
 				<id column="TypeIdDb" javaType="long" property="id"/>
 				<result column="typeParaTypeDb" javaType="String" property="paraType"/>
 				<result column="typeNotesDb" javaType="String" property="notes"/>
 			</association>
 		</association>
-		<association property="taskStatus" javaType="cn.com.sure.syscode.entry.SysCode" >
+		<association property="taskStatus" javaType="cn.com.sure.syscode.entry.KmSysCode" >
 			<id column="SysCodeId" javaType="long" property="id"/>
 			<result column="paraCode" javaType="String" property="paraCode"/>
 			<result column="paraValue" javaType="String" property="paraValue"/>
 			<result column="SysIsValid" javaType="Integer" property="isValid"/>
 			<result column="SysNotes" javaType="String" property="notes"/>
-			<association property="paraType" javaType="cn.com.sure.syscode.entry.SysCodeType" >
+			<association property="paraType" javaType="cn.com.sure.syscode.entry.KmSysCodeType" >
 				<id column="TypeId" javaType="long" property="id"/>
 				<result column="typeParaType" javaType="String" property="paraType"/>
 				<result column="typeNotes" javaType="String" property="notes"/>
